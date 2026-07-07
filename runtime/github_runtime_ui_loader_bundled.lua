@@ -48,6 +48,10 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
+local AssetService = nil
+pcall(function()
+	AssetService = game:GetService("AssetService")
+end)
 
 local LocalPlayer = Players.LocalPlayer
 local GLOBAL = typeof(getgenv) == "function" and getgenv() or _G
@@ -1319,6 +1323,26 @@ local function safeSet(instance, property, value)
 	end)
 end
 
+local function safeSetWithHiddenFallback(instance, property, value)
+	if value == nil then
+		return false
+	end
+	local ok = pcall(function()
+		instance[property] = value
+	end)
+	if ok then
+		return true
+	end
+	local setHidden = getGlobalFunction("sethiddenproperty")
+	if type(setHidden) == "function" then
+		local hiddenOk = pcall(setHidden, instance, property, value)
+		if hiddenOk then
+			return true
+		end
+	end
+	return false
+end
+
 local function safeGet(instance, property, fallback)
 	local ok, value = pcall(function()
 		return instance[property]
@@ -1353,10 +1377,41 @@ local function applyDescriptorAttributes(instance, attributes)
 	end
 end
 
+local function descriptorEnum(enumType, value, fallback)
+	if value == nil or enumType == nil then
+		return fallback
+	end
+	if typeof(value) == "EnumItem" then
+		return value
+	end
+	local numeric = tonumber(value)
+	local text = tostring(value)
+	local shortName = text:match("%.([%w_]+)$") or text
+	local ok, items = pcall(function()
+		return enumType:GetEnumItems()
+	end)
+	if not ok or type(items) ~= "table" then
+		return fallback
+	end
+	for _, item in ipairs(items) do
+		if item.Name == shortName then
+			return item
+		end
+		local valueOk, itemValue = pcall(function()
+			return item.Value
+		end)
+		if numeric ~= nil and valueOk and tonumber(itemValue) == numeric then
+			return item
+		end
+	end
+	return fallback
+end
+
 local function applyBasePartDescriptor(part, properties, anchorPart, localCFrame)
 	safeSet(part, "Size", descriptorVector3(properties.size or properties.Size, Vector3.new(1, 1, 1)))
 	safeSet(part, "Color", descriptorColor(properties.Color3uint8 or properties.Color, Color3.new(1, 1, 1)))
 	safeSet(part, "Transparency", math.clamp(tonumber(properties.Transparency) or 0, 0, 1))
+	safeSet(part, "Material", descriptorEnum(Enum.Material, properties.Material, Enum.Material.SmoothPlastic))
 	safeSet(part, "Reflectance", tonumber(properties.Reflectance) or 0)
 	safeSet(part, "CanCollide", false)
 	safeSet(part, "CanTouch", false)
@@ -1368,6 +1423,28 @@ local function applyBasePartDescriptor(part, properties, anchorPart, localCFrame
 	if anchorPart then
 		part.CFrame = anchorPart.CFrame * (localCFrame or descriptorCFrame(properties.LocalCFrame))
 	end
+end
+
+local function createDescriptorMeshPart(node)
+	local properties = type(node.properties) == "table" and node.properties or {}
+	local meshId = descriptorContent(properties.MeshId)
+	local ok, meshPart = pcall(Instance.new, "MeshPart")
+	if ok and meshPart then
+		return meshPart
+	end
+	if AssetService and meshId and type(AssetService.CreateMeshPartAsync) == "function" then
+		local fidelity = descriptorEnum(Enum.RenderFidelity, properties.RenderFidelity, Enum.RenderFidelity.Precise)
+		local createdOk, created = pcall(function()
+			return AssetService:CreateMeshPartAsync(meshId, Enum.CollisionFidelity.Default, fidelity)
+		end)
+		if createdOk and created then
+			return created
+		end
+	end
+	local fallback = Instance.new("Part")
+	safeSetAttribute(fallback, "OverlaySourceClass", "MeshPart")
+	safeSetAttribute(fallback, "OverlayMeshPartFallback", true)
+	return fallback
 end
 
 local function createDescriptorInstance(node)
@@ -1382,9 +1459,7 @@ local function createDescriptorInstance(node)
 		local ok, instance = pcall(Instance.new, className)
 		return ok and instance or Instance.new("Part")
 	elseif className == "MeshPart" then
-		local instance = Instance.new("Part")
-		safeSetAttribute(instance, "OverlaySourceClass", "MeshPart")
-		return instance
+		return createDescriptorMeshPart(node)
 	elseif className == "SpecialMesh" then
 		return Instance.new("SpecialMesh")
 	elseif className == "ParticleEmitter" then
@@ -1440,8 +1515,13 @@ local function applyDescriptorInstanceProperties(instance, node, anchorPart, loc
 		end
 		if node.class == "MeshPart" then
 			local meshId = descriptorContent(properties.MeshId)
-			if meshId then
-				safeSet(instance, "Size", Vector3.new(1, 1, 1))
+			local textureId = descriptorContent(properties.TextureID or properties.TextureId)
+			if instance:IsA("MeshPart") then
+				safeSetWithHiddenFallback(instance, "MeshId", meshId)
+				safeSetWithHiddenFallback(instance, "TextureID", textureId)
+				safeSet(instance, "RenderFidelity", descriptorEnum(Enum.RenderFidelity, properties.RenderFidelity, Enum.RenderFidelity.Precise))
+				safeSet(instance, "Size", descriptorVector3(properties.size or properties.Size, Vector3.new(1, 1, 1)))
+			elseif meshId then
 				local mesh = instance:FindFirstChild("OverlayMeshPartFallback")
 				if mesh == nil or not mesh:IsA("SpecialMesh") then
 					mesh = Instance.new("SpecialMesh")
@@ -1450,22 +1530,24 @@ local function applyDescriptorInstanceProperties(instance, node, anchorPart, loc
 				end
 				safeSet(mesh, "MeshType", Enum.MeshType.FileMesh)
 				safeSet(mesh, "MeshId", meshId)
-				safeSet(mesh, "TextureId", descriptorContent(properties.TextureID or properties.TextureId))
-				safeSet(mesh, "Scale", descriptorVector3(properties.size or properties.Size, Vector3.new(1, 1, 1)))
+				safeSet(mesh, "TextureId", textureId)
+				safeSet(mesh, "Scale", Vector3.new(1, 1, 1))
 				safeSet(mesh, "Offset", Vector3.new())
-			elseif instance:IsA("MeshPart") then
-				safeSet(instance, "MeshId", descriptorContent(properties.MeshId))
-				safeSet(instance, "TextureID", descriptorContent(properties.TextureID or properties.TextureId))
+			else
+				safeSet(instance, "Transparency", 1)
 			end
 		end
 	elseif instance:IsA("SpecialMesh") then
-		safeSet(instance, "MeshId", descriptorContent(properties.MeshId))
+		local meshId = descriptorContent(properties.MeshId)
+		safeSet(instance, "MeshId", meshId)
 		safeSet(instance, "TextureId", descriptorContent(properties.TextureId))
 		safeSet(instance, "Scale", descriptorVector3(properties.Scale, Vector3.new(1, 1, 1)))
 		safeSet(instance, "Offset", descriptorVector3(properties.Offset, Vector3.new()))
 		safeSet(instance, "VertexColor", descriptorVector3(properties.VertexColor, Vector3.new(1, 1, 1)))
-		if descriptorContent(properties.MeshId) then
+		if meshId then
 			safeSet(instance, "MeshType", Enum.MeshType.FileMesh)
+		else
+			safeSet(instance, "MeshType", descriptorEnum(Enum.MeshType, properties.MeshType, safeGet(instance, "MeshType", Enum.MeshType.Head)))
 		end
 	elseif instance:IsA("ParticleEmitter") then
 		safeSet(instance, "Texture", descriptorContent(properties.Texture))
@@ -1499,6 +1581,7 @@ local function applyDescriptorInstanceProperties(instance, node, anchorPart, loc
 		safeSet(instance, "OutlineColor", descriptorColor(properties.OutlineColor, Color3.new(1, 1, 1)))
 		safeSet(instance, "FillTransparency", math.clamp(tonumber(properties.FillTransparency) or 0.8, 0, 1))
 		safeSet(instance, "OutlineTransparency", math.clamp(tonumber(properties.OutlineTransparency) or 0, 0, 1))
+		safeSet(instance, "DepthMode", descriptorEnum(Enum.HighlightDepthMode, properties.DepthMode, safeGet(instance, "DepthMode", Enum.HighlightDepthMode.Occluded)))
 	elseif instance:IsA("Decal") or instance:IsA("Texture") then
 		safeSet(instance, "Texture", descriptorContent(properties.Texture))
 		safeSet(instance, "Transparency", math.clamp(tonumber(properties.Transparency) or 0, 0, 1))
