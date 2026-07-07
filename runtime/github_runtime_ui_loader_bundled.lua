@@ -1353,7 +1353,7 @@ local function applyDescriptorAttributes(instance, attributes)
 	end
 end
 
-local function applyBasePartDescriptor(part, properties, anchorPart)
+local function applyBasePartDescriptor(part, properties, anchorPart, localCFrame)
 	safeSet(part, "Size", descriptorVector3(properties.size or properties.Size, Vector3.new(1, 1, 1)))
 	safeSet(part, "Color", descriptorColor(properties.Color3uint8 or properties.Color, Color3.new(1, 1, 1)))
 	safeSet(part, "Transparency", math.clamp(tonumber(properties.Transparency) or 0, 0, 1))
@@ -1366,7 +1366,7 @@ local function applyBasePartDescriptor(part, properties, anchorPart)
 	safeSet(part, "TopSurface", Enum.SurfaceType.Smooth)
 	safeSet(part, "BottomSurface", Enum.SurfaceType.Smooth)
 	if anchorPart then
-		part.CFrame = anchorPart.CFrame * descriptorCFrame(properties.LocalCFrame)
+		part.CFrame = anchorPart.CFrame * (localCFrame or descriptorCFrame(properties.LocalCFrame))
 	end
 end
 
@@ -1427,16 +1427,21 @@ local function applyAttachmentLikeDescriptor(instance, properties)
 	safeSet(instance, "SecondaryAxis", descriptorVector3(properties.SecondaryAxis, safeGet(instance, "SecondaryAxis", Vector3.new(0, 1, 0))))
 end
 
-local function applyDescriptorInstanceProperties(instance, node, anchorPart)
+local function applyDescriptorInstanceProperties(instance, node, anchorPart, localCFrame)
 	local properties = type(node.properties) == "table" and node.properties or {}
 	safeSet(instance, "Name", tostring(node.name or properties.Name or node.class or "OverlayNode"))
 	applyDescriptorAttributes(instance, node.attributes)
 
 	if instance:IsA("BasePart") then
-		applyBasePartDescriptor(instance, properties, anchorPart)
+		applyBasePartDescriptor(instance, properties, anchorPart, localCFrame)
+		if tostring(node.name or properties.Name or "") == "Middle" then
+			safeSet(instance, "Transparency", 1)
+			safeSet(instance, "CanQuery", false)
+		end
 		if node.class == "MeshPart" then
 			local meshId = descriptorContent(properties.MeshId)
 			if meshId then
+				safeSet(instance, "Size", Vector3.new(1, 1, 1))
 				local mesh = instance:FindFirstChild("OverlayMeshPartFallback")
 				if mesh == nil or not mesh:IsA("SpecialMesh") then
 					mesh = Instance.new("SpecialMesh")
@@ -1565,6 +1570,10 @@ local function findCharacterPart(character, candidates)
 		Torso = { "Torso", "UpperTorso", "LowerTorso", "HumanoidRootPart" },
 		Head = { "Head", "UpperTorso", "Torso", "HumanoidRootPart" },
 		HumanoidRootPart = { "HumanoidRootPart", "LowerTorso", "UpperTorso", "Torso", "Head" },
+		["Left Arm"] = { "Left Arm", "LeftUpperArm", "LeftLowerArm", "LeftHand", "UpperTorso", "Torso" },
+		["Right Arm"] = { "Right Arm", "RightUpperArm", "RightLowerArm", "RightHand", "UpperTorso", "Torso" },
+		["Left Leg"] = { "Left Leg", "LeftUpperLeg", "LeftLowerLeg", "LeftFoot", "LowerTorso", "Torso" },
+		["Right Leg"] = { "Right Leg", "RightUpperLeg", "RightLowerLeg", "RightFoot", "LowerTorso", "Torso" },
 		RightHand = { "RightHand", "Right Arm", "RightLowerArm", "RightUpperArm", "UpperTorso", "Torso" },
 		LeftHand = { "LeftHand", "Left Arm", "LeftLowerArm", "LeftUpperArm", "UpperTorso", "Torso" },
 		RightLowerArm = { "RightLowerArm", "Right Arm", "RightUpperArm", "RightHand", "UpperTorso", "Torso" },
@@ -1604,6 +1613,142 @@ end
 
 local function resolveMorphAnchor(character, descriptor, fallback)
 	return findCharacterPart(character, descriptorAnchorCandidates(descriptor)) or fallback
+end
+
+local MORPH_GROUP_MOUNTS = {
+	HeadAcc = { anchor = "Head" },
+	TorsoAcc = { anchor = "Torso" },
+	UpperStatic = { anchor = "Torso" },
+	UpperStaticA = { anchor = "Torso" },
+	UpperStaticB = { anchor = "Torso" },
+	LowerStatic = { anchor = "Torso" },
+	LowerStaticA = { anchor = "Torso" },
+	LowerStaticB = { anchor = "Torso" },
+	RearStatic = { anchor = "Torso" },
+	Cage = { anchor = "Torso" },
+	ArmL = { anchor = "Left Arm" },
+	ArmR = { anchor = "Right Arm" },
+	LegL = { anchor = "Left Leg" },
+	LegR = { anchor = "Right Leg" },
+	BodyLeftArm = { anchor = "Left Arm" },
+	BodyRightArm = { anchor = "Right Arm" },
+	BodyLeftLeg = { anchor = "Left Leg" },
+	BodyRightLeg = { anchor = "Right Leg" },
+	BodyTorso = { anchor = "Torso" },
+	Rod = { anchor = "Torso", offset = "torso_bottom_front" },
+	Orbs = { anchor = "Torso", offset = "torso_bottom_front" },
+	UpperL = { anchor = "Torso", offset = "torso_upper_left_front" },
+	UpperR = { anchor = "Torso", offset = "torso_upper_right_front" },
+	LowerL = { anchor = "Torso", offset = "torso_lower_left_back" },
+	LowerR = { anchor = "Torso", offset = "torso_lower_right_back" },
+}
+
+local function isDescriptorBasePartClass(className)
+	return className == "Part"
+		or className == "WedgePart"
+		or className == "CornerWedgePart"
+		or className == "TrussPart"
+		or className == "UnionOperation"
+		or className == "MeshPart"
+end
+
+local function descriptorRuntimePlan(descriptor)
+	if type(descriptor) ~= "table" then
+		return { nodesById = {}, childrenByParent = {}, mountByNode = {} }
+	end
+	if descriptor._runtimePlan then
+		return descriptor._runtimePlan
+	end
+
+	local plan = {
+		nodesById = {},
+		childrenByParent = {},
+		mountByGroup = {},
+		mountByNode = {},
+	}
+
+	for _, node in ipairs(descriptor.nodes or {}) do
+		if type(node) == "table" and node.id then
+			plan.nodesById[node.id] = node
+			local parent = node.parent or "__root"
+			plan.childrenByParent[parent] = plan.childrenByParent[parent] or {}
+			table.insert(plan.childrenByParent[parent], node)
+		end
+	end
+
+	for _, node in ipairs(descriptor.nodes or {}) do
+		local mount = MORPH_GROUP_MOUNTS[tostring(node.name or "")]
+		if mount then
+			local middleNode = nil
+			for _, child in ipairs(plan.childrenByParent[node.id] or {}) do
+				if tostring(child.name or "") == "Middle" and isDescriptorBasePartClass(child.class) then
+					middleNode = child
+					break
+				end
+			end
+			if middleNode then
+				plan.mountByGroup[node.id] = {
+					group = node,
+					middle = middleNode,
+					anchor = mount.anchor,
+					offset = mount.offset,
+					middleLocal = descriptorCFrame(type(middleNode.properties) == "table" and middleNode.properties.LocalCFrame or nil),
+				}
+			end
+		end
+	end
+
+	local function nearestMount(node)
+		local current = node
+		while current do
+			local mount = plan.mountByGroup[current.id]
+			if mount then
+				return mount
+			end
+			current = current.parent and plan.nodesById[current.parent] or nil
+		end
+		return nil
+	end
+
+	for _, node in ipairs(descriptor.nodes or {}) do
+		if type(node) == "table" and node.id then
+			plan.mountByNode[node.id] = nearestMount(node)
+		end
+	end
+
+	descriptor._runtimePlan = plan
+	return plan
+end
+
+local function morphMountOffset(anchorPart, offsetKind)
+	if anchorPart == nil or offsetKind == nil then
+		return CFrame.new()
+	end
+	local size = safeGet(anchorPart, "Size", Vector3.new(2, 2, 1))
+	if offsetKind == "torso_bottom_front" then
+		return CFrame.new(0, -size.Y / 2, -size.Z / 2)
+	elseif offsetKind == "torso_upper_left_front" then
+		return CFrame.new(-size.X / 8, size.Y / 2, -size.Z / 2)
+	elseif offsetKind == "torso_upper_right_front" then
+		return CFrame.new(size.X / 8, size.Y / 2, -size.Z / 2)
+	elseif offsetKind == "torso_lower_left_back" then
+		return CFrame.new(-size.X / 8, -size.Y / 2, size.Z / 2)
+	elseif offsetKind == "torso_lower_right_back" then
+		return CFrame.new(size.X / 8, -size.Y / 2, size.Z / 2)
+	end
+	return CFrame.new()
+end
+
+local function descriptorNodePlacement(plan, node, character, fallbackAnchor)
+	local properties = type(node.properties) == "table" and node.properties or {}
+	local nodeLocal = descriptorCFrame(properties.LocalCFrame)
+	local mount = plan.mountByNode[node.id]
+	if mount then
+		local anchor = findCharacterPart(character, { mount.anchor }) or fallbackAnchor
+		local relativeToMiddle = mount.middleLocal:Inverse() * nodeLocal
+		return anchor, morphMountOffset(anchor, mount.offset) * relativeToMiddle
+	end
+	return fallbackAnchor, nodeLocal
 end
 
 local SMART_BONE_DEFAULTS = {
@@ -1874,7 +2019,7 @@ local function clearDescriptorMorph(handle)
 	end
 end
 
-local function applyDescriptorMorph(handle, anchorPart, components, entityId)
+local function applyDescriptorMorph(handle, anchorPart, components, entityId, character)
 	if handle == nil or anchorPart == nil or type(components) ~= "table" then
 		return
 	end
@@ -1904,6 +2049,7 @@ local function applyDescriptorMorph(handle, anchorPart, components, entityId)
 	local instances = {}
 	local createdNodes = {}
 	local jiggleBones = {}
+	local plan = descriptorRuntimePlan(descriptor)
 	for _, node in ipairs(descriptor.nodes or {}) do
 		local instance = createDescriptorInstance(node)
 		if instance then
@@ -1911,15 +2057,16 @@ local function applyDescriptorMorph(handle, anchorPart, components, entityId)
 			table.insert(createdNodes, { node = node, instance = instance })
 			local parent = instances[node.parent] or root
 			instance.Parent = parent
-			applyDescriptorInstanceProperties(instance, node, anchorPart)
+			local nodeAnchor, nodeLocalCFrame = descriptorNodePlacement(plan, node, character, anchorPart)
+			applyDescriptorInstanceProperties(instance, node, nodeAnchor, nodeLocalCFrame)
 			if instance:IsA("BasePart") then
 				local weld = Instance.new("WeldConstraint")
 				weld.Name = "OverlayDescriptorWeld"
-				weld.Part0 = anchorPart
+				weld.Part0 = nodeAnchor or anchorPart
 				weld.Part1 = instance
 				weld.Parent = instance
 			elseif instance:IsA("Highlight") then
-				safeSet(instance, "Adornee", anchorPart.Parent or anchorPart)
+				safeSet(instance, "Adornee", (nodeAnchor and nodeAnchor.Parent) or anchorPart.Parent or anchorPart)
 			elseif instance:IsA("Bone") then
 				table.insert(jiggleBones, {
 					bone = instance,
@@ -2256,7 +2403,7 @@ function ProxyAvatarRenderer.onCreate(entity)
 	entity.handle = { model = model, label = label, proxyParts = proxyParts }
 	applyProxyAssetVisuals(entity.handle, model, entity.components)
 	applyAppearanceAvatar(entity.handle, model, entity.components, entity.entityId)
-	applyDescriptorMorph(entity.handle, model, entity.components, entity.entityId)
+	applyDescriptorMorph(entity.handle, model, entity.components, entity.entityId, model)
 	applyEffectToPart(entity.handle, model, effectSettings(entity.entityId, entity.components))
 end
 
@@ -2357,7 +2504,7 @@ function OwnCharacterOverlayRenderer.onPatch(entity)
 	else
 		applyAppearanceAvatar(handle, anchor, entity.components, entity.entityId)
 	end
-	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId)
+	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId, character)
 end
 
 function OwnCharacterOverlayRenderer.onDestroy(entity)
@@ -2469,7 +2616,7 @@ function NativeCharacterOverlayRenderer.onPatch(entity)
 	else
 		applyAppearanceAvatar(handle, anchor, entity.components, entity.entityId)
 	end
-	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId)
+	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId, character)
 end
 
 function NativeCharacterOverlayRenderer.onDestroy(entity)
