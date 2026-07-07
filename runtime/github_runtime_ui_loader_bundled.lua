@@ -1080,7 +1080,7 @@ local function destroyHandle(handle)
 			end)
 		end
 	end
-	for _, key in ipairs({ "billboard", "highlight", "auraParticle", "auraAttachment", "trail", "trailAttachment0", "trailAttachment1", "meshVisual", "textureDecal", "descriptorMorphRoot", "model", "folder" }) do
+	for _, key in ipairs({ "billboard", "highlight", "auraParticle", "auraAttachment", "trail", "trailAttachment0", "trailAttachment1", "meshVisual", "textureDecal", "descriptorMorphRoot", "appearanceModel", "model", "folder" }) do
 		local instance = handle[key]
 		if instance then
 			pcall(function()
@@ -1499,16 +1499,179 @@ local function applyDescriptorMorph(handle, anchorPart, components, entityId)
 	handle.descriptorMorphAnchor = anchorPart
 end
 
+local function appearanceUserIdFor(components)
+	local avatar = components and components.avatar
+	if type(avatar) ~= "table" then
+		return nil
+	end
+	local userId = tonumber(avatar.appearance_user_id)
+	if userId and userId > 0 then
+		return math.floor(userId)
+	end
+	return nil
+end
+
+local function clearAppearanceAvatar(handle)
+	if handle and handle.appearanceModel then
+		pcall(function()
+			handle.appearanceModel:Destroy()
+		end)
+	end
+	if handle then
+		handle.appearanceModel = nil
+		handle.appearanceUserId = nil
+		handle.appearanceAnchor = nil
+		handle.appearanceLoadingId = nil
+	end
+end
+
+local function prepareAppearanceModel(model)
+	for _, descendant in ipairs(model:GetDescendants()) do
+		if descendant:IsA("BasePart") then
+			descendant.CanCollide = false
+			descendant.CanTouch = false
+			descendant.CanQuery = false
+			descendant.Massless = true
+		elseif descendant:IsA("Script") or descendant:IsA("LocalScript") then
+			descendant:Destroy()
+		end
+	end
+	local humanoid = model:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		pcall(function()
+			humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+		end)
+	end
+end
+
+local function appearanceRootPart(model)
+	return model:FindFirstChild("HumanoidRootPart")
+		or model.PrimaryPart
+		or model:FindFirstChildWhichIsA("BasePart")
+end
+
+local function createAppearanceModelFromUserId(userId)
+	local ok, model = pcall(function()
+		return Players:CreateHumanoidModelFromUserId(userId)
+	end)
+	if ok and model then
+		return model
+	end
+
+	local descriptionOk, description = pcall(function()
+		return Players:GetHumanoidDescriptionFromUserId(userId)
+	end)
+	if not descriptionOk or not description then
+		return nil
+	end
+
+	local modelOk, fallbackModel = pcall(function()
+		return Players:CreateHumanoidModelFromDescription(description, Enum.HumanoidRigType.R15)
+	end)
+	if modelOk then
+		return fallbackModel
+	end
+	return nil
+end
+
+local function setProxyVisualHidden(handle, hidden)
+	if handle == nil or handle.model == nil then
+		return
+	end
+	local transparency = hidden and 1 or 0.08
+	handle.model.Transparency = transparency
+	if handle.proxyParts then
+		for _, part in ipairs(handle.proxyParts) do
+			if part then
+				part.Transparency = hidden and 1 or 0.1
+			end
+		end
+	end
+	if handle.label then
+		handle.label.Visible = not hidden
+	end
+end
+
+local function applyAppearanceAvatar(handle, anchorPart, components, entityId)
+	if handle == nil or anchorPart == nil or type(components) ~= "table" then
+		return
+	end
+
+	local userId = appearanceUserIdFor(components)
+	if not userId then
+		clearAppearanceAvatar(handle)
+		setProxyVisualHidden(handle, false)
+		return
+	end
+
+	if handle.appearanceModel and handle.appearanceUserId == userId and handle.appearanceAnchor == anchorPart then
+		return
+	end
+	if handle.appearanceLoadingId == userId then
+		return
+	end
+
+	clearAppearanceAvatar(handle)
+	handle.appearanceLoadingId = userId
+
+	task.spawn(function()
+		local model = createAppearanceModelFromUserId(userId)
+		if not model then
+			if handle.appearanceLoadingId == userId then
+				handle.appearanceLoadingId = nil
+				emitBridgeError("avatar.appearance_failed", "Could not load avatar appearance: " .. tostring(userId))
+			end
+			return
+		end
+
+		if handle.appearanceLoadingId ~= userId then
+			model:Destroy()
+			return
+		end
+
+		prepareAppearanceModel(model)
+		local rootPart = appearanceRootPart(model)
+		if not rootPart then
+			model:Destroy()
+			handle.appearanceLoadingId = nil
+			return
+		end
+
+		model.Name = "OverlayAppearance_" .. tostring(entityId or userId)
+		model.PrimaryPart = rootPart
+		model.Parent = handle.folder or entityFolder
+		rootPart.CFrame = anchorPart.CFrame
+
+		local weld = Instance.new("WeldConstraint")
+		weld.Name = "OverlayAppearanceWeld"
+		weld.Part0 = anchorPart
+		weld.Part1 = rootPart
+		weld.Parent = rootPart
+
+		handle.appearanceModel = model
+		handle.appearanceUserId = userId
+		handle.appearanceAnchor = anchorPart
+		handle.appearanceLoadingId = nil
+		setProxyVisualHidden(handle, true)
+		emitBridgeEvent("avatar.appearance.ready", {
+			user_id = userId,
+			entity_id = entityId,
+		})
+	end)
+end
+
 local ProxyAvatarRenderer = {}
 local NativeCharacterOverlayRenderer = {}
+local OwnCharacterOverlayRenderer = {}
 local Renderers = {
 	proxy = ProxyAvatarRenderer,
 	native = NativeCharacterOverlayRenderer,
+	self = OwnCharacterOverlayRenderer,
 }
 
 local function selectRendererKind(entityId, components)
 	if isOwnEntity(entityId, components) then
-		return nil
+		return "self"
 	end
 	if findPlayerByRobloxUserId(robloxUserIdFor(components)) then
 		return "native"
@@ -1646,6 +1809,7 @@ function ProxyAvatarRenderer.onCreate(entity)
 	local model, label, proxyParts = createProxyModel(entity.entityId, entity.components)
 	entity.handle = { model = model, label = label, proxyParts = proxyParts }
 	applyProxyAssetVisuals(entity.handle, model, entity.components)
+	applyAppearanceAvatar(entity.handle, model, entity.components, entity.entityId)
 	applyDescriptorMorph(entity.handle, model, entity.components, entity.entityId)
 	applyEffectToPart(entity.handle, model, effectSettings(entity.entityId, entity.components))
 end
@@ -1674,6 +1838,7 @@ function ProxyAvatarRenderer.onPatch(entity, patch)
 			entity.samples = {}
 		end
 		applyProxyAssetVisuals(handle, handle.model, entity.components)
+		applyAppearanceAvatar(handle, handle.model, entity.components, entity.entityId)
 		applyDescriptorMorph(handle, handle.model, entity.components, entity.entityId)
 		applyEffectToPart(handle, handle.model, effectSettings(entity.entityId, entity.components))
 	end
@@ -1697,6 +1862,69 @@ local function clearNativeAttachedVisuals(handle)
 			handle[key] = nil
 		end
 	end
+end
+
+function OwnCharacterOverlayRenderer.onCreate(entity)
+	local folder = Instance.new("Folder")
+	folder.Name = entity.entityId .. "_self_overlay"
+	folder.Parent = entityFolder
+	entity.handle = {
+		folder = folder,
+		connections = {
+			LocalPlayer.CharacterAdded:Connect(function()
+				task.wait(0.1)
+				local current = Client.entities[entity.entityId]
+				if current == entity and current.rendererKind == "self" then
+					OwnCharacterOverlayRenderer.onPatch(entity, {})
+				end
+			end),
+		},
+	}
+	OwnCharacterOverlayRenderer.onPatch(entity, {})
+end
+
+function OwnCharacterOverlayRenderer.onPatch(entity)
+	local handle = entity.handle
+	if handle == nil then
+		return
+	end
+
+	local character = LocalPlayer.Character
+	if character == nil then
+		return
+	end
+
+	local head = character:FindFirstChild("Head")
+	local root = character:FindFirstChild("HumanoidRootPart")
+	local anchor = head or root
+	if anchor == nil then
+		return
+	end
+
+	local morphAssetId = assetIdFromComponent(entity.components and entity.components.morph)
+	local morphDescriptor = morphAssetId and descriptorForAsset(morphAssetId) or nil
+	local morphAnchor = anchor
+	if morphDescriptor and morphDescriptor.anchor == "HumanoidRootPart" and root then
+		morphAnchor = root
+	elseif morphDescriptor and morphDescriptor.anchor == "Head" and head then
+		morphAnchor = head
+	end
+
+	if root then
+		applyAppearanceAvatar(handle, root, entity.components, entity.entityId)
+		applyEffectToPart(handle, root, effectSettings(entity.entityId, entity.components))
+	else
+		applyAppearanceAvatar(handle, anchor, entity.components, entity.entityId)
+	end
+	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId)
+end
+
+function OwnCharacterOverlayRenderer.onDestroy(entity)
+	destroyHandle(entity.handle)
+	entity.handle = nil
+end
+
+function OwnCharacterOverlayRenderer.onEphemeralTransform()
 end
 
 function NativeCharacterOverlayRenderer.onCreate(entity)
@@ -1800,7 +2028,10 @@ function NativeCharacterOverlayRenderer.onPatch(entity)
 	end
 
 	if root then
+		applyAppearanceAvatar(handle, root, entity.components, entity.entityId)
 		applyEffectToPart(handle, root, effect)
+	else
+		applyAppearanceAvatar(handle, anchor, entity.components, entity.entityId)
 	end
 	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId)
 end
@@ -2538,6 +2769,49 @@ local function parseAppearanceUserId(payload)
 	return nil
 end
 
+local function appearanceInputRaw(payload)
+	payload = bridgePayloadTable(payload)
+	local raw = trimString(payload.appearance_user_id or payload.appearanceUserId or payload.roblox_avatar_user_id)
+	if raw == "" then
+		raw = trimString(payload.value or payload.input)
+	end
+	return raw
+end
+
+local function resolveAppearanceUserId(payload)
+	local numericId = parseAppearanceUserId(payload)
+	if numericId then
+		return numericId
+	end
+
+	local raw = appearanceInputRaw(payload)
+	if raw == "" or isHttpUrl(raw) then
+		return nil
+	end
+
+	local lower = string.lower(raw)
+	if string.sub(lower, 1, 5) == "user:" then
+		raw = string.sub(raw, 6)
+	elseif string.sub(lower, 1, 5) == "name:" then
+		raw = string.sub(raw, 6)
+	elseif string.sub(raw, 1, 1) == "@" then
+		raw = string.sub(raw, 2)
+	end
+	raw = trimString(raw)
+
+	if raw == "" or string.match(raw, "[/%\\:%?]") then
+		return nil
+	end
+
+	local ok, userId = pcall(function()
+		return Players:GetUserIdFromNameAsync(raw)
+	end)
+	if ok and tonumber(userId) then
+		return tonumber(userId)
+	end
+	return nil
+end
+
 local function resolveBridgeAsset(kind, payload)
 	payload = bridgePayloadTable(payload)
 	local value = trimString(payload.value or payload.input)
@@ -2626,7 +2900,7 @@ local function bridgeSetAvatar(payload)
 	end
 
 	task.spawn(function()
-		local appearanceUserId = parseAppearanceUserId(payload)
+		local appearanceUserId = resolveAppearanceUserId(payload)
 		local asset, assetError = nil, nil
 		if not appearanceUserId then
 			asset, assetError = resolveBridgeAsset("avatar", payload)
@@ -4296,6 +4570,8 @@ function OverlayUI:HandleRuntimeEvent(eventName, payload)
 		self:_notify("Descriptor ready: " .. tostring(payload and (payload.name or payload.asset_id) or "?"), 3)
 	elseif eventName == "avatar.applied" then
 		self:_notify("Avatar applied", 3)
+	elseif eventName == "avatar.appearance.ready" then
+		self:_notify("Avatar appearance ready", 3)
 	elseif eventName == "morph.applied" then
 		self:_notify("Morph applied", 3)
 	elseif eventName == "animation.played" then
