@@ -5,7 +5,14 @@
   "asset_id": "morph_2270-tz-s-scripted",
   "name": "Tz's Scripted",
   "source_file": "2270-tz-s-scripted.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -175.199982,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 5,
     "MeshPart": 5,
-    "ParticleEmitter": 2
+    "ParticleEmitter": 2,
+    "UnionOperation": 3,
+    "Bone": 3
   },
   "nodes": [
     {
@@ -131,6 +140,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://9001194356",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -197,6 +207,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12921743140",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -263,6 +274,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12921742575",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -329,6 +341,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://15902061210",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -498,6 +511,134 @@
         "VelocityInheritance": 0,
         "ZOffset": 0,
         "Name": "Particles"
+      }
+    },
+    {
+      "id": "RBXC75ACE7857264646810C921C34208137",
+      "parent": "RBXC392387EDD194B2C925AB83A5FC03323",
+      "class": "UnionOperation",
+      "name": "Wetness_H",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0,
+          0
+        ],
+        "Massless": true,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.0650000051,
+          0.0650000051,
+          0.0650000051
+        ],
+        "Name": "Wetness_H",
+        "LocalCFrame": {
+          "position": [
+            7.003662,
+            -0.78237,
+            -0.81028
+          ],
+          "rotation": [
+            -0.999965,
+            0.000543,
+            -0.008339,
+            0.008311,
+            -0.038862,
+            -0.99921,
+            -0.000867,
+            -0.999244,
+            0.038856
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX01D4E6A83B544A7680575BDB7AC41D45",
+      "parent": "RBXC392387EDD194B2C925AB83A5FC03323",
+      "class": "UnionOperation",
+      "name": "Wetness_S",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0,
+          1,
+          0
+        ],
+        "Massless": true,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.0650000051,
+          0.0650000051,
+          0.0650000051
+        ],
+        "Name": "Wetness_S",
+        "LocalCFrame": {
+          "position": [
+            7.003662,
+            -0.78237,
+            -0.81028
+          ],
+          "rotation": [
+            -0.999965,
+            0.000543,
+            -0.008339,
+            0.008311,
+            -0.038862,
+            -0.99921,
+            -0.000867,
+            -0.999244,
+            0.038856
+          ]
+        }
       }
     },
     {
@@ -676,6 +817,70 @@
       }
     },
     {
+      "id": "RBXBBB2DE1ED8B24CE29C6A93545C06A5E0",
+      "parent": "RBXC392387EDD194B2C925AB83A5FC03323",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.819608,
+          0.639216,
+          0.282353
+        ],
+        "Massless": true,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.511777103,
+          0.174063504,
+          0.520989835
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            7.003769,
+            -0.763607,
+            -0.745957
+          ],
+          "rotation": [
+            -0.999965,
+            0.000543,
+            -0.008339,
+            0.008311,
+            -0.038862,
+            -0.99921,
+            -0.000867,
+            -0.999244,
+            0.038856
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXDB2E6AE14A8740CAA825DFE3A05AE40C",
       "parent": "RBX1B1FA53D9D874557A6F50D632AEEDD08",
       "class": "Model",
@@ -755,6 +960,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -813,6 +1019,90 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX07AD86D9C25C4C34A06B8BD4A0B04219",
+      "parent": "RBX5322694981174035AB872F7B0604A66B",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00158373499,
+            0.566361785,
+            0.0609440543
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX20AD7852A9ED4FAF9B44C839B8C4A8D0",
+      "parent": "RBX07AD86D9C25C4C34A06B8BD4A0B04219",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000011535566,
+            0.484445989,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            -0.707106829,
+            -4.09782004e-8,
+            0.707106769,
+            0.707106829,
+            -4.09782288e-8,
+            5.79519437e-8,
+            2.14147903e-14,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX2445C42127864F0F9A8F18D059CAFB64",
+      "parent": "RBX07AD86D9C25C4C34A06B8BD4A0B04219",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000011535566,
+            0.48444581,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            0.707106829,
+            -1.00582852e-7,
+            -0.707106769,
+            0.707106829,
+            1.00582852e-7,
+            1.42245625e-7,
+            -4.03284245e-16,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     }
   ]

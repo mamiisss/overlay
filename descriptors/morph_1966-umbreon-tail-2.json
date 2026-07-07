@@ -5,7 +5,14 @@
   "asset_id": "morph_1966-umbreon-tail-2",
   "name": "Umbreon Tail 2",
   "source_file": "1966-umbreon-tail-2.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -28192.4609,
@@ -29,7 +36,9 @@
     "Model": 1,
     "Part": 2,
     "SpecialMesh": 1,
-    "MeshPart": 2
+    "Bone": 7,
+    "MeshPart": 2,
+    "Motor6D": 2
   },
   "nodes": [
     {
@@ -207,11 +216,208 @@
       }
     },
     {
+      "id": "RBX33998630C8B34816BA2C0CEF251204BC",
+      "parent": "RBXD8A66F0406E54EFBA756053832970E08",
+      "class": "Bone",
+      "name": "pm0197_00",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            -1.99520278e-23,
+            -2.44929371e-16,
+            -2.44929371e-16,
+            -1.62920685e-7,
+            -1,
+            -1.99520341e-23,
+            1,
+            -1.62920685e-7
+          ]
+        },
+        "Visible": false,
+        "Name": "pm0197_00"
+      }
+    },
+    {
+      "id": "RBX37F6856C429A4DE1B36D910A2CF525F4",
+      "parent": "RBX33998630C8B34816BA2C0CEF251204BC",
+      "class": "Bone",
+      "name": "Origin",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            -3.25059923e-30,
+            0,
+            1,
+            0,
+            3.25059923e-30,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Origin"
+      }
+    },
+    {
+      "id": "RBX86FD4999F7D3495584B147F66EE3EAC2",
+      "parent": "RBX37F6856C429A4DE1B36D910A2CF525F4",
+      "class": "Bone",
+      "name": "Waist",
+      "properties": {
+        "CFrame": {
+          "position": [
+            1.21371642e-8,
+            0.317955106,
+            -2.29942203
+          ],
+          "rotation": [
+            -0.998613775,
+            -2.34526868e-20,
+            0.0526370034,
+            0,
+            1,
+            4.45555202e-19,
+            -0.0526370034,
+            4.44937505e-19,
+            -0.998613775
+          ]
+        },
+        "Visible": false,
+        "Name": "Waist"
+      }
+    },
+    {
+      "id": "RBX14EDE93429914E259E48A8A38331DD94",
+      "parent": "RBX86FD4999F7D3495584B147F66EE3EAC2",
+      "class": "Bone",
+      "name": "Hips",
+      "properties": {
+        "CFrame": {
+          "position": [
+            1.13085159e-8,
+            0,
+            1.80936254e-7
+          ],
+          "rotation": [
+            0.99885118,
+            -5.5447369e-17,
+            0.0479219034,
+            5.55111512e-17,
+            1,
+            -2.06795153e-25,
+            -0.0479219034,
+            2.66019962e-18,
+            0.99885118
+          ]
+        },
+        "Visible": false,
+        "Name": "Hips"
+      }
+    },
+    {
+      "id": "RBX0153647E9BB04560BCD10CDC160DAF0E",
+      "parent": "RBX14EDE93429914E259E48A8A38331DD94",
+      "class": "Bone",
+      "name": "Tail1",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000211893325,
+            0.993764758,
+            0.163430855
+          ],
+          "rotation": [
+            -0.941457212,
+            -4.55463295e-15,
+            0.337132692,
+            0,
+            1,
+            1.35099138e-14,
+            -0.337132692,
+            1.27190044e-14,
+            -0.941457212
+          ]
+        },
+        "Visible": false,
+        "Name": "Tail1"
+      }
+    },
+    {
+      "id": "RBXE6EC88DA0A584E3EA41E1B9B40DC3B0B",
+      "parent": "RBX0153647E9BB04560BCD10CDC160DAF0E",
+      "class": "Bone",
+      "name": "Tail2",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0923046321,
+            0.743538082,
+            -0.253975153
+          ],
+          "rotation": [
+            1,
+            0,
+            -8.9406953e-8,
+            0,
+            1,
+            0,
+            8.9406953e-8,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Tail2"
+      }
+    },
+    {
+      "id": "RBX92DBBF7E671D4BF58A8031E948D892D4",
+      "parent": "RBXE6EC88DA0A584E3EA41E1B9B40DC3B0B",
+      "class": "Bone",
+      "name": "Tail3",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.119599588,
+            0.963406682,
+            -0.329076737
+          ],
+          "rotation": [
+            1,
+            0,
+            2.98023064e-8,
+            0,
+            1,
+            0,
+            -2.98023064e-8,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Tail3"
+      }
+    },
+    {
       "id": "RBX50EC71A8EE6A46C6B87045C02CEB228C",
       "parent": "RBXEA87D51D158146B39A26AB3E92FE1336",
       "class": "MeshPart",
       "name": "Umbreon.001",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://16432120348",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -273,11 +479,60 @@
       }
     },
     {
+      "id": "RBX48E4F18465FA47ED8C9DDEE41998C704",
+      "parent": "RBX50EC71A8EE6A46C6B87045C02CEB228C",
+      "class": "Motor6D",
+      "name": "Umbreon.001Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            2.94021419e-7,
+            -2.96866751,
+            -2.6949656
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD8A66F0406E54EFBA756053832970E08",
+        "Part1": "RBX50EC71A8EE6A46C6B87045C02CEB228C",
+        "Name": "Umbreon.001Motor6D"
+      }
+    },
+    {
       "id": "RBX23AA9E9BB8994636BD90D338710A6999",
       "parent": "RBXEA87D51D158146B39A26AB3E92FE1336",
       "class": "MeshPart",
       "name": "Umbreon",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://16432120359",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -336,6 +591,54 @@
             0.939693
           ]
         }
+      }
+    },
+    {
+      "id": "RBX6F8C4EE0C0E842A2A73EBA9B6AB231D9",
+      "parent": "RBX23AA9E9BB8994636BD90D338710A6999",
+      "class": "Motor6D",
+      "name": "UmbreonMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            2.94021419e-7,
+            -2.89905357,
+            -2.66131687
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD8A66F0406E54EFBA756053832970E08",
+        "Part1": "RBX23AA9E9BB8994636BD90D338710A6999",
+        "Name": "UmbreonMotor6D"
       }
     }
   ]

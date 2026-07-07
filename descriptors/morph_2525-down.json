@@ -5,7 +5,14 @@
   "asset_id": "morph_2525-down",
   "name": "Down",
   "source_file": "2525-down.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -4108.27197,
@@ -30,6 +37,7 @@
     "Part": 10,
     "SpecialMesh": 7,
     "ParticleEmitter": 1,
+    "UnionOperation": 1,
     "MeshPart": 1
   },
   "nodes": [
@@ -501,11 +509,76 @@
       }
     },
     {
+      "id": "RBX88EA332C0C9C4841B139C3F69D81593F",
+      "parent": "RBX61C9F3867265434BA74240C8ECD719D6",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.341007382,
+          0.248576924,
+          0.356180847
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0,
+            -0.3594,
+            -0.34229
+          ],
+          "rotation": [
+            0.999991,
+            0.004171,
+            0.000369,
+            0.00192,
+            -0.535014,
+            0.844841,
+            0.003721,
+            -0.844833,
+            -0.535017
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXBDC5B186B9434669A0D286A6FA6C1FAB",
       "parent": "RBX61C9F3867265434BA74240C8ECD719D6",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7628766135",
         "RenderFidelity": 1,
         "TextureID": null,

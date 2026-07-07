@@ -5,7 +5,14 @@
   "asset_id": "morph_2936-boobs-maroonheart",
   "name": "boobs maroonheart",
   "source_file": "2936-boobs-maroonheart.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       25.1619167,
@@ -31,6 +38,7 @@
     "SpecialMesh": 5,
     "ParticleEmitter": 2,
     "Decal": 2,
+    "WeldConstraint": 2,
     "MeshPart": 2
   },
   "nodes": [
@@ -364,11 +372,21 @@
       }
     },
     {
+      "id": "RBX8EAFFC59D0854DAA9133D29F12183F25",
+      "parent": "RBXE572CC270C474653945B717A3A213AD6",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX68C769629832466C97E2EF41B6596628",
       "parent": "RBXE572CC270C474653945B717A3A213AD6",
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8135652375",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -723,6 +741,15 @@
       }
     },
     {
+      "id": "RBX578FF890CEA947AE814B5BC4BEE9638A",
+      "parent": "RBX474AF8193AAA4877AA64ABA6DE9CCAE4",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX38365411674B4749BBDE1D678917F633",
       "parent": "RBX474AF8193AAA4877AA64ABA6DE9CCAE4",
       "class": "SpecialMesh",
@@ -755,6 +782,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8135651002",
         "RenderFidelity": 1,
         "TextureID": null,

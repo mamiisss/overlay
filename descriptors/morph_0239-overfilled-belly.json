@@ -5,7 +5,14 @@
   "asset_id": "morph_0239-overfilled-belly",
   "name": "Overfilled Belly",
   "source_file": "0239-overfilled-belly.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -81.2120895,
@@ -29,7 +36,8 @@
     "Model": 1,
     "Part": 4,
     "SpecialMesh": 4,
-    "MeshPart": 1
+    "MeshPart": 1,
+    "SurfaceAppearance": 1
   },
   "nodes": [
     {
@@ -421,6 +429,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14430959240",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -479,6 +488,20 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXF8D99916D37748BD81A7835FA94100AB",
+      "parent": "RBXB7CBF367362B4B1E890B20968C590581",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": "rbxassetid://14429033345",
+        "Name": "SurfaceAppearance"
       }
     }
   ]

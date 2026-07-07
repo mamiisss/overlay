@@ -5,7 +5,14 @@
   "asset_id": "morph_0521-puppet",
   "name": "Puppet",
   "source_file": "0521-puppet.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       944.915222,
@@ -30,9 +37,12 @@
     "MeshPart": 28,
     "Texture": 132,
     "Part": 25,
+    "UnionOperation": 3,
     "SpecialMesh": 1,
     "Decal": 7,
-    "Attachment": 12
+    "WeldConstraint": 44,
+    "Attachment": 12,
+    "Weld": 4
   },
   "nodes": [
     {
@@ -60,6 +70,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7316929694",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -309,8 +320,72 @@
       }
     },
     {
-      "id": "RBXBB644DB0ABEF4390BC95A6C63A6A423F",
+      "id": "RBX7D17CB7B4771406FB1712FC47D1810C2",
       "parent": "RBX25C702C7EC3F4256A1D50E75052A43C0",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.387187,
+            -0.006989,
+            0.467788
+          ],
+          "rotation": [
+            0.000058,
+            0.912651,
+            -0.40874,
+            -0.00111,
+            0.40874,
+            0.91265,
+            0.999999,
+            0.000402,
+            0.001039
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXBB644DB0ABEF4390BC95A6C63A6A423F",
+      "parent": "RBX7D17CB7B4771406FB1712FC47D1810C2",
       "class": "Texture",
       "name": "lq.lm.Cs.gs",
       "properties": {
@@ -329,7 +404,7 @@
     },
     {
       "id": "RBX99ADED5F61E74247BEE615C4CFED56B4",
-      "parent": "RBX25C702C7EC3F4256A1D50E75052A43C0",
+      "parent": "RBX7D17CB7B4771406FB1712FC47D1810C2",
       "class": "Texture",
       "name": "lq.lm.Cs.gs",
       "properties": {
@@ -348,7 +423,7 @@
     },
     {
       "id": "RBXB712152B462F40429699022D49ED51B0",
-      "parent": "RBX25C702C7EC3F4256A1D50E75052A43C0",
+      "parent": "RBX7D17CB7B4771406FB1712FC47D1810C2",
       "class": "Texture",
       "name": "lq.lm.Cs.gs",
       "properties": {
@@ -367,7 +442,7 @@
     },
     {
       "id": "RBXB1D975D4B1674FDD895B734C0DD63E62",
-      "parent": "RBX25C702C7EC3F4256A1D50E75052A43C0",
+      "parent": "RBX7D17CB7B4771406FB1712FC47D1810C2",
       "class": "Texture",
       "name": "lq.lm.Cs.gs",
       "properties": {
@@ -386,7 +461,7 @@
     },
     {
       "id": "RBX00EA0B03BAF84A01A77D6287523F1E7F",
-      "parent": "RBX25C702C7EC3F4256A1D50E75052A43C0",
+      "parent": "RBX7D17CB7B4771406FB1712FC47D1810C2",
       "class": "Texture",
       "name": "lq.lm.Cs.gs",
       "properties": {
@@ -405,7 +480,7 @@
     },
     {
       "id": "RBXBDA1DA0A1D434F5C9959CC4913AC08CE",
-      "parent": "RBX25C702C7EC3F4256A1D50E75052A43C0",
+      "parent": "RBX7D17CB7B4771406FB1712FC47D1810C2",
       "class": "Texture",
       "name": "lq.lm.Cs.gs",
       "properties": {
@@ -529,6 +604,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7310579572",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -800,6 +876,7 @@
       "class": "MeshPart",
       "name": "Aq.Go.dq.jm.H.hk.co.qm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://9496985521",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -858,6 +935,51 @@
             0.000041
           ]
         }
+      }
+    },
+    {
+      "id": "RBX0EA48B426EC4421D850756FC9D0CB3A5",
+      "parent": "RBX5A7683F6AB1F4820A5938126665EA171",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX5923C1ED88B244009CF11BC87A29E99A",
+      "parent": "RBX5A7683F6AB1F4820A5938126665EA171",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX7FDF82D6645445A5861E4A1E355EB059",
+      "parent": "RBX5A7683F6AB1F4820A5938126665EA171",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX6BB1EC8C30CE47119F33A74A3B53F2AF",
+      "parent": "RBX5A7683F6AB1F4820A5938126665EA171",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX405739A9506749628AD3433A7B0471DC",
+      "parent": "RBX5A7683F6AB1F4820A5938126665EA171",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
       }
     },
     {
@@ -974,6 +1096,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1040,6 +1163,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1106,6 +1230,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1172,6 +1297,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1540,6 +1666,7 @@
       "class": "MeshPart",
       "name": "fq.xm.aq.jm.H.hk.co.qm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://9496986645",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1601,11 +1728,57 @@
       }
     },
     {
+      "id": "RBX61281A535C2144BA8EA8E0B3859FA5E5",
+      "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX9B18A8D48F9749818FA46CDB50D0A0AE",
+      "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXAECDD2E673D5463D864DBB27A41D5778",
+      "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXB6EF0AA0BBE24A9B92B2E108E220922F",
+      "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX929FE93DD39947C9B324A2F34500D74B",
+      "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
       "id": "RBX889820859A574F21B33539430DE49E98",
       "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1672,6 +1845,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1738,6 +1912,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1804,6 +1979,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2070,6 +2246,102 @@
       }
     },
     {
+      "id": "RBX0E23D94148884DFE8E8303C9839D8677",
+      "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -1.28889775,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.600952148,
+            1.10839844,
+            -0.012878418
+          ],
+          "rotation": [
+            0,
+            -1,
+            0,
+            0.00003202273,
+            0,
+            -1,
+            1,
+            0,
+            0.00003202273
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+        "Part1": null,
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX512A4A87025F40219CA0E49FB6552B42",
+      "parent": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -1.28889775,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0.61315918,
+            0.999023438,
+            0.0562133789
+          ],
+          "rotation": [
+            -6.20495086e-8,
+            1,
+            4.95224299e-7,
+            3.1024765e-8,
+            -4.95224299e-7,
+            -1,
+            -1,
+            6.20495086e-8,
+            3.1024765e-8
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXCB7DEC4EFC46481BB0953C55AB8F24C2",
+        "Part1": null,
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX1C2B048A5B4C43678231E517D5351B70",
       "parent": "RBX572CCF1A022D43B4A0C84CDBEACE4B72",
       "class": "Part",
@@ -2149,6 +2421,7 @@
       "class": "MeshPart",
       "name": "Aq.Go.dq.jm.H.Dk.ao.Hk.cq",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://9496983888",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2207,6 +2480,51 @@
             0.000041
           ]
         }
+      }
+    },
+    {
+      "id": "RBX99013155BE45464992AB1187568BE5B1",
+      "parent": "RBXC2EFC29EE1764201B0B4E19A1FBE0ED8",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXAB7F793B04824DCCB05B06DA6320371A",
+      "parent": "RBXC2EFC29EE1764201B0B4E19A1FBE0ED8",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXDBFBCE4E85034195BF303BE6E8ECCD39",
+      "parent": "RBXC2EFC29EE1764201B0B4E19A1FBE0ED8",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX220018F37B204E82B4D8606AF75FA04E",
+      "parent": "RBXC2EFC29EE1764201B0B4E19A1FBE0ED8",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX23A6FD530B4C43D2BF6AF9D4A76AF2B7",
+      "parent": "RBXC2EFC29EE1764201B0B4E19A1FBE0ED8",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
       }
     },
     {
@@ -2323,6 +2641,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2389,6 +2708,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2455,6 +2775,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2521,6 +2842,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2775,6 +3097,7 @@
       "class": "MeshPart",
       "name": "fq.xm.aq.jm.H.Dk.ao.Hk.cq",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://9496988106",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2833,6 +3156,51 @@
             0.00004
           ]
         }
+      }
+    },
+    {
+      "id": "RBXF925720B4A504E27AD450654234FE9C4",
+      "parent": "RBX705FEDF2C997425C8356E06CFE564E2E",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX49C7A0BF6C264351B3CBE6BBEFCA1CBA",
+      "parent": "RBX705FEDF2C997425C8356E06CFE564E2E",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX7C24C3A7FF634C7F90D3E9B991925D37",
+      "parent": "RBX705FEDF2C997425C8356E06CFE564E2E",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX3AFD57B47CF54FE9AC8CA426AA2CA542",
+      "parent": "RBX705FEDF2C997425C8356E06CFE564E2E",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXEF61F033C1DB45678E9BA08069726658",
+      "parent": "RBX705FEDF2C997425C8356E06CFE564E2E",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
       }
     },
     {
@@ -2932,6 +3300,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2998,6 +3367,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -3064,6 +3434,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -3130,6 +3501,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -3305,6 +3677,102 @@
       }
     },
     {
+      "id": "RBXE348597273E449F8A1370F5EF4BB86EF",
+      "parent": "RBX705FEDF2C997425C8356E06CFE564E2E",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            -1.01399994,
+            1.10250008,
+            0.534999967
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            1.5803833,
+            -1.30761719,
+            0.412536621
+          ],
+          "rotation": [
+            -1.24099031e-7,
+            1,
+            0.0000320847794,
+            -9.90448598e-7,
+            -0.0000319606806,
+            1,
+            1,
+            -1.24067313e-7,
+            -9.90452577e-7
+          ]
+        },
+        "Enabled": true,
+        "Part0": null,
+        "Part1": "RBX705FEDF2C997425C8356E06CFE564E2E",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX0917DF3434DA4004965DB438AF44EC06",
+      "parent": "RBX705FEDF2C997425C8356E06CFE564E2E",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            -1,
+            1,
+            0.5
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0.588745117,
+            -1.30078125,
+            -1.61364746
+          ],
+          "rotation": [
+            3.10247685e-7,
+            -1,
+            1.55123629e-7,
+            0.00000247612161,
+            -1.55123629e-7,
+            1,
+            -1,
+            3.10247685e-7,
+            -0.00000247612161
+          ]
+        },
+        "Enabled": true,
+        "Part0": null,
+        "Part1": "RBX705FEDF2C997425C8356E06CFE564E2E",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX1D3D4045ED614C72A6D70B5A87C975A3",
       "parent": "RBX6AC0B467F93B4AA1A81CEE2E365A479C",
       "class": "Part",
@@ -3384,6 +3852,7 @@
       "class": "MeshPart",
       "name": "Cq.Ho.ku.lq.wi",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://9304389484",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -3442,6 +3911,114 @@
             0.000051
           ]
         }
+      }
+    },
+    {
+      "id": "RBX8EF0F1FBFC93451E9448A91EE5F97D87",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXFC319112796E4B74B424F56443B366EB",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX3A08524BC18B4B66A620E56069DA8D15",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX490D620DB4674D63892995522C9E0639",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX7369821AFAEB4A21A8D8E1BAFEB065BE",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX1CB6ABAFE6DE464CA71E8E72DC604C91",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXFF1E9CD680C9444082A8E7C6EA05319D",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX3A41A7545E584A7BB6A95B3F9580512C",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX9C02AF30BC804362A4D093AE4B645D9F",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX8074C0848CB7451DAF26C09CB7253556",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX6334D7FC793F4C9AB4C41618BF388047",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX66BE95B9D13C4A978779B07C4E0ECF4A",
+      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
       }
     },
     {
@@ -3513,8 +4090,108 @@
       }
     },
     {
-      "id": "RBXDB833E617B394D4D9663A946248F2372",
+      "id": "RBXDA159C2FE348443C96B4DF64C770DBC1",
       "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "UnionOperation",
+      "name": "is.Ho.Cs.vq.Ci",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.066667,
+          0.066667,
+          0.066667
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          3.32382202,
+          0.354888916,
+          3.32381821
+        ],
+        "Name": "is.Ho.Cs.vq.Ci",
+        "LocalCFrame": {
+          "position": [
+            0.376465,
+            5.014425,
+            2.321869
+          ],
+          "rotation": [
+            -0.717111,
+            0.356108,
+            0.599116,
+            0.41777,
+            0.907695,
+            -0.039476,
+            -0.557872,
+            0.221984,
+            -0.799689
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE8C16210930444BEB48E17A844170DA1",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX5B16AD25E01E4BE9AC49FAC8F9114D48",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX6230EEED215B412BBAD95139E25DC641",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX125ED0BD313743FC8AF7754BE9037723",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBXDB833E617B394D4D9663A946248F2372",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
       "class": "Part",
       "name": "ws.io.ds.js",
       "properties": {
@@ -3719,7 +4396,7 @@
     },
     {
       "id": "RBX0CE8DDE8CF3E46FFBD02900D230E654B",
-      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
       "class": "Part",
       "name": "ws.io.ds.js",
       "properties": {
@@ -3924,7 +4601,7 @@
     },
     {
       "id": "RBX8CFCB4122E4C428AA216C2D9761B089C",
-      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
       "class": "Part",
       "name": "ws.dm.fs.hq.ki",
       "properties": {
@@ -4129,7 +4806,7 @@
     },
     {
       "id": "RBX01DD1F42267C499C8B8C16F57C194F42",
-      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "parent": "RBXDA159C2FE348443C96B4DF64C770DBC1",
       "class": "Part",
       "name": "ws.dm.fs.hq.ki",
       "properties": {
@@ -4333,8 +5010,108 @@
       }
     },
     {
-      "id": "RBX9A3022BE170243E991F1FADAF6F1DE25",
+      "id": "RBX17D498611E7547EFA4DA01D628A071EF",
       "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "class": "UnionOperation",
+      "name": "is.Ho.Cs.vq.Ci",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.066667,
+          0.066667,
+          0.066667
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          3.32382584,
+          0.354888916,
+          3.3238163
+        ],
+        "Name": "is.Ho.Cs.vq.Ci",
+        "LocalCFrame": {
+          "position": [
+            0.376348,
+            4.841944,
+            -1.058518
+          ],
+          "rotation": [
+            -0.836535,
+            0.258698,
+            -0.482995,
+            0.345781,
+            0.933065,
+            -0.099123,
+            0.425023,
+            -0.24993,
+            -0.869994
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC3FCB2EB353A4042A2B7F56BD24B9A43",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX1E4EA516DA254375AC7E43019FCBD294",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX0DA132F285D2466EA5A7C8749F035D21",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX78640141CF864F598C0FEC2F18DC3296",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
+      "id": "RBX9A3022BE170243E991F1FADAF6F1DE25",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
       "class": "Part",
       "name": "ws.dm.fs.hq.ki",
       "properties": {
@@ -4511,6 +5288,15 @@
       }
     },
     {
+      "id": "RBX0DD287FE58A646078F24361F4D885595",
+      "parent": "RBX9A3022BE170243E991F1FADAF6F1DE25",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
       "id": "RBX83C2B54CBFD34DBCB122A066A3FF7990",
       "parent": "RBX9A3022BE170243E991F1FADAF6F1DE25",
       "class": "Attachment",
@@ -4539,7 +5325,7 @@
     },
     {
       "id": "RBX87D16EF427494D89B8AEDC2AD52E54CA",
-      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
       "class": "Part",
       "name": "ws.dm.fs.hq.ki",
       "properties": {
@@ -4716,6 +5502,15 @@
       }
     },
     {
+      "id": "RBX0D1F2150E2FC4130954276B9813A70CA",
+      "parent": "RBX87D16EF427494D89B8AEDC2AD52E54CA",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
       "id": "RBX0E3C0CF2C1A54156986CF430494621E0",
       "parent": "RBX87D16EF427494D89B8AEDC2AD52E54CA",
       "class": "Attachment",
@@ -4744,7 +5539,7 @@
     },
     {
       "id": "RBXE00F4C255697432CB7C515352E30D49D",
-      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
       "class": "Part",
       "name": "ws.io.ds.js",
       "properties": {
@@ -4921,6 +5716,15 @@
       }
     },
     {
+      "id": "RBXF60C7D01B3B249D085C274837B19540D",
+      "parent": "RBXE00F4C255697432CB7C515352E30D49D",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
       "id": "RBXFB5B08B5FB0C408695E46D4524BB4158",
       "parent": "RBXE00F4C255697432CB7C515352E30D49D",
       "class": "Attachment",
@@ -4949,7 +5753,7 @@
     },
     {
       "id": "RBXAE20F2E4AD5F4DE3B5D3B00AAC0BF596",
-      "parent": "RBX477B2292FC9C41A6AC4757A3AED04EB4",
+      "parent": "RBX17D498611E7547EFA4DA01D628A071EF",
       "class": "Part",
       "name": "ws.io.ds.js",
       "properties": {
@@ -5126,6 +5930,15 @@
       }
     },
     {
+      "id": "RBX6084CC98942C47519E58516D00A39EB7",
+      "parent": "RBXAE20F2E4AD5F4DE3B5D3B00AAC0BF596",
+      "class": "WeldConstraint",
+      "name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq",
+      "properties": {
+        "Name": "ws.nm.Is.Bq.s.Hk.go.Ik.q.mm.ms.js.vk.oq"
+      }
+    },
+    {
       "id": "RBXAC274E9BC1634E0B801836993AFC1C42",
       "parent": "RBXAE20F2E4AD5F4DE3B5D3B00AAC0BF596",
       "class": "Attachment",
@@ -5158,6 +5971,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5224,6 +6038,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5290,6 +6105,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5356,6 +6172,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5422,6 +6239,7 @@
       "class": "MeshPart",
       "name": "ws.Go.As.rs.t.uk.co.om",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7980629618",
         "RenderFidelity": 1,
         "TextureID": null,

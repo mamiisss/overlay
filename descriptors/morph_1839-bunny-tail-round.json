@@ -5,7 +5,14 @@
   "asset_id": "morph_1839-bunny-tail-round",
   "name": "Bunny Tail(Round)",
   "source_file": "1839-bunny-tail-round.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       14829.9648,
@@ -29,7 +36,8 @@
     "Model": 1,
     "Part": 1,
     "SpecialMesh": 1,
-    "MeshPart": 1
+    "MeshPart": 1,
+    "Bone": 2
   },
   "nodes": [
     {
@@ -148,6 +156,7 @@
       "class": "MeshPart",
       "name": "Tail",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://17136866458",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -206,6 +215,62 @@
             0
           ]
         }
+      }
+    },
+    {
+      "id": "RBX06EE04C36DBA4610AB771433DB535C84",
+      "parent": "RBXE6F647A9CE9B479BAAFE55ABEA4B23EC",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.425940156,
+            0.00646545179,
+            0.00145568151
+          ],
+          "rotation": [
+            0.0542838015,
+            0.99852562,
+            0.00000119262859,
+            -0.99852562,
+            0.0542838015,
+            0.00000101583589,
+            9.49597563e-7,
+            -0.00000124601343,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX7CEC22670DD84B3F9148CEA6DC5140F6",
+      "parent": "RBX06EE04C36DBA4610AB771433DB535C84",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -3.7252903e-9,
+            0.0972676575,
+            8.41282599e-12
+          ],
+          "rotation": [
+            0.999852598,
+            0.0171750449,
+            -1.44359085e-8,
+            -0.0171750449,
+            0.999852598,
+            -0.00000122558981,
+            -6.61577815e-9,
+            0.00000122565689,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     }
   ]

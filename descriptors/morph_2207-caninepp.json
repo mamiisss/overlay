@@ -5,7 +5,14 @@
   "asset_id": "morph_2207-caninepp",
   "name": "caninepp",
   "source_file": "2207-caninepp.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -51.5027466,
@@ -28,7 +35,9 @@
     "Folder": 1,
     "Model": 1,
     "Part": 1,
-    "MeshPart": 2
+    "Bone": 8,
+    "MeshPart": 2,
+    "Motor6D": 2
   },
   "nodes": [
     {
@@ -115,11 +124,236 @@
       }
     },
     {
+      "id": "RBX2727C6143828472182385DE0295F3528",
+      "parent": "RBX8E0D75173DDE45228279699971F6BF8C",
+      "class": "Bone",
+      "name": "penis.000",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            -0.00562095642,
+            0.0326843262
+          ],
+          "rotation": [
+            1,
+            4.22878989e-11,
+            7.15348506e-7,
+            -7.07165441e-7,
+            -0.150764346,
+            0.988569796,
+            1.07890834e-7,
+            -0.988569796,
+            -0.150764346
+          ]
+        },
+        "Visible": false,
+        "Name": "penis.000"
+      }
+    },
+    {
+      "id": "RBX7BEE460D3F4A435AA8B7A207C990A9C0",
+      "parent": "RBX2727C6143828472182385DE0295F3528",
+      "class": "Bone",
+      "name": "Sheath.L",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0875320435,
+            0.0813674927,
+            -0.0223922729
+          ],
+          "rotation": [
+            0.989547253,
+            0.0873592123,
+            0.114737421,
+            -0.0888993964,
+            0.996005476,
+            0.00836599153,
+            -0.113548249,
+            -0.0184786301,
+            0.993360698
+          ]
+        },
+        "Visible": false,
+        "Name": "Sheath.L"
+      }
+    },
+    {
+      "id": "RBX682D46C9D23748D7B6BF6A6E5707B702",
+      "parent": "RBX2727C6143828472182385DE0295F3528",
+      "class": "Bone",
+      "name": "Sheath.R",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0875320435,
+            0.0813674927,
+            -0.0223922729
+          ],
+          "rotation": [
+            0.989547133,
+            -0.087359041,
+            -0.114738502,
+            0.0888992473,
+            0.996005535,
+            0.00836606696,
+            0.113549322,
+            -0.0184787828,
+            0.993360579
+          ]
+        },
+        "Visible": false,
+        "Name": "Sheath.R"
+      }
+    },
+    {
+      "id": "RBX8F11F09F982648869109F18D46EF08A2",
+      "parent": "RBX2727C6143828472182385DE0295F3528",
+      "class": "Bone",
+      "name": "Sheath.B",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.127494812,
+            -0.146720886
+          ],
+          "rotation": [
+            1,
+            -1.94728372e-7,
+            -4.41331281e-7,
+            6.4938753e-8,
+            0.960915685,
+            -0.276841462,
+            4.77990966e-7,
+            0.276841462,
+            0.960915685
+          ]
+        },
+        "Visible": false,
+        "Name": "Sheath.B"
+      }
+    },
+    {
+      "id": "RBXB2CE15C76DFC47E3942138DA282D7ED5",
+      "parent": "RBX2727C6143828472182385DE0295F3528",
+      "class": "Bone",
+      "name": "Sheath.T",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.169960022,
+            0.115081787
+          ],
+          "rotation": [
+            1,
+            2.78256124e-7,
+            8.30688975e-7,
+            -5.75008926e-7,
+            0.923854709,
+            0.382743418,
+            -6.609352e-7,
+            -0.382743418,
+            0.923854709
+          ]
+        },
+        "Visible": false,
+        "Name": "Sheath.T"
+      }
+    },
+    {
+      "id": "RBXC27540BBE6B64EC3BB29C715C8825136",
+      "parent": "RBX2727C6143828472182385DE0295F3528",
+      "class": "Bone",
+      "name": "penis.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.297447205,
+            -0.0000152587891
+          ],
+          "rotation": [
+            1,
+            -9.02106407e-8,
+            -7.09543485e-7,
+            -2.32971249e-13,
+            0.992014527,
+            -0.126124069,
+            7.15255055e-7,
+            0.126124069,
+            0.992014527
+          ]
+        },
+        "Visible": false,
+        "Name": "penis.001"
+      }
+    },
+    {
+      "id": "RBX147EB6131D784417AA5E57DB816C636F",
+      "parent": "RBXC27540BBE6B64EC3BB29C715C8825136",
+      "class": "Bone",
+      "name": "penis.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.520492554,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            4.7646945e-14,
+            8.40352907e-13,
+            -2.2739067e-14,
+            0.999561429,
+            -0.0296149142,
+            -8.41395313e-13,
+            0.0296149142,
+            0.999561429
+          ]
+        },
+        "Visible": false,
+        "Name": "penis.002"
+      }
+    },
+    {
+      "id": "RBXF024CF317F8C47E7A381C72F57DBE449",
+      "parent": "RBX147EB6131D784417AA5E57DB816C636F",
+      "class": "Bone",
+      "name": "penis.003",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.437301636,
+            -0.00000762939453
+          ],
+          "rotation": [
+            1,
+            1.73434059e-16,
+            1.65565517e-15,
+            -1.20617492e-17,
+            0.995286942,
+            -0.0969736427,
+            -1.66467046e-15,
+            0.0969736427,
+            0.995286942
+          ]
+        },
+        "Visible": false,
+        "Name": "penis.003"
+      }
+    },
+    {
       "id": "RBX04B8182C0B7044BDB2B1254479EE37DE",
       "parent": "RBXBDD8D00DFA904DD09257427FB2C65703",
       "class": "MeshPart",
       "name": "Color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://12134484671",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -181,11 +415,60 @@
       }
     },
     {
+      "id": "RBX88073474111D41A883E4D132EC4A7E35",
+      "parent": "RBX04B8182C0B7044BDB2B1254479EE37DE",
+      "class": "Motor6D",
+      "name": "PenisMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            1.07524833e-7,
+            -2.75267601,
+            1.51193869
+          ],
+          "rotation": [
+            1,
+            -3.45055149e-8,
+            -3.18305844e-8,
+            4.54739464e-8,
+            0.8803913,
+            0.474248141,
+            1.16591909e-8,
+            -0.474248141,
+            0.8803913
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.00173104496,
+            -4.04856825,
+            0.0721859485
+          ],
+          "rotation": [
+            1,
+            -3.45142759e-8,
+            -3.17151567e-8,
+            2.68873972e-8,
+            0.976608872,
+            -0.215024993,
+            3.83947274e-8,
+            0.215024859,
+            0.976608694
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX8E0D75173DDE45228279699971F6BF8C",
+        "Part1": "RBX04B8182C0B7044BDB2B1254479EE37DE",
+        "Name": "PenisMotor6D"
+      }
+    },
+    {
       "id": "RBX0A39A006CFA5418898BB9E12B6D3E1AD",
       "parent": "RBXBDD8D00DFA904DD09257427FB2C65703",
       "class": "MeshPart",
       "name": "Color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2769379263",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -244,6 +527,54 @@
             -0.027298
           ]
         }
+      }
+    },
+    {
+      "id": "RBXC22DA721928C418EB12655F3899C0A36",
+      "parent": "RBX0A39A006CFA5418898BB9E12B6D3E1AD",
+      "class": "Motor6D",
+      "name": "RootPart",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0184637848,
+            -2.18912506,
+            -2.44610095
+          ],
+          "rotation": [
+            1,
+            -2.917157e-8,
+            -3.65628452e-8,
+            -1.26346205e-8,
+            0.584167719,
+            -0.811635673,
+            4.50355024e-8,
+            0.811636031,
+            0.584167242
+          ]
+        },
+        "C1": {
+          "position": [
+            8.5849365e-8,
+            -2.42419147,
+            2.09873271
+          ],
+          "rotation": [
+            1,
+            -2.91235569e-8,
+            -3.67648205e-8,
+            4.54477878e-8,
+            0.795385778,
+            0.606104732,
+            1.15902896e-8,
+            -0.606104732,
+            0.795385718
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0A39A006CFA5418898BB9E12B6D3E1AD",
+        "Part1": "RBX8E0D75173DDE45228279699971F6BF8C",
+        "Name": "RootPart"
       }
     }
   ]

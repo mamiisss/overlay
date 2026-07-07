@@ -5,7 +5,14 @@
   "asset_id": "morph_2110-bbc-2-mwa",
   "name": "BBC 2 mwa",
   "source_file": "2110-bbc-2-mwa.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -3903.79248,
@@ -28,9 +35,11 @@
     "Folder": 1,
     "Model": 3,
     "Part": 4,
+    "UnionOperation": 12,
     "Decal": 11,
     "SpecialMesh": 1,
-    "ParticleEmitter": 1
+    "ParticleEmitter": 1,
+    "Motor6D": 8
   },
   "nodes": [
     {
@@ -117,8 +126,72 @@
       }
     },
     {
-      "id": "RBX63846ADE249947B59E438DC46D82A879",
+      "id": "RBXA2E8CC266A3345619E45DC0985625C98",
       "parent": "RBXB8C37E8EC27F486F889C10DC827E4215",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.934382975,
+          0.48762092,
+          0.819720864
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.04004,
+            -0.4043,
+            0.01257
+          ],
+          "rotation": [
+            -0.342874,
+            -0.001166,
+            0.939381,
+            -0.939381,
+            0.001416,
+            -0.342872,
+            -0.00093,
+            -0.999998,
+            -0.001581
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX63846ADE249947B59E438DC46D82A879",
+      "parent": "RBXA2E8CC266A3345619E45DC0985625C98",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -135,7 +208,7 @@
     },
     {
       "id": "RBX18958777A623411FA6BC74053BB12760",
-      "parent": "RBXB8C37E8EC27F486F889C10DC827E4215",
+      "parent": "RBXA2E8CC266A3345619E45DC0985625C98",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -152,7 +225,7 @@
     },
     {
       "id": "RBX42BC9CD2E6634DE398EFDD0C21811098",
-      "parent": "RBXB8C37E8EC27F486F889C10DC827E4215",
+      "parent": "RBXA2E8CC266A3345619E45DC0985625C98",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -169,7 +242,7 @@
     },
     {
       "id": "RBXA26DAFB2E0C247F69E91B347C363C6EF",
-      "parent": "RBXB8C37E8EC27F486F889C10DC827E4215",
+      "parent": "RBXA2E8CC266A3345619E45DC0985625C98",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -186,7 +259,7 @@
     },
     {
       "id": "RBX5A331876348A469FB2C498CC1F2446CD",
-      "parent": "RBXB8C37E8EC27F486F889C10DC827E4215",
+      "parent": "RBXA2E8CC266A3345619E45DC0985625C98",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -203,7 +276,7 @@
     },
     {
       "id": "RBX0238E117F516427593EBD61A824DBDCD",
-      "parent": "RBXB8C37E8EC27F486F889C10DC827E4215",
+      "parent": "RBXA2E8CC266A3345619E45DC0985625C98",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -505,8 +578,584 @@
       }
     },
     {
-      "id": "RBXE4439889E412467B9C59E9A6C8173F65",
+      "id": "RBXAFD8732F90FC49AF8C76BB35FD41C617",
       "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0672404617,
+          0.74760133,
+          0.094783783
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.12695,
+            -0.1016,
+            -0.26196
+          ],
+          "rotation": [
+            0.666572,
+            -0.173829,
+            -0.72489,
+            -0.719341,
+            0.10507,
+            -0.686665,
+            0.195526,
+            0.979155,
+            -0.055006
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7A833F646A00484D84B2F1B26654EB11",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.101011865,
+          0.4268713,
+          0.0498303063
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.05615,
+            0.3183,
+            -1.10413
+          ],
+          "rotation": [
+            0.999438,
+            -0.018992,
+            -0.027642,
+            -0.022939,
+            0.214141,
+            -0.976533,
+            0.024465,
+            0.976618,
+            0.213585
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXAB1114D61987465298B807DB4791C277",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.193128511,
+          0.958393097,
+          0.129691765
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.06421,
+            0.2109,
+            -0.25977
+          ],
+          "rotation": [
+            0.922327,
+            -0.267771,
+            0.278588,
+            0.267695,
+            -0.077144,
+            -0.960411,
+            0.278661,
+            0.960389,
+            0.000528
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX63CCD941AC2E40B082A1D2FC76927EEB",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.159674957,
+          0.414373487,
+          0.159429312
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.21045,
+            0.1601,
+            -1.00195
+          ],
+          "rotation": [
+            0.303835,
+            -0.314185,
+            -0.899429,
+            -0.838378,
+            0.36027,
+            -0.40906,
+            0.45256,
+            0.878352,
+            -0.153943
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXEB7D38B9BA4741F8B90F6795FF0B6DD2",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.231794223,
+          0.372422874,
+          0.230792791
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.19751,
+            0.0996,
+            -0.81531
+          ],
+          "rotation": [
+            0.017919,
+            0.249478,
+            -0.968215,
+            -0.466685,
+            0.858498,
+            0.21257,
+            0.884242,
+            0.448042,
+            0.131811
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXEE938F1533BE481B947A98E60F989C3C",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.209427893,
+          0.871791184,
+          0.223462313
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.1355,
+            -0.1133,
+            -0.41919
+          ],
+          "rotation": [
+            0.685659,
+            0.463744,
+            0.561081,
+            0.687674,
+            -0.159912,
+            -0.70819,
+            -0.238696,
+            0.871418,
+            -0.42855
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE8246EEA9A50488BA7002ECC25D4D3E6",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.09340287,
+          0.336072564,
+          0.297804117
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.19092,
+            0.0175,
+            -1.11853
+          ],
+          "rotation": [
+            0.964944,
+            0.18556,
+            0.185611,
+            0.245322,
+            -0.889032,
+            -0.386577,
+            0.093281,
+            0.418562,
+            -0.903391
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX9817BE7ADF114D6FB43CCE113500A15B",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.157960832,
+          0.723692298,
+          0.23527348
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.1792,
+            -0.0059,
+            -0.98096
+          ],
+          "rotation": [
+            0.94893,
+            -0.0343,
+            0.313616,
+            0.315299,
+            0.068887,
+            -0.946489,
+            0.010861,
+            0.997035,
+            0.076184
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX328491FC7EE5400FAFCE90668E2A64F8",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.444578707,
+          0.463351339,
+          0.338040709
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            0.01147,
+            0.4004,
+            -1.39343
+          ],
+          "rotation": [
+            -1,
+            -0.000008,
+            -0.000055,
+            -0.000052,
+            0.49033,
+            0.871537,
+            0.00002,
+            0.871537,
+            -0.490331
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE4439889E412467B9C59E9A6C8173F65",
+      "parent": "RBX328491FC7EE5400FAFCE90668E2A64F8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -523,7 +1172,7 @@
     },
     {
       "id": "RBX97BC0F0EF7FD4AF7B98D6E67CB473803",
-      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "parent": "RBX328491FC7EE5400FAFCE90668E2A64F8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -540,7 +1189,7 @@
     },
     {
       "id": "RBX8F819394BF59473B80ADE0435C725A86",
-      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "parent": "RBX328491FC7EE5400FAFCE90668E2A64F8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -557,7 +1206,7 @@
     },
     {
       "id": "RBXE2E0CA3F572948AEBBBACDD21EB74D61",
-      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "parent": "RBX328491FC7EE5400FAFCE90668E2A64F8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -574,7 +1223,7 @@
     },
     {
       "id": "RBXBEC222CC4F554FCE8C924873B9202340",
-      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "parent": "RBX328491FC7EE5400FAFCE90668E2A64F8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -587,6 +1236,518 @@
         "Transparency": 0,
         "Face": 4,
         "Name": "Decal"
+      }
+    },
+    {
+      "id": "RBX71D6BEDA86774219906ED9924C6A8865",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.239110559,
+          1.65540743,
+          0.673674107
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.00586,
+            0.0312,
+            -0.75415
+          ],
+          "rotation": [
+            -1,
+            0.000041,
+            -0.000033,
+            -0.000049,
+            -0.476723,
+            0.879054,
+            0.000021,
+            0.879054,
+            0.476723
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "parent": "RBX2FC83640F00648B69AD2451E5D145694",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.564713299,
+          1.92810857,
+          0.60895431
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.00561,
+            0.0449,
+            -0.63074
+          ],
+          "rotation": [
+            -1,
+            0.000031,
+            -0.000044,
+            -0.00005,
+            -0.207794,
+            0.978173,
+            0.000022,
+            0.978173,
+            0.207794
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX73CA369B7BC94EE892814424E3EF5A00",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "urethra",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.000150749649,
+            -0.117961615,
+            -0.0386496186
+          ],
+          "rotation": [
+            1,
+            0.00000136332346,
+            -3.03055458e-7,
+            -0.00000122116944,
+            0.95892626,
+            0.283655882,
+            6.73657382e-7,
+            -0.283655852,
+            0.95892626
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBX71D6BEDA86774219906ED9924C6A8865",
+        "Name": "urethra"
+      }
+    },
+    {
+      "id": "RBX2477083356794F0083CA7858A6B9913D",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "tip",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0059357672,
+            -0.820115805,
+            0.190118879
+          ],
+          "rotation": [
+            1,
+            0.00000207558151,
+            9.18792466e-7,
+            -9.50723916e-7,
+            0.75062573,
+            -0.660727739,
+            -0.00000206473169,
+            0.66072768,
+            0.75062573
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBX328491FC7EE5400FAFCE90668E2A64F8",
+        "Name": "tip"
+      }
+    },
+    {
+      "id": "RBXEBB554394FB8430EA92783E1484AE254",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "Union",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.204812229,
+            -0.387238175,
+            0.0362823829
+          ],
+          "rotation": [
+            -0.303783685,
+            0.31418559,
+            0.899445951,
+            0.616900623,
+            0.784308553,
+            -0.0656115264,
+            -0.726053238,
+            0.534935832,
+            -0.432079792
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBX63CCD941AC2E40B082A1D2FC76927EEB",
+        "Name": "Union"
+      }
+    },
+    {
+      "id": "RBX0D9A855B258B41A389BA0D6986AA12C9",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "Union",
+      "properties": {
+        "C0": {
+          "position": [
+            0.184819087,
+            -0.331913054,
+            -0.122704335
+          ],
+          "rotation": [
+            -0.948945522,
+            0.0343185924,
+            -0.313567549,
+            -0.0548634455,
+            0.960956752,
+            0.271205038,
+            0.310632259,
+            0.27456221,
+            -0.910012782
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBX9817BE7ADF114D6FB43CCE113500A15B",
+        "Name": "Union"
+      }
+    },
+    {
+      "id": "RBXD57CDC8501B3458DB5D6F859BAD55123",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "Union",
+      "properties": {
+        "C0": {
+          "position": [
+            0.141214743,
+            0.239767328,
+            -0.110757418
+          ],
+          "rotation": [
+            -0.685698569,
+            -0.46371761,
+            -0.561055541,
+            -0.376358211,
+            0.885640562,
+            -0.272020817,
+            0.623034537,
+            0.0246336069,
+            -0.781806469
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBXEE938F1533BE481B947A98E60F989C3C",
+        "Name": "Union"
+      }
+    },
+    {
+      "id": "RBXE350C4907E21467BB60F782DF6EB0844",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "Union",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.191847801,
+            -0.192092732,
+            0.0160147976
+          ],
+          "rotation": [
+            -0.0178767499,
+            -0.24951078,
+            0.968206942,
+            0.961916268,
+            0.259879798,
+            0.0847326368,
+            -0.27275908,
+            0.93284893,
+            0.235362619
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBXEB7D38B9BA4741F8B90F6795FF0B6DD2",
+        "Name": "Union"
+      }
+    },
+    {
+      "id": "RBX25A12AD54D2A45FF9299A6460A237E78",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "Union",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0585097075,
+            0.328332722,
+            0.239867404
+          ],
+          "rotation": [
+            -0.922334492,
+            0.267795175,
+            -0.278540492,
+            0.216982558,
+            0.955448329,
+            0.200092822,
+            0.319714934,
+            0.124114089,
+            -0.93934989
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBXAB1114D61987465298B807DB4791C277",
+        "Name": "Union"
+      }
+    },
+    {
+      "id": "RBX71619B8083D240109CECBE4592C7FBB9",
+      "parent": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+      "class": "Motor6D",
+      "name": "Union",
+      "properties": {
+        "C0": {
+          "position": [
+            0.196577579,
+            -0.471695662,
+            -0.127200902
+          ],
+          "rotation": [
+            -0.964953959,
+            -0.185506433,
+            -0.185611039,
+            0.040298935,
+            0.594166815,
+            -0.803338349,
+            0.259307563,
+            -0.782660186,
+            -0.565866709
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B62CF2ED6BF46ABBFB660E2C90D2889",
+        "Part1": "RBXE8246EEA9A50488BA7002ECC25D4D3E6",
+        "Name": "Union"
       }
     }
   ]

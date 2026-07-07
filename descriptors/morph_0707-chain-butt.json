@@ -5,31 +5,41 @@
   "asset_id": "morph_0707-chain-butt",
   "name": "Chain Butt",
   "source_file": "0707-chain-butt.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
-      946.375122,
-      14192.9248,
-      801.833984
+      946.576294,
+      14192.0771,
+      801.877441
     ],
     "rotation": [
-      9.92793957e-7,
-      -4.96384189e-7,
-      1,
-      -0.00000792358878,
-      1,
-      4.9639209e-7,
-      -1,
-      -0.00000792358878,
-      9.92790092e-7
+      0.0000160076888,
+      0.912698328,
+      -0.408634096,
+      -0.00100909139,
+      0.408633888,
+      0.912697911,
+      0.999999523,
+      0.000397738942,
+      0.00092753733
     ]
   },
   "class_counts": {
     "Folder": 1,
     "Model": 3,
+    "UnionOperation": 1,
     "Part": 3,
     "SpecialMesh": 1,
-    "MeshPart": 6
+    "MeshPart": 6,
+    "WeldConstraint": 2,
+    "Weld": 2
   },
   "nodes": [
     {
@@ -49,6 +59,70 @@
       "properties": {
         "PrimaryPart": "RBXD80BCEB836FD4CC3836330193506727F",
         "Name": "LowerStatic"
+      }
+    },
+    {
+      "id": "RBX2FA176EAD2BF4EEBAAAD9142A1DB3A1C",
+      "parent": "RBX8DFBF4A8D438426A900EEF074DCA4D85",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.486275,
+          0.360784,
+          0.27451
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        }
       }
     },
     {
@@ -97,20 +171,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            0,
-            0,
-            0
+            -0.044316,
+            0.162772,
+            0.855859
           ],
           "rotation": [
-            1,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            1
+            -1,
+            -0.001017,
+            0.000017,
+            -0.0004,
+            0.408633,
+            0.912699,
+            -0.000935,
+            0.912698,
+            -0.408634
           ]
         }
       }
@@ -158,6 +232,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7316929694",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -200,22 +275,31 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            0.553841,
-            -0.997096,
-            0.513183
+            -0.597134,
+            0.223485,
+            -0.26441
           ],
           "rotation": [
-            -0.00004,
-            0.000086,
-            -1,
-            -0.000117,
-            1,
-            0.000086,
-            1,
-            0.000117,
-            -0.00004
+            0.000057,
+            -0.001104,
+            0.999999,
+            0.912651,
+            0.40874,
+            0.000399,
+            -0.40874,
+            0.91265,
+            0.00103
           ]
         }
+      }
+    },
+    {
+      "id": "RBXA94ACC8FF1074D1A8CAC87A0310A8BFF",
+      "parent": "RBXABDC7CE7E4D74AE3912C0B52D86193E1",
+      "class": "WeldConstraint",
+      "name": "CustomWeld",
+      "properties": {
+        "Name": "CustomWeld"
       }
     },
     {
@@ -264,20 +348,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            0.370003,
-            -1.000997,
-            0.500487
+            -0.413292,
+            0.210377,
+            -0.262611
           ],
           "rotation": [
-            1,
-            -0.000008,
-            0,
-            0.000008,
-            1,
-            0,
-            0,
-            0,
-            1
+            -1,
+            -0.001009,
+            0.000016,
+            -0.000398,
+            0.408634,
+            0.912698,
+            -0.000927,
+            0.912698,
+            -0.408634
           ]
         }
       }
@@ -288,6 +372,7 @@
       "class": "MeshPart",
       "name": "Chains",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5632057546",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -330,20 +415,20 @@
         "Name": "Chains",
         "LocalCFrame": {
           "position": [
-            0.579903,
-            -0.873996,
-            0.58258
+            -0.623319,
+            0.337116,
+            -0.180439
           ],
           "rotation": [
-            -0.088522,
-            0.183733,
-            -0.978982,
-            0.243209,
-            0.95708,
-            0.157631,
-            0.965926,
-            -0.224144,
-            -0.129408
+            0.088291,
+            -0.18471,
+            0.978819,
+            0.981018,
+            0.186446,
+            -0.053306,
+            -0.172651,
+            0.964946,
+            0.197666
           ]
         }
       }
@@ -354,6 +439,7 @@
       "class": "MeshPart",
       "name": "Chains",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5632057546",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -396,20 +482,20 @@
         "Name": "Chains",
         "LocalCFrame": {
           "position": [
-            0.579902,
-            -0.871096,
-            0.58258
+            -0.623322,
+            0.338301,
+            -0.177792
           ],
           "rotation": [
-            -0.088522,
-            0.183733,
-            -0.978982,
-            0.243209,
-            0.95708,
-            0.157631,
-            0.965926,
-            -0.224144,
-            -0.129408
+            0.088291,
+            -0.18471,
+            0.978819,
+            0.981018,
+            0.186446,
+            -0.053306,
+            -0.172651,
+            0.964946,
+            0.197666
           ]
         }
       }
@@ -430,6 +516,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7310579572",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -472,22 +559,127 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            -0.601127,
-            -1.013705,
-            0.513001
+            0.557851,
+            0.216994,
+            -0.278415
           ],
           "rotation": [
-            -0.00004,
-            0.000086,
-            -1,
-            -0.000116,
-            1,
-            0.000086,
-            1,
-            0.000116,
-            -0.00004
+            0.000057,
+            -0.001103,
+            0.999999,
+            0.912651,
+            0.40874,
+            0.000399,
+            -0.40874,
+            0.91265,
+            0.00103
           ]
         }
+      }
+    },
+    {
+      "id": "RBX953A8E48D8D04985A647D1F926047B0E",
+      "parent": "RBXFB53E5C33FDF48B4A1FC971F139866E4",
+      "class": "WeldConstraint",
+      "name": "CustomWeld",
+      "properties": {
+        "Name": "CustomWeld"
+      }
+    },
+    {
+      "id": "RBXB9AA33A5C21248B19F6D789C1265FAA6",
+      "parent": "RBXFB53E5C33FDF48B4A1FC971F139866E4",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.100000001,
+            0.100000001,
+            0.100000001
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.311950684,
+            -0.833007812,
+            0.128356934
+          ],
+          "rotation": [
+            -1.00000036,
+            0.0000406354775,
+            -0.000115910552,
+            -0.000115994357,
+            -0.0000942200422,
+            1,
+            0.0000405311475,
+            1,
+            0.0000942647457
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX300C89F7E41340CE9E13116A4820886A",
+        "Part1": "RBXFB53E5C33FDF48B4A1FC971F139866E4",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBXB1D733BC3AF24EE7B8C2034D53D2DA6E",
+      "parent": "RBXFB53E5C33FDF48B4A1FC971F139866E4",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.100000001,
+            0.100000001,
+            0.100000001
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.811950684,
+            -0.833007812,
+            0.128356934
+          ],
+          "rotation": [
+            -1.00000036,
+            0.0000406354884,
+            -0.000115910552,
+            -0.000115994357,
+            -0.0000942200641,
+            1,
+            0.0000405311366,
+            1,
+            0.0000942647239
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX689E98B5D98C4A2499E03D6D326B95D5",
+        "Part1": "RBXFB53E5C33FDF48B4A1FC971F139866E4",
+        "Name": "Weld"
       }
     },
     {
@@ -536,20 +728,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            -0.339836,
-            -1.001003,
-            0.500488
+            0.296546,
+            0.21066,
+            -0.261952
           ],
           "rotation": [
-            1,
-            -0.000008,
-            0,
-            0.000008,
-            1,
-            0,
-            0,
-            0,
-            1
+            -1,
+            -0.001009,
+            0.000016,
+            -0.000398,
+            0.408634,
+            0.912698,
+            -0.000928,
+            0.912698,
+            -0.408634
           ]
         }
       }
@@ -560,6 +752,7 @@
       "class": "MeshPart",
       "name": "Chains",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5632057546",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -602,20 +795,20 @@
         "Name": "Chains",
         "LocalCFrame": {
           "position": [
-            -0.595573,
-            -0.874005,
-            0.582459
+            0.552156,
+            0.337473,
+            -0.179299
           ],
           "rotation": [
-            -0.166366,
-            -0.154688,
-            -0.973855,
-            0.198265,
-            0.962201,
-            -0.186707,
-            0.965927,
-            -0.224143,
-            -0.129409
+            0.166181,
+            0.153706,
+            0.974042,
+            0.962684,
+            0.188674,
+            -0.194016,
+            -0.213598,
+            0.969936,
+            -0.116616
           ]
         }
       }
@@ -626,6 +819,7 @@
       "class": "MeshPart",
       "name": "Chains",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5632057546",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -668,20 +862,20 @@
         "Name": "Chains",
         "LocalCFrame": {
           "position": [
-            -0.595451,
-            -0.874005,
-            0.582581
+            0.552034,
+            0.337584,
+            -0.179349
           ],
           "rotation": [
-            -0.166366,
-            -0.154688,
-            -0.973855,
-            0.198265,
-            0.962201,
-            -0.186707,
-            0.965927,
-            -0.224143,
-            -0.129409
+            0.166181,
+            0.153706,
+            0.974042,
+            0.962684,
+            0.188674,
+            -0.194016,
+            -0.213598,
+            0.969936,
+            -0.116616
           ]
         }
       }

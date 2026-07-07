@@ -5,7 +5,14 @@
   "asset_id": "morph_3044-phys-uv-combined",
   "name": "Phys UV Combined",
   "source_file": "3044-phys-uv-combined.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -245732.641,
@@ -29,7 +36,9 @@
     "Model": 1,
     "Part": 2,
     "SpecialMesh": 1,
-    "MeshPart": 3
+    "MeshPart": 3,
+    "Motor6D": 3,
+    "Bone": 2
   },
   "nodes": [
     {
@@ -148,6 +157,7 @@
       "class": "MeshPart",
       "name": "ClothShirt",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -206,6 +216,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX4EB287910F2D41BDBCF248CDAE75C2C8",
+      "parent": "RBXDD2D94BC21494E9C8018333B97CF6BDD",
+      "class": "Motor6D",
+      "name": "OuterMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXB434DFEE2EC4467B99296EF66C3894AB",
+        "Part1": "RBXDD2D94BC21494E9C8018333B97CF6BDD",
+        "Name": "OuterMotor6D"
       }
     },
     {
@@ -273,11 +331,68 @@
       }
     },
     {
+      "id": "RBX52ED6374D00C4D93A6AEAC9270F703B6",
+      "parent": "RBXB434DFEE2EC4467B99296EF66C3894AB",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            1.66517103,
+            0.601628363
+          ],
+          "rotation": [
+            1,
+            -3.67394082e-16,
+            -1.22464818e-16,
+            -3.67394135e-16,
+            -1,
+            -4.93897176e-7,
+            -1.22464632e-16,
+            4.93897176e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX769E77FD17EA49B1BD9101A9123B4FFF",
+      "parent": "RBX52ED6374D00C4D93A6AEAC9270F703B6",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.574072838,
+            -9.53674316e-7
+          ],
+          "rotation": [
+            1,
+            1.01213085e-16,
+            -5.35189959e-17,
+            -1.01213112e-16,
+            0.562984765,
+            -0.826467395,
+            -5.35189231e-17,
+            0.826467395,
+            0.562984765
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
       "id": "RBXF25C28AA064440099B376EA1D00D741E",
       "parent": "RBX260BB498ED434A2A8B994B5E43F36D5F",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -339,11 +454,60 @@
       }
     },
     {
+      "id": "RBXD21D3394529D48C2BEF6BFE742E4F1BC",
+      "parent": "RBXF25C28AA064440099B376EA1D00D741E",
+      "class": "Motor6D",
+      "name": "OuterMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXB434DFEE2EC4467B99296EF66C3894AB",
+        "Part1": "RBXF25C28AA064440099B376EA1D00D741E",
+        "Name": "OuterMotor6D"
+      }
+    },
+    {
       "id": "RBX7B0873B4C9374C1E894566B253CCA090",
       "parent": "RBX260BB498ED434A2A8B994B5E43F36D5F",
       "class": "MeshPart",
       "name": "ClothPants",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://117058662939466",
@@ -402,6 +566,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXB1DBE6B3FC7844B2AA772744E735BAC0",
+      "parent": "RBX7B0873B4C9374C1E894566B253CCA090",
+      "class": "Motor6D",
+      "name": "OuterMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXB434DFEE2EC4467B99296EF66C3894AB",
+        "Part1": "RBX7B0873B4C9374C1E894566B253CCA090",
+        "Name": "OuterMotor6D"
       }
     }
   ]

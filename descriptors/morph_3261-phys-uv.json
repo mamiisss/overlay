@@ -5,7 +5,14 @@
   "asset_id": "morph_3261-phys-uv",
   "name": "Phys UV",
   "source_file": "3261-phys-uv.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -18.9379997,
@@ -29,7 +36,9 @@
     "Model": 1,
     "Part": 2,
     "SpecialMesh": 1,
-    "MeshPart": 2
+    "MeshPart": 2,
+    "Motor6D": 2,
+    "Bone": 2
   },
   "nodes": [
     {
@@ -148,6 +157,7 @@
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -206,6 +216,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX62BEE90C3F1546C5A945B3A8C1FFE40B",
+      "parent": "RBX30F608F0077A4323A1C4E0EE7B8521C3",
+      "class": "Motor6D",
+      "name": "OuterMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.75110203,
+            -0.0391068272
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD1A71FC1ABF64408B69674FC4D0EF78B",
+        "Part1": "RBX30F608F0077A4323A1C4E0EE7B8521C3",
+        "Name": "OuterMotor6D"
       }
     },
     {
@@ -273,11 +331,68 @@
       }
     },
     {
+      "id": "RBX9FE7C94AF0FD446DA230A024CE7CFFB0",
+      "parent": "RBXD1A71FC1ABF64408B69674FC4D0EF78B",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            1.37137413,
+            0.495479167
+          ],
+          "rotation": [
+            1,
+            -3.67394082e-16,
+            -1.22464818e-16,
+            -3.67394135e-16,
+            -1,
+            -4.93897176e-7,
+            -1.22464632e-16,
+            4.93897176e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXD62A0322DB304D1E96EEF434E1DAA2EC",
+      "parent": "RBX9FE7C94AF0FD446DA230A024CE7CFFB0",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            1.73698572e-16,
+            0.472785354,
+            0
+          ],
+          "rotation": [
+            1,
+            1.01213085e-16,
+            -5.35189959e-17,
+            -1.01213112e-16,
+            0.562984765,
+            -0.826467395,
+            -5.35189231e-17,
+            0.826467395,
+            0.562984765
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
       "id": "RBX272E66FDA5C14CA3AD3054A84F99D591",
       "parent": "RBX5E2D5FAE291D44B3AC16204B50B08503",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -336,6 +451,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX93BD69847854481BA4C8BFE1D846F0A9",
+      "parent": "RBX272E66FDA5C14CA3AD3054A84F99D591",
+      "class": "Motor6D",
+      "name": "OuterMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.75110203,
+            -0.0391068272
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD1A71FC1ABF64408B69674FC4D0EF78B",
+        "Part1": "RBX272E66FDA5C14CA3AD3054A84F99D591",
+        "Name": "OuterMotor6D"
       }
     }
   ]

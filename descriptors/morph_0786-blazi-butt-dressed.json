@@ -5,7 +5,14 @@
   "asset_id": "morph_0786-blazi-butt-dressed",
   "name": "Blazi butt (dressed)",
   "source_file": "0786-blazi-butt-dressed.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       83.5310059,
@@ -29,6 +36,7 @@
     "Model": 3,
     "Part": 6,
     "SpecialMesh": 4,
+    "UnionOperation": 1,
     "Decal": 6,
     "MeshPart": 3
   },
@@ -565,8 +573,72 @@
       }
     },
     {
-      "id": "RBXE5A3CD200CB04E22B647273F9E2AE6BB",
+      "id": "RBX6B65D20EAAF34396A284C255D06CA1C2",
       "parent": "RBXE6A47B93A8B84A5CB947987655FC3B35",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1312,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.233803,
+            -0.138708,
+            -0.150864
+          ],
+          "rotation": [
+            -1,
+            -0.0004,
+            -0.000935,
+            -0.001017,
+            0.408634,
+            0.912698,
+            0.000017,
+            0.912698,
+            -0.408634
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE5A3CD200CB04E22B647273F9E2AE6BB",
+      "parent": "RBX6B65D20EAAF34396A284C255D06CA1C2",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -583,7 +655,7 @@
     },
     {
       "id": "RBX20E7E2584EBC45C7B4D2C91DBAEBCC3D",
-      "parent": "RBXE6A47B93A8B84A5CB947987655FC3B35",
+      "parent": "RBX6B65D20EAAF34396A284C255D06CA1C2",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -600,7 +672,7 @@
     },
     {
       "id": "RBX09AE855E3E74403B81C63D24977785AE",
-      "parent": "RBXE6A47B93A8B84A5CB947987655FC3B35",
+      "parent": "RBX6B65D20EAAF34396A284C255D06CA1C2",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -617,7 +689,7 @@
     },
     {
       "id": "RBX92E0C0638CF3417DB146DB6AAB1AB632",
-      "parent": "RBXE6A47B93A8B84A5CB947987655FC3B35",
+      "parent": "RBX6B65D20EAAF34396A284C255D06CA1C2",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -634,7 +706,7 @@
     },
     {
       "id": "RBX825E75580A2B4BBA9E1291F7C1727149",
-      "parent": "RBXE6A47B93A8B84A5CB947987655FC3B35",
+      "parent": "RBX6B65D20EAAF34396A284C255D06CA1C2",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -651,7 +723,7 @@
     },
     {
       "id": "RBX1EE81BEA9D7C4694A8B58D8F5ADF8597",
-      "parent": "RBXE6A47B93A8B84A5CB947987655FC3B35",
+      "parent": "RBX6B65D20EAAF34396A284C255D06CA1C2",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -672,6 +744,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7793099595",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -738,6 +811,7 @@
       "class": "MeshPart",
       "name": "skirt",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://11389496406",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -804,6 +878,7 @@
       "class": "MeshPart",
       "name": "Clothing2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6668707772",
         "RenderFidelity": 1,
         "TextureID": null,

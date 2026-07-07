@@ -5,7 +5,14 @@
   "asset_id": "morph_0362-cum-tongue",
   "name": "cum tongue",
   "source_file": "0362-cum-tongue.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -83.4637299,
@@ -30,7 +37,11 @@
     "Part": 3,
     "SpecialMesh": 3,
     "Attachment": 2,
-    "MeshPart": 10
+    "UnionOperation": 3,
+    "WeldConstraint": 3,
+    "MeshPart": 10,
+    "Weld": 1,
+    "Bone": 6
   },
   "nodes": [
     {
@@ -380,11 +391,85 @@
       }
     },
     {
+      "id": "RBXE0FFA486610E44D2A7FFB1587A773808",
+      "parent": "RBXB3F5558A92134080B57F4E8A44C9EF7B",
+      "class": "UnionOperation",
+      "name": "Fluid",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1568,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0605459847,
+          0.114121802,
+          0.107926428
+        ],
+        "Name": "Fluid",
+        "LocalCFrame": {
+          "position": [
+            0.052933,
+            -0.339828,
+            -0.632813
+          ],
+          "rotation": [
+            -0.476739,
+            -0.388405,
+            0.788582,
+            0.000003,
+            0.897089,
+            0.44185,
+            -0.879045,
+            0.21065,
+            -0.427677
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX41C637095BCC4DC1984CFE1500524A45",
+      "parent": "RBXE0FFA486610E44D2A7FFB1587A773808",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX85D4746C8F844A1AB52C6C0B6AFA9E71",
       "parent": "RBXB3F5558A92134080B57F4E8A44C9EF7B",
       "class": "MeshPart",
       "name": "Liquid",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -451,6 +536,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7660229326",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -517,6 +603,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7660240057",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -578,11 +665,206 @@
       }
     },
     {
+      "id": "RBX34DBF151A14B41DB861EC9429607445E",
+      "parent": "RBXB3F5558A92134080B57F4E8A44C9EF7B",
+      "class": "UnionOperation",
+      "name": "Fluid",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1568,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0605459847,
+          0.114121802,
+          0.107926428
+        ],
+        "Name": "Fluid",
+        "LocalCFrame": {
+          "position": [
+            -0.018066,
+            -0.339828,
+            -0.609375
+          ],
+          "rotation": [
+            0.553227,
+            0.368074,
+            -0.747303,
+            0.000003,
+            0.897089,
+            0.44185,
+            0.833031,
+            -0.244446,
+            0.496292
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX410B129E5AB24889A0A5938A27AA8430",
+      "parent": "RBX34DBF151A14B41DB861EC9429607445E",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
+      "id": "RBX089B7EEDF7E74AD2A4E4115493B10F66",
+      "parent": "RBXB3F5558A92134080B57F4E8A44C9EF7B",
+      "class": "UnionOperation",
+      "name": "Fluid",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1568,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0605459847,
+          0.114121802,
+          0.107926428
+        ],
+        "Name": "Fluid",
+        "LocalCFrame": {
+          "position": [
+            -0.05806,
+            -0.339828,
+            -0.609375
+          ],
+          "rotation": [
+            0.553227,
+            0.368074,
+            -0.747303,
+            0.000003,
+            0.897089,
+            0.44185,
+            0.833031,
+            -0.244446,
+            0.496292
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXAB638B3B3425482A80075AF6AF9A3365",
+      "parent": "RBX089B7EEDF7E74AD2A4E4115493B10F66",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
+      "id": "RBX461401444A6148A4AB95FEA3001F442A",
+      "parent": "RBX089B7EEDF7E74AD2A4E4115493B10F66",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0302729607,
+            0,
+            0.00000762939453
+          ],
+          "rotation": [
+            0,
+            0,
+            1.00000012,
+            -7.4505806e-9,
+            -1,
+            0,
+            1,
+            7.4505806e-9,
+            -2.98023224e-8
+          ]
+        },
+        "C1": {
+          "position": [
+            0.00814414024,
+            -0.0147247314,
+            0.0298919678
+          ],
+          "rotation": [
+            0,
+            0,
+            1.00000012,
+            -1.49011612e-8,
+            -1,
+            -1.49011612e-8,
+            1.00000012,
+            -1.49011612e-8,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX089B7EEDF7E74AD2A4E4115493B10F66",
+        "Part1": "RBX34DBF151A14B41DB861EC9429607445E",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX2BCFE4BBE32D4B4C8197C5C77FF30580",
       "parent": "RBXB3F5558A92134080B57F4E8A44C9EF7B",
       "class": "MeshPart",
       "name": "Cum Cover 3",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7661611375",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -649,6 +931,7 @@
       "class": "MeshPart",
       "name": "Butt cum 2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -710,11 +993,96 @@
       }
     },
     {
+      "id": "RBXE8747E3208514DD3A1CAC6970A53207D",
+      "parent": "RBX8ECF500A901D48719A3E350FDE2F1116",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00104070047,
+            0.263313383,
+            0.00425126543
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXB3885D03E13244ADA996FDDC246298C1",
+      "parent": "RBXE8747E3208514DD3A1CAC6970A53207D",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000610351562,
+            0.293945312,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            9.23872619e-7,
+            -0.00000131130128,
+            -9.23871767e-7,
+            1,
+            6.7055305e-7,
+            0.00000131130184,
+            -6.70551856e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX11521C618F074971B9CE558D1805A657",
+      "parent": "RBXB3885D03E13244ADA996FDDC246298C1",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000152587891,
+            0.257781982,
+            -0.00000762939453
+          ],
+          "rotation": [
+            1,
+            -5.96046874e-8,
+            -2.68220901e-7,
+            5.96046448e-8,
+            1,
+            -1.63912901e-7,
+            2.68220901e-7,
+            1.63912887e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX0CD07DE9E98E4534AD764FB8D5F8F02B",
       "parent": "RBXB3F5558A92134080B57F4E8A44C9EF7B",
       "class": "MeshPart",
       "name": "Butt cum 2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -776,11 +1144,96 @@
       }
     },
     {
+      "id": "RBXDE4BE9B305E144D3A2E7C2C0F2DB2255",
+      "parent": "RBX0CD07DE9E98E4534AD764FB8D5F8F02B",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000508407073,
+            0.108054221,
+            0.00328313117
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXB14DA1141DC046B7A2C92643F2B87CDA",
+      "parent": "RBXDE4BE9B305E144D3A2E7C2C0F2DB2255",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.120622635,
+            0.0000381469727
+          ],
+          "rotation": [
+            1,
+            0.0000010393569,
+            -0.00000190711444,
+            -0.00000103935565,
+            1,
+            6.40751864e-7,
+            0.00000190711512,
+            -6.40749874e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX27B116D55AC841EDBDD13A6351F91E47",
+      "parent": "RBXB14DA1141DC046B7A2C92643F2B87CDA",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000305175781,
+            0.10578537,
+            -0.0000457763672
+          ],
+          "rotation": [
+            1,
+            -1.49011612e-7,
+            -1.61118706e-7,
+            1.49011555e-7,
+            1,
+            -3.12924328e-7,
+            1.61118749e-7,
+            3.129243e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXF60B03DDE68141E5BFE08B047CAC47CE",
       "parent": "RBXB3F5558A92134080B57F4E8A44C9EF7B",
       "class": "MeshPart",
       "name": "Liquid",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -847,6 +1300,7 @@
       "class": "MeshPart",
       "name": "Liquid",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -913,6 +1367,7 @@
       "class": "MeshPart",
       "name": "Liquid",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -979,6 +1434,7 @@
       "class": "MeshPart",
       "name": "Drip 3",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7685478950",
         "RenderFidelity": 1,
         "TextureID": null,

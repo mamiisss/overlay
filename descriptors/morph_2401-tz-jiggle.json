@@ -6,6 +6,13 @@
   "name": "TZ jiggle",
   "source_file": "2401-tz-jiggle.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -245269.344,
@@ -29,7 +36,9 @@
     "Model": 2,
     "Part": 4,
     "ParticleEmitter": 1,
-    "MeshPart": 2
+    "MeshPart": 2,
+    "Bone": 7,
+    "SurfaceAppearance": 1
   },
   "nodes": [
     {
@@ -296,6 +305,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://92815596733415",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -357,6 +367,132 @@
       }
     },
     {
+      "id": "RBX26B2006EBDC944E79565F53E0CABB416",
+      "parent": "RBX4DB860A3A0C642B3AC830D1E0D816733",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            1.92332024e-7,
+            0.217351407,
+            0.887207568
+          ],
+          "rotation": [
+            1,
+            1.08732857e-15,
+            4.76837499e-7,
+            6.44401466e-9,
+            -0.999908745,
+            -0.0135140689,
+            4.76793929e-7,
+            0.0135140689,
+            -0.999908745
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX09A8B518DC484D678F68574AE895F6DE",
+      "parent": "RBX26B2006EBDC944E79565F53E0CABB416",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.125,
+            0
+          ],
+          "rotation": [
+            1,
+            -4.7501959e-7,
+            0.00000242591864,
+            0.00000237523091,
+            -0.0872367099,
+            -0.996187687,
+            6.84837744e-7,
+            0.996187687,
+            -0.0872367099
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX8D8630F9E6B34A37B07EEF064BDA00B0",
+      "parent": "RBX09A8B518DC484D678F68574AE895F6DE",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.40234375,
+            0
+          ],
+          "rotation": [
+            1,
+            5.54269718e-7,
+            0.00000173407386,
+            -9.42196095e-7,
+            0.97260493,
+            0.232464582,
+            -0.00000155772045,
+            -0.232464582,
+            0.97260493
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
+      }
+    },
+    {
+      "id": "RBXCFD0ECC85D584EBA94B5BE784EECC07F",
+      "parent": "RBX8D8630F9E6B34A37B07EEF064BDA00B0",
+      "class": "Bone",
+      "name": "Bone.003",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.890625,
+            0
+          ],
+          "rotation": [
+            1,
+            -0.00000650050151,
+            -0.00000263168113,
+            0.00000692872163,
+            0.973784745,
+            0.227471694,
+            0.00000108401071,
+            -0.227471694,
+            0.973784745
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.003"
+      }
+    },
+    {
+      "id": "RBX52C2720F1E6B47B2860B03F51C51462F",
+      "parent": "RBX4DB860A3A0C642B3AC830D1E0D816733",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": "rbxassetid://97198515805238",
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": null,
+        "Name": "SurfaceAppearance"
+      }
+    },
+    {
       "id": "RBX39C8BA9D41B44969B7691D3A495EDD67",
       "parent": "RBXF0C2CB4CFE284680B04BD9780A14EA25",
       "class": "Model",
@@ -372,6 +508,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://106420044523852",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -430,6 +567,90 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXCDBB6320709F40FF85EA12A37451D1E4",
+      "parent": "RBX8A2BDB0156C0410A8AEF3421748AB737",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            5.65369708e-24,
+            0.562029839,
+            0.0327944495
+          ],
+          "rotation": [
+            1,
+            -1.22464672e-16,
+            -1.22464685e-16,
+            -1.22464672e-16,
+            -1,
+            -1.52650088e-8,
+            -1.22464685e-16,
+            1.52650088e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX4F4DEE19BBD94616B630AB942CCEF610",
+      "parent": "RBXCDBB6320709F40FF85EA12A37451D1E4",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.385867953,
+            0
+          ],
+          "rotation": [
+            0.941762686,
+            -0.333104134,
+            0.0460954942,
+            0.336278409,
+            0.932873011,
+            -0.129092202,
+            -1.01775662e-7,
+            0.137075111,
+            0.99056071
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBXD063838C0FDD4E60951C7E6CD1FBBF29",
+      "parent": "RBXCDBB6320709F40FF85EA12A37451D1E4",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00107574463,
+            0.385867953,
+            0
+          ],
+          "rotation": [
+            0.941776931,
+            0.333063573,
+            0.0460962988,
+            -0.322024286,
+            0.932887673,
+            -0.161310628,
+            -0.0967293531,
+            0.1370745,
+            0.985826671
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {

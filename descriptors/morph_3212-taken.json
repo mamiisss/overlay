@@ -5,7 +5,14 @@
   "asset_id": "morph_3212-taken",
   "name": "taken",
   "source_file": "3212-taken.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       175.879547,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 3,
     "SpecialMesh": 3,
-    "MeshPart": 6
+    "MeshPart": 6,
+    "Bone": 4,
+    "Weld": 3
   },
   "nodes": [
     {
@@ -148,6 +157,7 @@
       "class": "MeshPart",
       "name": "Left Areola",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://15136690242",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://15136690232",
@@ -214,6 +224,7 @@
       "class": "MeshPart",
       "name": "Left Boob",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://15136690229",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -275,11 +286,164 @@
       }
     },
     {
+      "id": "RBX12E564A3AF9544BB97FBA5A286496BCA",
+      "parent": "RBX4F7E91C0D7FA4EE8AE4F841072D67C12",
+      "class": "Bone",
+      "name": "Left Boob1",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0275537055,
+            0.0460984856,
+            -0.0378048643
+          ],
+          "rotation": [
+            0.906320512,
+            -0.422556579,
+            -0.00540719926,
+            -0.210154697,
+            -0.461777478,
+            0.861740649,
+            -0.366631031,
+            -0.779876709,
+            -0.507320642
+          ]
+        },
+        "Visible": false,
+        "Name": "Left Boob1"
+      }
+    },
+    {
+      "id": "RBXDE3CCF2B239240449FBCB0DE5AD473DB",
+      "parent": "RBX12E564A3AF9544BB97FBA5A286496BCA",
+      "class": "Bone",
+      "name": "Left Boob2",
+      "properties": {
+        "CFrame": {
+          "position": [
+            2.48868872e-7,
+            0.3312231,
+            -4.97737744e-7
+          ],
+          "rotation": [
+            0.976262808,
+            -0.0232689623,
+            -0.21533595,
+            -0.08349251,
+            0.876941621,
+            -0.473289132,
+            0.199849963,
+            0.480033487,
+            0.854182661
+          ]
+        },
+        "Visible": false,
+        "Name": "Left Boob2"
+      }
+    },
+    {
+      "id": "RBX59F4D32542864E0A8B1FA2F92737B126",
+      "parent": "RBX4F7E91C0D7FA4EE8AE4F841072D67C12",
+      "class": "Weld",
+      "name": "Left Areola",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -4.97737744e-7,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4F7E91C0D7FA4EE8AE4F841072D67C12",
+        "Part1": "RBX5E774909239C4D238DD84A923D38540A",
+        "Name": "Left Areola"
+      }
+    },
+    {
+      "id": "RBX24B996272180412B831B4DB143E250A7",
+      "parent": "RBX4F7E91C0D7FA4EE8AE4F841072D67C12",
+      "class": "Weld",
+      "name": "Left Nipple",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.260304868,
+            -0.0778999403,
+            -0.534753621
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4F7E91C0D7FA4EE8AE4F841072D67C12",
+        "Part1": "RBX055F18D035E34E108C6F3E43EE2A3529",
+        "Name": "Left Nipple"
+      }
+    },
+    {
       "id": "RBX055F18D035E34E108C6F3E43EE2A3529",
       "parent": "RBX54488170D1954EEEA3DD3C858B170A41",
       "class": "MeshPart",
       "name": "Left Nipple",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://15136690190",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -447,6 +611,7 @@
       "class": "MeshPart",
       "name": "Right Areola",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://15136690226",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://15136690232",
@@ -513,6 +678,7 @@
       "class": "MeshPart",
       "name": "Right Boob",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://15136690240",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -574,11 +740,116 @@
       }
     },
     {
+      "id": "RBXFBC72F5DBB584CB9B15063EC657C7B45",
+      "parent": "RBX4A19B5DDAE864968925DE43DE48C87DF",
+      "class": "Bone",
+      "name": "Right Boob1",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0275539849,
+            0.0460984856,
+            -0.0378047377
+          ],
+          "rotation": [
+            0.906320453,
+            0.422556579,
+            0.00540728867,
+            0.210154757,
+            -0.461777806,
+            0.861740351,
+            0.366630971,
+            -0.77987653,
+            -0.50732094
+          ]
+        },
+        "Visible": false,
+        "Name": "Right Boob1"
+      }
+    },
+    {
+      "id": "RBXDCD20E3246F14837B6678F4396EFE2A5",
+      "parent": "RBXFBC72F5DBB584CB9B15063EC657C7B45",
+      "class": "Bone",
+      "name": "Right Boob2",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -1.24434436e-7,
+            0.33122319,
+            -9.95475489e-7
+          ],
+          "rotation": [
+            0.976262867,
+            0.0232688598,
+            0.215335995,
+            0.0834926069,
+            0.876941621,
+            -0.473289102,
+            -0.199849978,
+            0.480033427,
+            0.85418278
+          ]
+        },
+        "Visible": false,
+        "Name": "Right Boob2"
+      }
+    },
+    {
+      "id": "RBX225BE2BC778442F7A69837A9D9DB84C6",
+      "parent": "RBX4A19B5DDAE864968925DE43DE48C87DF",
+      "class": "Weld",
+      "name": "Right Nipple",
+      "properties": {
+        "C0": {
+          "position": [
+            0.260304868,
+            -0.0778999403,
+            -0.534749508
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4A19B5DDAE864968925DE43DE48C87DF",
+        "Part1": "RBX4E16B0BA0B194745B9C30B8DE59B42D7",
+        "Name": "Right Nipple"
+      }
+    },
+    {
       "id": "RBX4E16B0BA0B194745B9C30B8DE59B42D7",
       "parent": "RBXE3CE1F3BD992466996637D9CAE34473F",
       "class": "MeshPart",
       "name": "Right Nipple",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://15136690188",
         "RenderFidelity": 0,
         "TextureID": null,

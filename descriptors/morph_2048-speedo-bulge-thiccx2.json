@@ -5,7 +5,14 @@
   "asset_id": "morph_2048-speedo-bulge-thiccx2",
   "name": "Speedo+bulge (Thiccx2)",
   "source_file": "2048-speedo-bulge-thiccx2.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       1013.78986,
@@ -29,7 +36,9 @@
     "Model": 1,
     "Part": 1,
     "SpecialMesh": 1,
-    "MeshPart": 2
+    "Weld": 4,
+    "MeshPart": 2,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -143,11 +152,204 @@
       }
     },
     {
+      "id": "RBXF25BBCDB881B4FA3B4CFFFA9916CE484",
+      "parent": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+        "Part1": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBXF0F1955E98D4423D9DA63907B3AB082F",
+      "parent": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+      "class": "Weld",
+      "name": "Back",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0234802961,
+            -1.11202383,
+            0.351988792
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.999999702,
+            3.33066828e-16,
+            1,
+            0,
+            0.999999702,
+            3.33066907e-16,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+        "Part1": "RBX7A98CFAFED484ED088B0E3CC0E803FBB",
+        "Name": "Back"
+      }
+    },
+    {
+      "id": "RBX697C5D548D024E1FA17A673CAEA3F46E",
+      "parent": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+      "class": "Weld",
+      "name": "Front",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.00280368328,
+            -0.737895012,
+            -0.138290405
+          ],
+          "rotation": [
+            0,
+            0,
+            -0.999999702,
+            6.66133762e-16,
+            1,
+            0,
+            0.999999702,
+            6.66133762e-16,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+        "Part1": "RBXF48228A259824E34992003A10ED17E27",
+        "Name": "Front"
+      }
+    },
+    {
+      "id": "RBX965EE3FE75A5458BB6CD4153B38A28BE",
+      "parent": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+      "class": "Weld",
+      "name": "Bulge",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.00185573101,
+            -1.33026409,
+            -0.578060627
+          ],
+          "rotation": [
+            0.999999702,
+            0.0000133812428,
+            -0.0000323057175,
+            0.0000133812428,
+            0.707060337,
+            0.707153201,
+            0.0000323057175,
+            -0.707152963,
+            0.707060099
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0F2F04B9D7544111A7C25C817C526B6B",
+        "Part1": "RBX93BE2C14B05941148FF79A35DA78CB55",
+        "Name": "Bulge"
+      }
+    },
+    {
       "id": "RBXF48228A259824E34992003A10ED17E27",
       "parent": "RBX730BD3D576E7437BB3BBA54715ACBE02",
       "class": "MeshPart",
       "name": "Front",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8866726852",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -209,11 +411,76 @@
       }
     },
     {
+      "id": "RBX93BE2C14B05941148FF79A35DA78CB55",
+      "parent": "RBX730BD3D576E7437BB3BBA54715ACBE02",
+      "class": "UnionOperation",
+      "name": "Bulge",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.105882,
+          0.164706,
+          0.207843
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.42870522,
+          1.44605064,
+          1.42871499
+        ],
+        "Name": "Bulge",
+        "LocalCFrame": {
+          "position": [
+            -0.001849,
+            -1.330261,
+            -0.578074
+          ],
+          "rotation": [
+            0.999995,
+            0.000013,
+            -0.000032,
+            0.000013,
+            0.70706,
+            0.707153,
+            0.000032,
+            -0.70715,
+            0.707057
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX7A98CFAFED484ED088B0E3CC0E803FBB",
       "parent": "RBX730BD3D576E7437BB3BBA54715ACBE02",
       "class": "MeshPart",
       "name": "Back",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8866726852",
         "RenderFidelity": 0,
         "TextureID": null,

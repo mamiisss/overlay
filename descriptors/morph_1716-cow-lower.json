@@ -5,7 +5,18 @@
   "asset_id": "morph_1716-cow-lower",
   "name": "Cow Lower",
   "source_file": "1716-cow-lower.rbxmx",
-  "anchor": "Head",
+  "anchor": "RightHand",
+  "anchor_candidates": [
+    "RightHand",
+    "RightLowerArm",
+    "RightUpperArm",
+    "LeftHand",
+    "LeftLowerArm",
+    "LeftUpperArm",
+    "UpperTorso",
+    "Torso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       9103.95898,
@@ -29,6 +40,7 @@
     "Model": 5,
     "Part": 8,
     "SpecialMesh": 6,
+    "UnionOperation": 1,
     "MeshPart": 1
   },
   "nodes": [
@@ -234,6 +246,70 @@
       }
     },
     {
+      "id": "RBX162C53C1DACE414996A2E75B051C3188",
+      "parent": "RBX94F6E5360BF9469894FE88FD804B0ECC",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.982434869,
+          0.959270358,
+          0.764019251
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.24381,
+            0.451342,
+            0.209635
+          ],
+          "rotation": [
+            0.001875,
+            0.912744,
+            -0.408528,
+            -0.965923,
+            -0.104083,
+            -0.236977,
+            -0.25882,
+            0.395051,
+            0.881445
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX0CAA001CB931466BA59BA2EB4AFB53F8",
       "parent": "RBX94F6E5360BF9469894FE88FD804B0ECC",
       "class": "Part",
@@ -421,6 +497,7 @@
       "class": "MeshPart",
       "name": "cow",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6755486346",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12669810547",

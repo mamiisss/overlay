@@ -6,6 +6,13 @@
   "name": "OverflowCumflation",
   "source_file": "0288-overflowcumflation.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -24,
@@ -29,7 +36,9 @@
     "Model": 1,
     "Part": 2,
     "SpecialMesh": 2,
-    "MeshPart": 1
+    "MeshPart": 1,
+    "SurfaceAppearance": 1,
+    "Motor6D": 2
   },
   "nodes": [
     {
@@ -148,6 +157,7 @@
       "class": "MeshPart",
       "name": "Bell",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14430959240",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -206,6 +216,68 @@
             -0.999997
           ]
         }
+      }
+    },
+    {
+      "id": "RBX9693ED9A11AF482D9203A854DA4F3357",
+      "parent": "RBX4D7AC27292EA4300A2D67CDC88E9EA27",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": "rbxassetid://14429033345",
+        "Name": "SurfaceAppearance"
+      }
+    },
+    {
+      "id": "RBXB833230649D147E4BD87D91487CC6CCE",
+      "parent": "RBX28FE96A253E94C7DA886537CCF94566B",
+      "class": "Motor6D",
+      "name": "BellJoint",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX28FE96A253E94C7DA886537CCF94566B",
+        "Part1": "RBXA6747C18CCF04683BCCB694D03D0E51C",
+        "Name": "BellJoint"
       }
     },
     {
@@ -270,6 +342,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXE38469480C74487EA8318161CA585F17",
+      "parent": "RBXA6747C18CCF04683BCCB694D03D0E51C",
+      "class": "Motor6D",
+      "name": "Bell",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            -1,
+            -3.41224683e-12,
+            -6.63273635e-13,
+            3.41224683e-12,
+            0.99999994,
+            4.47034836e-8,
+            -6.63273635e-13,
+            -4.47034836e-8,
+            -0.99999994
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            -3.68518466e-10,
+            -7.16316728e-11,
+            7.23395177e-10,
+            0.999996901,
+            -0.00000482796167,
+            1.40617032e-10,
+            0.0000094771076,
+            0.999996901
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA6747C18CCF04683BCCB694D03D0E51C",
+        "Part1": "RBX4D7AC27292EA4300A2D67CDC88E9EA27",
+        "Name": "Bell"
       }
     },
     {

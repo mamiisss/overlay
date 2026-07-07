@@ -1319,6 +1319,16 @@ local function safeSet(instance, property, value)
 	end)
 end
 
+local function safeGet(instance, property, fallback)
+	local ok, value = pcall(function()
+		return instance[property]
+	end)
+	if ok and value ~= nil then
+		return value
+	end
+	return fallback
+end
+
 local function applyBasePartDescriptor(part, properties, anchorPart)
 	safeSet(part, "Size", descriptorVector3(properties.size or properties.Size, Vector3.new(1, 1, 1)))
 	safeSet(part, "Color", descriptorColor(properties.Color3uint8 or properties.Color, Color3.new(1, 1, 1)))
@@ -1344,6 +1354,9 @@ local function createDescriptorInstance(node)
 		return Instance.new("Model")
 	elseif className == "Part" then
 		return Instance.new("Part")
+	elseif className == "WedgePart" or className == "CornerWedgePart" or className == "TrussPart" or className == "UnionOperation" then
+		local ok, instance = pcall(Instance.new, className)
+		return ok and instance or Instance.new("Part")
 	elseif className == "MeshPart" then
 		local ok, instance = pcall(Instance.new, "MeshPart")
 		return ok and instance or Instance.new("Part")
@@ -1353,6 +1366,9 @@ local function createDescriptorInstance(node)
 		return Instance.new("ParticleEmitter")
 	elseif className == "Attachment" then
 		return Instance.new("Attachment")
+	elseif className == "Bone" then
+		local ok, instance = pcall(Instance.new, "Bone")
+		return ok and instance or nil
 	elseif className == "Highlight" then
 		return Instance.new("Highlight")
 	elseif className == "Decal" then
@@ -1365,8 +1381,25 @@ local function createDescriptorInstance(node)
 		return Instance.new("SpotLight")
 	elseif className == "SurfaceLight" then
 		return Instance.new("SurfaceLight")
+	elseif className == "SurfaceAppearance" or className == "WrapLayer" or className == "WrapTarget" then
+		local ok, instance = pcall(Instance.new, className)
+		return ok and instance or nil
+	elseif className == "Weld" or className == "Motor6D" or className == "WeldConstraint" then
+		local ok, instance = pcall(Instance.new, className)
+		return ok and instance or nil
 	end
 	return nil
+end
+
+local function applyAttachmentLikeDescriptor(instance, properties)
+	if properties.CFrame then
+		safeSet(instance, "CFrame", descriptorCFrame(properties.CFrame))
+	else
+		safeSet(instance, "Position", descriptorVector3(properties.Position, Vector3.new()))
+		safeSet(instance, "Orientation", descriptorVector3(properties.Orientation, Vector3.new()))
+	end
+	safeSet(instance, "Axis", descriptorVector3(properties.Axis, safeGet(instance, "Axis", Vector3.new(1, 0, 0))))
+	safeSet(instance, "SecondaryAxis", descriptorVector3(properties.SecondaryAxis, safeGet(instance, "SecondaryAxis", Vector3.new(0, 1, 0))))
 end
 
 local function applyDescriptorInstanceProperties(instance, node, anchorPart)
@@ -1409,12 +1442,11 @@ local function applyDescriptorInstanceProperties(instance, node, anchorPart)
 		safeSet(instance, "RotSpeed", descriptorNumberRange(properties.RotSpeed, 0, 0))
 		safeSet(instance, "VelocityInheritance", tonumber(properties.VelocityInheritance) or 0)
 	elseif instance:IsA("Attachment") then
-		if properties.CFrame then
-			safeSet(instance, "CFrame", descriptorCFrame(properties.CFrame))
-		else
-			safeSet(instance, "Position", descriptorVector3(properties.Position, Vector3.new()))
-			safeSet(instance, "Orientation", descriptorVector3(properties.Orientation, Vector3.new()))
-		end
+		applyAttachmentLikeDescriptor(instance, properties)
+	elseif instance:IsA("Bone") then
+		applyAttachmentLikeDescriptor(instance, properties)
+		safeSet(instance, "Transform", descriptorCFrame(properties.Transform))
+		safeSet(instance, "Visible", properties.Visible == true)
 	elseif instance:IsA("Highlight") then
 		safeSet(instance, "Enabled", properties.Enabled ~= false)
 		safeSet(instance, "FillColor", descriptorColor(properties.FillColor, Color3.new(1, 1, 1)))
@@ -1431,7 +1463,106 @@ local function applyDescriptorInstanceProperties(instance, node, anchorPart)
 		safeSet(instance, "Brightness", tonumber(properties.Brightness) or 1)
 		safeSet(instance, "Range", tonumber(properties.Range) or 8)
 		safeSet(instance, "Shadows", properties.Shadows == true)
+	elseif instance:IsA("SurfaceAppearance") then
+		safeSet(instance, "ColorMap", descriptorContent(properties.ColorMap))
+		safeSet(instance, "MetalnessMap", descriptorContent(properties.MetalnessMap))
+		safeSet(instance, "NormalMap", descriptorContent(properties.NormalMap))
+		safeSet(instance, "RoughnessMap", descriptorContent(properties.RoughnessMap))
+	elseif instance:IsA("WrapLayer") or instance:IsA("WrapTarget") then
+		safeSet(instance, "CageMeshId", descriptorContent(properties.CageMeshId))
+		safeSet(instance, "ReferenceMeshId", descriptorContent(properties.ReferenceMeshId))
+		safeSet(instance, "Enabled", properties.Enabled ~= false)
+		safeSet(instance, "Puffiness", tonumber(properties.Puffiness) or 0)
+		safeSet(instance, "Order", tonumber(properties.Order) or 0)
 	end
+end
+
+local function applyDescriptorLink(instance, node, instances)
+	local properties = type(node.properties) == "table" and node.properties or {}
+	if instance:IsA("Weld") or instance:IsA("Motor6D") or instance:IsA("WeldConstraint") then
+		local part0 = properties.Part0 and instances[properties.Part0] or nil
+		local part1 = properties.Part1 and instances[properties.Part1] or nil
+		if part0 and part0:IsA("BasePart") then
+			safeSet(instance, "Part0", part0)
+		end
+		if part1 and part1:IsA("BasePart") then
+			safeSet(instance, "Part1", part1)
+		end
+		if instance:IsA("Weld") or instance:IsA("Motor6D") then
+			safeSet(instance, "C0", descriptorCFrame(properties.C0))
+			safeSet(instance, "C1", descriptorCFrame(properties.C1))
+		end
+		if instance:IsA("Motor6D") then
+			safeSet(instance, "Transform", descriptorCFrame(properties.Transform))
+		end
+		safeSet(instance, "Enabled", properties.Enabled ~= false)
+	end
+end
+
+local function descriptorAnchorCandidates(descriptor)
+	local candidates = {}
+	if type(descriptor) == "table" and type(descriptor.anchor_candidates) == "table" then
+		for _, name in ipairs(descriptor.anchor_candidates) do
+			if type(name) == "string" and name ~= "" then
+				table.insert(candidates, name)
+			end
+		end
+	end
+	if type(descriptor) == "table" and type(descriptor.anchor) == "string" and descriptor.anchor ~= "" then
+		table.insert(candidates, descriptor.anchor)
+	end
+	return candidates
+end
+
+local function findCharacterPart(character, candidates)
+	if character == nil then
+		return nil
+	end
+	local aliases = {
+		UpperTorso = { "UpperTorso", "Torso", "HumanoidRootPart" },
+		LowerTorso = { "LowerTorso", "Torso", "HumanoidRootPart", "UpperTorso" },
+		Torso = { "Torso", "UpperTorso", "LowerTorso", "HumanoidRootPart" },
+		Head = { "Head", "UpperTorso", "Torso", "HumanoidRootPart" },
+		HumanoidRootPart = { "HumanoidRootPart", "LowerTorso", "UpperTorso", "Torso", "Head" },
+		RightHand = { "RightHand", "Right Arm", "RightLowerArm", "RightUpperArm", "UpperTorso", "Torso" },
+		LeftHand = { "LeftHand", "Left Arm", "LeftLowerArm", "LeftUpperArm", "UpperTorso", "Torso" },
+		RightLowerArm = { "RightLowerArm", "Right Arm", "RightUpperArm", "RightHand", "UpperTorso", "Torso" },
+		LeftLowerArm = { "LeftLowerArm", "Left Arm", "LeftUpperArm", "LeftHand", "UpperTorso", "Torso" },
+		RightUpperArm = { "RightUpperArm", "Right Arm", "RightLowerArm", "RightHand", "UpperTorso", "Torso" },
+		LeftUpperArm = { "LeftUpperArm", "Left Arm", "LeftLowerArm", "LeftHand", "UpperTorso", "Torso" },
+		RightFoot = { "RightFoot", "Right Leg", "RightLowerLeg", "RightUpperLeg", "LowerTorso", "Torso" },
+		LeftFoot = { "LeftFoot", "Left Leg", "LeftLowerLeg", "LeftUpperLeg", "LowerTorso", "Torso" },
+		RightLowerLeg = { "RightLowerLeg", "Right Leg", "RightUpperLeg", "RightFoot", "LowerTorso", "Torso" },
+		LeftLowerLeg = { "LeftLowerLeg", "Left Leg", "LeftUpperLeg", "LeftFoot", "LowerTorso", "Torso" },
+		RightUpperLeg = { "RightUpperLeg", "Right Leg", "RightLowerLeg", "RightFoot", "LowerTorso", "Torso" },
+		LeftUpperLeg = { "LeftUpperLeg", "Left Leg", "LeftLowerLeg", "LeftFoot", "LowerTorso", "Torso" },
+	}
+	local tried = {}
+	local function tryName(name)
+		if tried[name] then
+			return nil
+		end
+		tried[name] = true
+		local part = character:FindFirstChild(name)
+		if part and part:IsA("BasePart") then
+			return part
+		end
+		return nil
+	end
+	for _, candidate in ipairs(candidates or {}) do
+		local list = aliases[candidate] or { candidate }
+		for _, name in ipairs(list) do
+			local part = tryName(name)
+			if part then
+				return part
+			end
+		end
+	end
+	return tryName("HumanoidRootPart") or tryName("UpperTorso") or tryName("Torso") or tryName("Head")
+end
+
+local function resolveMorphAnchor(character, descriptor, fallback)
+	return findCharacterPart(character, descriptorAnchorCandidates(descriptor)) or fallback
 end
 
 local function clearDescriptorMorph(handle)
@@ -1444,6 +1575,7 @@ local function clearDescriptorMorph(handle)
 		handle.descriptorMorphRoot = nil
 		handle.descriptorMorphAssetId = nil
 		handle.descriptorMorphAnchor = nil
+		handle.descriptorMorphJiggle = nil
 	end
 end
 
@@ -1475,10 +1607,13 @@ local function applyDescriptorMorph(handle, anchorPart, components, entityId)
 	root.Parent = handle.folder or entityFolder
 
 	local instances = {}
+	local createdNodes = {}
+	local jiggleBones = {}
 	for _, node in ipairs(descriptor.nodes or {}) do
 		local instance = createDescriptorInstance(node)
 		if instance then
 			instances[node.id] = instance
+			table.insert(createdNodes, { node = node, instance = instance })
 			local parent = instances[node.parent] or root
 			instance.Parent = parent
 			applyDescriptorInstanceProperties(instance, node, anchorPart)
@@ -1490,13 +1625,29 @@ local function applyDescriptorMorph(handle, anchorPart, components, entityId)
 				weld.Parent = instance
 			elseif instance:IsA("Highlight") then
 				safeSet(instance, "Adornee", anchorPart.Parent or anchorPart)
+			elseif instance:IsA("Bone") then
+				table.insert(jiggleBones, {
+					bone = instance,
+					base = safeGet(instance, "Transform", CFrame.new()),
+					phase = (#jiggleBones + 1) * 0.73,
+					speed = 4 + (#jiggleBones % 4),
+					amplitude = 0.035,
+				})
 			end
 		end
+	end
+	for _, created in ipairs(createdNodes) do
+		applyDescriptorLink(created.instance, created.node, instances)
 	end
 
 	handle.descriptorMorphRoot = root
 	handle.descriptorMorphAssetId = assetId
 	handle.descriptorMorphAnchor = anchorPart
+	if descriptor.jiggle == true and #jiggleBones > 0 then
+		handle.descriptorMorphJiggle = jiggleBones
+	else
+		handle.descriptorMorphJiggle = nil
+	end
 end
 
 local function appearanceUserIdFor(components)
@@ -1903,12 +2054,7 @@ function OwnCharacterOverlayRenderer.onPatch(entity)
 
 	local morphAssetId = assetIdFromComponent(entity.components and entity.components.morph)
 	local morphDescriptor = morphAssetId and descriptorForAsset(morphAssetId) or nil
-	local morphAnchor = anchor
-	if morphDescriptor and morphDescriptor.anchor == "HumanoidRootPart" and root then
-		morphAnchor = root
-	elseif morphDescriptor and morphDescriptor.anchor == "Head" and head then
-		morphAnchor = head
-	end
+	local morphAnchor = resolveMorphAnchor(character, morphDescriptor, anchor)
 
 	if root then
 		applyAppearanceAvatar(handle, root, entity.components, entity.entityId)
@@ -1981,12 +2127,7 @@ function NativeCharacterOverlayRenderer.onPatch(entity)
 	end
 	local morphAssetId = assetIdFromComponent(entity.components and entity.components.morph)
 	local morphDescriptor = morphAssetId and descriptorForAsset(morphAssetId) or nil
-	local morphAnchor = anchor
-	if morphDescriptor and morphDescriptor.anchor == "HumanoidRootPart" and root then
-		morphAnchor = root
-	elseif morphDescriptor and morphDescriptor.anchor == "Head" and head then
-		morphAnchor = head
-	end
+	local morphAnchor = resolveMorphAnchor(character, morphDescriptor, anchor)
 
 	local color = colorFromComponents(entity.entityId, entity.components)
 	local effect = effectSettings(entity.entityId, entity.components)
@@ -2173,6 +2314,7 @@ end
 -- ---------------------------------------------------------------------------
 
 trackConnection(RunService.Heartbeat:Connect(function()
+	local now = os.clock()
 	local renderAt = os.clock() - CONFIG.interp_delay
 	for entityId, entity in pairs(Client.entities) do
 		local handle = entity.handle
@@ -2195,6 +2337,15 @@ trackConnection(RunService.Heartbeat:Connect(function()
 				local span = following.at - previous.at
 				local alpha = span > 0 and math.clamp((renderAt - previous.at) / span, 0, 1) or 1
 				handle.model.CFrame = previous.cf:Lerp(following.cf, alpha)
+			end
+		end
+		if handle and handle.descriptorMorphJiggle then
+			for _, item in ipairs(handle.descriptorMorphJiggle) do
+				if item.bone and item.bone.Parent then
+					local sway = math.sin(now * item.speed + item.phase) * item.amplitude
+					local twist = math.cos(now * (item.speed * 0.7) + item.phase) * item.amplitude * 0.45
+					safeSet(item.bone, "Transform", item.base * CFrame.Angles(sway, 0, twist))
+				end
 			end
 		end
 	end

@@ -5,7 +5,14 @@
   "asset_id": "morph_0623-medium-sticky-fishnet",
   "name": "Medium Sticky Fishnet",
   "source_file": "0623-medium-sticky-fishnet.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -7572.06543,
@@ -30,7 +37,9 @@
     "MeshPart": 4,
     "Texture": 12,
     "Part": 4,
-    "SpecialMesh": 4
+    "SpecialMesh": 4,
+    "Weld": 9,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -58,6 +67,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014170419",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -324,11 +334,156 @@
       }
     },
     {
+      "id": "RBXF8A538D87E1B42A8872A4528CBE6BAF0",
+      "parent": "RBX76B46631BE6040E496D538C7729A2C9D",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            -1.1920929e-7,
+            0,
+            -1.00000012,
+            0,
+            1,
+            0,
+            1.00000012,
+            0,
+            -1.1920929e-7
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            -1.1920929e-7,
+            0,
+            -1.00000012,
+            0,
+            1,
+            0,
+            1.00000012,
+            0,
+            -1.1920929e-7
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX76B46631BE6040E496D538C7729A2C9D",
+        "Part1": "RBX76B46631BE6040E496D538C7729A2C9D",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX2EEE1AFE42584BE1953DCAD668782564",
+      "parent": "RBX76B46631BE6040E496D538C7729A2C9D",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            -1.1920929e-7,
+            0,
+            -1.00000012,
+            0,
+            1,
+            0,
+            1.00000012,
+            0,
+            -1.1920929e-7
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0502929688,
+            0.106567383,
+            -0.242433548
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX76B46631BE6040E496D538C7729A2C9D",
+        "Part1": "RBX49F6EC5DAE964E2FA688149E32192FFC",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBXB844EE90E8CC4925AF3810F5F1A6C817",
+      "parent": "RBX76B46631BE6040E496D538C7729A2C9D",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            -1.1920929e-7,
+            0,
+            -1.00000012,
+            0,
+            1,
+            0,
+            1.00000012,
+            0,
+            -1.1920929e-7
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.29095459,
+            -0.433185577,
+            0.113418579
+          ],
+          "rotation": [
+            0.0151199698,
+            -0.173029542,
+            0.984800577,
+            0.996194005,
+            0.0871634483,
+            0.0000197589397,
+            -0.0858420134,
+            0.98105216,
+            0.173688948
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX76B46631BE6040E496D538C7729A2C9D",
+        "Part1": "RBX50871ED68AE447C7B07ECE8EEF906DDB",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX50871ED68AE447C7B07ECE8EEF906DDB",
       "parent": "RBX31EE7D077008456E98B55401F910176B",
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6720355129",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -405,6 +560,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6720355129",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -471,6 +627,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014168388",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -737,6 +894,150 @@
       }
     },
     {
+      "id": "RBXDC5ABEE98EA74A08993DC57B23D9C0E1",
+      "parent": "RBX45AD1574855A4BD9BB89379930526875",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX45AD1574855A4BD9BB89379930526875",
+        "Part1": "RBX45AD1574855A4BD9BB89379930526875",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX81DE551DA593486BB4E6ECB54086CF3D",
+      "parent": "RBX45AD1574855A4BD9BB89379930526875",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0498046875,
+            0.106201172,
+            0.257324219
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX45AD1574855A4BD9BB89379930526875",
+        "Part1": "RBX43D0E966463D4607B5AECB287B71DD03",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBXBB757A1D9D134B3EACA995EE41C1F23D",
+      "parent": "RBX45AD1574855A4BD9BB89379930526875",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0512237549,
+            -0.436942101,
+            -0.230918884
+          ],
+          "rotation": [
+            0.176123679,
+            0.980467081,
+            0.0875485837,
+            0.984100699,
+            -0.177450657,
+            0.00755128264,
+            0.0229393393,
+            0.0848266631,
+            -0.996131659
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX45AD1574855A4BD9BB89379930526875",
+        "Part1": "RBX2DF94A4D66794EB48CF61AFEDBE6F1BB",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX88F10DC237764281A79118556969834F",
       "parent": "RBX59670148212C4419BA9DB5BB878629BC",
       "class": "Model",
@@ -744,6 +1045,70 @@
       "properties": {
         "PrimaryPart": "RBX93CB06D0693C43B396104966D200EB17",
         "Name": "LowerStatic"
+      }
+    },
+    {
+      "id": "RBXB2BF445DFF5A4918927AAC493E357DD3",
+      "parent": "RBX88F10DC237764281A79118556969834F",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          1,
+          0.8
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.982434869,
+          0.922482193,
+          0.746903658
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.243806,
+            0.252599,
+            -0.472847
+          ],
+          "rotation": [
+            -0.002996,
+            0.912691,
+            -0.408641,
+            -0.000947,
+            0.408639,
+            0.912696,
+            0.999996,
+            0.003121,
+            -0.00036
+          ]
+        }
       }
     },
     {
@@ -835,6 +1200,150 @@
           1
         ],
         "Name": "Mesh"
+      }
+    },
+    {
+      "id": "RBXA359027D590948D9AA435BBB1FE5A966",
+      "parent": "RBX93CB06D0693C43B396104966D200EB17",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX93CB06D0693C43B396104966D200EB17",
+        "Part1": "RBX93CB06D0693C43B396104966D200EB17",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX02334588170C4D07890D9820261209FA",
+      "parent": "RBX93CB06D0693C43B396104966D200EB17",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0.091550827,
+            0.485351562,
+            0.122070312
+          ],
+          "rotation": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX93CB06D0693C43B396104966D200EB17",
+        "Part1": "RBX87467E274A1D44A7AACF7D2792F9FDE5",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX923E1DD7069C4C4EA4E6E562FBB2AC15",
+      "parent": "RBX93CB06D0693C43B396104966D200EB17",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.020160675,
+            0.161560059,
+            0.863311768
+          ],
+          "rotation": [
+            0.0000017285347,
+            -0.000946670771,
+            0.999999523,
+            0.912695885,
+            0.408639252,
+            0.000385254622,
+            -0.408639401,
+            0.912695527,
+            0.000864744186
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX93CB06D0693C43B396104966D200EB17",
+        "Part1": "RBXB2BF445DFF5A4918927AAC493E357DD3",
+        "Name": "Weld"
       }
     },
     {

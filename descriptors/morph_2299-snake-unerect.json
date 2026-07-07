@@ -5,7 +5,14 @@
   "asset_id": "morph_2299-snake-unerect",
   "name": "Snake Unerect",
   "source_file": "2299-snake-unerect.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -3.02585435,
@@ -29,7 +36,8 @@
     "Model": 3,
     "Part": 3,
     "SpecialMesh": 1,
-    "MeshPart": 3
+    "MeshPart": 3,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -222,6 +230,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7645729033",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -357,11 +366,76 @@
       }
     },
     {
+      "id": "RBX73E6F895AA104C1FB201CD77CDAB02F9",
+      "parent": "RBX7BEBE53311064663A9C1845A5014D4D3",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.356863,
+          0.364706,
+          0.411765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.642558992,
+          0.165864557,
+          0.453078926
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.004518,
+            -0.79715,
+            -0.798675
+          ],
+          "rotation": [
+            -0.999965,
+            -0.00096,
+            -0.008303,
+            0.008344,
+            -0.057522,
+            -0.998309,
+            0.000481,
+            -0.998344,
+            0.057528
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX5A16E867EAC442F180747485249B6D73",
       "parent": "RBX7BEBE53311064663A9C1845A5014D4D3",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://514528170",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -428,6 +502,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://514528170",
         "RenderFidelity": 1,
         "TextureID": null,

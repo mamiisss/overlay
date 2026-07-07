@@ -6,6 +6,13 @@
   "name": "Blazi head",
   "source_file": "0039-blazi-head.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       79.5419998,
@@ -30,6 +37,7 @@
     "Part": 1,
     "SpecialMesh": 1,
     "MeshPart": 2,
+    "UnionOperation": 1,
     "Decal": 1
   },
   "nodes": [
@@ -149,6 +157,7 @@
       "class": "MeshPart",
       "name": "hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://16031336772",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -210,8 +219,72 @@
       }
     },
     {
-      "id": "RBX88E590716695448A8807D942FFCBB402",
+      "id": "RBX99F746D8A40B49A28CD45BF533D5E8E2",
       "parent": "RBXA8A92B87DD044E08A0DD3ADFFA7C329F",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.639216,
+          0.635294,
+          0.647059
+        ],
+        "Massless": false,
+        "Material": 256,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.25,
+          1.2499671,
+          0.999999046
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.000008,
+            0.171742,
+            -0.212509
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX88E590716695448A8807D942FFCBB402",
+      "parent": "RBX99F746D8A40B49A28CD45BF533D5E8E2",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -232,6 +305,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://17486199571",
         "RenderFidelity": 0,
         "TextureID": null,

@@ -5,7 +5,14 @@
   "asset_id": "morph_2534-skinny-annihilator",
   "name": "Skinny Annihilator",
   "source_file": "2534-skinny-annihilator.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -191.848145,
@@ -30,7 +37,9 @@
     "Part": 4,
     "SpecialMesh": 1,
     "MeshPart": 8,
-    "ParticleEmitter": 1
+    "Motor6D": 6,
+    "ParticleEmitter": 1,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -159,6 +168,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11666691537",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -225,6 +235,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11666691586",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -286,11 +297,60 @@
       }
     },
     {
+      "id": "RBX92404E2FFEA940F7B0F56F6A2D611AAE",
+      "parent": "RBXC6340514FBDB48C7845860DBEF421546",
+      "class": "Motor6D",
+      "name": "Shaft.2Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.000117965377,
+            -0.0713188499,
+            0.458506137
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.00130006694,
+            0.00294735469,
+            0.0642405823
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXB46035896602433F848ED7C8A2EB28E5",
+        "Part1": "RBXC6340514FBDB48C7845860DBEF421546",
+        "Name": "Shaft.2Motor6D"
+      }
+    },
+    {
       "id": "RBXD0696F503C3E49B6A461E8BE7683AB15",
       "parent": "RBXFD737FC5BF07485FB43E9E738BF2A4AC",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11666691612",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -352,11 +412,60 @@
       }
     },
     {
+      "id": "RBXCAD6FCB9852B491FAD6AB65E60465DC9",
+      "parent": "RBXD0696F503C3E49B6A461E8BE7683AB15",
+      "class": "Motor6D",
+      "name": "Shaft.6Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0000296779399,
+            0.120475292,
+            0.27674365
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.000596006226,
+            0.101417303,
+            -0.0150104044
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX989545920F534684BF20CCD57236C78B",
+        "Part1": "RBXD0696F503C3E49B6A461E8BE7683AB15",
+        "Name": "Shaft.6Motor6D"
+      }
+    },
+    {
       "id": "RBX989545920F534684BF20CCD57236C78B",
       "parent": "RBXFD737FC5BF07485FB43E9E738BF2A4AC",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11666691628",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -418,11 +527,60 @@
       }
     },
     {
+      "id": "RBX86E9D8648FD64D5D836A571A70B82405",
+      "parent": "RBX989545920F534684BF20CCD57236C78B",
+      "class": "Motor6D",
+      "name": "Shaft.5Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0000828038392,
+            0.0719123408,
+            0.362912804
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0000296743183,
+            0.0790711641,
+            0.0379797667
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX25D7B9CEFB034202803C9EB665A7F012",
+        "Part1": "RBX989545920F534684BF20CCD57236C78B",
+        "Name": "Shaft.5Motor6D"
+      }
+    },
+    {
       "id": "RBX25D7B9CEFB034202803C9EB665A7F012",
       "parent": "RBXFD737FC5BF07485FB43E9E738BF2A4AC",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11666691574",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -484,11 +642,60 @@
       }
     },
     {
+      "id": "RBXF580BC23A36845D4AF11C5CEC7F0EE13",
+      "parent": "RBX25D7B9CEFB034202803C9EB665A7F012",
+      "class": "Motor6D",
+      "name": "Shaft.4Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.00120630115,
+            0.00933490321,
+            0.364489645
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0000828057528,
+            0.0498301648,
+            0.00959749334
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXC4FA8FD181A34B848E43071E1E633CF7",
+        "Part1": "RBX25D7B9CEFB034202803C9EB665A7F012",
+        "Name": "Shaft.4Motor6D"
+      }
+    },
+    {
       "id": "RBXC4FA8FD181A34B848E43071E1E633CF7",
       "parent": "RBXFD737FC5BF07485FB43E9E738BF2A4AC",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11666691609",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -547,6 +754,54 @@
             -0.965926
           ]
         }
+      }
+    },
+    {
+      "id": "RBXB2ADCC7D97AD4A60A86EE853584D413E",
+      "parent": "RBXC4FA8FD181A34B848E43071E1E633CF7",
+      "class": "Motor6D",
+      "name": "Shaft.3Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.00130006182,
+            -0.0571296215,
+            0.451337367
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.00120629976,
+            0.0258861892,
+            -0.0231633373
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXC6340514FBDB48C7845860DBEF421546",
+        "Part1": "RBXC4FA8FD181A34B848E43071E1E633CF7",
+        "Name": "Shaft.3Motor6D"
       }
     },
     {
@@ -619,6 +874,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11666691591",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -680,11 +936,60 @@
       }
     },
     {
+      "id": "RBXEB3F9A6CC81B4A25B3387B571CD26A80",
+      "parent": "RBX70A91A4857A241E1B4B66B78DA23ED63",
+      "class": "Motor6D",
+      "name": "Shaft.7Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.000596001337,
+            0.156622872,
+            0.258256555
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0231676381,
+            0.0403883494,
+            0.0501122475
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD0696F503C3E49B6A461E8BE7683AB15",
+        "Part1": "RBX70A91A4857A241E1B4B66B78DA23ED63",
+        "Name": "Shaft.7Motor6D"
+      }
+    },
+    {
       "id": "RBX3D2A20CA85114DA78165E287CAAA0064",
       "parent": "RBXFD737FC5BF07485FB43E9E738BF2A4AC",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7628766135",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -926,6 +1231,70 @@
             0,
             -0.12154,
             0.992587
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX6D58B2BE646C4F6F9CFE9F186B46B1CC",
+      "parent": "RBX52455CC4048746CEBA97910AD8AA880B",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": true,
+        "Material": 2309,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.800294638,
+          1.37855649,
+          0.671020925
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.00711,
+            -1.552077,
+            -0.536843
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0.998612,
+            0.052675,
+            0,
+            0.052675,
+            -0.998612
           ]
         }
       }

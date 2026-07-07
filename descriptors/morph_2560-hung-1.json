@@ -5,7 +5,14 @@
   "asset_id": "morph_2560-hung-1",
   "name": "HUNG  1",
   "source_file": "2560-hung-1.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -183.883835,
@@ -30,7 +37,8 @@
     "Part": 3,
     "SpecialMesh": 1,
     "MeshPart": 2,
-    "ParticleEmitter": 1
+    "ParticleEmitter": 1,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -223,6 +231,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://15714950631",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -289,6 +298,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://119782745847621",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -466,6 +476,70 @@
             0,
             -0.12154,
             0.992587
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7E848A7BD9264B648AF08B9E2B506348",
+      "parent": "RBX8814CA57D318489AAAB558DAA8C23B32",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.639216,
+          0.635294,
+          0.647059
+        ],
+        "Massless": true,
+        "Material": 2309,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.900950015,
+          1.28995979,
+          0.689217746
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.015579,
+            -1.695438,
+            -0.581283
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0.998611,
+            0.05268,
+            0,
+            0.05268,
+            -0.998611
           ]
         }
       }

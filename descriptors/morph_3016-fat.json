@@ -6,31 +6,40 @@
   "name": "Fat",
   "source_file": "3016-fat.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
-      -238788.328,
-      -134059.172,
-      -113210.242
+      -238788.25,
+      -134059.203,
+      -113210.188
     ],
     "rotation": [
-      0.93763119,
-      -0.153886884,
-      0.311697304,
-      0.067807205,
-      0.960414708,
-      0.270199716,
-      -0.340945035,
-      -0.232205197,
-      0.910952806
+      0.937624454,
+      -0.15386416,
+      0.311747283,
+      0.067780219,
+      0.960425675,
+      0.270163447,
+      -0.340978801,
+      -0.232181638,
+      0.910947919
     ]
   },
   "class_counts": {
     "Folder": 1,
     "Model": 3,
+    "UnionOperation": 4,
     "Part": 5,
     "ParticleEmitter": 2,
     "SpecialMesh": 3,
-    "MeshPart": 4
+    "MeshPart": 4,
+    "SurfaceAppearance": 2
   },
   "nodes": [
     {
@@ -50,6 +59,70 @@
       "properties": {
         "PrimaryPart": "RBXE0433309F831479398720BA2861DF8C6",
         "Name": "UpperL"
+      }
+    },
+    {
+      "id": "RBX17337A9E96EC4DCAACADC066CE3A6FEF",
+      "parent": "RBX6DC9E056C7ED4C589E462EC1ECBD4802",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.3499268,
+          0.119018912,
+          0.123051167
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1.000001
+          ]
+        }
       }
     },
     {
@@ -98,20 +171,20 @@
         "Name": "Particle3",
         "LocalCFrame": {
           "position": [
-            0,
-            0,
-            0
+            -0.052621,
+            0.054312,
+            -0.065132
           ],
           "rotation": [
-            0.999994,
-            0.000003,
-            -0.000006,
-            0.000003,
             0.999997,
-            0.00001,
-            -0.000006,
-            0.00001,
-            0.999998
+            -0.000014,
+            -0.000046,
+            0.000017,
+            0.999998,
+            0.000041,
+            0.00004,
+            -0.000032,
+            0.999999
           ]
         }
       }
@@ -164,6 +237,70 @@
       }
     },
     {
+      "id": "RBXEE6D12CE12994409A0BAEDCEEB182915",
+      "parent": "RBX6DC9E056C7ED4C589E462EC1ECBD4802",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.360268146,
+          0.0798861757,
+          0.360375166
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.001654,
+            -0.128087,
+            -0.00692
+          ],
+          "rotation": [
+            0.980963,
+            -0.192092,
+            0.028511,
+            -0.020537,
+            -0.248612,
+            -0.968385,
+            0.193107,
+            0.949365,
+            -0.247824
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXE0433309F831479398720BA2861DF8C6",
       "parent": "RBX6DC9E056C7ED4C589E462EC1ECBD4802",
       "class": "Part",
@@ -209,20 +346,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            0.127887,
-            0.74335,
-            1.085913
+            0.07521,
+            0.797699,
+            1.020757
           ],
           "rotation": [
-            0.937631,
-            0.067807,
-            -0.340945,
-            -0.153887,
-            0.960415,
-            -0.232205,
-            0.311697,
-            0.2702,
-            0.910953
+            0.937624,
+            0.06778,
+            -0.340979,
+            -0.153864,
+            0.960426,
+            -0.232182,
+            0.311747,
+            0.270163,
+            0.910948
           ]
         }
       }
@@ -260,6 +397,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://13779805157",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -302,20 +440,20 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            -0.114549,
-            0.064605,
-            0.376471
+            -0.167186,
+            0.118928,
+            0.311331
           ],
           "rotation": [
-            0.895112,
-            -0.067348,
-            0.440718,
-            -0.177718,
-            -0.96049,
-            0.214185,
-            0.408874,
-            -0.270047,
-            -0.871718
+            0.895102,
+            -0.067321,
+            0.440751,
+            -0.177693,
+            -0.960501,
+            0.214164,
+            0.408923,
+            -0.270011,
+            -0.871707
           ]
         }
       }
@@ -326,6 +464,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://13779756984",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -368,22 +507,36 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            -0.140873,
-            0.0247,
-            -0.16718
+            -0.193488,
+            0.079006,
+            -0.23232
           ],
           "rotation": [
-            -0.79186,
-            0.585628,
-            -0.173178,
-            0.244897,
-            0.044742,
-            -0.968515,
-            -0.559435,
-            -0.809346,
-            -0.178857
+            -0.791845,
+            0.585662,
+            -0.173155,
+            0.244869,
+            0.044725,
+            -0.968524,
+            -0.559483,
+            -0.809322,
+            -0.178825
           ]
         }
+      }
+    },
+    {
+      "id": "RBX5FC11ECBA62C4A9FBA90809A970CF80A",
+      "parent": "RBX757D76553D6D4C12BE28A30E37B3FBF1",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": "rbxassetid://13779954418",
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": null,
+        "Name": "SurfaceAppearance"
       }
     },
     {
@@ -442,20 +595,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            0.578967,
-            0.668041,
-            1.295917
+            0.526285,
+            0.722404,
+            1.230786
           ],
           "rotation": [
-            0.937631,
-            0.067807,
-            -0.340945,
-            -0.153887,
-            0.960415,
-            -0.232205,
-            0.311697,
-            0.2702,
-            0.910953
+            0.937624,
+            0.06778,
+            -0.340979,
+            -0.153864,
+            0.960426,
+            -0.232182,
+            0.311747,
+            0.270163,
+            0.910948
           ]
         }
       }
@@ -485,6 +638,70 @@
           1
         ],
         "Name": "Mesh"
+      }
+    },
+    {
+      "id": "RBXDD8B4F2DD7BE4149BF4DA07DAC6C58D7",
+      "parent": "RBX8766EDCC08FF4B919F744F60C66C5307",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.3499268,
+          0.119018912,
+          0.123051167
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            1.103098,
+            -0.267611,
+            0.559855
+          ],
+          "rotation": [
+            0.590979,
+            0.315833,
+            -0.74229,
+            -0.314651,
+            0.937537,
+            0.148396,
+            0.742791,
+            0.145863,
+            0.653442
+          ]
+        }
       }
     },
     {
@@ -533,20 +750,20 @@
         "Name": "Particle2",
         "LocalCFrame": {
           "position": [
-            1.284494,
-            -0.266703,
-            0.566444
+            1.23186,
+            -0.212355,
+            0.501382
           ],
           "rotation": [
-            0.590974,
-            0.315813,
-            -0.742297,
-            -0.314666,
-            0.937536,
-            0.148354,
-            0.742778,
-            0.145912,
-            0.653442
+            0.590951,
+            0.315792,
+            -0.742329,
+            -0.314635,
+            0.937547,
+            0.148364,
+            0.742819,
+            0.145888,
+            0.653403
           ]
         }
       }
@@ -599,11 +816,76 @@
       }
     },
     {
+      "id": "RBXA8B24DCFF3CE4E4C870C956F1F100FA3",
+      "parent": "RBX8766EDCC08FF4B919F744F60C66C5307",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.360268116,
+          0.0798861682,
+          0.360375166
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            1.074508,
+            -0.388685,
+            0.534761
+          ],
+          "rotation": [
+            0.742704,
+            -0.656869,
+            -0.130058,
+            -0.303505,
+            -0.157089,
+            -0.939792,
+            0.596889,
+            0.73746,
+            -0.316034
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX0E4109E1BFBB4D6A8F1BB7205C3B2818",
       "parent": "RBX8766EDCC08FF4B919F744F60C66C5307",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://13779756939",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -646,22 +928,36 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            1.389963,
-            -0.285026,
-            0.490374
+            1.337332,
+            -0.230679,
+            0.425318
           ],
           "rotation": [
             -0.963976,
-            0.218174,
-            -0.152131,
-            0.203111,
-            0.234559,
-            -0.950644,
-            -0.171715,
-            -0.947301,
-            -0.270432
+            0.218209,
+            -0.152104,
+            0.203092,
+            0.234533,
+            -0.950657,
+            -0.171768,
+            -0.947302,
+            -0.2704
           ]
         }
+      }
+    },
+    {
+      "id": "RBX437C9117168A41A0AF844B25BD38767E",
+      "parent": "RBX0E4109E1BFBB4D6A8F1BB7205C3B2818",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": "rbxassetid://13779954418",
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": null,
+        "Name": "SurfaceAppearance"
       }
     },
     {
@@ -670,6 +966,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://13779805168",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -712,20 +1009,20 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            0.996375,
-            -0.14481,
-            0.842059
+            0.943726,
+            -0.090457,
+            0.77698
           ],
           "rotation": [
-            0.895112,
-            -0.067349,
-            0.440717,
-            -0.177718,
-            -0.96049,
-            0.214185,
-            0.408874,
-            -0.270047,
-            -0.871718
+            0.895102,
+            -0.067322,
+            0.44075,
+            -0.177693,
+            -0.960501,
+            0.214164,
+            0.408923,
+            -0.270011,
+            -0.871708
           ]
         }
       }
@@ -786,20 +1083,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            0.061654,
-            -0.333896,
-            1.404554
+            0.008982,
+            -0.279539,
+            1.33944
           ],
           "rotation": [
-            0.895126,
-            0.067172,
-            -0.440717,
-            -0.177531,
-            0.960523,
-            -0.214185,
-            0.408926,
-            0.269973,
-            0.871718
+            0.895115,
+            0.067145,
+            -0.44075,
+            -0.177506,
+            0.960534,
+            -0.214164,
+            0.408975,
+            0.269937,
+            0.871708
           ]
         }
       }

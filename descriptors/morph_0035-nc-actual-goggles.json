@@ -6,6 +6,13 @@
   "name": "nc actual goggles",
   "source_file": "0035-nc-actual-goggles.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -7182.0498,
@@ -30,7 +37,8 @@
     "Part": 5,
     "SpecialMesh": 2,
     "MeshPart": 3,
-    "Decal": 2
+    "Decal": 2,
+    "Weld": 1
   },
   "nodes": [
     {
@@ -149,6 +157,7 @@
       "class": "MeshPart",
       "name": "Ears",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7416921335",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://7393103928",
@@ -215,6 +224,7 @@
       "class": "MeshPart",
       "name": "Head",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxasset://Meshes/OX_6972893586.mesh",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -598,6 +608,7 @@
       "class": "MeshPart",
       "name": "Goggles",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7417479578",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://7417479700",
@@ -666,6 +677,54 @@
       "properties": {
         "PrimaryPart": null,
         "Name": "Model"
+      }
+    },
+    {
+      "id": "RBXB48CF2E6EBD04AE2B65F7F32DBBA22CE",
+      "parent": "RBX01E1F5A575694E71BB37CC252FEF62D5",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -0.361328125,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            3.56747509e-13,
+            -1.07023927e-12,
+            0,
+            -1,
+            0,
+            1,
+            6.59194921e-17
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.14453125,
+            -0.0234375,
+            -0.0009765625
+          ],
+          "rotation": [
+            -5.79071752e-7,
+            -1,
+            -2.41929882e-7,
+            -1.16869819e-10,
+            2.41929882e-7,
+            -1,
+            1,
+            -5.79071752e-7,
+            -1.16653159e-10
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX01E1F5A575694E71BB37CC252FEF62D5",
+        "Part1": "RBX6173FF50D09446D18E18E0B525AA4117",
+        "Name": "Weld"
       }
     }
   ]

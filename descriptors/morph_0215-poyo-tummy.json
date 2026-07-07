@@ -5,7 +5,14 @@
   "asset_id": "morph_0215-poyo-tummy",
   "name": "Poyo Tummy",
   "source_file": "0215-poyo-tummy.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       0.050962843,
@@ -29,6 +36,7 @@
     "Model": 1,
     "Part": 3,
     "SpecialMesh": 1,
+    "Weld": 1,
     "MeshPart": 1
   },
   "nodes": [
@@ -143,11 +151,60 @@
       }
     },
     {
+      "id": "RBXF1E43F5544A447D9AF108BEC23F3B86C",
+      "parent": "RBXE0580643620A4333866EA7D0AF284B36",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXE0580643620A4333866EA7D0AF284B36",
+        "Part1": "RBXE0580643620A4333866EA7D0AF284B36",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX396A9AE3215D4BF794DF3E4E88207395",
       "parent": "RBX854B5E604806472887A1CD9443E79C5A",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://15037874016",
         "RenderFidelity": 0,
         "TextureID": null,

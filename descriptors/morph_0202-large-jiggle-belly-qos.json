@@ -5,7 +5,14 @@
   "asset_id": "morph_0202-large-jiggle-belly-qos",
   "name": "large jiggle belly QoS",
   "source_file": "0202-large-jiggle-belly-qos.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       3.39160633,
@@ -30,6 +37,7 @@
     "Part": 1,
     "SpecialMesh": 1,
     "MeshPart": 1,
+    "Bone": 2,
     "Decal": 1
   },
   "nodes": [
@@ -149,6 +157,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://17850816718",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -207,6 +216,62 @@
             -0.999848
           ]
         }
+      }
+    },
+    {
+      "id": "RBX231FA5CA5D67499EB9DB483D15D0659F",
+      "parent": "RBXF0DEEED5AC7E47F9BE96B70DFA3FFD2C",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000222375325,
+            0.0885233581,
+            -0.394100517
+          ],
+          "rotation": [
+            1,
+            -4.39809682e-16,
+            4.13175392e-17,
+            -4.05348782e-16,
+            -0.950761497,
+            -0.309923649,
+            1.75590526e-16,
+            0.309923649,
+            -0.950761497
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXFA3F02760EED4919ACD09741932FD200",
+      "parent": "RBX231FA5CA5D67499EB9DB483D15D0659F",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00000381469727,
+            0.398507833,
+            0.0190401077
+          ],
+          "rotation": [
+            1,
+            0.00000605660034,
+            -0.00000276417722,
+            -0.00000226541306,
+            0.699978411,
+            0.714164078,
+            0.00000626026986,
+            -0.714164078,
+            0.699978411
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {

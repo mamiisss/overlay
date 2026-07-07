@@ -5,7 +5,14 @@
   "asset_id": "morph_2239-downloincock",
   "name": "Downloincock",
   "source_file": "2239-downloincock.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -6.10699987,
@@ -31,7 +38,9 @@
     "SpecialMesh": 7,
     "MeshPart": 7,
     "Decal": 6,
-    "ParticleEmitter": 1
+    "Weld": 7,
+    "ParticleEmitter": 1,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -396,6 +405,7 @@
       "class": "MeshPart",
       "name": "fur",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1200773982",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -479,6 +489,7 @@
       "class": "MeshPart",
       "name": "fur",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1200773982",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -621,11 +632,60 @@
       }
     },
     {
+      "id": "RBXEA7D9CA9C12B4271BD62323ECFEA9EA8",
+      "parent": "RBXCD3C2F74B9884A8281DB6816F648758F",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            -1.45519138e-10,
+            4.65661232e-10,
+            1.45519138e-10,
+            1,
+            1.49012713e-8,
+            -4.65661232e-10,
+            -1.49012713e-8,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            -1.45519138e-10,
+            4.65661232e-10,
+            1.45519138e-10,
+            1,
+            1.49012713e-8,
+            -4.65661232e-10,
+            -1.49012713e-8,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXCD3C2F74B9884A8281DB6816F648758F",
+        "Part1": "RBXCD3C2F74B9884A8281DB6816F648758F",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBXB6EF69FBC0AD44488DA1900517FC2522",
       "parent": "RBX94D2A98FD7C14DB09BF428C7A1817D55",
       "class": "MeshPart",
       "name": "fur",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1200773982",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -894,6 +954,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7628766135",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1292,11 +1353,300 @@
       }
     },
     {
+      "id": "RBX358E06DEE78A41E68FD42704A785E16D",
+      "parent": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            2.54658516e-11,
+            1.36424205e-12,
+            -2.54658516e-11,
+            1,
+            -2.25368724e-10,
+            -1.36424194e-12,
+            2.2536871e-10,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            2.54658516e-11,
+            1.36424205e-12,
+            -2.54658516e-11,
+            1,
+            -2.25368724e-10,
+            -1.36424194e-12,
+            2.2536871e-10,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+        "Part1": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBXCC1D9A60BE0F4314AF1851566ADFEC5B",
+      "parent": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            2.54658516e-11,
+            1.36424205e-12,
+            -2.54658516e-11,
+            1,
+            -2.25368724e-10,
+            -1.36424194e-12,
+            2.2536871e-10,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.000854492188,
+            -0.1484375,
+            -0.189453125
+          ],
+          "rotation": [
+            -0.999991596,
+            0.00191353599,
+            -0.00365341757,
+            0.00393642392,
+            0.707106888,
+            -0.707095742,
+            0.00123030366,
+            -0.707104027,
+            -0.707108438
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+        "Part1": "RBX468A30BC9768495CB1C3D4ED5E62577B",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX52E0B406604742969A8BF5B80D17AD8A",
+      "parent": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            2.54658516e-11,
+            1.36424205e-12,
+            -2.54658516e-11,
+            1,
+            -2.25368724e-10,
+            -1.36424194e-12,
+            2.2536871e-10,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.000793457031,
+            -0.0301513672,
+            -0.11328125
+          ],
+          "rotation": [
+            -0.999991536,
+            0.00191348628,
+            -0.00365355518,
+            0.00226231455,
+            0.995184541,
+            -0.0979931578,
+            0.00344845303,
+            -0.0980005935,
+            -0.995180428
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+        "Part1": "RBX9EE3A082586343E8B09D2E7387D2B3EF",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBXB9D59FBCC8A04CA980A7F2DD78F3A244",
+      "parent": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            2.54658516e-11,
+            1.36424205e-12,
+            -2.54658516e-11,
+            1,
+            -2.25368724e-10,
+            -1.36424194e-12,
+            2.2536871e-10,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.000671386719,
+            -0.291015625,
+            -0.204956055
+          ],
+          "rotation": [
+            -0.999991536,
+            0.0019137637,
+            -0.00365327345,
+            0.00382327009,
+            0.0980174839,
+            -0.995177448,
+            -0.00154644973,
+            -0.995182931,
+            -0.0980239734
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+        "Part1": "RBX71F2670E34504C23ACDBB28EC56FF0DD",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX497EA158CAE34D899AB916E9B0FA154E",
+      "parent": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            2.54658516e-11,
+            1.36424205e-12,
+            -2.54658516e-11,
+            1,
+            -2.25368724e-10,
+            -1.36424194e-12,
+            2.2536871e-10,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.001953125,
+            -0.482421875,
+            0.120605469
+          ],
+          "rotation": [
+            0.999991298,
+            0.00191985187,
+            0.00372093241,
+            0.0041707498,
+            -0.535014093,
+            -0.844832778,
+            0.000368797482,
+            0.844840944,
+            -0.535017431
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+        "Part1": "RBXD278C90CCD5447588B0744DFDA89ED15",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX6C45625FFBE24CD4848FA01F01654279",
+      "parent": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            2.54658516e-11,
+            1.36424205e-12,
+            -2.54658516e-11,
+            1,
+            -2.25368724e-10,
+            -1.36424194e-12,
+            2.2536871e-10,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0458984375,
+            -0.51953125,
+            0.0102233887
+          ],
+          "rotation": [
+            -0.00836559013,
+            -0.684673965,
+            0.728801548,
+            0.0219761245,
+            -0.728776872,
+            -0.684398532,
+            0.999723494,
+            0.0102908351,
+            0.0211431291
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0DCC69FB15144C68A96D0F42F2E4958F",
+        "Part1": "RBX0BF07DF16DA84B4EA59B533156DA09E3",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX59E69D72FE6C4F83B9A8A1ACDF66A9D3",
       "parent": "RBX612D4002E91A44FABB91455982E213D0",
       "class": "MeshPart",
       "name": "ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://3270017",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1380,6 +1730,7 @@
       "class": "MeshPart",
       "name": "ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://3270017",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1455,6 +1806,70 @@
         "Transparency": 0,
         "Face": 1,
         "Name": "Decal"
+      }
+    },
+    {
+      "id": "RBXD278C90CCD5447588B0744DFDA89ED15",
+      "parent": "RBX612D4002E91A44FABB91455982E213D0",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.356863,
+          0.364706,
+          0.411765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.341007382,
+          0.248576924,
+          0.356180847
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.000185,
+            -0.337807,
+            -0.4375
+          ],
+          "rotation": [
+            0.999991,
+            0.004169,
+            0.000367,
+            0.00187,
+            -0.5236,
+            0.851962,
+            0.003744,
+            -0.851954,
+            -0.523603
+          ]
+        }
       }
     },
     {
@@ -1564,6 +1979,7 @@
       "class": "MeshPart",
       "name": "fur",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1200773982",
         "RenderFidelity": 1,
         "TextureID": null,

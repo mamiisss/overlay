@@ -5,7 +5,14 @@
   "asset_id": "morph_3191-uv-6",
   "name": "UV 6",
   "source_file": "3191-uv-6.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -16.6384392,
@@ -28,7 +35,9 @@
     "Folder": 1,
     "Model": 1,
     "MeshPart": 3,
+    "Motor6D": 3,
     "Part": 2,
+    "Bone": 2,
     "SpecialMesh": 1
   },
   "nodes": [
@@ -57,6 +66,7 @@
       "class": "MeshPart",
       "name": "is.Eo.Bs.Bq.oi.Dk.qo.Jk.w.mm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://117058662939466",
@@ -118,11 +128,60 @@
       }
     },
     {
+      "id": "RBX27A91D900815421F9C05A3856631035A",
+      "parent": "RBX060667D18509448EA05D02C982FDF319",
+      "class": "Motor6D",
+      "name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDD5BEC2DDCE4468A93B54C85A4BFF802",
+        "Part1": "RBX060667D18509448EA05D02C982FDF319",
+        "Name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq"
+      }
+    },
+    {
       "id": "RBX1AE8853F3ACF43E38D1908AE7171FEB0",
       "parent": "RBX80DE4B0D3F4C432FA6C487FC36E6DB71",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -181,6 +240,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXFC3BF51872B548F889219AE132EAB77F",
+      "parent": "RBX1AE8853F3ACF43E38D1908AE7171FEB0",
+      "class": "Motor6D",
+      "name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDD5BEC2DDCE4468A93B54C85A4BFF802",
+        "Part1": "RBX1AE8853F3ACF43E38D1908AE7171FEB0",
+        "Name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq"
       }
     },
     {
@@ -248,11 +355,68 @@
       }
     },
     {
+      "id": "RBX34E4072639AC4A99968973970C5ED941",
+      "parent": "RBXDD5BEC2DDCE4468A93B54C85A4BFF802",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            1.66517103,
+            0.601628363
+          ],
+          "rotation": [
+            1,
+            -3.67394082e-16,
+            -1.22464818e-16,
+            -3.67394135e-16,
+            -1,
+            -4.93897176e-7,
+            -1.22464632e-16,
+            4.93897176e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX2FDC513E3DF642EB80C1806F543AFBAA",
+      "parent": "RBX34E4072639AC4A99968973970C5ED941",
+      "class": "Bone",
+      "name": "Io.ms.wq.io.j.Bk.Ho.mm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.574072838,
+            -9.53674316e-7
+          ],
+          "rotation": [
+            1,
+            1.01213085e-16,
+            -5.35189959e-17,
+            -1.01213112e-16,
+            0.562984765,
+            -0.826467395,
+            -5.35189231e-17,
+            0.826467395,
+            0.562984765
+          ]
+        },
+        "Visible": false,
+        "Name": "Io.ms.wq.io.j.Bk.Ho.mm"
+      }
+    },
+    {
       "id": "RBX12763CC4C6924E8FA2F31383AEEFB070",
       "parent": "RBX80DE4B0D3F4C432FA6C487FC36E6DB71",
       "class": "MeshPart",
       "name": "ws.Go.Is.jq.ii.Dk.qo.Jk.w.mm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -311,6 +475,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXEF2387F13FA341D9A6ABAF59FA320AA4",
+      "parent": "RBX12763CC4C6924E8FA2F31383AEEFB070",
+      "class": "Motor6D",
+      "name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDD5BEC2DDCE4468A93B54C85A4BFF802",
+        "Part1": "RBX12763CC4C6924E8FA2F31383AEEFB070",
+        "Name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq"
       }
     },
     {

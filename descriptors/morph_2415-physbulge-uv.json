@@ -5,7 +5,14 @@
   "asset_id": "morph_2415-physbulge-uv",
   "name": "PhysBulge UV",
   "source_file": "2415-physbulge-uv.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -245609.625,
@@ -28,7 +35,9 @@
     "Folder": 1,
     "Model": 1,
     "MeshPart": 2,
-    "Part": 2
+    "Motor6D": 2,
+    "Part": 2,
+    "Bone": 2
   },
   "nodes": [
     {
@@ -56,6 +65,7 @@
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://111494250268875",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -117,11 +127,60 @@
       }
     },
     {
+      "id": "RBX2F38DA4FAFB44F808C3702A3ACB40DA1",
+      "parent": "RBX92D7B0B340994E7989F346A3B12E3523",
+      "class": "Motor6D",
+      "name": "RoundcubeMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            2.00061083,
+            0.917309761
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXF81D80857D684D40A90372F0B20F3541",
+        "Part1": "RBX92D7B0B340994E7989F346A3B12E3523",
+        "Name": "RoundcubeMotor6D"
+      }
+    },
+    {
       "id": "RBX6C0FCDE855CC44D49EA5DF81316FE43F",
       "parent": "RBX7AD7427E80C247ECB2A73DB7AF27DC53",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://100344693798443",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -180,6 +239,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX17630CBB9D9B45FDB41389523C28D4A3",
+      "parent": "RBX6C0FCDE855CC44D49EA5DF81316FE43F",
+      "class": "Motor6D",
+      "name": "Roundcube.001Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            1.5476294e-8,
+            2.00167298,
+            0.917698741
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXF81D80857D684D40A90372F0B20F3541",
+        "Part1": "RBX6C0FCDE855CC44D49EA5DF81316FE43F",
+        "Name": "Roundcube.001Motor6D"
       }
     },
     {
@@ -244,6 +351,62 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXFF1136ECC22C4FFE8ACE32B5D29602BA",
+      "parent": "RBXF81D80857D684D40A90372F0B20F3541",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -2.63613747e-24,
+            2.25187206,
+            0.662139297
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464619e-16,
+            -1.22464619e-16,
+            -1,
+            5.48412686e-7,
+            -1.22464685e-16,
+            -5.48412686e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXF49BC49B612E432DA60F21149482F431",
+      "parent": "RBXFF1136ECC22C4FFE8ACE32B5D29602BA",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.251356125,
+            0
+          ],
+          "rotation": [
+            1,
+            -2.55688957e-14,
+            0.00000166893108,
+            -0.00000163439927,
+            0.20237036,
+            0.979309142,
+            -3.37742193e-7,
+            -0.979309142,
+            0.20237036
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {

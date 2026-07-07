@@ -5,7 +5,19 @@
   "asset_id": "morph_1943-socks-pawbeans-blue-for-body-e3",
   "name": "Socks Pawbeans Blue (For Body E3)",
   "source_file": "1943-socks-pawbeans-blue-for-body-e3.rbxmx",
-  "anchor": "Head",
+  "anchor": "RightFoot",
+  "anchor_candidates": [
+    "RightFoot",
+    "RightLowerLeg",
+    "RightUpperLeg",
+    "LeftFoot",
+    "LeftLowerLeg",
+    "LeftUpperLeg",
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       3.98900032,
@@ -29,7 +41,8 @@
     "Model": 2,
     "Part": 2,
     "MeshPart": 2,
-    "Texture": 12
+    "Texture": 12,
+    "UnionOperation": 2
   },
   "nodes": [
     {
@@ -121,6 +134,7 @@
       "class": "MeshPart",
       "name": "Right Sock",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6721517477",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -296,6 +310,70 @@
       }
     },
     {
+      "id": "RBX1C08849351804628BDF6D269396EFBA7",
+      "parent": "RBX2F7E7ED4652544E59CC5D91C3F791305",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.066667,
+          0.066667,
+          0.066667
+        ],
+        "Massless": true,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.769878387,
+          0.148062706,
+          0.749184132
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.101816,
+            -1.17631,
+            -0.055923
+          ],
+          "rotation": [
+            -0.999997,
+            0.002622,
+            0,
+            -0.002622,
+            -0.999997,
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX76C247CFBD7841F8B8DBB5191E725AC7",
       "parent": "RBX92128DE070C34F00840231841E3754BA",
       "class": "Model",
@@ -375,6 +453,7 @@
       "class": "MeshPart",
       "name": "Left Sock",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6721513769",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -547,6 +626,70 @@
         "Transparency": 0.5,
         "Face": 4,
         "Name": "Texture"
+      }
+    },
+    {
+      "id": "RBXA3453184CFC5483B8E33442FC8DC1789",
+      "parent": "RBX76C247CFBD7841F8B8DBB5191E725AC7",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.066667,
+          0.066667,
+          0.066667
+        ],
+        "Massless": true,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.769878387,
+          0.148062706,
+          0.749184132
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.917962,
+            -1.178431,
+            -0.055923
+          ],
+          "rotation": [
+            -1,
+            0.002622,
+            0,
+            -0.002622,
+            -1,
+            0,
+            0,
+            0,
+            1
+          ]
+        }
       }
     }
   ]

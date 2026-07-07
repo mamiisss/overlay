@@ -5,7 +5,14 @@
   "asset_id": "morph_1617-anus-creampie",
   "name": "Anus Creampie",
   "source_file": "1617-anus-creampie.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -366.62915,
@@ -30,7 +37,8 @@
     "Part": 10,
     "SpecialMesh": 10,
     "MeshPart": 3,
-    "Decal": 2
+    "Decal": 2,
+    "WeldConstraint": 2
   },
   "nodes": [
     {
@@ -149,6 +157,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10191889916",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -852,6 +861,7 @@
       "class": "MeshPart",
       "name": "OpenC",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7685505826",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -918,6 +928,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10191890130",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -1151,6 +1162,15 @@
       }
     },
     {
+      "id": "RBX601C522DF2E54339AD8640E9098FF501",
+      "parent": "RBXE7BB392819C54036A987818BF3934901",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX9C023E3A895942B6A5E1E53A89718C43",
       "parent": "RBXE7BB392819C54036A987818BF3934901",
       "class": "SpecialMesh",
@@ -1192,6 +1212,15 @@
         "Transparency": 0,
         "Face": 0,
         "Name": "Decal"
+      }
+    },
+    {
+      "id": "RBX511E120AAAE64722BF0BD25DABC9A0D8",
+      "parent": "RBX84BA3B771A024D93A72E088B6B80F6EC",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     }
   ]

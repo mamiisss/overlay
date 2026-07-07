@@ -5,7 +5,14 @@
   "asset_id": "morph_3123-man",
   "name": "Man",
   "source_file": "3123-man.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       431.635406,
@@ -29,7 +36,10 @@
     "Model": 3,
     "Part": 10,
     "ParticleEmitter": 1,
-    "SpecialMesh": 9
+    "SpecialMesh": 9,
+    "Motor6D": 4,
+    "Weld": 4,
+    "UnionOperation": 4
   },
   "nodes": [
     {
@@ -254,6 +264,102 @@
       }
     },
     {
+      "id": "RBX0EF7A1B1E58841DE88FC4398FDD2943A",
+      "parent": "RBXA865417FD39F4D139846916AA69B0647",
+      "class": "Motor6D",
+      "name": "Nip",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.477905273,
+            0.304015636,
+            -0.47187233
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0539327189,
+            0.0234933812,
+            -1.24240485e-15
+          ],
+          "rotation": [
+            0.939692855,
+            0.342019707,
+            6.49238963e-14,
+            -0.342019707,
+            0.939692795,
+            1.64103364e-13,
+            -4.88193707e-15,
+            -1.76411999e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": null,
+        "Part1": "RBXA865417FD39F4D139846916AA69B0647",
+        "Name": "Nip"
+      }
+    },
+    {
+      "id": "RBX9FDAAD7FF3574AB0A4652F9603AFA1DC",
+      "parent": "RBXA865417FD39F4D139846916AA69B0647",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -0.00000190734863,
+            0.0899963379
+          ],
+          "rotation": [
+            1.00000012,
+            -2.4561768e-15,
+            7.10542736e-15,
+            -5.96046448e-8,
+            1,
+            0,
+            -7.10542736e-15,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0587158203,
+            -0.00363206863,
+            -0.00453948975
+          ],
+          "rotation": [
+            0.939692736,
+            -0.342019826,
+            7.10542736e-15,
+            0.342019826,
+            0.939692736,
+            -1.33509523e-13,
+            4.26325641e-14,
+            1.27897692e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA865417FD39F4D139846916AA69B0647",
+        "Part1": null,
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX009C19B0F2714379B7249E480C992692",
       "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
       "class": "Part",
@@ -345,6 +451,70 @@
       }
     },
     {
+      "id": "RBX191E03A671524649BB21619D96321F5C",
+      "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.199926764,
+          0.0680001229,
+          0.0703039169
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            -0.131345,
+            -0.013374,
+            0.47373
+          ],
+          "rotation": [
+            0.99207,
+            0.065339,
+            -0.107372,
+            -0.078257,
+            0.989579,
+            -0.120872,
+            0.098355,
+            0.128317,
+            0.986844
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX67AC183346CF42FF9061E23F348B344B",
       "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
       "class": "Part",
@@ -433,6 +603,70 @@
           1
         ],
         "Name": "MaleMesh"
+      }
+    },
+    {
+      "id": "RBXB52AE6A982CC4E3E952A054C54C46D38",
+      "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.150000006,
+          0.0250000004,
+          0.150000006
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.13054,
+            -0.061327,
+            0.453324
+          ],
+          "rotation": [
+            0.99207,
+            -0.107372,
+            -0.065339,
+            -0.078257,
+            -0.120873,
+            -0.989579,
+            0.098355,
+            0.986844,
+            -0.128317
+          ]
+        }
       }
     },
     {
@@ -618,6 +852,102 @@
       }
     },
     {
+      "id": "RBXF4BAF89F12F74EFEA48DBA565B8D022D",
+      "parent": "RBX920A3DF1F2ED4E8CAF61E43A137A37D2",
+      "class": "Motor6D",
+      "name": "Nip",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.477905273,
+            0.304015636,
+            -0.47187233
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0539327189,
+            0.0234933812,
+            -1.24240485e-15
+          ],
+          "rotation": [
+            0.939692855,
+            0.342019707,
+            6.49238963e-14,
+            -0.342019707,
+            0.939692795,
+            1.64103364e-13,
+            -4.88193707e-15,
+            -1.76411999e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": null,
+        "Part1": "RBX920A3DF1F2ED4E8CAF61E43A137A37D2",
+        "Name": "Nip"
+      }
+    },
+    {
+      "id": "RBXFD25FA7DC8D1480CB6ABB37EC2D966B8",
+      "parent": "RBX920A3DF1F2ED4E8CAF61E43A137A37D2",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -0.00000190734863,
+            0.0899963379
+          ],
+          "rotation": [
+            1.00000012,
+            -2.4561768e-15,
+            7.10542736e-15,
+            -5.96046448e-8,
+            1,
+            0,
+            -7.10542736e-15,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0587158203,
+            -0.00363206863,
+            -0.00453948975
+          ],
+          "rotation": [
+            0.939692736,
+            -0.342019826,
+            7.10542736e-15,
+            0.342019826,
+            0.939692736,
+            -1.33509523e-13,
+            4.26325641e-14,
+            1.27897692e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX920A3DF1F2ED4E8CAF61E43A137A37D2",
+        "Part1": null,
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBXB2925B2506DF4167BD69CF41A79EE24A",
       "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
       "class": "Part",
@@ -709,6 +1039,102 @@
       }
     },
     {
+      "id": "RBXF4E88D3481DE4E22A4C7A2F37720A666",
+      "parent": "RBXB2925B2506DF4167BD69CF41A79EE24A",
+      "class": "Motor6D",
+      "name": "Nip",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.477905273,
+            0.304015636,
+            -0.47187233
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0539327189,
+            0.0234933812,
+            -1.24240485e-15
+          ],
+          "rotation": [
+            0.939692855,
+            0.342019707,
+            6.49238963e-14,
+            -0.342019707,
+            0.939692795,
+            1.64103364e-13,
+            -4.88193707e-15,
+            -1.76411999e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": null,
+        "Part1": "RBXB2925B2506DF4167BD69CF41A79EE24A",
+        "Name": "Nip"
+      }
+    },
+    {
+      "id": "RBX4A78796034994C1C8F3A17B80AE1C3EE",
+      "parent": "RBXB2925B2506DF4167BD69CF41A79EE24A",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -0.00000190734863,
+            0.0899963379
+          ],
+          "rotation": [
+            1.00000012,
+            -2.4561768e-15,
+            7.10542736e-15,
+            -5.96046448e-8,
+            1,
+            0,
+            -7.10542736e-15,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0587158203,
+            -0.00363206863,
+            -0.00453948975
+          ],
+          "rotation": [
+            0.939692736,
+            -0.342019826,
+            7.10542736e-15,
+            0.342019826,
+            0.939692736,
+            -1.33509523e-13,
+            4.26325641e-14,
+            1.27897692e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXB2925B2506DF4167BD69CF41A79EE24A",
+        "Part1": null,
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX7EF71404BE7946C481273FE27A0D5EBC",
       "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
       "class": "Part",
@@ -797,6 +1223,230 @@
           1
         ],
         "Name": "Mesh"
+      }
+    },
+    {
+      "id": "RBX2B1D29BFAE5F494EA8C0060DC2F7D59F",
+      "parent": "RBX7EF71404BE7946C481273FE27A0D5EBC",
+      "class": "Motor6D",
+      "name": "Nip",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.477905273,
+            0.304015636,
+            -0.47187233
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0539327189,
+            0.0234933812,
+            -1.24240485e-15
+          ],
+          "rotation": [
+            0.939692855,
+            0.342019707,
+            6.49238963e-14,
+            -0.342019707,
+            0.939692795,
+            1.64103364e-13,
+            -4.88193707e-15,
+            -1.76411999e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": null,
+        "Part1": "RBX7EF71404BE7946C481273FE27A0D5EBC",
+        "Name": "Nip"
+      }
+    },
+    {
+      "id": "RBX451F1AE7821B4166A6A2EB047A105AD8",
+      "parent": "RBX7EF71404BE7946C481273FE27A0D5EBC",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -0.00000190734863,
+            0.0899963379
+          ],
+          "rotation": [
+            1.00000012,
+            -2.4561768e-15,
+            7.10542736e-15,
+            -5.96046448e-8,
+            1,
+            0,
+            -7.10542736e-15,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0587158203,
+            -0.00363206863,
+            -0.00453948975
+          ],
+          "rotation": [
+            0.939692736,
+            -0.342019826,
+            7.10542736e-15,
+            0.342019826,
+            0.939692736,
+            -1.33509523e-13,
+            4.26325641e-14,
+            1.27897692e-13,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX7EF71404BE7946C481273FE27A0D5EBC",
+        "Part1": null,
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBXCFBA3ED428B24112AE6356C6BA8B3DCC",
+      "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.199926764,
+          0.0680001229,
+          0.0703039169
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            1.152845,
+            -0.144771,
+            0.83315
+          ],
+          "rotation": [
+            0.895517,
+            0.065339,
+            -0.440204,
+            -0.114879,
+            0.989579,
+            -0.086817,
+            0.429944,
+            0.128317,
+            0.893691
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7B2552C3E5D54DFA9DEFE4F46C7062F1",
+      "parent": "RBXBBF9425D92D74F18B89B95B753429FF6",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.150000006,
+          0.0250000004,
+          0.150000006
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            1.153649,
+            -0.192724,
+            0.812744
+          ],
+          "rotation": [
+            0.895517,
+            -0.440204,
+            -0.065339,
+            -0.114879,
+            -0.086817,
+            -0.989579,
+            0.429944,
+            0.893691,
+            -0.128317
+          ]
+        }
       }
     },
     {

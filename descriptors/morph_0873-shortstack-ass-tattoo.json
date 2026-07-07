@@ -5,7 +5,14 @@
   "asset_id": "morph_0873-shortstack-ass-tattoo",
   "name": "shortstack ass tattoo",
   "source_file": "0873-shortstack-ass-tattoo.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -516.308594,
@@ -29,6 +36,7 @@
     "Model": 3,
     "Part": 4,
     "SpecialMesh": 2,
+    "UnionOperation": 1,
     "Decal": 9,
     "MeshPart": 2
   },
@@ -235,8 +243,72 @@
       }
     },
     {
-      "id": "RBXF66D6DD712F34133A5DD26F24519E60F",
+      "id": "RBXDCB4D26DE7934AA394073CA7F4814AED",
       "parent": "RBXC373020C85F24A9388BC9EC11590F26D",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1312,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.04345,
+            -0.847382,
+            0.201172
+          ],
+          "rotation": [
+            -1,
+            -0.0004,
+            -0.000936,
+            -0.001016,
+            0.408634,
+            0.912698,
+            0.000017,
+            0.912698,
+            -0.408634
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF66D6DD712F34133A5DD26F24519E60F",
+      "parent": "RBXDCB4D26DE7934AA394073CA7F4814AED",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -253,7 +325,7 @@
     },
     {
       "id": "RBX16FC418E17434941AF1C1FD020B8FC16",
-      "parent": "RBXC373020C85F24A9388BC9EC11590F26D",
+      "parent": "RBXDCB4D26DE7934AA394073CA7F4814AED",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -270,7 +342,7 @@
     },
     {
       "id": "RBX820845A942214228A7FECABE29D02D4E",
-      "parent": "RBXC373020C85F24A9388BC9EC11590F26D",
+      "parent": "RBXDCB4D26DE7934AA394073CA7F4814AED",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -287,7 +359,7 @@
     },
     {
       "id": "RBX4315F5F0EDD24418A4BFAA9CEE5AB933",
-      "parent": "RBXC373020C85F24A9388BC9EC11590F26D",
+      "parent": "RBXDCB4D26DE7934AA394073CA7F4814AED",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -304,7 +376,7 @@
     },
     {
       "id": "RBX6AA011C19AEE46559CFB8190362EF31F",
-      "parent": "RBXC373020C85F24A9388BC9EC11590F26D",
+      "parent": "RBXDCB4D26DE7934AA394073CA7F4814AED",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -321,7 +393,7 @@
     },
     {
       "id": "RBXDE678DA6808A49F3B085DCC3B61F6668",
-      "parent": "RBXC373020C85F24A9388BC9EC11590F26D",
+      "parent": "RBXDCB4D26DE7934AA394073CA7F4814AED",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -416,6 +488,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7316929694",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -590,6 +663,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7310579572",
         "RenderFidelity": 0,
         "TextureID": null,

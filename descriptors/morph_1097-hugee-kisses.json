@@ -5,7 +5,14 @@
   "asset_id": "morph_1097-hugee-kisses",
   "name": "HugeE Kisses",
   "source_file": "1097-hugee-kisses.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       747.313965,
@@ -29,6 +36,7 @@
     "Model": 3,
     "Part": 10,
     "SpecialMesh": 10,
+    "UnionOperation": 1,
     "Decal": 12,
     "MeshPart": 2
   },
@@ -235,8 +243,72 @@
       }
     },
     {
-      "id": "RBXC27DF8F6D46B40CE98CBA4FBF84546E5",
+      "id": "RBX790E7F45B39E474298109614E0029D7F",
       "parent": "RBXF4A8427701A740109A1370803E833F85",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.8,
+          0.6
+        ],
+        "Massless": false,
+        "Material": 1312,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.043478,
+            -0.84717,
+            0.201135
+          ],
+          "rotation": [
+            -1,
+            -0.000385,
+            -0.000865,
+            -0.000947,
+            0.408639,
+            0.912696,
+            0.000002,
+            0.912696,
+            -0.408639
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC27DF8F6D46B40CE98CBA4FBF84546E5",
+      "parent": "RBX790E7F45B39E474298109614E0029D7F",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -253,7 +325,7 @@
     },
     {
       "id": "RBXCE57CD95C0F741B0962184C5A45BE4B4",
-      "parent": "RBXF4A8427701A740109A1370803E833F85",
+      "parent": "RBX790E7F45B39E474298109614E0029D7F",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -270,7 +342,7 @@
     },
     {
       "id": "RBX55082805E6064BD88CF50E7878FDA730",
-      "parent": "RBXF4A8427701A740109A1370803E833F85",
+      "parent": "RBX790E7F45B39E474298109614E0029D7F",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -287,7 +359,7 @@
     },
     {
       "id": "RBXCBD4E05A1A7944A5ADE61B7532D0DCA1",
-      "parent": "RBXF4A8427701A740109A1370803E833F85",
+      "parent": "RBX790E7F45B39E474298109614E0029D7F",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -304,7 +376,7 @@
     },
     {
       "id": "RBXA2175A08EFEA498DAE346756BC59C906",
-      "parent": "RBXF4A8427701A740109A1370803E833F85",
+      "parent": "RBX790E7F45B39E474298109614E0029D7F",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -321,7 +393,7 @@
     },
     {
       "id": "RBX88F476270AC54FC89137F5AF1B5CD263",
-      "parent": "RBXF4A8427701A740109A1370803E833F85",
+      "parent": "RBX790E7F45B39E474298109614E0029D7F",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -767,6 +839,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7316929694",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -934,6 +1007,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7310579572",
         "RenderFidelity": 0,
         "TextureID": null,

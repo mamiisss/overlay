@@ -5,7 +5,14 @@
   "asset_id": "morph_0710-handness-ass",
   "name": "handness ass",
   "source_file": "0710-handness-ass.rbxmx",
-  "anchor": "HumanoidRootPart",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       0.195527002,
@@ -31,7 +38,8 @@
     "SpecialMesh": 4,
     "MeshPart": 2,
     "Decal": 2,
-    "Highlight": 3
+    "Highlight": 3,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -150,6 +158,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014168388",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -443,6 +452,70 @@
       }
     },
     {
+      "id": "RBX80EDB5A7BCDD40248BE9377F6420D2F3",
+      "parent": "RBXA7BAC88622F44085951D33D1289596EF",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.293469,
+            0.152828,
+            -0.298829
+          ],
+          "rotation": [
+            -1.000002,
+            -0.0004,
+            -0.000935,
+            -0.001017,
+            0.408633,
+            0.912696,
+            0.000017,
+            0.9127,
+            -0.408635
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXCA321580E8C04D508F23AD2D69C82FAE",
       "parent": "RBX8CF02BAEC1D249CFBD8CD2A896B4633F",
       "class": "Model",
@@ -572,6 +645,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014170419",
         "RenderFidelity": 1,
         "TextureID": null,

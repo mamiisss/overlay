@@ -5,7 +5,14 @@
   "asset_id": "morph_1033-pawg-sticky",
   "name": "PAWG sticky",
   "source_file": "1033-pawg-sticky.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -249606.203,
@@ -29,7 +36,10 @@
     "Model": 3,
     "Part": 4,
     "MeshPart": 32,
+    "Bone": 90,
+    "Weld": 1,
     "SpecialMesh": 2,
+    "UnionOperation": 1,
     "Decal": 6
   },
   "nodes": [
@@ -122,6 +132,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7310579572",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -188,6 +199,7 @@
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -249,11 +261,96 @@
       }
     },
     {
+      "id": "RBX0526617378CD4BDE882B7EAAF6686E8B",
+      "parent": "RBXA08F0F84ABA746B6B07B13CEDE6C362A",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000124713712,
+            0.0269451048,
+            0.000951566442
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX064DD5FFA36B49D5933B2C21E0DD3B4E",
+      "parent": "RBX0526617378CD4BDE882B7EAAF6686E8B",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000915527344,
+            0.0300750732,
+            0.00016784668
+          ],
+          "rotation": [
+            1,
+            -8.34464288e-7,
+            -0.00000143051147,
+            8.34464799e-7,
+            1,
+            3.50176094e-7,
+            0.00000143051113,
+            -3.50177288e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX5A70CDFFAAE94706B64BD045E91E85C1",
+      "parent": "RBX064DD5FFA36B49D5933B2C21E0DD3B4E",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000106811523,
+            0.0263748169,
+            0.0000915527344
+          ],
+          "rotation": [
+            1,
+            -1.86264515e-7,
+            -2.68220816e-7,
+            1.86264472e-7,
+            1,
+            -1.45286378e-7,
+            2.68220845e-7,
+            1.45286322e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX04FCD45FFA044647A59D74D8B87AEBB5",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -315,11 +412,96 @@
       }
     },
     {
+      "id": "RBX876963A2D5B64745B69BA6FBF8289393",
+      "parent": "RBX04FCD45FFA044647A59D74D8B87AEBB5",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00128639292,
+            0.325477391,
+            0.00525492011
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX18470476435F4882B09089A5B2885674",
+      "parent": "RBX876963A2D5B64745B69BA6FBF8289393",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000072479248,
+            0.363327026,
+            0
+          ],
+          "rotation": [
+            1,
+            9.31323541e-7,
+            -0.00000143051091,
+            -9.31322575e-7,
+            1,
+            6.63102924e-7,
+            0.00000143051147,
+            -6.63101616e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXA23FAAA2D6C247D6A1BE53DD8F03B327",
+      "parent": "RBX18470476435F4882B09089A5B2885674",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000186920166,
+            0.31867981,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            -5.21541033e-8,
+            -2.38418565e-7,
+            5.21540642e-8,
+            1,
+            -1.63912787e-7,
+            2.38418579e-7,
+            1.63912773e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX5A93B13D85AA40B18BB3F0B56483C4D9",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -381,11 +563,96 @@
       }
     },
     {
+      "id": "RBX7A6D81321197430E812F9B886CAFCB1B",
+      "parent": "RBX5A93B13D85AA40B18BB3F0B56483C4D9",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000141543322,
+            0.0414914303,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXC5BE11E7858545858BB97ECB458570E6",
+      "parent": "RBX7A6D81321197430E812F9B886CAFCB1B",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0463180542,
+            -0.00000762939453
+          ],
+          "rotation": [
+            1,
+            -4.47036506e-8,
+            -0.0000012069936,
+            4.47034694e-8,
+            1,
+            -1.49011598e-7,
+            0.0000012069936,
+            1.49011541e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX894B2C4843FD4382B67B8C2FC9A70CF1",
+      "parent": "RBXC5BE11E7858545858BB97ECB458570E6",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0406265259,
+            0.0000190734863
+          ],
+          "rotation": [
+            1,
+            4.47034196e-8,
+            -2.38418437e-7,
+            -4.47034552e-8,
+            1,
+            -1.49011598e-7,
+            2.38418437e-7,
+            1.49011612e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX6DDE05E71A39480B9585A44D7C2BE07C",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -447,11 +714,96 @@
       }
     },
     {
+      "id": "RBX8DD02C19AC054336816F79DEE4D0C86F",
+      "parent": "RBX6DDE05E71A39480B9585A44D7C2BE07C",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000141543322,
+            0.0335203148,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX24C065D0E02F4593A25F032B6B9A3C68",
+      "parent": "RBX8DD02C19AC054336816F79DEE4D0C86F",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.037437439,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            1.86263147e-8,
+            -0.00000122189465,
+            -1.86264426e-8,
+            1,
+            -1.04308043e-7,
+            0.00000122189465,
+            1.04308064e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX3BF98EA0902E491C9C2B1509E84E8691",
+      "parent": "RBX24C065D0E02F4593A25F032B6B9A3C68",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0328140259,
+            9.53674316e-7
+          ],
+          "rotation": [
+            1,
+            7.45052731e-9,
+            -2.38418465e-7,
+            -7.45057704e-9,
+            1,
+            -2.08616157e-7,
+            2.38418465e-7,
+            2.08616157e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX68B2B26A9FA94107BF05DFDFD483BD40",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -513,11 +865,96 @@
       }
     },
     {
+      "id": "RBX15974239E1E2456680AFE75ED6D8F550",
+      "parent": "RBX68B2B26A9FA94107BF05DFDFD483BD40",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00128639292,
+            0.325477391,
+            0.00525492011
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX71800ED8A02F490A96EC62A54C78EB93",
+      "parent": "RBX15974239E1E2456680AFE75ED6D8F550",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000767707825,
+            0.363342285,
+            0
+          ],
+          "rotation": [
+            1,
+            9.46224702e-7,
+            -0.00000132620289,
+            -9.46223849e-7,
+            1,
+            6.55652116e-7,
+            0.00000132620346,
+            -6.55650865e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX297AFD8A235D4533AE48C1671D14AFFA",
+      "parent": "RBX71800ED8A02F490A96EC62A54C78EB93",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000189304352,
+            0.318664551,
+            -0.00000762939453
+          ],
+          "rotation": [
+            1,
+            -8.19564647e-8,
+            -2.6822093e-7,
+            8.19564079e-8,
+            1,
+            -2.08616228e-7,
+            2.68220958e-7,
+            2.086162e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXFCBA9F1BB8C2497D9834072CD67B2BD4",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -579,11 +1016,96 @@
       }
     },
     {
+      "id": "RBX9076FEB4EBBD4536838D79298E4C6A9E",
+      "parent": "RBXFCBA9F1BB8C2497D9834072CD67B2BD4",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00017983526,
+            0.0273449384,
+            0.000529679586
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXA650DDE789A44146B4EB5CAFD20BF0E9",
+      "parent": "RBX9076FEB4EBBD4536838D79298E4C6A9E",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000610351562,
+            0.0305519104,
+            0.00000858306885
+          ],
+          "rotation": [
+            1,
+            -4.06987425e-7,
+            -0.00000131130196,
+            4.0698788e-7,
+            1,
+            3.57627385e-7,
+            0.00000131130184,
+            -3.57627925e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX053AD6332D3641749B664AAA629C9DFF",
+      "parent": "RBXA650DDE789A44146B4EB5CAFD20BF0E9",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000106811523,
+            0.0267562866,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            5.58788615e-9,
+            -2.4586916e-7,
+            -5.58793545e-9,
+            1,
+            -2.01165719e-7,
+            2.4586916e-7,
+            2.01165719e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX8A1AF6978FD142E1A3569FCA2A447A2B",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -645,11 +1167,96 @@
       }
     },
     {
+      "id": "RBXED234D770577446F9051D9B8A2AFE545",
+      "parent": "RBX8A1AF6978FD142E1A3569FCA2A447A2B",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000141543322,
+            0.0414914303,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX9752AC0ED2A64B20A592720A6BCC5978",
+      "parent": "RBXED234D770577446F9051D9B8A2AFE545",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0463027954,
+            0.00000190734863
+          ],
+          "rotation": [
+            1,
+            -2.07220126e-8,
+            -0.00000122189488,
+            2.0721922e-8,
+            1,
+            -7.45057704e-8,
+            0.00000122189488,
+            7.4505742e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX471AB22680064DFF8DD47C61EE7E0841",
+      "parent": "RBX9752AC0ED2A64B20A592720A6BCC5978",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.0406188965,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            4.42377655e-8,
+            -2.30967956e-7,
+            -4.42378116e-8,
+            1,
+            -2.03028264e-7,
+            2.30967942e-7,
+            2.03028279e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXB32975CB66EA4E6B85CBDDA2FD086EE3",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -711,11 +1318,96 @@
       }
     },
     {
+      "id": "RBX5B3F52A051A44D00B262FB466887788F",
+      "parent": "RBXB32975CB66EA4E6B85CBDDA2FD086EE3",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000141543322,
+            0.0414914303,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXE2A35C84ED3B42A9A8DFF52659D4D8B3",
+      "parent": "RBX5B3F52A051A44D00B262FB466887788F",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000305175781,
+            0.0463409424,
+            0.00000190734863
+          ],
+          "rotation": [
+            1,
+            1.11757936e-8,
+            -0.00000120699349,
+            -1.11758656e-8,
+            1,
+            -5.96045879e-8,
+            0.00000120699349,
+            5.96046021e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX769EB6DC535A4C11BAD016784DB57695",
+      "parent": "RBXE2A35C84ED3B42A9A8DFF52659D4D8B3",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0405960083,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            -1.11759189e-8,
+            -2.38418465e-7,
+            1.11758656e-8,
+            1,
+            -2.23517347e-7,
+            2.38418465e-7,
+            2.23517347e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX1B373F0B269E45D0AE0A5B380DD8E8C5",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -777,11 +1469,96 @@
       }
     },
     {
+      "id": "RBX91F450A601B34949B4E4AFED3010912B",
+      "parent": "RBX1B373F0B269E45D0AE0A5B380DD8E8C5",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00128639292,
+            0.325477391,
+            0.00525492011
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX4A05B09DB1A3461DB95A161270377893",
+      "parent": "RBX91F450A601B34949B4E4AFED3010912B",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000915527344,
+            0.363357544,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            9.53675226e-7,
+            -0.00000125169686,
+            -9.53674316e-7,
+            1,
+            7.15257045e-7,
+            0.00000125169754,
+            -7.15255851e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXC432DC65918C46FFBA5D65321F9C053D",
+      "parent": "RBX4A05B09DB1A3461DB95A161270377893",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000205993652,
+            0.318649292,
+            -0.0000114440918
+          ],
+          "rotation": [
+            1,
+            -5.96047087e-8,
+            -3.27825518e-7,
+            5.96046377e-8,
+            1,
+            -2.08616285e-7,
+            3.27825518e-7,
+            2.08616271e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX625238EBBA6344F7B825AC5365A62D95",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -843,11 +1620,96 @@
       }
     },
     {
+      "id": "RBXFAFFC9399E6949E588209C2E13447CD7",
+      "parent": "RBX625238EBBA6344F7B825AC5365A62D95",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000154820402,
+            0.0269451048,
+            0.000764574506
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX5BDBDC5D1692479EB9EF4A32AE3DC889",
+      "parent": "RBXFAFFC9399E6949E588209C2E13447CD7",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000116348267,
+            0.0300674438,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            -1.93714541e-7,
+            -0.00000125169731,
+            1.93715053e-7,
+            1,
+            4.09781507e-7,
+            0.0000012516972,
+            -4.09781762e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX9343DDB700C04B7F916F673504AA383A",
+      "parent": "RBX5BDBDC5D1692479EB9EF4A32AE3DC889",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000127792358,
+            0.0263824463,
+            0.0000610351562
+          ],
+          "rotation": [
+            1,
+            -1.04308171e-7,
+            -2.38418522e-7,
+            1.04308114e-7,
+            1,
+            -2.30967984e-7,
+            2.38418551e-7,
+            2.30967956e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX6D3464F5263745019129D626A3AED690",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -909,11 +1771,144 @@
       }
     },
     {
+      "id": "RBX62524D709AF04239B4CE55290EDF7F92",
+      "parent": "RBX6D3464F5263745019129D626A3AED690",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000141543322,
+            0.0438010208,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXBF8202871EB94D1485ED953EB56FB68B",
+      "parent": "RBX62524D709AF04239B4CE55290EDF7F92",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.0488739014,
+            9.53674316e-7
+          ],
+          "rotation": [
+            1,
+            -1.73226042e-7,
+            -0.00000122189488,
+            1.73225956e-7,
+            1,
+            -7.45056141e-8,
+            0.00000122189488,
+            7.4505401e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX0A2EB1F4C8F64B358067542C39590A74",
+      "parent": "RBXBF8202871EB94D1485ED953EB56FB68B",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.0429077148,
+            9.53674316e-7
+          ],
+          "rotation": [
+            1,
+            -5.58799096e-9,
+            -2.38418522e-7,
+            5.58793412e-9,
+            1,
+            -2.38418551e-7,
+            2.38418522e-7,
+            2.38418551e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
+      "id": "RBXEBF9F4C81578424395EB35B879881616",
+      "parent": "RBX6D3464F5263745019129D626A3AED690",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0471343994,
+            0.0000305175781,
+            0
+          ],
+          "rotation": [
+            -2.98023224e-8,
+            0,
+            1,
+            1.49011612e-8,
+            -1.00000012,
+            -3.35276127e-8,
+            1,
+            0,
+            -2.98023224e-8
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0852890015,
+            -0.268981934,
+            0.00845336914
+          ],
+          "rotation": [
+            0.997643709,
+            -0.0686080381,
+            -0.000332355499,
+            -0.0686045885,
+            -0.997624159,
+            0.00629911385,
+            -0.000763714314,
+            -0.00626150891,
+            -0.999980092
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX6D3464F5263745019129D626A3AED690",
+        "Part1": "RBXA08F0F84ABA746B6B07B13CEDE6C362A",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBX64A215DF883C446DB72056894BBBF840",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -975,11 +1970,96 @@
       }
     },
     {
+      "id": "RBX6910B074071446C9932E1E8C8EFA9A25",
+      "parent": "RBX64A215DF883C446DB72056894BBBF840",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000844929382,
+            0.0278749093,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX3C2B11AC18EE4BCFBC61D44C103DBBFF",
+      "parent": "RBX6910B074071446C9932E1E8C8EFA9A25",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00160217285,
+            0.0311126709,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            0.00000214576266,
+            -0.00000244379476,
+            -0.00000214576744,
+            1,
+            -0.00000190734386,
+            0.00000244379066,
+            0.00000190734909,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX0B8D25104998411CB2CFCDEB0390D377",
+      "parent": "RBX3C2B11AC18EE4BCFBC61D44C103DBBFF",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000762939453,
+            0.0272979736,
+            0.000020980835
+          ],
+          "rotation": [
+            1,
+            5.96046128e-8,
+            -2.68220901e-7,
+            -5.96046448e-8,
+            1,
+            -1.19209332e-7,
+            2.68220901e-7,
+            1.19209346e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXDAB6AEBFE325421C810D583F23F09627",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1041,11 +2121,96 @@
       }
     },
     {
+      "id": "RBX6C0629AE1FD64CFFBA7B8EB59CB1E9F5",
+      "parent": "RBXDAB6AEBFE325421C810D583F23F09627",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000141543322,
+            0.0414914303,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX54461861612944C3BFBEF43267DD037E",
+      "parent": "RBX6C0629AE1FD64CFFBA7B8EB59CB1E9F5",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.0463256836,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            -2.2351843e-8,
+            -0.00000119209267,
+            2.23517365e-8,
+            1,
+            -8.94069387e-8,
+            0.00000119209267,
+            8.94069103e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX45EFC39D2455465B94256F0DCCC08F3B",
+      "parent": "RBX54461861612944C3BFBEF43267DD037E",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000305175781,
+            0.0406036377,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            7.45053219e-9,
+            -2.23517361e-7,
+            -7.45057882e-9,
+            1,
+            -2.08616271e-7,
+            2.23517361e-7,
+            2.08616271e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX88B25C5CE3BE459A970C2BF62B8E5F7A",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1107,11 +2272,96 @@
       }
     },
     {
+      "id": "RBX007CF194EE37457E825BC825B2441345",
+      "parent": "RBX88B25C5CE3BE459A970C2BF62B8E5F7A",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000154820402,
+            0.03622327,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX5E9F18F4C6814168AC35924288DA3566",
+      "parent": "RBX007CF194EE37457E825BC825B2441345",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000122070312,
+            0.0404510498,
+            -0.0000114440918
+          ],
+          "rotation": [
+            1,
+            -2.98023579e-8,
+            -0.00000126659859,
+            2.98023188e-8,
+            1,
+            -2.98025e-8,
+            0.00000126659859,
+            2.98024609e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXC39F44A6C3744A2AAC49DA3E087C92A0",
+      "parent": "RBX5E9F18F4C6814168AC35924288DA3566",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000152587891,
+            0.0354919434,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            -1.19209304e-7,
+            -2.08616243e-7,
+            1.1920929e-7,
+            1,
+            -8.94070382e-8,
+            2.08616257e-7,
+            8.94070098e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX3016C6970C1945C5887F2E85F89A29CC",
       "parent": "RBX3CD2EA4E6599475EBDB74249DB925397",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1170,6 +2420,90 @@
             -0.250188
           ]
         }
+      }
+    },
+    {
+      "id": "RBX6F257113F4254E62A69C42FD4C15D568",
+      "parent": "RBX3016C6970C1945C5887F2E85F89A29CC",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000141543322,
+            0.0335203148,
+            0.000823690614
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX835340077B55400EB24CD41B89296BE0",
+      "parent": "RBX6F257113F4254E62A69C42FD4C15D568",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000305175781,
+            0.0374221802,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            -1.1362139e-7,
+            -0.00000122189465,
+            1.13621297e-7,
+            1,
+            -7.45057065e-8,
+            0.00000122189465,
+            7.45055644e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXB94F35F02CDF4B419A90CD6D0DA86CE2",
+      "parent": "RBX835340077B55400EB24CD41B89296BE0",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0328063965,
+            0.0000057220459
+          ],
+          "rotation": [
+            1,
+            9.49948102e-8,
+            -2.3841848e-7,
+            -9.499486e-8,
+            1,
+            -2.23517347e-7,
+            2.38418465e-7,
+            2.23517375e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -1252,6 +2586,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7316929694",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -1318,6 +2653,7 @@
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1379,11 +2715,96 @@
       }
     },
     {
+      "id": "RBX83D24044E4E9422D839D23B7115FACA8",
+      "parent": "RBX2C2D1337728649AEA1444754CC715586",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0343324952,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX03CA5FF650314E70A0A2227383DC9BD7",
+      "parent": "RBX83D24044E4E9422D839D23B7115FACA8",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000457763672,
+            0.0383605957,
+            0.00000190734863
+          ],
+          "rotation": [
+            1,
+            -2.98024005e-8,
+            -0.00000123679627,
+            2.98023188e-8,
+            1,
+            -6.70552041e-8,
+            0.00000123679627,
+            6.70551685e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX9FC9F5B0B5E64A749C4D609110CBA27D",
+      "parent": "RBX03CA5FF650314E70A0A2227383DC9BD7",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000457763672,
+            0.0335693359,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            6.51922516e-9,
+            -1.78813906e-7,
+            -6.51925713e-9,
+            1,
+            -1.78813892e-7,
+            1.78813906e-7,
+            1.78813892e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX9315399A09C94BBD8DB5FFF74E2C3279",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1445,11 +2866,96 @@
       }
     },
     {
+      "id": "RBX54E3F0563324443B8AA5CD471D729EBA",
+      "parent": "RBX9315399A09C94BBD8DB5FFF74E2C3279",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00131756184,
+            0.333363533,
+            0.00538224448
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX657160D0C990486C8DFE5106E54A97F4",
+      "parent": "RBX54E3F0563324443B8AA5CD471D729EBA",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000734329224,
+            0.372146606,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            9.24803828e-7,
+            -0.00000137090581,
+            -9.24802976e-7,
+            1,
+            6.25850021e-7,
+            0.00000137090638,
+            -6.2584877e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX3EF8B61FAEE148348C0F597BE44EE509",
+      "parent": "RBX657160D0C990486C8DFE5106E54A97F4",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000188827515,
+            0.326370239,
+            0
+          ],
+          "rotation": [
+            1,
+            -9.49948884e-8,
+            -1.93714996e-7,
+            9.499486e-8,
+            1,
+            -1.34110465e-7,
+            1.9371501e-7,
+            1.34110451e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX6CCECAC6577240AE9E7690C61901955B",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1511,11 +3017,96 @@
       }
     },
     {
+      "id": "RBXC88F83567AE344D1A13644411BD3FDBE",
+      "parent": "RBX6CCECAC6577240AE9E7690C61901955B",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000184192599,
+            0.0280074943,
+            0.000542513444
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX36AA68B1350F4E88A0B1BDEE6285992B",
+      "parent": "RBXC88F83567AE344D1A13644411BD3FDBE",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000705718994,
+            0.0312957764,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            -4.32133078e-7,
+            -0.00000140070938,
+            4.32133675e-7,
+            1,
+            4.17231945e-7,
+            0.00000140070915,
+            -4.17232542e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXFCB7761DD38C4E56999A6225892CE2CB",
+      "parent": "RBX36AA68B1350F4E88A0B1BDEE6285992B",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000122070312,
+            0.0274200439,
+            -0.0000457763672
+          ],
+          "rotation": [
+            1,
+            -3.72530202e-8,
+            -2.98023195e-7,
+            3.7252903e-8,
+            1,
+            -3.94880772e-7,
+            2.98023224e-7,
+            3.94880772e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX0EEA28BD8E974F249395E5E28158A75C",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1577,11 +3168,96 @@
       }
     },
     {
+      "id": "RBX960F6AAFBB0841E3A3DC1947332F74D0",
+      "parent": "RBX0EEA28BD8E974F249395E5E28158A75C",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0424967445,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX1186E7128C2B4C0B933E804316B3F287",
+      "parent": "RBX960F6AAFBB0841E3A3DC1947332F74D0",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.0474853516,
+            0.00000190734863
+          ],
+          "rotation": [
+            1,
+            6.51909771e-9,
+            -0.0000012516972,
+            -6.51925625e-9,
+            1,
+            -1.2665987e-7,
+            0.0000012516972,
+            1.26659884e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX4D589F0C25974D18A615E40A21EDA923",
+      "parent": "RBX1186E7128C2B4C0B933E804316B3F287",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0415649414,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            -3.35276624e-8,
+            -2.38418508e-7,
+            3.35276056e-8,
+            1,
+            -2.38418565e-7,
+            2.38418522e-7,
+            2.38418551e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX878CDE947A7F437B9302AE391E362A74",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1643,11 +3319,96 @@
       }
     },
     {
+      "id": "RBX88E9256407AC459C93B5746E126B59A2",
+      "parent": "RBX878CDE947A7F437B9302AE391E362A74",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000137329102,
+            0.0425109863,
+            0.000854492188
+          ],
+          "rotation": [
+            1,
+            -0.0000141858463,
+            -0.00000312922293,
+            -0.0000141858445,
+            -1,
+            5.36465279e-7,
+            -0.00000312923044,
+            -5.36420885e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX7F1759F0D34A4E8185FF9BAD41085536",
+      "parent": "RBX88E9256407AC459C93B5746E126B59A2",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.047454834,
+            0.00000762939453
+          ],
+          "rotation": [
+            1,
+            -0.0000132097739,
+            -0.00000554317558,
+            0.0000132097693,
+            1,
+            -7.59965303e-7,
+            0.00000554318558,
+            7.59892089e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX6185FEF2E3354CF68519523B76A37023",
+      "parent": "RBX7F1759F0D34A4E8185FF9BAD41085536",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000610351562,
+            0.0416412354,
+            -0.00000762939453
+          ],
+          "rotation": [
+            1,
+            -1.89988342e-7,
+            -2.83119704e-7,
+            1.8998827e-7,
+            1,
+            -2.38412923e-7,
+            2.83119761e-7,
+            2.38412866e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXC7BEFCF8FCD04FD0BD0816A5B44059BB",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1709,11 +3470,96 @@
       }
     },
     {
+      "id": "RBX4BA256F06C7341E2BB8084941E851658",
+      "parent": "RBXC7BEFCF8FCD04FD0BD0816A5B44059BB",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000158571624,
+            0.0275979713,
+            0.000783099793
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXB2D351C05F564FDABBE290FD04A90CFC",
+      "parent": "RBX4BA256F06C7341E2BB8084941E851658",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000102996826,
+            0.0308074951,
+            0.0000762939453
+          ],
+          "rotation": [
+            1,
+            -2.36555309e-7,
+            -0.00000131130196,
+            2.36555877e-7,
+            1,
+            4.37721127e-7,
+            0.00000131130184,
+            -4.3772144e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXCF237C8161CA461FB48193B5E6B1738F",
+      "parent": "RBXB2D351C05F564FDABBE290FD04A90CFC",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000110626221,
+            0.0270690918,
+            -0.00000762939453
+          ],
+          "rotation": [
+            1,
+            -7.45057989e-8,
+            -2.01165633e-7,
+            7.45057918e-8,
+            1,
+            -4.41214105e-8,
+            2.01165633e-7,
+            4.41213963e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX15167698A7384063AACD5BE599B5B24C",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1775,11 +3621,96 @@
       }
     },
     {
+      "id": "RBXDF7B1ED90E534AC596DC9D73B63646E7",
+      "parent": "RBX15167698A7384063AACD5BE599B5B24C",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0343324952,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX09F35082417142ECB971B45A1FF1F9D2",
+      "parent": "RBXDF7B1ED90E534AC596DC9D73B63646E7",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000305175781,
+            0.0382995605,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            -6.7055403e-8,
+            -0.0000011920929,
+            6.70552254e-8,
+            1,
+            -1.49011612e-7,
+            0.0000011920929,
+            1.49011527e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX26D50B43D1DF4596B7555E37258434CB",
+      "parent": "RBX09F35082417142ECB971B45A1FF1F9D2",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000915527344,
+            0.0335693359,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            -1.11759091e-8,
+            -2.23517389e-7,
+            1.11758691e-8,
+            1,
+            -1.78813849e-7,
+            2.23517389e-7,
+            1.78813849e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX050903433A794480B162D4FD9B2F63F6",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1841,11 +3772,96 @@
       }
     },
     {
+      "id": "RBXCB1CC456FB244BFEA896DC2F1F43B07F",
+      "parent": "RBX050903433A794480B162D4FD9B2F63F6",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0424967445,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX51F678400F51417B9A146D81EA04C529",
+      "parent": "RBXCB1CC456FB244BFEA896DC2F1F43B07F",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000457763672,
+            0.047454834,
+            0.00000762939453
+          ],
+          "rotation": [
+            1,
+            -2.08616314e-7,
+            -0.00000131130184,
+            2.086162e-7,
+            1,
+            -8.94069387e-8,
+            0.00000131130184,
+            8.94066616e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX8EC4FEEA71EC4806BBA50FDDAF2BCFEE",
+      "parent": "RBX51F678400F51417B9A146D81EA04C529",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0415802002,
+            -0.0000228881836
+          ],
+          "rotation": [
+            1,
+            1.49011527e-7,
+            -2.01165676e-7,
+            -1.49011584e-7,
+            1,
+            -2.6822093e-7,
+            2.01165633e-7,
+            2.68220958e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXEF07752F60014DA989F3B1542D48F873",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1907,11 +3923,96 @@
       }
     },
     {
+      "id": "RBXF742247DA243443085418DFC613B4C7C",
+      "parent": "RBXEF07752F60014DA989F3B1542D48F873",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000127735475,
+            0.0275979713,
+            0.000974622439
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXEFE9222A7CA74FEC92DF55AC5A9B926E",
+      "parent": "RBXF742247DA243443085418DFC613B4C7C",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000915527344,
+            0.0308227539,
+            0.000129699707
+          ],
+          "rotation": [
+            1,
+            -8.04662079e-7,
+            -0.00000147894059,
+            8.04662704e-7,
+            1,
+            4.06055364e-7,
+            0.00000147894025,
+            -4.06056557e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXA6692D04F48B4ECA819F9B8DFEC6E297",
+      "parent": "RBXEFE9222A7CA74FEC92DF55AC5A9B926E",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000106811523,
+            0.0270080566,
+            0.000137329102
+          ],
+          "rotation": [
+            1,
+            -2.08616285e-7,
+            -2.49594422e-7,
+            2.08616257e-7,
+            1,
+            -9.12696763e-8,
+            2.4959445e-7,
+            9.12696265e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX57FE86ECC7CE4351924CC2EE59FEFB50",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1973,11 +4074,96 @@
       }
     },
     {
+      "id": "RBX055BBDB8183A4D4CB108D2408603E664",
+      "parent": "RBX57FE86ECC7CE4351924CC2EE59FEFB50",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00131756184,
+            0.333363533,
+            0.00538224448
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX75D98955DC9549A3A74D5B88664ADFCE",
+      "parent": "RBX055BBDB8183A4D4CB108D2408603E664",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000610351562,
+            0.372161865,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            -1.35972229e-7,
+            -0.00000126287296,
+            1.35973025e-7,
+            1,
+            6.25848998e-7,
+            0.00000126287284,
+            -6.25849168e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX44B560E475714B56A4D9CD44769AD94B",
+      "parent": "RBX75D98955DC9549A3A74D5B88664ADFCE",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000137329102,
+            0.326339722,
+            -0.0000305175781
+          ],
+          "rotation": [
+            1,
+            -1.11759322e-8,
+            -3.27825347e-7,
+            1.11758638e-8,
+            1,
+            -2.0861583e-7,
+            3.27825347e-7,
+            2.0861583e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX4CEF2BE16F8C4697A9243D8C305024ED",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2039,11 +4225,96 @@
       }
     },
     {
+      "id": "RBX112BB5AA903F4418B0B8FD2545A6CE94",
+      "parent": "RBX4CEF2BE16F8C4697A9243D8C305024ED",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0343324952,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX6DF7F4D6979C40F69E9E9DA535008D04",
+      "parent": "RBX112BB5AA903F4418B0B8FD2545A6CE94",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000457763672,
+            0.0383300781,
+            -0.0000057220459
+          ],
+          "rotation": [
+            1,
+            -2.59839112e-7,
+            -0.0000012665987,
+            2.59838998e-7,
+            1,
+            -8.19567987e-8,
+            0.0000012665987,
+            8.19564718e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXABD5E1477D18432BAC10A6A96B2BAE67",
+      "parent": "RBX6DF7F4D6979C40F69E9E9DA535008D04",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.0336303711,
+            0
+          ],
+          "rotation": [
+            1,
+            1.05239415e-7,
+            -1.78813963e-7,
+            -1.05239451e-7,
+            1,
+            -2.08616314e-7,
+            1.78813934e-7,
+            2.08616328e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXBB73DDD90634402F9CDB2B559496DEDD",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2105,11 +4376,96 @@
       }
     },
     {
+      "id": "RBX9A2FD009A16F4518B43D440FA3D36BE1",
+      "parent": "RBXBB73DDD90634402F9CDB2B559496DEDD",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0448622964,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXED431C23FA5246D985F3207CBAE56349",
+      "parent": "RBX9A2FD009A16F4518B43D440FA3D36BE1",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000228881836,
+            0.0501098633,
+            0.00000476837158
+          ],
+          "rotation": [
+            1,
+            5.96046661e-8,
+            -0.00000101327885,
+            -5.96046377e-8,
+            1,
+            2.98024538e-8,
+            0.00000101327885,
+            -2.98023934e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX5A7669858366434D9500DB7E7656D73E",
+      "parent": "RBXED431C23FA5246D985F3207CBAE56349",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.0439300537,
+            -0.0000143051147
+          ],
+          "rotation": [
+            1,
+            -2.98023615e-8,
+            -2.38418551e-7,
+            2.98023188e-8,
+            1,
+            -1.78813991e-7,
+            2.38418551e-7,
+            1.78813977e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXE2C5085585AC42DBB94BF3334FD7A17E",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2171,11 +4527,96 @@
       }
     },
     {
+      "id": "RBXC7465604C3E64B68AAC16B108924ABE0",
+      "parent": "RBXE2C5085585AC42DBB94BF3334FD7A17E",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0424967445,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXD95C176897B84738866AB0430DE0605B",
+      "parent": "RBXC7465604C3E64B68AAC16B108924ABE0",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000610351562,
+            0.047454834,
+            0.00000953674316
+          ],
+          "rotation": [
+            1,
+            1.63912617e-7,
+            -0.00000125169743,
+            -1.63912759e-7,
+            1,
+            -1.19209055e-7,
+            0.00000125169743,
+            1.19209261e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXCC3ADA7B05884A8B87250E2FA303DB9C",
+      "parent": "RBXD95C176897B84738866AB0430DE0605B",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000457763672,
+            0.0415802002,
+            -0.0000152587891
+          ],
+          "rotation": [
+            1,
+            3.72528604e-8,
+            -2.4586916e-7,
+            -3.7252903e-8,
+            1,
+            -1.78813892e-7,
+            2.4586916e-7,
+            1.78813906e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXA728947D5C704908A1E36FDF764AAE48",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2237,11 +4678,96 @@
       }
     },
     {
+      "id": "RBX10C03EA6B649460A84F510C5AE78E83E",
+      "parent": "RBXA728947D5C704908A1E36FDF764AAE48",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000144972873,
+            0.0343324952,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX5D77961177A74A068DA8DEC46ABB319B",
+      "parent": "RBX10C03EA6B649460A84F510C5AE78E83E",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.0382995605,
+            -0.00000190734863
+          ],
+          "rotation": [
+            1,
+            -1.49011541e-7,
+            -0.00000122189465,
+            1.49011541e-7,
+            1,
+            -1.09245878e-13,
+            0.00000122189465,
+            -7.2830522e-14,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX038A4939EDA44272B7738EAE204A35A0",
+      "parent": "RBX5D77961177A74A068DA8DEC46ABB319B",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0336151123,
+            0.0000057220459
+          ],
+          "rotation": [
+            1,
+            1.19209204e-7,
+            -1.78813934e-7,
+            -1.19209261e-7,
+            1,
+            -3.27825347e-7,
+            1.78813892e-7,
+            3.27825376e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX1366558F6AE34889A04A15DA6F67C0D5",
       "parent": "RBX34E1183126AD4252BA997193A7F16823",
       "class": "MeshPart",
       "name": "Butt cum 1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2300,6 +4826,90 @@
             -0.096811
           ]
         }
+      }
+    },
+    {
+      "id": "RBXF7BB99C11B214D7B98D9CC120698ACD5",
+      "parent": "RBX1366558F6AE34889A04A15DA6F67C0D5",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000158571624,
+            0.0371009409,
+            0.000843648275
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX7FA99393752D4870971F551776B1C82A",
+      "parent": "RBXF7BB99C11B214D7B98D9CC120698ACD5",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000152587891,
+            0.0413818359,
+            -0.0000152587891
+          ],
+          "rotation": [
+            1,
+            -1.37835855e-7,
+            -0.0000011175872,
+            1.37835755e-7,
+            1,
+            -8.94070595e-8,
+            0.0000011175872,
+            8.94069032e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXBC0E5BE7D3884F39A740FAE8DF1B9604",
+      "parent": "RBX7FA99393752D4870971F551776B1C82A",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00016784668,
+            0.0363769531,
+            0.0000381469727
+          ],
+          "rotation": [
+            1,
+            7.6368444e-8,
+            -2.38418579e-7,
+            -7.63684511e-8,
+            1,
+            -2.98022886e-8,
+            2.38418579e-7,
+            2.98023064e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -2495,8 +5105,72 @@
       }
     },
     {
-      "id": "RBX8E11FEA82C8945329D4420548C32A190",
+      "id": "RBX9514299E2A104261A8BC5DFA6D6D21F5",
       "parent": "RBX3F9984E575544AE38E40747CE651DF83",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1312,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.2969,
+            0.125,
+            -0.297
+          ],
+          "rotation": [
+            -1,
+            -0.0004,
+            -0.000935,
+            -0.001017,
+            0.408634,
+            0.912698,
+            0.000017,
+            0.912698,
+            -0.408634
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX8E11FEA82C8945329D4420548C32A190",
+      "parent": "RBX9514299E2A104261A8BC5DFA6D6D21F5",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -2513,7 +5187,7 @@
     },
     {
       "id": "RBX6D60F85D61094A04B372888761B8A055",
-      "parent": "RBX3F9984E575544AE38E40747CE651DF83",
+      "parent": "RBX9514299E2A104261A8BC5DFA6D6D21F5",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -2530,7 +5204,7 @@
     },
     {
       "id": "RBX35B50E877BD84EF9984EA8F44313FCF6",
-      "parent": "RBX3F9984E575544AE38E40747CE651DF83",
+      "parent": "RBX9514299E2A104261A8BC5DFA6D6D21F5",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -2547,7 +5221,7 @@
     },
     {
       "id": "RBX072D9B0716E34ADA938A360F8FB0E44A",
-      "parent": "RBX3F9984E575544AE38E40747CE651DF83",
+      "parent": "RBX9514299E2A104261A8BC5DFA6D6D21F5",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -2564,7 +5238,7 @@
     },
     {
       "id": "RBX1401FB880286419C958728F388F3A7C7",
-      "parent": "RBX3F9984E575544AE38E40747CE651DF83",
+      "parent": "RBX9514299E2A104261A8BC5DFA6D6D21F5",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -2581,7 +5255,7 @@
     },
     {
       "id": "RBX099165105F76472A98EEB224210657A6",
-      "parent": "RBX3F9984E575544AE38E40747CE651DF83",
+      "parent": "RBX9514299E2A104261A8BC5DFA6D6D21F5",
       "class": "Decal",
       "name": "fur light",
       "properties": {

@@ -5,7 +5,14 @@
   "asset_id": "morph_0608-office-life-cum",
   "name": "office life [Cum]",
   "source_file": "0608-office-life-cum.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       1104.18091,
@@ -30,7 +37,8 @@
     "Part": 4,
     "MeshPart": 10,
     "Decal": 9,
-    "SpecialMesh": 2
+    "SpecialMesh": 2,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -122,6 +130,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7310579572",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://16443142713",
@@ -205,6 +214,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6720355129",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -271,6 +281,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -337,6 +348,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -403,6 +415,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -543,6 +556,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7316929694",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://16443142713",
@@ -643,6 +657,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -709,6 +724,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -775,6 +791,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -841,6 +858,7 @@
       "class": "MeshPart",
       "name": "Plane",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6720355129",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1094,8 +1112,72 @@
       }
     },
     {
-      "id": "RBXC3F139BAB8E545FCABF1643F55BC5014",
+      "id": "RBXD76AF78D10374F1E96966EEDB6A24E9A",
       "parent": "RBX96BC7422422C41B385E94A51CCFEBDC2",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1312,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.29639,
+            0.152687,
+            -0.29932
+          ],
+          "rotation": [
+            -1,
+            -0.0004,
+            -0.000936,
+            -0.001017,
+            0.408634,
+            0.912698,
+            0.000017,
+            0.912698,
+            -0.408634
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC3F139BAB8E545FCABF1643F55BC5014",
+      "parent": "RBXD76AF78D10374F1E96966EEDB6A24E9A",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -1112,7 +1194,7 @@
     },
     {
       "id": "RBXFE450C2A19F04A4390E514C8C3C5BF96",
-      "parent": "RBX96BC7422422C41B385E94A51CCFEBDC2",
+      "parent": "RBXD76AF78D10374F1E96966EEDB6A24E9A",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -1129,7 +1211,7 @@
     },
     {
       "id": "RBX321E2E375922424DAE103DD231B048ED",
-      "parent": "RBX96BC7422422C41B385E94A51CCFEBDC2",
+      "parent": "RBXD76AF78D10374F1E96966EEDB6A24E9A",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -1146,7 +1228,7 @@
     },
     {
       "id": "RBX88B64DBCACF64BACB8A88F21C8ED8376",
-      "parent": "RBX96BC7422422C41B385E94A51CCFEBDC2",
+      "parent": "RBXD76AF78D10374F1E96966EEDB6A24E9A",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -1163,7 +1245,7 @@
     },
     {
       "id": "RBX0E4C667EA0AA4F0289A0FC7316FF5487",
-      "parent": "RBX96BC7422422C41B385E94A51CCFEBDC2",
+      "parent": "RBXD76AF78D10374F1E96966EEDB6A24E9A",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -1180,7 +1262,7 @@
     },
     {
       "id": "RBX4F5ACFAF1F814327BF7E26EFA6C91B6C",
-      "parent": "RBX96BC7422422C41B385E94A51CCFEBDC2",
+      "parent": "RBXD76AF78D10374F1E96966EEDB6A24E9A",
       "class": "Decal",
       "name": "fur light",
       "properties": {

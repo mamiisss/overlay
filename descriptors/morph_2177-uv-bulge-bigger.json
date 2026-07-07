@@ -5,7 +5,14 @@
   "asset_id": "morph_2177-uv-bulge-bigger",
   "name": "UV Bulge Bigger",
   "source_file": "2177-uv-bulge-bigger.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       36.4966125,
@@ -29,6 +36,7 @@
     "Model": 3,
     "Part": 4,
     "ParticleEmitter": 1,
+    "UnionOperation": 1,
     "MeshPart": 2,
     "SpecialMesh": 1
   },
@@ -228,6 +236,70 @@
       }
     },
     {
+      "id": "RBX0ED79BFE2B72405397EF1A4608D2E02B",
+      "parent": "RBXB06F673F53FA4F45A2FF92E08EF46E4E",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.356863,
+          0.364706,
+          0.411765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.667823374,
+          0.300454378,
+          0.650003076
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            0.001964,
+            0.000626,
+            -0.312799
+          ],
+          "rotation": [
+            -0.999965,
+            -0.000913,
+            -0.008306,
+            0.00821,
+            0.077535,
+            -0.996956,
+            0.001554,
+            -0.996989,
+            -0.077525
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX7E4E92C622194399A2F463F9F8AFA64C",
       "parent": "RBXDF8D933635F04D1785A77F601B7CFD2F",
       "class": "Model",
@@ -307,6 +379,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12532892619",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -373,6 +446,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12532892619",
         "RenderFidelity": 0,
         "TextureID": null,

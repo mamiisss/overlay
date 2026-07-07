@@ -5,7 +5,14 @@
   "asset_id": "morph_0493-drool-facesticky-tonguesticky",
   "name": "Drool+FaceSticky+TongueSticky",
   "source_file": "0493-drool-facesticky-tonguesticky.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -15.0122223,
@@ -30,7 +37,9 @@
     "Part": 4,
     "SpecialMesh": 3,
     "Attachment": 4,
-    "MeshPart": 19
+    "Weld": 2,
+    "MeshPart": 19,
+    "Bone": 3
   },
   "nodes": [
     {
@@ -171,6 +180,54 @@
       }
     },
     {
+      "id": "RBX2E79D1806B3F465A804ADD3DF7A00C56",
+      "parent": "RBXE758B7576BBA4E06807610299A2BA89F",
+      "class": "Weld",
+      "name": "Drool",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0123596191,
+            -0.667030334,
+            -0.717681885
+          ],
+          "rotation": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXE758B7576BBA4E06807610299A2BA89F",
+        "Part1": "RBX13B272FAB04040F7B121F413FA32AEE0",
+        "Name": "Drool"
+      }
+    },
+    {
       "id": "RBXC1AF0412BBDA444892C6F33934E03153",
       "parent": "RBXE758B7576BBA4E06807610299A2BA89F",
       "class": "Folder",
@@ -249,6 +306,7 @@
       "class": "MeshPart",
       "name": "Drool",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -310,6 +368,90 @@
       }
     },
     {
+      "id": "RBX7575795565C743728F99DECE415813DB",
+      "parent": "RBX13B272FAB04040F7B121F413FA32AEE0",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000122070312,
+            0.0817947388,
+            0.0206298828
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXCDA004DE6B344EF8BD900897C015C4DD",
+      "parent": "RBX7575795565C743728F99DECE415813DB",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000915527344,
+            0.124328613,
+            0.02003479
+          ],
+          "rotation": [
+            1,
+            -2.29338028e-7,
+            -0.00000126660098,
+            2.29338568e-7,
+            1,
+            4.30270859e-7,
+            0.00000126660086,
+            -4.30271143e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX5DC5BE1817604801B7C746F8DB5FE8F7",
+      "parent": "RBXCDA004DE6B344EF8BD900897C015C4DD",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000915527344,
+            0.0613555908,
+            -0.0199737549
+          ],
+          "rotation": [
+            1,
+            -1.06171044e-7,
+            -2.38418949e-7,
+            1.06170987e-7,
+            1,
+            -2.23517631e-7,
+            2.38418977e-7,
+            2.23517603e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXDC86017FE0D34068B3C33AF96A1A2250",
       "parent": "RBX13B272FAB04040F7B121F413FA32AEE0",
       "class": "Attachment",
@@ -334,6 +476,54 @@
           ]
         },
         "Name": "Attachment"
+      }
+    },
+    {
+      "id": "RBXE559EEB9E58F435EA6CE1F0AE8E8B710",
+      "parent": "RBX13B272FAB04040F7B121F413FA32AEE0",
+      "class": "Weld",
+      "name": "Weight",
+      "properties": {
+        "C0": {
+          "position": [
+            0.00231933594,
+            -0.232978821,
+            0.0123596191
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX13B272FAB04040F7B121F413FA32AEE0",
+        "Part1": "RBXF63B74A614EC4EF4A4EE0E017454CA52",
+        "Name": "Weight"
       }
     },
     {
@@ -460,6 +650,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -644,6 +835,7 @@
       "class": "MeshPart",
       "name": "CumSplat",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -710,6 +902,7 @@
       "class": "MeshPart",
       "name": "CumSplat",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -776,6 +969,7 @@
       "class": "MeshPart",
       "name": "CumSplat",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -842,6 +1036,7 @@
       "class": "MeshPart",
       "name": "CumSplat",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -908,6 +1103,7 @@
       "class": "MeshPart",
       "name": "CumSplat",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7004864019",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -974,6 +1170,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1040,6 +1237,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1106,6 +1304,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1172,6 +1371,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1238,6 +1438,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1304,6 +1505,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1370,6 +1572,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1436,6 +1639,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1502,6 +1706,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1568,6 +1773,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1634,6 +1840,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1700,6 +1907,7 @@
       "class": "MeshPart",
       "name": "Cumline",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,

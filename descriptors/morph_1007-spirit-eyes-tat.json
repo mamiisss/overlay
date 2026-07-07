@@ -5,7 +5,14 @@
   "asset_id": "morph_1007-spirit-eyes-tat",
   "name": "Spirit Eyes Tat",
   "source_file": "1007-spirit-eyes-tat.rbxmx",
-  "anchor": "HumanoidRootPart",
+  "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -14.5779724,
@@ -31,7 +38,8 @@
     "MeshPart": 2,
     "Decal": 2,
     "Part": 4,
-    "SpecialMesh": 4
+    "SpecialMesh": 4,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -82,6 +90,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014170419",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -281,6 +290,70 @@
       "properties": {
         "PrimaryPart": "RBX56366E91D8D545A1995F63035FA01892",
         "Name": "LowerStatic"
+      }
+    },
+    {
+      "id": "RBX8C15D52DD2CE45AD8F9C1864369360FA",
+      "parent": "RBXB9D0D6CA09794317B6967FD291658262",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.248779,
+            0.202286,
+            -0.480031
+          ],
+          "rotation": [
+            0.000017,
+            0.912698,
+            -0.408634,
+            -0.001017,
+            0.408634,
+            0.912698,
+            1,
+            0.0004,
+            0.000935
+          ]
+        }
       }
     },
     {
@@ -504,6 +577,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014168388",
         "RenderFidelity": 1,
         "TextureID": null,

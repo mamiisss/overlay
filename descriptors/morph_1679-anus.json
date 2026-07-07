@@ -5,7 +5,14 @@
   "asset_id": "morph_1679-anus",
   "name": "Anus",
   "source_file": "1679-anus.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -367.62915,
@@ -30,7 +37,8 @@
     "Part": 3,
     "SpecialMesh": 3,
     "MeshPart": 2,
-    "Decal": 2
+    "Decal": 2,
+    "WeldConstraint": 2
   },
   "nodes": [
     {
@@ -149,6 +157,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10191889916",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -215,6 +224,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10191890130",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -448,6 +458,15 @@
       }
     },
     {
+      "id": "RBX75F5657D63E64EE094FCB6850F0651A4",
+      "parent": "RBX547A229B775F44DBA7D1293F7292D210",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX99A0C28F5C154853B9D64861DB82AF07",
       "parent": "RBX547A229B775F44DBA7D1293F7292D210",
       "class": "SpecialMesh",
@@ -489,6 +508,15 @@
         "Transparency": 0,
         "Face": 0,
         "Name": "Decal"
+      }
+    },
+    {
+      "id": "RBX8F35F949E8144BF88704C25A52C2163C",
+      "parent": "RBXBC5B5C97351D479BB21237451B205FF4",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     }
   ]

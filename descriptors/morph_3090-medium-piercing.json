@@ -5,7 +5,14 @@
   "asset_id": "morph_3090-medium-piercing",
   "name": "Medium Piercing",
   "source_file": "3090-medium-piercing.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       331.057892,
@@ -29,6 +36,7 @@
     "Model": 3,
     "Part": 9,
     "SpecialMesh": 7,
+    "UnionOperation": 4,
     "Decal": 1,
     "ParticleEmitter": 2
   },
@@ -144,8 +152,72 @@
       }
     },
     {
-      "id": "RBX852102AEEB164F34A05980E00723A70B",
+      "id": "RBX526DA7C21F3B4D379DC394F80E53F8CF",
       "parent": "RBX861BDA83F4574103AC21745BC0B14174",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.08504653,
+          1.41056049,
+          1.08504653
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.158692,
+            -0.669854,
+            -0.061521
+          ],
+          "rotation": [
+            0.9185,
+            0.374721,
+            -0.126219,
+            -0.393931,
+            0.839687,
+            -0.373827,
+            -0.034105,
+            0.393089,
+            0.918868
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX852102AEEB164F34A05980E00723A70B",
+      "parent": "RBX526DA7C21F3B4D379DC394F80E53F8CF",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -451,6 +523,70 @@
         "VelocityInheritance": 0,
         "ZOffset": 0,
         "Name": "Particles"
+      }
+    },
+    {
+      "id": "RBX77DBCAA9FD2541F49D8FB85169563A34",
+      "parent": "RBX861BDA83F4574103AC21745BC0B14174",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.299926788,
+          0.102012649,
+          0.10546875
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            -0.440917,
+            -0.912539,
+            -0.733402
+          ],
+          "rotation": [
+            0.897429,
+            -0.098051,
+            0.430113,
+            0.014665,
+            0.981077,
+            0.193069,
+            -0.44091,
+            -0.166949,
+            0.881888
+          ]
+        }
       }
     },
     {
@@ -845,6 +981,134 @@
         "VelocityInheritance": 0,
         "ZOffset": 0,
         "Name": "Particles"
+      }
+    },
+    {
+      "id": "RBXD7103C3B7FF143C889E924C865045FBF",
+      "parent": "RBXC926441F55EA40038BB543D89700DBB4",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.08504653,
+          1.41056049,
+          1.08504653
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.669338,
+            -0.662948,
+            -0.061522
+          ],
+          "rotation": [
+            0.90987,
+            -0.397345,
+            0.119341,
+            0.412066,
+            0.832029,
+            -0.371391,
+            0.048276,
+            0.387107,
+            0.92077
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX6CCCFE35D7694523A4A426E6EACCA3ED",
+      "parent": "RBXC926441F55EA40038BB543D89700DBB4",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.299926788,
+          0.102012649,
+          0.10546875
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            0.984033,
+            -0.898788,
+            -0.719723
+          ],
+          "rotation": [
+            0.890621,
+            0.081145,
+            -0.447436,
+            0.00303,
+            0.982872,
+            0.184274,
+            0.454723,
+            -0.165463,
+            0.875128
+          ]
+        }
       }
     },
     {

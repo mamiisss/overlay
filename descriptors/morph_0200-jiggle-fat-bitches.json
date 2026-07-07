@@ -5,7 +5,14 @@
   "asset_id": "morph_0200-jiggle-fat-bitches",
   "name": "(jiggle) fat bitches!",
   "source_file": "0200-jiggle-fat-bitches.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -55.2738762,
@@ -28,7 +35,8 @@
     "Folder": 1,
     "Model": 1,
     "Part": 1,
-    "MeshPart": 1
+    "MeshPart": 1,
+    "Bone": 2
   },
   "nodes": [
     {
@@ -120,6 +128,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://17850816718",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -178,6 +187,62 @@
             -0.999848
           ]
         }
+      }
+    },
+    {
+      "id": "RBX56B7AE5E70B140F9BBB462F6CBD44B65",
+      "parent": "RBX5A3461954D8C4149A3DEFD65CCC6C998",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000359535217,
+            0.168669969,
+            -0.893792868
+          ],
+          "rotation": [
+            1,
+            -4.39809682e-16,
+            4.13175392e-17,
+            -4.05348782e-16,
+            -0.950761497,
+            -0.309923649,
+            1.75590526e-16,
+            0.309923649,
+            -0.950761497
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXBA5C6D8B440047BAB8062DCB7E25BF6B",
+      "parent": "RBX56B7AE5E70B140F9BBB462F6CBD44B65",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            3.39156942e-16,
+            0.771144867,
+            -5.96046448e-8
+          ],
+          "rotation": [
+            1,
+            -2.54957997e-15,
+            2.38418636e-7,
+            -1.70268933e-7,
+            0.699982941,
+            0.714159608,
+            -1.66888952e-7,
+            -0.714159608,
+            0.699982941
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     }
   ]

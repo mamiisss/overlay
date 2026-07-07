@@ -5,7 +5,14 @@
   "asset_id": "morph_2085-task-outfit",
   "name": "Task Outfit",
   "source_file": "2085-task-outfit.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       26.6460285,
@@ -28,6 +35,8 @@
     "Folder": 1,
     "Model": 5,
     "Part": 5,
+    "UnionOperation": 22,
+    "Motor6D": 22,
     "MeshPart": 8,
     "SpecialMesh": 1
   },
@@ -116,11 +125,460 @@
       }
     },
     {
+      "id": "RBXED74D5C6FD6D455FA9723D08B194F9E1",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "R7",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.3150976,
+          0.227002367,
+          0.227666676
+        ],
+        "Name": "R7",
+        "LocalCFrame": {
+          "position": [
+            0.189411,
+            -1.003932,
+            -0.221031
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7D01F53D487442598B75D92766A2864E",
+      "parent": "RBXED74D5C6FD6D455FA9723D08B194F9E1",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0657327771,
+            -0.0000404385719,
+            -0.00013357772
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109416835,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXF583E898A0754AD8BCF3311C6AA70F67",
+        "Part1": "RBXED74D5C6FD6D455FA9723D08B194F9E1",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBXF583E898A0754AD8BCF3311C6AA70F67",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "L8",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314702719,
+          0.227083743,
+          0.227544829
+        ],
+        "Name": "L8",
+        "LocalCFrame": {
+          "position": [
+            0.189372,
+            -0.828781,
+            -0.221156
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX73C9B279254347DEB2C1DB388D4CB7F5",
+      "parent": "RBXF583E898A0754AD8BCF3311C6AA70F67",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.298174709,
+            0.00106757937,
+            -0.0134639209
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.065674454,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDEB112571D72454DB9AEAF1F8728F37E",
+        "Part1": "RBXF583E898A0754AD8BCF3311C6AA70F67",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX1B44E797FE24499FA67BB0C5B18B861C",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "L11",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314652324,
+          0.227162763,
+          0.228368267
+        ],
+        "Name": "L11",
+        "LocalCFrame": {
+          "position": [
+            0.362517,
+            -0.811498,
+            -0.220537
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX419EB4F438F341B79F4B30728C4E38B9",
+      "parent": "RBX1B44E797FE24499FA67BB0C5B18B861C",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.280889899,
+            0.000447199622,
+            -0.18660818
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.065674454,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDEB112571D72454DB9AEAF1F8728F37E",
+        "Part1": "RBX1B44E797FE24499FA67BB0C5B18B861C",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBXE338AE5D6DC1458A9E4D1824D7A8AB50",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "L10",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314484268,
+          0.227002904,
+          0.227389395
+        ],
+        "Name": "L10",
+        "LocalCFrame": {
+          "position": [
+            0.362596,
+            -0.987116,
+            -0.221088
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX80CACDE2A88B4C93ADEE98CB6E74F218",
+      "parent": "RBXE338AE5D6DC1458A9E4D1824D7A8AB50",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0661919266,
+            -0.0000798335532,
+            0.000542659545
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109425202,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX1B44E797FE24499FA67BB0C5B18B861C",
+        "Part1": "RBXE338AE5D6DC1458A9E4D1824D7A8AB50",
+        "Name": "Joint"
+      }
+    },
+    {
       "id": "RBXDEB112571D72454DB9AEAF1F8728F37E",
       "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
       "class": "MeshPart",
       "name": "RH",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7690609285",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -179,6 +637,790 @@
             0.000006
           ]
         }
+      }
+    },
+    {
+      "id": "RBX3E8A311BA5DB43FA8325C141AD659091",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "R6",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.315232068,
+          0.227848113,
+          0.227326378
+        ],
+        "Name": "R6",
+        "LocalCFrame": {
+          "position": [
+            0.189829,
+            -1.182238,
+            -0.220915
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXEB81782F79624273B4F19620DA58DF63",
+      "parent": "RBX3E8A311BA5DB43FA8325C141AD659091",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0688843578,
+            -0.0004197784,
+            -0.000125229111
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXED74D5C6FD6D455FA9723D08B194F9E1",
+        "Part1": "RBX3E8A311BA5DB43FA8325C141AD659091",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX17E006C2927F40F5B6A1C27A5B795A14",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "L9",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314484268,
+          0.227002367,
+          0.227280155
+        ],
+        "Name": "L9",
+        "LocalCFrame": {
+          "position": [
+            0.362595,
+            -1.16551,
+            -0.221013
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX3BB9F2737DA047FE85964E0711C03A4B",
+      "parent": "RBX17E006C2927F40F5B6A1C27A5B795A14",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0689720213,
+            2.60893984e-7,
+            -0.0000751374537
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXE338AE5D6DC1458A9E4D1824D7A8AB50",
+        "Part1": "RBX17E006C2927F40F5B6A1C27A5B795A14",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBXC4871E93146F45B7A6F5AB47C3F173AE",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "R5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.316425204,
+          0.227178544,
+          0.227528036
+        ],
+        "Name": "R5",
+        "LocalCFrame": {
+          "position": [
+            0.011676,
+            -0.798601,
+            -0.220824
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX8C58BADC60DB4959B6358985D4B8798A",
+      "parent": "RBXC4871E93146F45B7A6F5AB47C3F173AE",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.267996252,
+            0.000736250891,
+            0.164233178
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.065674454,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDEB112571D72454DB9AEAF1F8728F37E",
+        "Part1": "RBXC4871E93146F45B7A6F5AB47C3F173AE",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBXF50304E0B9634FB4AAA4A163EAC0B803",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "R4",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314593494,
+          0.227164358,
+          0.227351576
+        ],
+        "Name": "R4",
+        "LocalCFrame": {
+          "position": [
+            0.011683,
+            -0.973117,
+            -0.220716
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXACA4DE111B2642D2A820FCABD453228F",
+      "parent": "RBXF50304E0B9634FB4AAA4A163EAC0B803",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.065094091,
+            -0.00000678324204,
+            -0.000116880503
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXC4871E93146F45B7A6F5AB47C3F173AE",
+        "Part1": "RBXF50304E0B9634FB4AAA4A163EAC0B803",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX2DC4D396B57C4209A5FC31C3E575A80D",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "3",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.31452626,
+          0.227186173,
+          0.227708682
+        ],
+        "Name": "3",
+        "LocalCFrame": {
+          "position": [
+            0.01167,
+            -1.151548,
+            -0.220549
+          ],
+          "rotation": [
+            -0.000005,
+            -1,
+            -0.000006,
+            -1.000003,
+            0.00001,
+            0.000002,
+            -0.000002,
+            0.000006,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX1766EF19BC7545AC8274690F2886C014",
+      "parent": "RBX2DC4D396B57C4209A5FC31C3E575A80D",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0690095723,
+            0.0000106966527,
+            -0.00016697211
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXF50304E0B9634FB4AAA4A163EAC0B803",
+        "Part1": "RBX2DC4D396B57C4209A5FC31C3E575A80D",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBXAD891A13FC514843B88E0EBD38E514D6",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "R2",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314480066,
+          0.227158323,
+          0.227872521
+        ],
+        "Name": "R2",
+        "LocalCFrame": {
+          "position": [
+            -0.159737,
+            -0.355905,
+            -0.218088
+          ],
+          "rotation": [
+            -0.912709,
+            -0.408611,
+            -0.000006,
+            -0.408608,
+            0.912714,
+            0.000002,
+            0.000005,
+            0.000004,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXAE73C1751A4F4E7BB59A6978301187BE",
+      "parent": "RBXAD891A13FC514843B88E0EBD38E514D6",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.135857224,
+            -0.00199767947,
+            0.275705636
+          ],
+          "rotation": [
+            -0.408605576,
+            0.912711084,
+            0,
+            0,
+            0,
+            1,
+            0.912711143,
+            0.408605576,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0656752363,
+            -9.39494896e-7,
+            0
+          ],
+          "rotation": [
+            1,
+            -0.0000108182703,
+            0,
+            0.0000108182703,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDEB112571D72454DB9AEAF1F8728F37E",
+        "Part1": "RBXAD891A13FC514843B88E0EBD38E514D6",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX2525B487B602490B81F5DEBCCB034CFA",
+      "parent": "RBXB7683FDCD36E4202AD1F9ED0E0AFA489",
+      "class": "UnionOperation",
+      "name": "R1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314593494,
+          0.227267548,
+          0.228158206
+        ],
+        "Name": "R1",
+        "LocalCFrame": {
+          "position": [
+            -0.322587,
+            -0.428774,
+            -0.218171
+          ],
+          "rotation": [
+            -0.912711,
+            -0.408606,
+            -0.000006,
+            -0.408603,
+            0.912716,
+            0.000002,
+            0.000005,
+            0.000004,
+            -1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX241A27DD44394B21AE84AB58E2877095",
+      "parent": "RBX2525B487B602490B81F5DEBCCB034CFA",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.068980366,
+            0.0000333944299,
+            0.0000834860548
+          ],
+          "rotation": [
+            1,
+            0.0000877976418,
+            -0.00000177323818,
+            -0.0000877678394,
+            1,
+            -0.00000178813934,
+            0.00000175833702,
+            0.00000181794167,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109429359,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0.0000928184163,
+            -0.00000190750711,
+            -0.0000928184236,
+            1,
+            -0.00000190718106,
+            0.00000190732999,
+            0.00000190735818,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXAD891A13FC514843B88E0EBD38E514D6",
+        "Part1": "RBX2525B487B602490B81F5DEBCCB034CFA",
+        "Name": "Joint"
       }
     },
     {
@@ -362,6 +1604,7 @@
       "class": "MeshPart",
       "name": "RightShoulder",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7690392678",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -428,6 +1671,7 @@
       "class": "MeshPart",
       "name": "Belly",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6583261022",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -494,6 +1738,7 @@
       "class": "MeshPart",
       "name": "FrontCloth",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://114046169",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -560,6 +1805,7 @@
       "class": "MeshPart",
       "name": "Shirt",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://4450768469",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -626,6 +1872,7 @@
       "class": "MeshPart",
       "name": "Belt",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://4450768469",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -692,6 +1939,7 @@
       "class": "MeshPart",
       "name": "LeftShoulder",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7690392678",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -901,11 +2149,236 @@
       }
     },
     {
+      "id": "RBXFAE4C61FB77C40CDBEA38547A14889D3",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L2",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314480066,
+          0.227158323,
+          0.227872521
+        ],
+        "Name": "L2",
+        "LocalCFrame": {
+          "position": [
+            -2.906949,
+            -0.17445,
+            -0.315326
+          ],
+          "rotation": [
+            0.912703,
+            0.408618,
+            0.000006,
+            -0.408622,
+            0.912706,
+            0.000002,
+            -0.000005,
+            -0.000004,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX4FDACE610E6A4F62955151C051A32ABD",
+      "parent": "RBXFAE4C61FB77C40CDBEA38547A14889D3",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.135906711,
+            -0.00200550864,
+            0.275707364
+          ],
+          "rotation": [
+            -0.408611983,
+            0.912707448,
+            0,
+            0,
+            0,
+            1,
+            0.912706673,
+            0.408612996,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0656754673,
+            0,
+            0
+          ],
+          "rotation": [
+            0.999998569,
+            1.78813934e-7,
+            0,
+            4.47034836e-7,
+            0.999999762,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA4F593B0BBDC400C93D590E725F8ABB3",
+        "Part1": "RBXFAE4C61FB77C40CDBEA38547A14889D3",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX5374C0E767C340929C228395AA449F31",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314593494,
+          0.227267548,
+          0.228158206
+        ],
+        "Name": "L1",
+        "LocalCFrame": {
+          "position": [
+            -2.7441,
+            -0.247321,
+            -0.315243
+          ],
+          "rotation": [
+            0.912705,
+            0.408613,
+            0.000006,
+            -0.408617,
+            0.912708,
+            0.000002,
+            -0.000005,
+            -0.000004,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXB677E1CBC58F42ABAFA9E52693CCB63A",
+      "parent": "RBX5374C0E767C340929C228395AA449F31",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.068980366,
+            0.0000333944299,
+            0.0000834860548
+          ],
+          "rotation": [
+            1,
+            0.0000877976418,
+            -0.00000177323818,
+            -0.0000877678394,
+            1,
+            -0.00000178813934,
+            0.00000175833702,
+            0.00000181794167,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109429359,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0.0000928184163,
+            -0.00000190750711,
+            -0.0000928184236,
+            1,
+            -0.00000190718106,
+            0.00000190732999,
+            0.00000190735818,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXFAE4C61FB77C40CDBEA38547A14889D3",
+        "Part1": "RBX5374C0E767C340929C228395AA449F31",
+        "Name": "Joint"
+      }
+    },
+    {
       "id": "RBXA4F593B0BBDC400C93D590E725F8ABB3",
       "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
       "class": "MeshPart",
       "name": "LH",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7690609285",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -964,6 +2437,1014 @@
             -0.000006
           ]
         }
+      }
+    },
+    {
+      "id": "RBX95BD2F646AFC4117A1C10361A528E0EA",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L8",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314702719,
+          0.227083743,
+          0.227544829
+        ],
+        "Name": "L8",
+        "LocalCFrame": {
+          "position": [
+            -3.256065,
+            -0.64733,
+            -0.312256
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXA06B7DA2156C46D09791415CC9803252",
+      "parent": "RBX95BD2F646AFC4117A1C10361A528E0EA",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.298136175,
+            0.00106162927,
+            -0.0134642934
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0656753927,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA4F593B0BBDC400C93D590E725F8ABB3",
+        "Part1": "RBX95BD2F646AFC4117A1C10361A528E0EA",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX5229A1B17BC04B5286006E477A8A7164",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.316425204,
+          0.227178544,
+          0.227528036
+        ],
+        "Name": "L5",
+        "LocalCFrame": {
+          "position": [
+            -3.078367,
+            -0.617153,
+            -0.312589
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX57E4A278DA5C464C8CB5CAE80E2AB7C8",
+      "parent": "RBX5229A1B17BC04B5286006E477A8A7164",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.267957419,
+            0.000729048043,
+            0.164233342
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0656753927,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA4F593B0BBDC400C93D590E725F8ABB3",
+        "Part1": "RBX5229A1B17BC04B5286006E477A8A7164",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX3E8D306FBB8C4A9EBFAD268F6BCA0B71",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L11",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314652324,
+          0.227162763,
+          0.228368267
+        ],
+        "Name": "L11",
+        "LocalCFrame": {
+          "position": [
+            -3.429207,
+            -0.630044,
+            -0.312876
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXCB88E87D7B80496FA27F707AAC2DC130",
+      "parent": "RBX3E8D306FBB8C4A9EBFAD268F6BCA0B71",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.28085199,
+            0.0661160201,
+            -0.186606571
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0656753927,
+            0,
+            0.0656757057
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA4F593B0BBDC400C93D590E725F8ABB3",
+        "Part1": "RBX3E8D306FBB8C4A9EBFAD268F6BCA0B71",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBXBD2424CFC77848FBA0C5E52A7A61E737",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L10",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314484268,
+          0.227002904,
+          0.227389395
+        ],
+        "Name": "L10",
+        "LocalCFrame": {
+          "position": [
+            -3.429288,
+            -0.805662,
+            -0.312325
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX2CB67337F8BC444DAB8ABD2FA06D4B10",
+      "parent": "RBXBD2424CFC77848FBA0C5E52A7A61E737",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0661919266,
+            -0.0000798335532,
+            0.000542659545
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109425202,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX3E8D306FBB8C4A9EBFAD268F6BCA0B71",
+        "Part1": "RBXBD2424CFC77848FBA0C5E52A7A61E737",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBXEE6CE6861429485999239E6A26BCDB41",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L7",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.3150976,
+          0.227002367,
+          0.227666676
+        ],
+        "Name": "L7",
+        "LocalCFrame": {
+          "position": [
+            -3.256106,
+            -0.822481,
+            -0.312381
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX6E34E300BFA44DD4B22B31FB7D2145D9",
+      "parent": "RBXEE6CE6861429485999239E6A26BCDB41",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0657327771,
+            -0.0000404385719,
+            -0.00013357772
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109416835,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX95BD2F646AFC4117A1C10361A528E0EA",
+        "Part1": "RBXEE6CE6861429485999239E6A26BCDB41",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX8D6E6AC813E14393AA85F6059DA48F85",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L4",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314593494,
+          0.227164358,
+          0.227351576
+        ],
+        "Name": "L4",
+        "LocalCFrame": {
+          "position": [
+            -3.078374,
+            -0.791669,
+            -0.312698
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX54094C1DA2134901AA3A2D8F24A8107B",
+      "parent": "RBX8D6E6AC813E14393AA85F6059DA48F85",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.065094091,
+            -0.00000678324204,
+            -0.000116880503
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX5229A1B17BC04B5286006E477A8A7164",
+        "Part1": "RBX8D6E6AC813E14393AA85F6059DA48F85",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX3A95C4561123476CAEC468B98828FAE8",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L9",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.314484268,
+          0.227002367,
+          0.227280155
+        ],
+        "Name": "L9",
+        "LocalCFrame": {
+          "position": [
+            -3.429289,
+            -0.984056,
+            -0.3124
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX590A5660C1B1487D8D34DDE165F6162E",
+      "parent": "RBX3A95C4561123476CAEC468B98828FAE8",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0689720213,
+            2.60893984e-7,
+            -0.0000751374537
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXBD2424CFC77848FBA0C5E52A7A61E737",
+        "Part1": "RBX3A95C4561123476CAEC468B98828FAE8",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX69278F7B389040FBBB7B1AE3E7308DBF",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L6",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.315232068,
+          0.227848113,
+          0.227326378
+        ],
+        "Name": "L6",
+        "LocalCFrame": {
+          "position": [
+            -3.256527,
+            -1.000787,
+            -0.312497
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC9D517D98421477BBA64AE6C9EBD1AFE",
+      "parent": "RBX69278F7B389040FBBB7B1AE3E7308DBF",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0688843578,
+            -0.0004197784,
+            -0.000125229111
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            -0.00000834860748
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXEE6CE6861429485999239E6A26BCDB41",
+        "Part1": "RBX69278F7B389040FBBB7B1AE3E7308DBF",
+        "Name": "Joint"
+      }
+    },
+    {
+      "id": "RBX5E85CCBC8518408294FAFF15FC105A9C",
+      "parent": "RBX2CCF7C4D9006472B98D61751EB80C2E4",
+      "class": "UnionOperation",
+      "name": "L3",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.058824,
+          0.568627,
+          0.623529
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.31452626,
+          0.227186173,
+          0.227708682
+        ],
+        "Name": "L3",
+        "LocalCFrame": {
+          "position": [
+            -3.078363,
+            -0.9701,
+            -0.312864
+          ],
+          "rotation": [
+            -0.000005,
+            1,
+            0.000006,
+            -1.000003,
+            -0.00001,
+            0.000002,
+            0.000002,
+            -0.000006,
+            1.000003
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX9A1248934D7B4D948F84DD89EB8C1308",
+      "parent": "RBX5E85CCBC8518408294FAFF15FC105A9C",
+      "class": "Motor6D",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0690095723,
+            0.0000106966527,
+            -0.00016697211
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.109421022,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX8D6E6AC813E14393AA85F6059DA48F85",
+        "Part1": "RBX5E85CCBC8518408294FAFF15FC105A9C",
+        "Name": "Joint"
       }
     }
   ]

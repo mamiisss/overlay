@@ -5,7 +5,14 @@
   "asset_id": "morph_2027-shoulder-flashlight",
   "name": "Shoulder Flashlight",
   "source_file": "2027-shoulder-flashlight.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       630.821106,
@@ -29,6 +36,7 @@
     "Model": 1,
     "Part": 3,
     "SpecialMesh": 2,
+    "Weld": 2,
     "SpotLight": 2,
     "Attachment": 1,
     "PointLight": 1,
@@ -146,6 +154,54 @@
       }
     },
     {
+      "id": "RBX6411E8F7EE67405F9D7C9A2BFAC8F61F",
+      "parent": "RBXB58525EDDAE9431E81FC2C7D30BD4CB3",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0.0000129999999,
+            1,
+            0,
+            1,
+            -0.0000129999999,
+            -1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0.0000129999999,
+            1,
+            0,
+            1,
+            -0.0000129999999,
+            -1,
+            0,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXB58525EDDAE9431E81FC2C7D30BD4CB3",
+        "Part1": "RBXB58525EDDAE9431E81FC2C7D30BD4CB3",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBXB2F990D751414176B2E25AAB3ECA6B0A",
       "parent": "RBXBA203C8DF928479DB21121704AAC7BF6",
       "class": "Part",
@@ -254,6 +310,54 @@
         "Enabled": true,
         "Shadows": true,
         "Name": "Light"
+      }
+    },
+    {
+      "id": "RBXEF657ED5483E40CF8BFD1E0523921BF9",
+      "parent": "RBXB2F990D751414176B2E25AAB3ECA6B0A",
+      "class": "Weld",
+      "name": "Neon",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0000181308314,
+            -0.00000113317697,
+            -0.665383399
+          ],
+          "rotation": [
+            -5.96046448e-8,
+            1.11758709e-8,
+            1.00000012,
+            0,
+            1,
+            -5.58793545e-9,
+            -1,
+            0,
+            -8.94069672e-8
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXB2F990D751414176B2E25AAB3ECA6B0A",
+        "Part1": "RBX9BA2745DCD6F4FB8A949EB0AC8BBF4D3",
+        "Name": "Neon"
       }
     },
     {

@@ -5,7 +5,14 @@
   "asset_id": "morph_0729-beeg-butt",
   "name": "beeg butt",
   "source_file": "0729-beeg-butt.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       96.2688141,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 3,
     "SpecialMesh": 3,
-    "MeshPart": 2
+    "MeshPart": 2,
+    "SurfaceAppearance": 2,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -148,6 +157,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14153765223",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -206,6 +216,20 @@
             0
           ]
         }
+      }
+    },
+    {
+      "id": "RBX59485D22A6294178865B0F2A8AAE7AF2",
+      "parent": "RBXE384070E90DA4763A18554982742B123",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": "rbxassetid://5168609593",
+        "Name": "SurfaceAppearance"
       }
     },
     {
@@ -315,6 +339,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14153767338",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -376,6 +401,20 @@
       }
     },
     {
+      "id": "RBX81448972359444B5BE05CA441BF51BDB",
+      "parent": "RBX52F2861FAD9D412EAE90EC93A5AB410E",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": "rbxassetid://5168609593",
+        "Name": "SurfaceAppearance"
+      }
+    },
+    {
       "id": "RBXD3DBC69EEC964D35988876DF73C3C571",
       "parent": "RBXD044FD9E210F45B88B8C4DDF5F195996",
       "class": "Model",
@@ -383,6 +422,70 @@
       "properties": {
         "PrimaryPart": "RBXAAD85FDD69674DFC9319C8925AAF2A9F",
         "Name": "LowerStatic"
+      }
+    },
+    {
+      "id": "RBX3A6D23B6813148158C12AEFEA045B2BA",
+      "parent": "RBXD3DBC69EEC964D35988876DF73C3C571",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.982434869,
+          0.922482193,
+          0.746903658
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.372887,
+            0.046141,
+            -0.3203
+          ],
+          "rotation": [
+            -1,
+            -0.0004,
+            -0.000935,
+            -0.001017,
+            0.408634,
+            0.912698,
+            0.000017,
+            0.912698,
+            -0.408634
+          ]
+        }
       }
     },
     {

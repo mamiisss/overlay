@@ -5,7 +5,14 @@
   "asset_id": "morph_2450-temp-dickup",
   "name": "temp-dickup",
   "source_file": "2450-temp-dickup.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       50.8003693,
@@ -30,8 +37,11 @@
     "Part": 4,
     "SpecialMesh": 1,
     "MeshPart": 3,
+    "Bone": 3,
     "Decal": 30,
-    "ParticleEmitter": 1
+    "ParticleEmitter": 1,
+    "UnionOperation": 4,
+    "WeldConstraint": 2
   },
   "nodes": [
     {
@@ -224,6 +234,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -282,6 +293,90 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX804D510374CF4EA8839414F260F517BF",
+      "parent": "RBX7EF4531B07B74F159DC028B9E7DC24E0",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0011411499,
+            0.460959882,
+            0.0339843556
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXE83C4BA06478473F84E11B88A39B7118",
+      "parent": "RBX804D510374CF4EA8839414F260F517BF",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000381469727,
+            0.394287109,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            -0.707106829,
+            -4.09782004e-8,
+            0.707106769,
+            0.707106829,
+            -4.09782288e-8,
+            5.79519437e-8,
+            2.14147903e-14,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX94353600E3EF4029B62C87F27AF6C8EC",
+      "parent": "RBX804D510374CF4EA8839414F260F517BF",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000381469727,
+            0.394287109,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            0.707106829,
+            -1.00582852e-7,
+            -0.707106769,
+            0.707106829,
+            1.00582852e-7,
+            1.42245625e-7,
+            -4.03284245e-16,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {
@@ -572,8 +667,72 @@
       }
     },
     {
-      "id": "RBX65C992329C3E40279B92617922AC14D8",
+      "id": "RBXD765099338354BDABD82280ED66B18D8",
       "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.352941,
+          0.298039,
+          0.258824
+        ],
+        "Massless": false,
+        "Material": 256,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.245659903,
+          0.227472439,
+          0.154775947
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.029669,
+            -0.693481,
+            -1.414833
+          ],
+          "rotation": [
+            1,
+            -0.000019,
+            0.000037,
+            0.00003,
+            0.944445,
+            -0.328671,
+            -0.000029,
+            0.328671,
+            0.944445
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX65C992329C3E40279B92617922AC14D8",
+      "parent": "RBXD765099338354BDABD82280ED66B18D8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -590,7 +749,7 @@
     },
     {
       "id": "RBX8944E4CE011B420CBAF652CF88FC5A16",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBXD765099338354BDABD82280ED66B18D8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -607,7 +766,7 @@
     },
     {
       "id": "RBX45B8D7E7B18D465F9D107404EA82934B",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBXD765099338354BDABD82280ED66B18D8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -624,7 +783,7 @@
     },
     {
       "id": "RBX42F6F84ADFD34F22B0254AB648F444A7",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBXD765099338354BDABD82280ED66B18D8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -641,7 +800,7 @@
     },
     {
       "id": "RBX396916BEF8144F2583CE4D9F78DCDB8D",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBXD765099338354BDABD82280ED66B18D8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -658,7 +817,7 @@
     },
     {
       "id": "RBXAF25D84199CB44D1B58C8ED54B542848",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBXD765099338354BDABD82280ED66B18D8",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -674,8 +833,72 @@
       }
     },
     {
-      "id": "RBXBC4779D2A15846E8A0BF6A4550212EC8",
+      "id": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.352941,
+          0.298039,
+          0.258824
+        ],
+        "Massless": false,
+        "Material": 256,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.352607816,
+          0.421877027,
+          1.12940848
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.029652,
+            -0.840271,
+            -0.937698
+          ],
+          "rotation": [
+            1,
+            -0.000028,
+            0.00003,
+            0.000029,
+            0.999785,
+            -0.020733,
+            -0.000029,
+            0.020733,
+            0.999785
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXBC4779D2A15846E8A0BF6A4550212EC8",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -692,7 +915,7 @@
     },
     {
       "id": "RBXBE2889D92A3049F9A020938F7A7D68E3",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -709,7 +932,7 @@
     },
     {
       "id": "RBX98745F67C7574F9DA1AD17A0B60A5C09",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -726,7 +949,7 @@
     },
     {
       "id": "RBX13EE0D92A81B449FBC70432E92D179E3",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -743,7 +966,7 @@
     },
     {
       "id": "RBX3AE7CC3DE15C4A45BA1D3B0F731B62F5",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -760,7 +983,7 @@
     },
     {
       "id": "RBX859CF882ECD84BE3AB5CFC2AE9125FDF",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -777,10 +1000,11 @@
     },
     {
       "id": "RBXA1A624F94799462E9A73D8BDE3A2B248",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "MeshPart",
       "name": "shark fin",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://4876132413",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://5213418462",
@@ -843,10 +1067,11 @@
     },
     {
       "id": "RBXDC3B2A3FD3E346458FAF0E3B205F7258",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
       "class": "MeshPart",
       "name": "shark fin",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://4876132413",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://5213418462",
@@ -908,8 +1133,90 @@
       }
     },
     {
-      "id": "RBX412DFCE4EA2E449BA1D1B1BA8D2B91B7",
+      "id": "RBXA08068D33C584B67AC8E6126CC75E9F6",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
+      "id": "RBXCD1F4F76A18F4D769A9E28EDF47D8054",
+      "parent": "RBX40723BDCBD0D4F838CD0910C59D6F1F0",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
+      "id": "RBX591AE2AD9A344C67B285F19560D55A7A",
       "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.337255,
+          0.258824,
+          0.211765
+        ],
+        "Massless": false,
+        "Material": 256,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.244623661,
+          0.218995348,
+          0.234454691
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            0.029665,
+            -0.679657,
+            -1.453529
+          ],
+          "rotation": [
+            1,
+            -0.000019,
+            0.000037,
+            0.00003,
+            0.944445,
+            -0.328671,
+            -0.000029,
+            0.328671,
+            0.944445
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX412DFCE4EA2E449BA1D1B1BA8D2B91B7",
+      "parent": "RBX591AE2AD9A344C67B285F19560D55A7A",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -926,7 +1233,7 @@
     },
     {
       "id": "RBX9DC8E0AA99A34149BB8ACF606A2B9D19",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX591AE2AD9A344C67B285F19560D55A7A",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -943,7 +1250,7 @@
     },
     {
       "id": "RBX1B718867710F4BDBBF42D937A1AE27F0",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX591AE2AD9A344C67B285F19560D55A7A",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -960,7 +1267,7 @@
     },
     {
       "id": "RBX8401148FC3834F85A5863A2226C78049",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX591AE2AD9A344C67B285F19560D55A7A",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -977,7 +1284,7 @@
     },
     {
       "id": "RBX9EDF21B8261E44368476C77B5557C043",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX591AE2AD9A344C67B285F19560D55A7A",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -994,7 +1301,7 @@
     },
     {
       "id": "RBX3A9840BB61474F8C92A23B521A2AE3FE",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX591AE2AD9A344C67B285F19560D55A7A",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1010,8 +1317,72 @@
       }
     },
     {
-      "id": "RBX7A9C7D82C9394BFEBC2ABFA65F5A52D5",
+      "id": "RBX065549BA978F44DEBB4715515EC057BE",
       "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.352941,
+          0.298039,
+          0.258824
+        ],
+        "Massless": false,
+        "Material": 256,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.248455003,
+          0.476926476,
+          1.14013851
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.029652,
+            -0.875869,
+            -0.97966
+          ],
+          "rotation": [
+            1,
+            -0.000016,
+            0.000038,
+            0.00003,
+            0.919208,
+            -0.393774,
+            -0.000029,
+            0.393774,
+            0.919208
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7A9C7D82C9394BFEBC2ABFA65F5A52D5",
+      "parent": "RBX065549BA978F44DEBB4715515EC057BE",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1028,7 +1399,7 @@
     },
     {
       "id": "RBXA33E78B68E0B46FCAAAD312976D20071",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX065549BA978F44DEBB4715515EC057BE",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1045,7 +1416,7 @@
     },
     {
       "id": "RBXFB5D1D3075C24991892B1B6EF4E61854",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX065549BA978F44DEBB4715515EC057BE",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1062,7 +1433,7 @@
     },
     {
       "id": "RBXA7CA1923F3BD44AE834E850FBBD3492A",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX065549BA978F44DEBB4715515EC057BE",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1079,7 +1450,7 @@
     },
     {
       "id": "RBX475D8070C0154866AB7CD9EBF34DB041",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX065549BA978F44DEBB4715515EC057BE",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1096,7 +1467,7 @@
     },
     {
       "id": "RBX709A817F22594036AC6F4DC21DC98E57",
-      "parent": "RBXD2F755E10E5B4DF980EC0E91B4244CB5",
+      "parent": "RBX065549BA978F44DEBB4715515EC057BE",
       "class": "Decal",
       "name": "Decal",
       "properties": {

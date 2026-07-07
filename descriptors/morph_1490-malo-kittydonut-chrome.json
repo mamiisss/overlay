@@ -5,7 +5,14 @@
   "asset_id": "morph_1490-malo-kittydonut-chrome",
   "name": "Malo KittyDonut (Chrome)",
   "source_file": "1490-malo-kittydonut-chrome.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       1585.26001,
@@ -29,6 +36,7 @@
     "Model": 1,
     "Part": 1,
     "SpecialMesh": 1,
+    "UnionOperation": 1,
     "MeshPart": 1
   },
   "nodes": [
@@ -143,11 +151,76 @@
       }
     },
     {
-      "id": "RBX7FA3137450734C70A7810C5BBCD33832",
+      "id": "RBX029235BBA06C4F239B571FFCBE963A32",
       "parent": "RBXBB681E9787CA4B7C9D79A8FBA27A1928",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.356863,
+          0.356863,
+          0.356863
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.582795084,
+          0.426238835,
+          0.576722383
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            0.003662,
+            -1.009865,
+            1.27539
+          ],
+          "rotation": [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7FA3137450734C70A7810C5BBCD33832",
+      "parent": "RBX029235BBA06C4F239B571FFCBE963A32",
       "class": "MeshPart",
       "name": "c2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1527559",
         "RenderFidelity": 1,
         "TextureID": null,

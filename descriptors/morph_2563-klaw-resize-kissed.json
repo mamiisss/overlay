@@ -5,7 +5,14 @@
   "asset_id": "morph_2563-klaw-resize-kissed",
   "name": "klaw resize kissed",
   "source_file": "2563-klaw-resize-kissed.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -25.4611511,
@@ -31,6 +38,7 @@
     "MeshPart": 3,
     "ParticleEmitter": 1,
     "SpecialMesh": 1,
+    "UnionOperation": 1,
     "Decal": 9
   },
   "nodes": [
@@ -123,6 +131,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14777922005",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -189,6 +198,7 @@
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://11140269772",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -255,6 +265,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14777922096",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -602,8 +613,72 @@
       }
     },
     {
-      "id": "RBX11B6C32270C44A21B53CE6AA7A251DB4",
+      "id": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          2.21312928,
+          2.09746003,
+          1.35553992
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.076083,
+            -0.6753,
+            -0.037257
+          ],
+          "rotation": [
+            -1,
+            -0.000001,
+            0.000016,
+            -0.000001,
+            1,
+            -0.000003,
+            -0.000016,
+            -0.000003,
+            -1
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX11B6C32270C44A21B53CE6AA7A251DB4",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -620,7 +695,7 @@
     },
     {
       "id": "RBX140FBFD2F10B4057B4E7B6EF8B01E6FD",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -637,7 +712,7 @@
     },
     {
       "id": "RBXBF06B0CAF1DF45F99BA9D9D8B521FFD6",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -654,7 +729,7 @@
     },
     {
       "id": "RBXEC4255173577405EBE5FFC8DB6282FC9",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -671,7 +746,7 @@
     },
     {
       "id": "RBX2F39435B94C04159B6981F567D224A4E",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -688,7 +763,7 @@
     },
     {
       "id": "RBX7FA38596DFFD4D81884E1BEBA7D9B701",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -705,7 +780,7 @@
     },
     {
       "id": "RBX76592A4B733B4AAB9860D4E3AC2C8D99",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -722,7 +797,7 @@
     },
     {
       "id": "RBXD9EF85040BF449178C603794CA0230D6",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -739,7 +814,7 @@
     },
     {
       "id": "RBX773E8E67BE4B45AA9A90C912774ED3AE",
-      "parent": "RBXE198D14E4DBE435DAD400763E9A04332",
+      "parent": "RBXDBD48ED25AA24523B73B358C28D8DEAD",
       "class": "Decal",
       "name": "Decal",
       "properties": {

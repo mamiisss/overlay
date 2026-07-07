@@ -5,7 +5,14 @@
   "asset_id": "morph_2830-body-h-piercings",
   "name": "Body H (Piercings)",
   "source_file": "2830-body-h-piercings.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -0.285614014,
@@ -30,6 +37,7 @@
     "Part": 5,
     "SpecialMesh": 3,
     "ParticleEmitter": 2,
+    "UnionOperation": 4,
     "MeshPart": 4
   },
   "nodes": [
@@ -255,11 +263,140 @@
       }
     },
     {
+      "id": "RBXAE3E938CB53A4174A98F938A4178F39E",
+      "parent": "RBX9A8621C8776747FA9DFF8F378330D79B",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.451193452,
+          0.153462231,
+          0.158661425
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            0.466332,
+            -1.577904,
+            -1.078535
+          ],
+          "rotation": [
+            0.959165,
+            -0.000001,
+            -0.282847,
+            0,
+            1,
+            -0.000006,
+            0.282847,
+            0.000006,
+            0.959165
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX74D21741FC5F45CFB9DFBA4DEA008215",
+      "parent": "RBX9A8621C8776747FA9DFF8F378330D79B",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.474272192,
+          0.105165534,
+          0.474413067
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            0.464501,
+            -1.740771,
+            -1.065261
+          ],
+          "rotation": [
+            0.956662,
+            -0.291202,
+            0.000001,
+            0,
+            -0.000006,
+            -1,
+            0.291202,
+            0.956662,
+            -0.000006
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX9A17B3E0413549349C8067F72E821D0A",
       "parent": "RBX9A8621C8776747FA9DFF8F378330D79B",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://15689547548",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -326,6 +463,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://15689547561",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -498,6 +636,70 @@
       }
     },
     {
+      "id": "RBXF8A3D564AA4849ED84FA54B186F22688",
+      "parent": "RBXFE2700B0C631482282D00691C3C0C500",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.473638088,
+          0.105024934,
+          0.473778814
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -1.113807,
+            -1.726531,
+            -1.050629
+          ],
+          "rotation": [
+            0.947549,
+            0.319611,
+            -0.000009,
+            0.000003,
+            -0.000037,
+            -1,
+            -0.319611,
+            0.947549,
+            -0.000036
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX242285E0CA1C4429A5541FDBF127E6EC",
       "parent": "RBXFE2700B0C631482282D00691C3C0C500",
       "class": "Part",
@@ -609,6 +811,70 @@
       }
     },
     {
+      "id": "RBX13170E1A52A34382BDC9200513C2E41C",
+      "parent": "RBXFE2700B0C631482282D00691C3C0C500",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.450590193,
+          0.153257057,
+          0.158449307
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            -1.1128,
+            -1.577245,
+            -1.049956
+          ],
+          "rotation": [
+            0.946482,
+            -0.000001,
+            0.322758,
+            0.000015,
+            1,
+            -0.000023,
+            -0.322758,
+            0.000027,
+            0.946482
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXDACC883995D54C77A357EE3443571EA5",
       "parent": "RBXFE2700B0C631482282D00691C3C0C500",
       "class": "Part",
@@ -705,6 +971,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://15689547549",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -771,6 +1038,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://15689547574",
         "RenderFidelity": 1,
         "TextureID": null,

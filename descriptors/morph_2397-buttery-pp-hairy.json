@@ -5,7 +5,14 @@
   "asset_id": "morph_2397-buttery-pp-hairy",
   "name": "Buttery PP (Hairy)",
   "source_file": "2397-buttery-pp-hairy.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -15803.4844,
@@ -30,7 +37,8 @@
     "Part": 75,
     "ParticleEmitter": 3,
     "MeshPart": 4,
-    "SpecialMesh": 72
+    "SpecialMesh": 72,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -233,6 +241,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://93925131542621",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -346,6 +355,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://111141613201292",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -518,8 +528,72 @@
       }
     },
     {
-      "id": "RBX090238201FCB441AAA02DD0A2957EEFF",
+      "id": "RBX0BE44DBF5D31416E8454F19C770F5DEB",
       "parent": "RBX47CB9BFEAFC14369865CCED8CDACCF31",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.411765,
+          0.25098,
+          0.156863
+        ],
+        "Massless": true,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.736505568,
+          0.934571505,
+          0.623325109
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.034019,
+            -1.472306,
+            0.277879
+          ],
+          "rotation": [
+            0.999751,
+            -0.000842,
+            0.022278,
+            -0.022175,
+            0.065385,
+            0.997617,
+            -0.002297,
+            -0.997858,
+            0.065351
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX090238201FCB441AAA02DD0A2957EEFF",
+      "parent": "RBX0BE44DBF5D31416E8454F19C770F5DEB",
       "class": "ParticleEmitter",
       "name": "Mist",
       "properties": {
@@ -7095,6 +7169,7 @@
       "class": "MeshPart",
       "name": "Meshes/IzukuHair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1411429673",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -7161,6 +7236,7 @@
       "class": "MeshPart",
       "name": "Meshes/IzukuHair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1411429673",
         "RenderFidelity": 1,
         "TextureID": null,

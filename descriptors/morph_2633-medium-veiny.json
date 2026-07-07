@@ -5,7 +5,14 @@
   "asset_id": "morph_2633-medium-veiny",
   "name": "Medium veiny",
   "source_file": "2633-medium-veiny.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -60.8145142,
@@ -30,9 +37,11 @@
     "Part": 7,
     "MeshPart": 7,
     "Texture": 20,
+    "UnionOperation": 6,
     "ParticleEmitter": 11,
     "Attachment": 4,
     "SpecialMesh": 1,
+    "Bone": 3,
     "Decal": 19
   },
   "nodes": [
@@ -125,6 +134,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://9932838444",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -281,8 +291,72 @@
       }
     },
     {
-      "id": "RBX884993C3B586451EA37526557D4DE641",
+      "id": "RBX07DCEF15192949C48C6BDF5D7F8B2104",
       "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.580392,
+          0.580392
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.259244502,
+          0.23711741,
+          0.156880036
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            -0.011151,
+            0.22123,
+            -1.139313
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            0.935477,
+            -0.353388,
+            0,
+            0.353388,
+            0.935477
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX884993C3B586451EA37526557D4DE641",
+      "parent": "RBX07DCEF15192949C48C6BDF5D7F8B2104",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -301,7 +375,7 @@
     },
     {
       "id": "RBX4A8A4DC1ABF944A4910408B68C09CFF3",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX07DCEF15192949C48C6BDF5D7F8B2104",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -320,7 +394,7 @@
     },
     {
       "id": "RBXA5007F749AA7477A915A25F121329001",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX07DCEF15192949C48C6BDF5D7F8B2104",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -339,7 +413,7 @@
     },
     {
       "id": "RBXEF96BAC0F7EA403495D62FAF8CBBF23C",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX07DCEF15192949C48C6BDF5D7F8B2104",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -358,7 +432,7 @@
     },
     {
       "id": "RBX5F87CF5A4DF140938B32D32C25786F01",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX07DCEF15192949C48C6BDF5D7F8B2104",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -381,6 +455,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://9932828407",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -589,6 +664,7 @@
       "class": "MeshPart",
       "name": "Wetness",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5029184581",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -702,6 +778,7 @@
       "class": "MeshPart",
       "name": "Wetness",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://9932838444",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -763,11 +840,76 @@
       }
     },
     {
+      "id": "RBX1ED63864043745ADA229974AE4F9A87F",
+      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "class": "UnionOperation",
+      "name": "Wetness",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0.100000001,
+        "Transparency": 0.100000001,
+        "size": [
+          0.279244453,
+          0.247117415,
+          0.166880041
+        ],
+        "Name": "Wetness",
+        "LocalCFrame": {
+          "position": [
+            -0.011151,
+            0.218323,
+            -1.145752
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            0.935477,
+            -0.353388,
+            0,
+            0.353388,
+            0.935477
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXB60D464C23AD47419E5EC73FCAE3BBE4",
       "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8489981458",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -829,11 +971,76 @@
       }
     },
     {
+      "id": "RBXD9AE9F0C62F842BBA932D7405396F73D",
+      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.580392,
+          0.580392
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.243344784,
+          0.252500594,
+          0.18244651
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            -0.011405,
+            -0.437344,
+            -0.563599
+          ],
+          "rotation": [
+            1,
+            0.000007,
+            -0.000017,
+            0,
+            0.678805,
+            0.734319,
+            0.000016,
+            -0.734319,
+            0.678805
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX1398E321C4BA40E7926F5F22B2E99944",
       "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://9932838444",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -890,6 +1097,134 @@
             -0.58314,
             -0.000034,
             -0.812372
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXBF7F43246E8942C0AAE5DCD60F576F6B",
+      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.8,
+          0.6
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.514956892,
+          0.926187217,
+          0.404342026
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.020809,
+            -0.112766,
+            -0.262238
+          ],
+          "rotation": [
+            -0.063278,
+            0.059796,
+            0.996203,
+            -0.909429,
+            -0.414558,
+            -0.032875,
+            0.411014,
+            -0.908058,
+            0.080613
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX849F5F57A6DB4AA6B04BAADEC428FD08",
+      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "class": "UnionOperation",
+      "name": "Wetness",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": true,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0.100000001,
+        "Transparency": 0.100000001,
+        "size": [
+          0.526471496,
+          0.466159195,
+          1.02224946
+        ],
+        "Name": "Wetness",
+        "LocalCFrame": {
+          "position": [
+            -0.00713,
+            0.104527,
+            -0.670746
+          ],
+          "rotation": [
+            1,
+            0,
+            -0.000016,
+            0,
+            0.999972,
+            -0.007452,
+            0.000016,
+            0.007452,
+            0.999972
           ]
         }
       }
@@ -1682,8 +2017,72 @@
       }
     },
     {
-      "id": "RBXC2CD5D73C32B4E02B29FDF0BCD7019A3",
+      "id": "RBX591D6DC13DEA42D79FA6D319669B5BED",
       "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.8,
+          0.6
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.1960001,
+          0.40200001,
+          0.49999997
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.005851,
+            0.123222,
+            -0.519074
+          ],
+          "rotation": [
+            -0.015201,
+            -0.27853,
+            -0.960307,
+            0.041198,
+            0.959428,
+            -0.278928,
+            0.999036,
+            -0.043803,
+            -0.00311
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC2CD5D73C32B4E02B29FDF0BCD7019A3",
+      "parent": "RBX591D6DC13DEA42D79FA6D319669B5BED",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -1702,7 +2101,7 @@
     },
     {
       "id": "RBXC50B06FD98214EAC8D535C1F6C680382",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX591D6DC13DEA42D79FA6D319669B5BED",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -1721,7 +2120,7 @@
     },
     {
       "id": "RBX5C800B6088694A61956B430EF51DE03B",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX591D6DC13DEA42D79FA6D319669B5BED",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -1740,7 +2139,7 @@
     },
     {
       "id": "RBX48519F65D88E4885BCF00560057811A2",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX591D6DC13DEA42D79FA6D319669B5BED",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -1759,7 +2158,7 @@
     },
     {
       "id": "RBXB2C3A7F00FC34C4D92F1ABA8EA464338",
-      "parent": "RBXB3AF57DF627749458758BA9EDD13459A",
+      "parent": "RBX591D6DC13DEA42D79FA6D319669B5BED",
       "class": "Texture",
       "name": "Texture",
       "properties": {
@@ -1957,6 +2356,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -2015,6 +2415,90 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXC60FA981C318446FBDE45CE42815D12B",
+      "parent": "RBX1C58A2124C2E441D89934B8FE060C686",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00156495359,
+            0.522135675,
+            0.0561850555
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX6202020B60AE4EE3A3DABE7774ABB850",
+      "parent": "RBXC60FA981C318446FBDE45CE42815D12B",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.44661659,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            -0.707106769,
+            -4.09782004e-8,
+            0.707106769,
+            0.707106888,
+            -4.09782288e-8,
+            5.79519437e-8,
+            2.48689958e-14,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX3390D0C607184EA0A4419E4F5C6419B1",
+      "parent": "RBXC60FA981C318446FBDE45CE42815D12B",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.446616471,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            0.707106769,
+            -1.00582852e-7,
+            -0.707106769,
+            0.707106888,
+            1.00582852e-7,
+            1.42245625e-7,
+            -8.8817842e-15,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {

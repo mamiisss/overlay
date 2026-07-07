@@ -5,7 +5,14 @@
   "asset_id": "morph_2616-the-whaa",
   "name": "The WHAA",
   "source_file": "2616-the-whaa.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       229.476334,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 3,
     "SpecialMesh": 1,
-    "MeshPart": 14
+    "UnionOperation": 2,
+    "MeshPart": 14,
+    "Motor6D": 4
   },
   "nodes": [
     {
@@ -217,11 +226,76 @@
       }
     },
     {
+      "id": "RBX7571E598205447AFA17132D84A8C074E",
+      "parent": "RBX35AF973019A04B4DA0E8C67AC1BCC431",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.356863,
+          0.364706,
+          0.411765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.667823374,
+          0.300454378,
+          0.650003076
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            0.000054,
+            -0.808652,
+            -0.389596
+          ],
+          "rotation": [
+            -0.999966,
+            -0.000912,
+            -0.008306,
+            0.00821,
+            0.077528,
+            -0.996956,
+            0.001553,
+            -0.996991,
+            -0.077518
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX9875F07C1103480298D2651D9BB996EA",
       "parent": "RBX35AF973019A04B4DA0E8C67AC1BCC431",
       "class": "MeshPart",
       "name": "Shaft.7",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14385906440",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -288,6 +362,7 @@
       "class": "MeshPart",
       "name": "Shaft.6",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14385906444",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -354,6 +429,7 @@
       "class": "MeshPart",
       "name": "Shaft.3",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14385906448",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -420,6 +496,7 @@
       "class": "MeshPart",
       "name": "Shaft.4",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14385906441",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -486,6 +563,7 @@
       "class": "MeshPart",
       "name": "Shaft.5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14385906462",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -552,6 +630,7 @@
       "class": "MeshPart",
       "name": "Shaft.2",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14385906429",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -618,6 +697,7 @@
       "class": "MeshPart",
       "name": "Shaft.1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://14385906384",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -679,11 +759,76 @@
       }
     },
     {
+      "id": "RBX2111926E7A1F4E188E0A560E90692DF2",
+      "parent": "RBX35AF973019A04B4DA0E8C67AC1BCC431",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.854902,
+          0.52549,
+          0.478431
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.397700995,
+          0.332545727,
+          0.265085399
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            0.024419,
+            -0.370599,
+            -2.040704
+          ],
+          "rotation": [
+            -1.000001,
+            -0.000001,
+            -0.000001,
+            -0.000002,
+            0.411867,
+            0.911244,
+            0,
+            0.911245,
+            -0.411867
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXD67AD9EFFAD74D78B3EBB362887B35ED",
       "parent": "RBX35AF973019A04B4DA0E8C67AC1BCC431",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7018779981",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -824,6 +969,7 @@
       "class": "MeshPart",
       "name": "RightT_2",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11660500789",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -885,11 +1031,60 @@
       }
     },
     {
+      "id": "RBX56998EE79D654473B739D74829239207",
+      "parent": "RBX908130159D1445CDB586790E6960B910",
+      "class": "Motor6D",
+      "name": "RightT_2Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0649840385,
+            -0.133325428,
+            0.033449892
+          ],
+          "rotation": [
+            1,
+            5.95173333e-9,
+            2.98023224e-8,
+            5.95173422e-9,
+            1.00000024,
+            -5.16593035e-9,
+            2.98023224e-8,
+            -5.16592946e-9,
+            0.999999881
+          ]
+        },
+        "C1": {
+          "position": [
+            0.00377090974,
+            0.0900387764,
+            0.0441352241
+          ],
+          "rotation": [
+            1,
+            5.7334546e-9,
+            5.96046412e-8,
+            5.73345638e-9,
+            1.00000036,
+            -5.63159208e-9,
+            5.96046412e-8,
+            -5.63159031e-9,
+            0.999999762
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX385F97CEA4004E318EDA0967BA7836F3",
+        "Part1": "RBX908130159D1445CDB586790E6960B910",
+        "Name": "RightT_2Motor6D"
+      }
+    },
+    {
       "id": "RBX385F97CEA4004E318EDA0967BA7836F3",
       "parent": "RBX5478423BBA1E49DC92A49A4F729EA00C",
       "class": "MeshPart",
       "name": "RightT_1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11660500816",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -956,6 +1151,7 @@
       "class": "MeshPart",
       "name": "RightBall",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11660500819",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1017,11 +1213,60 @@
       }
     },
     {
+      "id": "RBX072B8F4B6FC9472DB58C866011D1E580",
+      "parent": "RBXE6CD76133C234634B36510EAEBAC4FF7",
+      "class": "Motor6D",
+      "name": "RightBallMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0515751541,
+            0.00357990433,
+            0.052008599
+          ],
+          "rotation": [
+            1,
+            5.7334546e-9,
+            5.96046412e-8,
+            5.73345638e-9,
+            1.00000036,
+            -5.63159208e-9,
+            5.96046412e-8,
+            -5.63159031e-9,
+            0.999999762
+          ]
+        },
+        "C1": {
+          "position": [
+            0.0283258688,
+            0.229340509,
+            0.0374798998
+          ],
+          "rotation": [
+            1,
+            1.7636923e-8,
+            1.19209261e-7,
+            1.76369319e-8,
+            1.00000083,
+            -1.59634581e-8,
+            1.19209268e-7,
+            -1.59634457e-8,
+            0.999999523
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX908130159D1445CDB586790E6960B910",
+        "Part1": "RBXE6CD76133C234634B36510EAEBAC4FF7",
+        "Name": "RightBallMotor6D"
+      }
+    },
+    {
       "id": "RBX89DE73C1792F4D20A76D9731C9243468",
       "parent": "RBX5478423BBA1E49DC92A49A4F729EA00C",
       "class": "MeshPart",
       "name": "LeftT_1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11660500813",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1088,6 +1333,7 @@
       "class": "MeshPart",
       "name": "LeftT_2",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11660500792",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1149,11 +1395,60 @@
       }
     },
     {
+      "id": "RBX0A0129833BDF41CFB5858D49B5E05014",
+      "parent": "RBXA604AD40AB104553B9C264AE7540AC8B",
+      "class": "Motor6D",
+      "name": "LeftT_2Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0649993494,
+            -0.133328512,
+            0.0334652476
+          ],
+          "rotation": [
+            1.00000024,
+            3.72529119e-9,
+            -2.77555756e-17,
+            3.72529074e-9,
+            1.00000024,
+            -7.4505806e-9,
+            0,
+            -7.45057971e-9,
+            0.999999881
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.00549511658,
+            0.0900356919,
+            0.0441353619
+          ],
+          "rotation": [
+            1.00000036,
+            7.45058237e-9,
+            -5.55111512e-17,
+            7.45058237e-9,
+            1.00000024,
+            -7.4505806e-9,
+            0,
+            -7.45057882e-9,
+            0.999999762
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX89DE73C1792F4D20A76D9731C9243468",
+        "Part1": "RBXA604AD40AB104553B9C264AE7540AC8B",
+        "Name": "LeftT_2Motor6D"
+      }
+    },
+    {
       "id": "RBX696BD4E423DD4AA49B899077ED5C61C3",
       "parent": "RBX5478423BBA1E49DC92A49A4F729EA00C",
       "class": "MeshPart",
       "name": "LeftBall",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://11660500814",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1212,6 +1507,54 @@
             0.998732
           ]
         }
+      }
+    },
+    {
+      "id": "RBX7A2F9E242FA643DBA13366C40D369DD9",
+      "parent": "RBX696BD4E423DD4AA49B899077ED5C61C3",
+      "class": "Motor6D",
+      "name": "LeftBallMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0498509668,
+            0.00357682863,
+            0.0520087406
+          ],
+          "rotation": [
+            1.00000036,
+            7.45058237e-9,
+            -5.55111512e-17,
+            7.45058237e-9,
+            1.00000024,
+            -7.4505806e-9,
+            0,
+            -7.45057882e-9,
+            0.999999762
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0299585834,
+            0.229338512,
+            0.0374800041
+          ],
+          "rotation": [
+            1.00000048,
+            7.45058415e-9,
+            -1.11022329e-16,
+            7.45058237e-9,
+            1.00000048,
+            -1.4901163e-8,
+            0,
+            -1.49011594e-8,
+            0.999999762
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA604AD40AB104553B9C264AE7540AC8B",
+        "Part1": "RBX696BD4E423DD4AA49B899077ED5C61C3",
+        "Name": "LeftBallMotor6D"
       }
     }
   ]

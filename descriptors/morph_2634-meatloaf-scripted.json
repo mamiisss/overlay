@@ -5,7 +5,14 @@
   "asset_id": "morph_2634-meatloaf-scripted",
   "name": "Meatloaf (scripted)",
   "source_file": "2634-meatloaf-scripted.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -34.8099327,
@@ -31,7 +38,9 @@
     "MeshPart": 9,
     "Decal": 20,
     "ParticleEmitter": 10,
+    "UnionOperation": 2,
     "Attachment": 4,
+    "Bone": 3,
     "SpecialMesh": 1
   },
   "nodes": [
@@ -124,6 +133,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://82427765431796",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -254,6 +264,7 @@
       "class": "MeshPart",
       "name": "Wetness",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://92547856909817",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -320,6 +331,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://103055843749060",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -386,6 +398,7 @@
       "class": "MeshPart",
       "name": "Wetness",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://103055843749060",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -452,6 +465,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://9932838444",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -513,11 +527,76 @@
       }
     },
     {
+      "id": "RBX78BB8D7426314D9787B932552B4A763F",
+      "parent": "RBX31968B32B9374BB681339739B0F7FB02",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.8,
+          0.556863,
+          0.411765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.452762902,
+          0.802312613,
+          0.363359451
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.012848,
+            -0.165596,
+            -0.069866
+          ],
+          "rotation": [
+            -0.063274,
+            0.059787,
+            0.996204,
+            -0.909429,
+            -0.414558,
+            -0.032875,
+            0.411015,
+            -0.908059,
+            0.080603
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXDD53D68DB0894380B039EB40FBF5329E",
       "parent": "RBX31968B32B9374BB681339739B0F7FB02",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://103055843749060",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -584,6 +663,7 @@
       "class": "MeshPart",
       "name": "Wetness",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5029184581",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -650,6 +730,7 @@
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://103055843749060",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -706,6 +787,70 @@
             -0.011206,
             0.231408,
             -0.972792
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE109BD91532D460DA2C0082281130A6D",
+      "parent": "RBX31968B32B9374BB681339739B0F7FB02",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.494118,
+          0.407843,
+          0.247059
+        ],
+        "Massless": true,
+        "Material": 800,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.616471469,
+          0.546159148,
+          1.25224948
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            0.004726,
+            0.044514,
+            -0.666038
+          ],
+          "rotation": [
+            0.999767,
+            -0.003063,
+            -0.021393,
+            0.005489,
+            0.993433,
+            0.114282,
+            0.020903,
+            -0.114373,
+            0.993218
           ]
         }
       }
@@ -1513,6 +1658,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -1571,6 +1717,90 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX2280D7EE441544C98CFAEAF53D6A49D4",
+      "parent": "RBX33C80748353B423E9E8B6B4D0F646EAB",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00156495359,
+            0.522135675,
+            0.0561850555
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXB0C2E8A68F474C2FB7BE356571FA79D2",
+      "parent": "RBX2280D7EE441544C98CFAEAF53D6A49D4",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.44661659,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            -0.707106769,
+            -4.09782004e-8,
+            0.707106769,
+            0.707106888,
+            -4.09782288e-8,
+            5.79519437e-8,
+            2.48689958e-14,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX593BAC84B2204E57BB752E0D0F73FEFF",
+      "parent": "RBX2280D7EE441544C98CFAEAF53D6A49D4",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.446616471,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            0.707106769,
+            -1.00582852e-7,
+            -0.707106769,
+            0.707106888,
+            1.00582852e-7,
+            1.42245625e-7,
+            -8.8817842e-15,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {

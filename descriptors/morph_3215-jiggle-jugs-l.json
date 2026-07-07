@@ -5,7 +5,14 @@
   "asset_id": "morph_3215-jiggle-jugs-l",
   "name": "jiggle jugs L",
   "source_file": "3215-jiggle-jugs-l.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       273.592072,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 5,
     "SpecialMesh": 3,
-    "MeshPart": 10
+    "MeshPart": 10,
+    "Motor6D": 10,
+    "Bone": 4
   },
   "nodes": [
     {
@@ -158,6 +167,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121275507871032",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -219,11 +229,60 @@
       }
     },
     {
+      "id": "RBX6E6EA18657724FB386C573B04056460E",
+      "parent": "RBX99C8B0B168BE42479580E6B9E55B5351",
+      "class": "Motor6D",
+      "name": "breas.001Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.00301355124,
+            -0.080537945,
+            0.0891955495
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD7EC9A40182248C5980B473269EEFB12",
+        "Part1": "RBX99C8B0B168BE42479580E6B9E55B5351",
+        "Name": "breas.001Motor6D"
+      }
+    },
+    {
       "id": "RBX7886F3DC46E343A49FE568E371C5FF11",
       "parent": "RBX17C7E5791FD948CBB23D59A001AEA025",
       "class": "MeshPart",
       "name": "Piercing",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://113648955797099",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -285,11 +344,60 @@
       }
     },
     {
+      "id": "RBXDFA0A3CF840241888474603D0246C2FE",
+      "parent": "RBX7886F3DC46E343A49FE568E371C5FF11",
+      "class": "Motor6D",
+      "name": "pierce.001Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.261141956,
+            -0.288482845,
+            0.673304141
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD7EC9A40182248C5980B473269EEFB12",
+        "Part1": "RBX7886F3DC46E343A49FE568E371C5FF11",
+        "Name": "pierce.001Motor6D"
+      }
+    },
+    {
       "id": "RBXF3A3752591CE4F50B881086EF2E8E2BA",
       "parent": "RBX17C7E5791FD948CBB23D59A001AEA025",
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://108408077022012",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -351,11 +459,60 @@
       }
     },
     {
+      "id": "RBXAA7BA2527B63438E81C9CF05A6F8B617",
+      "parent": "RBXF3A3752591CE4F50B881086EF2E8E2BA",
+      "class": "Motor6D",
+      "name": "ring.001Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.276790708,
+            -0.417879343,
+            0.681849599
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD7EC9A40182248C5980B473269EEFB12",
+        "Part1": "RBXF3A3752591CE4F50B881086EF2E8E2BA",
+        "Name": "ring.001Motor6D"
+      }
+    },
+    {
       "id": "RBXF7A9C5D3DBE341AFB21F7B47BE471C5C",
       "parent": "RBX17C7E5791FD948CBB23D59A001AEA025",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://87988942003941",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -417,11 +574,60 @@
       }
     },
     {
+      "id": "RBXA4B7F1B89B014A9EBCB77E3C327D1291",
+      "parent": "RBXF7A9C5D3DBE341AFB21F7B47BE471C5C",
+      "class": "Motor6D",
+      "name": "np2.001Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.212109447,
+            -0.266015887,
+            0.559561133
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD7EC9A40182248C5980B473269EEFB12",
+        "Part1": "RBXF7A9C5D3DBE341AFB21F7B47BE471C5C",
+        "Name": "np2.001Motor6D"
+      }
+    },
+    {
       "id": "RBXB3E0FB81676E42C694453BA894AC8E18",
       "parent": "RBX17C7E5791FD948CBB23D59A001AEA025",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://131160410258737",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -480,6 +686,54 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX5E7FF54B19954BE8B02C0C9028064744",
+      "parent": "RBXB3E0FB81676E42C694453BA894AC8E18",
+      "class": "Motor6D",
+      "name": "np1.001Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.260023952,
+            -0.294298381,
+            0.671759129
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD7EC9A40182248C5980B473269EEFB12",
+        "Part1": "RBXB3E0FB81676E42C694453BA894AC8E18",
+        "Name": "np1.001Motor6D"
       }
     },
     {
@@ -544,6 +798,62 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXB35DC72F12B043C5AF8E07D015D02526",
+      "parent": "RBXD7EC9A40182248C5980B473269EEFB12",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.200000018,
+            0.600000024,
+            -0.199999988
+          ],
+          "rotation": [
+            1,
+            5.66553869e-16,
+            -3.44509317e-16,
+            5.66553922e-16,
+            -1,
+            8.74227837e-8,
+            -3.44509264e-16,
+            -8.74227837e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX757C982E7C2E4CE6AAC2210E4C25849C",
+      "parent": "RBXB35DC72F12B043C5AF8E07D015D02526",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -2.98023224e-8,
+            0.49999997,
+            -4.47034836e-8
+          ],
+          "rotation": [
+            0.849562049,
+            0.45267871,
+            0.270788372,
+            -0.45267874,
+            0.36214307,
+            0.81482172,
+            0.270788312,
+            -0.81482172,
+            0.512580991
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {
@@ -653,6 +963,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://91726582949162",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -714,11 +1025,60 @@
       }
     },
     {
+      "id": "RBX782ECCF2A2F44ACE803477F592CA5F52",
+      "parent": "RBX5FF6B2C610C443988F993742CFEE7BDB",
+      "class": "Motor6D",
+      "name": "breas.002Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.00301346183,
+            -0.080537945,
+            0.0891955793
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX6A597EC6C963403B8456557FD09DC93E",
+        "Part1": "RBX5FF6B2C610C443988F993742CFEE7BDB",
+        "Name": "breas.002Motor6D"
+      }
+    },
+    {
       "id": "RBXC6CB796F10DD4D43A861446D989212AC",
       "parent": "RBXC894DC11A31440C39DAB9DCE31F783DA",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://85084952804117",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -780,11 +1140,60 @@
       }
     },
     {
+      "id": "RBXD02F1CFAD79646528EF2FE79C12DC781",
+      "parent": "RBXC6CB796F10DD4D43A861446D989212AC",
+      "class": "Motor6D",
+      "name": "np1.002Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.260024011,
+            -0.294298351,
+            0.671759129
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX6A597EC6C963403B8456557FD09DC93E",
+        "Part1": "RBXC6CB796F10DD4D43A861446D989212AC",
+        "Name": "np1.002Motor6D"
+      }
+    },
+    {
       "id": "RBXFC3DCAC2F6DC4195A5CFC96871FBD655",
       "parent": "RBXC894DC11A31440C39DAB9DCE31F783DA",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://92090382199726",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -846,11 +1255,60 @@
       }
     },
     {
+      "id": "RBXB62A6E0436634DE086435F815FD6800E",
+      "parent": "RBXFC3DCAC2F6DC4195A5CFC96871FBD655",
+      "class": "Motor6D",
+      "name": "np2.002Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.212109506,
+            -0.266015887,
+            0.559561133
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX6A597EC6C963403B8456557FD09DC93E",
+        "Part1": "RBXFC3DCAC2F6DC4195A5CFC96871FBD655",
+        "Name": "np2.002Motor6D"
+      }
+    },
+    {
       "id": "RBX72738AB96793486CB95E49E1CA514030",
       "parent": "RBXC894DC11A31440C39DAB9DCE31F783DA",
       "class": "MeshPart",
       "name": "Piercing",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://111710905090731",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -912,11 +1370,60 @@
       }
     },
     {
+      "id": "RBXBB113B39132E4C6AA7B644A615887519",
+      "parent": "RBX72738AB96793486CB95E49E1CA514030",
+      "class": "Motor6D",
+      "name": "pierce.002Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.261142015,
+            -0.288482845,
+            0.673304141
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX6A597EC6C963403B8456557FD09DC93E",
+        "Part1": "RBX72738AB96793486CB95E49E1CA514030",
+        "Name": "pierce.002Motor6D"
+      }
+    },
+    {
       "id": "RBX4433B8B7A5AB41959CBBDE4AF0D8A13D",
       "parent": "RBXC894DC11A31440C39DAB9DCE31F783DA",
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://94617452007217",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -975,6 +1482,54 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX8A214FC56C084E728FA08E38FCF18561",
+      "parent": "RBX4433B8B7A5AB41959CBBDE4AF0D8A13D",
+      "class": "Motor6D",
+      "name": "ring.002Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.276790768,
+            -0.417879343,
+            0.681849658
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX6A597EC6C963403B8456557FD09DC93E",
+        "Part1": "RBX4433B8B7A5AB41959CBBDE4AF0D8A13D",
+        "Name": "ring.002Motor6D"
       }
     },
     {
@@ -1039,6 +1594,62 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX5B0F9B9EAD2C4BB9884EEDC57F26734A",
+      "parent": "RBX6A597EC6C963403B8456557FD09DC93E",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.199999988,
+            0.600000024,
+            -0.199999988
+          ],
+          "rotation": [
+            1,
+            -8.11483239e-16,
+            9.95799726e-17,
+            -8.11483239e-16,
+            -1,
+            4.37114025e-8,
+            9.95799395e-17,
+            -4.37114025e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX1EFA81B913A94549B416D58CBDDA7CF9",
+      "parent": "RBX5B0F9B9EAD2C4BB9884EEDC57F26734A",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.49999994,
+            -5.96046448e-8
+          ],
+          "rotation": [
+            0.876304626,
+            -0.45267874,
+            0.164840013,
+            0.011748842,
+            0.36214301,
+            0.932048559,
+            -0.481614202,
+            -0.81482172,
+            0.322666049
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {

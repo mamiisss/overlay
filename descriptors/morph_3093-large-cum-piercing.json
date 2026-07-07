@@ -5,7 +5,14 @@
   "asset_id": "morph_3093-large-cum-piercing",
   "name": "Large Cum Piercing",
   "source_file": "3093-large-cum-piercing.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       1.81026495,
@@ -29,8 +36,10 @@
     "Model": 3,
     "Part": 9,
     "SpecialMesh": 7,
+    "UnionOperation": 4,
     "ParticleEmitter": 2,
     "MeshPart": 2,
+    "Bone": 6,
     "Decal": 1
   },
   "nodes": [
@@ -243,6 +252,134 @@
           1
         ],
         "Name": "Mesh"
+      }
+    },
+    {
+      "id": "RBX980473CD6F224AA7B19B87665FC85813",
+      "parent": "RBXBF6ED0524593434B9F3472E954ECA857",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.3499268,
+          0.119018912,
+          0.123051167
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            0.801295,
+            -0.208068,
+            -1.200073
+          ],
+          "rotation": [
+            0.89044,
+            0.081223,
+            -0.447795,
+            0.025054,
+            0.973704,
+            0.226436,
+            0.454411,
+            -0.212847,
+            0.864989
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX722DB47D9B664349876859686763EEFF",
+      "parent": "RBXBF6ED0524593434B9F3472E954ECA857",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.20394146,
+          1.5651238,
+          1.20394146
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.465943,
+            0.079958,
+            -0.511719
+          ],
+          "rotation": [
+            0.909857,
+            -0.397492,
+            0.11895,
+            0.413917,
+            0.849773,
+            -0.326437,
+            0.028677,
+            0.346259,
+            0.937701
+          ]
+        }
       }
     },
     {
@@ -544,6 +681,7 @@
       "class": "MeshPart",
       "name": "Right Boob cum",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7115703261",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -602,6 +740,90 @@
             0
           ]
         }
+      }
+    },
+    {
+      "id": "RBX2810CD4DA8154CCC8ECACC45075A4373",
+      "parent": "RBXD14F6CD46A0B45FAB2DC5EC2C23C1581",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00131526694,
+            0.407013476,
+            0.0076540052
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXA9D9DEFBEA464CC9B9832A26DCEE4607",
+      "parent": "RBX2810CD4DA8154CCC8ECACC45075A4373",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000610351562,
+            0.454418182,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            -8.89772671e-14,
+            -0.00000122258939,
+            0,
+            1,
+            -7.27777163e-8,
+            0.00000122258939,
+            7.27777163e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX981DCFE8A7654063B64B9CE2055179DB",
+      "parent": "RBXA9D9DEFBEA464CC9B9832A26DCEE4607",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000610351562,
+            0.398445129,
+            0.0000114440918
+          ],
+          "rotation": [
+            1,
+            -4.72067792e-14,
+            -2.36395465e-7,
+            0,
+            1,
+            -1.99694099e-7,
+            2.36395465e-7,
+            1.99694099e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -706,8 +928,72 @@
       }
     },
     {
-      "id": "RBX1CBD13F55FA445D09C9F9067A9CCF71B",
+      "id": "RBXCE20FB4A138A4F968FE268A9EAD409E5",
       "parent": "RBXA1A1FB9B7DAB4184A19F7B71F6ABC927",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.20202911,
+          1.56263781,
+          1.20202911
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.471553,
+            0.076014,
+            -0.498047
+          ],
+          "rotation": [
+            0.918512,
+            0.374578,
+            -0.1266,
+            -0.395123,
+            0.857705,
+            -0.328968,
+            -0.014639,
+            0.352183,
+            0.935817
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX1CBD13F55FA445D09C9F9067A9CCF71B",
+      "parent": "RBXCE20FB4A138A4F968FE268A9EAD409E5",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -720,6 +1006,70 @@
         "Transparency": 0,
         "Face": 5,
         "Name": "Decal"
+      }
+    },
+    {
+      "id": "RBXC20B4DDED53A4EB4BE15447BA00F3D73",
+      "parent": "RBXA1A1FB9B7DAB4184A19F7B71F6ABC927",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.3499268,
+          0.119018912,
+          0.123051167
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            -0.743655,
+            -0.223789,
+            -1.211914
+          ],
+          "rotation": [
+            0.897602,
+            -0.097886,
+            0.429788,
+            -0.006716,
+            0.971879,
+            0.235389,
+            -0.440749,
+            -0.214165,
+            0.871708
+          ]
+        }
       }
     },
     {
@@ -1021,6 +1371,7 @@
       "class": "MeshPart",
       "name": "Left Boob cum",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7115693161",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1079,6 +1430,90 @@
             -0.136249
           ]
         }
+      }
+    },
+    {
+      "id": "RBXAF5FDB411EFD46E49309622E016815DC",
+      "parent": "RBXA7F4D6F1FD424E41B520C2BE821422DD",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00124489807,
+            0.471009314,
+            0.00802186038
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX5E663321810346E09E198DB7C745ECAF",
+      "parent": "RBXAF5FDB411EFD46E49309622E016815DC",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000610351562,
+            0.525863647,
+            0.0000381469727
+          ],
+          "rotation": [
+            1,
+            -5.17815465e-7,
+            -0.00000178813934,
+            5.17815351e-7,
+            1,
+            -5.12236689e-8,
+            0.00000178813934,
+            5.12227416e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX111CBF508BA9430BA74FDD76D843B111",
+      "parent": "RBX5E663321810346E09E198DB7C745ECAF",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000610351562,
+            0.461101532,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            -2.60771085e-8,
+            -3.7252903e-7,
+            2.60770321e-8,
+            1,
+            -2.03028335e-7,
+            3.7252903e-7,
+            2.03028321e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     }
   ]

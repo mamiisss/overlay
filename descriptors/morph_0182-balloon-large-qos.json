@@ -5,7 +5,14 @@
   "asset_id": "morph_0182-balloon-large-qos",
   "name": "Balloon Large QoS",
   "source_file": "0182-balloon-large-qos.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       26.4842873,
@@ -29,6 +36,7 @@
     "Model": 1,
     "Part": 1,
     "SpecialMesh": 1,
+    "UnionOperation": 1,
     "Decal": 1
   },
   "nodes": [
@@ -143,8 +151,72 @@
       }
     },
     {
-      "id": "RBXCA94ED34714E4E6D8354EE9FE8A4B6F3",
+      "id": "RBX48092667DD90401190602D19594A235F",
       "parent": "RBX892BBFFCA2774DBA85FD032BE97D677A",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.69999886,
+          1.99810672,
+          1.65054893
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.015694,
+            -0.282367,
+            -0.579794
+          ],
+          "rotation": [
+            1,
+            0.000035,
+            0.000069,
+            -0.000035,
+            1,
+            -0.000085,
+            -0.000069,
+            0.000085,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXCA94ED34714E4E6D8354EE9FE8A4B6F3",
+      "parent": "RBX48092667DD90401190602D19594A235F",
       "class": "Decal",
       "name": "Decal",
       "properties": {

@@ -5,7 +5,14 @@
   "asset_id": "morph_0526-grena-starter-pack",
   "name": "gRena starter pack",
   "source_file": "0526-grena-starter-pack.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -199.109589,
@@ -30,8 +37,12 @@
     "Part": 360,
     "SpecialMesh": 68,
     "MeshPart": 87,
+    "Bone": 68,
     "Texture": 42,
-    "Decal": 254
+    "Decal": 254,
+    "UnionOperation": 63,
+    "Motor6D": 1,
+    "Weld": 1
   },
   "nodes": [
     {
@@ -159,6 +170,7 @@
       "class": "MeshPart",
       "name": "Right Arm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6256403385",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -217,6 +229,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX253327AF83554A7993D478E570392531",
+      "parent": "RBX9BB10F925BA64D09B087A0959483AB48",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000964013743,
+            0.892460406,
+            0.00274245325
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851738,
+            -0.000648312271,
+            0.0010305217,
+            -0.999994695,
+            0.00309875305,
+            -0.000645121676,
+            -0.00309941894,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXBE655484BB0846F3B2FB29421A428C66",
+      "parent": "RBX253327AF83554A7993D478E570392531",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000190734863,
+            0.890078783,
+            0
+          ],
+          "rotation": [
+            1,
+            0.00000145530794,
+            -2.6321527e-7,
+            -0.00000145530794,
+            1,
+            -1.46697417e-7,
+            2.63215043e-7,
+            1.46697801e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXC50564DEF937476F9822205EE7ACCDD8",
+      "parent": "RBXBE655484BB0846F3B2FB29421A428C66",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000190734863,
+            0.780449629,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            2.21189111e-9,
+            2.36439519e-7,
+            -2.21189111e-9,
+            1,
+            2.54085416e-11,
+            -2.36439519e-7,
+            -2.54090637e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -417,6 +513,7 @@
       "class": "MeshPart",
       "name": "Shirt R",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297221838",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -475,6 +572,34 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX4FC161B2407D4DD08D0DAA40AC3ECB88",
+      "parent": "RBX5C0FB923926B4B42AE7D0793581F3C9C",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000549316406,
+            0.188928127,
+            -0.000637054443
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102860481,
+            -0.00064831262,
+            0.00103060913,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941941,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
       }
     },
     {
@@ -597,6 +722,7 @@
       "class": "MeshPart",
       "name": "Right Glove",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297219283",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12669820455",
@@ -658,11 +784,96 @@
       }
     },
     {
+      "id": "RBX8B5315E2EF264D50B4478A2314AAF6D0",
+      "parent": "RBX3574E5F983344AA5BC27636547CD0CBF",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000816345215,
+            1.2964344,
+            0.00224304199
+          ],
+          "rotation": [
+            0.999999344,
+            0.00102851738,
+            -0.000648312387,
+            0.0010305217,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941918,
+            -0.999995112
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX1DA74FFEA04B430FB3B1E6BA136BD19E",
+      "parent": "RBX8B5315E2EF264D50B4478A2314AAF6D0",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000190734863,
+            0.890078783,
+            0.0000114440918
+          ],
+          "rotation": [
+            1,
+            0.00000145530771,
+            -2.63273449e-7,
+            -0.00000145530771,
+            1,
+            -1.46930134e-7,
+            2.63273222e-7,
+            1.46930518e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXDA0508FB64D5413FAA15E613BC09F42D",
+      "parent": "RBX1DA74FFEA04B430FB3B1E6BA136BD19E",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.780448675,
+            0
+          ],
+          "rotation": [
+            1,
+            2.21189089e-9,
+            2.3643949e-7,
+            -2.21189089e-9,
+            1,
+            2.55790718e-11,
+            -2.3643949e-7,
+            -2.5579594e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX0D93C1D49FDF40EAA3FEBE61B21EB760",
       "parent": "RBXAEEC2D5DE1BE4358ABD5280F625729DA",
       "class": "MeshPart",
       "name": "Left Arm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6256403385",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -721,6 +932,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX15F48CDE9A8F4AD49C01FA5940F113D2",
+      "parent": "RBX0D93C1D49FDF40EAA3FEBE61B21EB760",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000964013743,
+            0.892460406,
+            0.00274245325
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851738,
+            -0.000648312271,
+            0.0010305217,
+            -0.999994695,
+            0.00309875305,
+            -0.000645121676,
+            -0.00309941894,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXEE11548AF06F45378D4382DEF3A762E0",
+      "parent": "RBX15F48CDE9A8F4AD49C01FA5940F113D2",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000190734863,
+            0.890078783,
+            0
+          ],
+          "rotation": [
+            1,
+            0.00000145530794,
+            -2.6321527e-7,
+            -0.00000145530794,
+            1,
+            -1.46697417e-7,
+            2.63215043e-7,
+            1.46697801e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX05800F27DC2C4A0ABFF2467B437B9131",
+      "parent": "RBXEE11548AF06F45378D4382DEF3A762E0",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000190734863,
+            0.78044939,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            2.21189111e-9,
+            2.36439519e-7,
+            -2.21189111e-9,
+            1,
+            2.54085416e-11,
+            -2.36439519e-7,
+            -2.54090637e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -921,6 +1216,7 @@
       "class": "MeshPart",
       "name": "Shirt L",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297245755",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -979,6 +1275,34 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX8175D4C7062143B5BEF936B4CCBC8B8B",
+      "parent": "RBX7335741066B340D28D424E510E830CE2",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000549316406,
+            0.188928127,
+            0.00241851807
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851714,
+            -0.000648312387,
+            0.00103052147,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941941,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
       }
     },
     {
@@ -1101,6 +1425,7 @@
       "class": "MeshPart",
       "name": "Left Glove",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297219471",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12669820455",
@@ -1162,11 +1487,96 @@
       }
     },
     {
+      "id": "RBX9ACC3AA5DFAD4E26A12DC842678A76DD",
+      "parent": "RBX30C5ED093EEF4A538FDF9E6D99C0A294",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000816345215,
+            1.29643321,
+            0.00244522095
+          ],
+          "rotation": [
+            0.999999344,
+            0.00102856453,
+            -0.000648312503,
+            0.00103056885,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941918,
+            -0.999995112
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXC5501C35C78F4F3CB7F81F4A17792624",
+      "parent": "RBX9ACC3AA5DFAD4E26A12DC842678A76DD",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.890078783,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            0.00000145530771,
+            -2.63273449e-7,
+            -0.00000145530771,
+            1,
+            -1.47132269e-7,
+            2.63273222e-7,
+            1.47132653e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXBC20C6D089764DAC8F044FC84928B10D",
+      "parent": "RBXC5501C35C78F4F3CB7F81F4A17792624",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000114440918,
+            0.780448914,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            2.21189089e-9,
+            2.36264867e-7,
+            -2.21189089e-9,
+            1,
+            5.62745163e-11,
+            -2.36264867e-7,
+            -5.62750402e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXBFA99EA9F5164778A45326FD472744EF",
       "parent": "RBXAEEC2D5DE1BE4358ABD5280F625729DA",
       "class": "MeshPart",
       "name": "Torso",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256534961",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1243,6 +1653,7 @@
       "class": "MeshPart",
       "name": "Shirt",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297220853",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -1301,6 +1712,62 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX5F9A0CB94BBF45BA9EDDC114A52A405F",
+      "parent": "RBX4145544D05104EA5ACC23FB0B25BE89E",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.133132935,
+            0.613199949,
+            0
+          ],
+          "rotation": [
+            7.54979013e-8,
+            1,
+            -1.22464698e-16,
+            -1,
+            7.54979013e-8,
+            1.43333187e-14,
+            1.43333187e-14,
+            1.22463613e-16,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXCCEA91E8DDBE46F1BC6108871F7810E0",
+      "parent": "RBX5F9A0CB94BBF45BA9EDDC114A52A405F",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            1.17674708,
+            1.01590347,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            9.24582767e-24,
+            0,
+            1,
+            0,
+            -9.24582767e-24,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {
@@ -1423,6 +1890,7 @@
       "class": "MeshPart",
       "name": "Panties",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297229742",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12670862811",
@@ -1489,6 +1957,7 @@
       "class": "MeshPart",
       "name": "Bikini",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297176322",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075427646",
@@ -1565,6 +2034,7 @@
       "class": "MeshPart",
       "name": "Buttcheek",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256904270",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1631,6 +2101,7 @@
       "class": "MeshPart",
       "name": "Buttcheek",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256904072",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2571,6 +3042,7 @@
       "class": "MeshPart",
       "name": "Nipples",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5270413632",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2846,6 +3318,7 @@
       "class": "MeshPart",
       "name": "Nipples",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5270413936",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -3207,6 +3680,70 @@
       }
     },
     {
+      "id": "RBX140CA361374842A08D992D97817D77E4",
+      "parent": "RBX70E702DD08FD4BDC94B2D9E45165CE04",
+      "class": "UnionOperation",
+      "name": "Abs",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.905882,
+          0.905882,
+          0.92549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0.600000024,
+        "size": [
+          1.18722439,
+          0.872590303,
+          0.301811099
+        ],
+        "Name": "Abs",
+        "LocalCFrame": {
+          "position": [
+            -0.01785,
+            -1.971091,
+            -0.325906
+          ],
+          "rotation": [
+            0.992124,
+            0.121073,
+            -0.032106,
+            -0.125257,
+            0.958911,
+            -0.254559,
+            -0.000033,
+            0.256575,
+            0.966524
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX609F1E12DA20424BA5F321086071DF7B",
       "parent": "RBXBFA99EA9F5164778A45326FD472744EF",
       "class": "Part",
@@ -3340,6 +3877,7 @@
       "class": "MeshPart",
       "name": "Right Leg",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6257084343",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -3398,6 +3936,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBXCBFF75C931F34D4EB0644836AE6AB7E0",
+      "parent": "RBX9B5257DAAAB24E0BA88E82DDF63D82E5",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00257624383,
+            0.797226846,
+            -0.00909164827
+          ],
+          "rotation": [
+            1,
+            -0.00000145730371,
+            2.67922431e-8,
+            -0.00000145730371,
+            -1,
+            -7.29435854e-8,
+            2.67923497e-8,
+            7.29435499e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX493FAB3C0C0D459E912E8F02B23FF5EE",
+      "parent": "RBXCBFF75C931F34D4EB0644836AE6AB7E0",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.890079021,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            0.0000014552727,
+            -2.63179771e-7,
+            -0.0000014552727,
+            1,
+            -7.29431946e-8,
+            2.63179658e-7,
+            7.29435783e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX0ED11F3917B8453F989D7ED630D38804",
+      "parent": "RBX493FAB3C0C0D459E912E8F02B23FF5EE",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448794,
+            0
+          ],
+          "rotation": [
+            1,
+            2.03099537e-9,
+            2.36387535e-7,
+            -2.03094808e-9,
+            1,
+            -1.99687506e-7,
+            -2.36387535e-7,
+            1.99687506e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -3598,6 +4220,7 @@
       "class": "MeshPart",
       "name": "Right Thigh",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297220197",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -3659,11 +4282,96 @@
       }
     },
     {
+      "id": "RBX7326068CD83148CD917C076B52379204",
+      "parent": "RBX4174A0042951458B9D3E22B73CEAE519",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0318260193,
+            1.25533926,
+            -0.00492095947
+          ],
+          "rotation": [
+            1,
+            -0.00000145730371,
+            2.67922431e-8,
+            -0.00000145730371,
+            -1,
+            8.99770995e-8,
+            2.67921116e-8,
+            -8.99771351e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX42FD2B70AA9741DA9FD41C22FE54586E",
+      "parent": "RBX7326068CD83148CD917C076B52379204",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00000381469727,
+            0.890078783,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            0.0000014552727,
+            -2.63179771e-7,
+            -0.0000014552727,
+            1,
+            -7.29432017e-8,
+            2.63179658e-7,
+            7.29435854e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX0D9BE49A26F84626B7E5C2A709499C87",
+      "parent": "RBX42FD2B70AA9741DA9FD41C22FE54586E",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448914,
+            0
+          ],
+          "rotation": [
+            1,
+            2.03100425e-9,
+            2.36387535e-7,
+            -2.03095696e-9,
+            1,
+            -1.9968752e-7,
+            -2.36387535e-7,
+            1.9968752e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX7ED44B32CF33408EA80692EEF02B90E7",
       "parent": "RBXAEEC2D5DE1BE4358ABD5280F625729DA",
       "class": "MeshPart",
       "name": "Left Leg",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6257252712",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -3917,11 +4625,96 @@
       }
     },
     {
+      "id": "RBX8A73F2D9B60D42969111DDDCFE964259",
+      "parent": "RBX7ED44B32CF33408EA80692EEF02B90E7",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00257624383,
+            0.797226846,
+            0.0149920778
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXE15CEA5EFC234CE3BEB7BE3A72539A0B",
+      "parent": "RBX8A73F2D9B60D42969111DDDCFE964259",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000381469727,
+            0.890079021,
+            0
+          ],
+          "rotation": [
+            1,
+            5.64949834e-14,
+            -0.00000122115375,
+            -1.45570323e-13,
+            1,
+            -7.29435925e-8,
+            0.00000122115375,
+            7.29435925e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX4025D0CC58094DBC8F71557F0E2121D1",
+      "parent": "RBXE15CEA5EFC234CE3BEB7BE3A72539A0B",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448914,
+            0
+          ],
+          "rotation": [
+            1,
+            -3.62687683e-14,
+            -2.36396033e-7,
+            -1.09365574e-14,
+            1,
+            -1.99687463e-7,
+            2.36396033e-7,
+            1.99687463e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXB08A4D0569684F81A141F03531DA96A2",
       "parent": "RBX7ED44B32CF33408EA80692EEF02B90E7",
       "class": "MeshPart",
       "name": "Left Thigh",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297219854",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -3980,6 +4773,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX9E8516DD52094143A713FF6AB46051CC",
+      "parent": "RBXB08A4D0569684F81A141F03531DA96A2",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0318260193,
+            1.25533926,
+            0.0390472412
+          ],
+          "rotation": [
+            1,
+            -0.0000015447265,
+            2.67922236e-8,
+            -0.0000015447265,
+            -1,
+            -2.35864277e-7,
+            2.67925877e-8,
+            2.35864235e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX49DDE6C64CC842C695F73FF9B8B8F658",
+      "parent": "RBX9E8516DD52094143A713FF6AB46051CC",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00000381469727,
+            0.890079021,
+            -0.0000152587891
+          ],
+          "rotation": [
+            1,
+            0.00000145527258,
+            -2.63179771e-7,
+            -0.00000145527258,
+            1,
+            -7.29432088e-8,
+            2.63179658e-7,
+            7.29435925e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX26984E94151540D0966B493A9956C012",
+      "parent": "RBX49DDE6C64CC842C695F73FF9B8B8F658",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448735,
+            0
+          ],
+          "rotation": [
+            1,
+            2.03110528e-9,
+            2.36387521e-7,
+            -2.03105799e-9,
+            1,
+            -1.9968752e-7,
+            -2.36387521e-7,
+            1.9968752e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -4072,6 +4949,7 @@
       "class": "MeshPart",
       "name": "Meshes/lfembrow",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472596071",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4138,6 +5016,7 @@
       "class": "MeshPart",
       "name": "Meshes/rfembrow",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472595966",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4808,6 +5687,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472596012",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4874,6 +5754,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472595912",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4960,6 +5841,7 @@
       "class": "MeshPart",
       "name": "Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5026,6 +5908,7 @@
       "class": "MeshPart",
       "name": "untitled",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://728936337",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5092,6 +5975,7 @@
       "class": "MeshPart",
       "name": "Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5158,6 +6042,7 @@
       "class": "MeshPart",
       "name": "untitled",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://728936337",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5239,6 +6124,966 @@
       }
     },
     {
+      "id": "RBX34107AEF07E149D39BA13D9E7A6E9B9B",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.193255141,
+          0.1979689,
+          0.197968557
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.399533,
+            0.601011,
+            -0.506446
+          ],
+          "rotation": [
+            -0.309951,
+            0.939701,
+            0.144541,
+            -0.765382,
+            -0.336807,
+            0.548408,
+            0.564022,
+            0.059351,
+            0.823624
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXBE62C39867E1442799C6B0DF7ED5CA07",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.13169758,
+          0.134909868,
+          0.13490963
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.570314,
+            1.03911,
+            -0.724327
+          ],
+          "rotation": [
+            -0.341995,
+            0.939702,
+            0.000009,
+            -0.925437,
+            -0.336806,
+            0.173575,
+            0.163112,
+            0.059354,
+            0.984821
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX5DF9AD46DF9243DFAAE481F35B8F39B7",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.156261414,
+          0.160072848,
+          0.160072565
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.507162,
+            0.872742,
+            -0.668384
+          ],
+          "rotation": [
+            -0.336799,
+            0.939701,
+            0.059395,
+            -0.881238,
+            -0.336806,
+            0.331634,
+            0.331641,
+            0.059353,
+            0.941537
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF5EFFCDC226646F5A80DE5B4F80F5FD5",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.143831521,
+          0.147339776,
+          0.147339538
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.540653,
+            0.960366,
+            -0.701337
+          ],
+          "rotation": [
+            -0.340693,
+            0.939702,
+            0.029814,
+            -0.906789,
+            -0.336805,
+            0.253568,
+            0.24832,
+            0.059354,
+            0.966858
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXD9214855376A40D0AEF1EB26534EB367",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.242678791,
+          0.248598024,
+          0.248597577
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.236352,
+            0.195725,
+            -0.22263
+          ],
+          "rotation": [
+            -0.33034,
+            0.939702,
+            0.088523,
+            -0.848983,
+            -0.336806,
+            0.407173,
+            0.412436,
+            0.059352,
+            0.909051
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX394C3B28EBE344A485CEB7CA778F761B",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.168691307,
+          0.17280592,
+          0.172805592
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.471962,
+            0.781695,
+            -0.627497
+          ],
+          "rotation": [
+            -0.33034,
+            0.939702,
+            0.088523,
+            -0.848983,
+            -0.336806,
+            0.407173,
+            0.412436,
+            0.059352,
+            0.909051
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX1432E6BFC7D44471A076AE8F6EB10525",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.119563639,
+          0.122479953,
+          0.122479737
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.600708,
+            1.121966,
+            -0.735674
+          ],
+          "rotation": [
+            -0.340695,
+            0.939701,
+            -0.029799,
+            -0.937043,
+            -0.336806,
+            0.09226,
+            0.07666,
+            0.059355,
+            0.995289
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX5395C2B4D036402F9E29B56FDEA1D85D",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.218114913,
+          0.223435059,
+          0.223434627
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.328265,
+            0.427621,
+            -0.362324
+          ],
+          "rotation": [
+            -0.309951,
+            0.939701,
+            0.144541,
+            -0.765382,
+            -0.336807,
+            0.548408,
+            0.564022,
+            0.059351,
+            0.823624
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC2C46747A64D4A97B21D239988818064",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0947038531,
+          0.0970138162,
+          0.0970136449
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.647122,
+            1.250663,
+            -0.739952
+          ],
+          "rotation": [
+            -0.330346,
+            0.939701,
+            -0.088507,
+            -0.938828,
+            -0.336807,
+            -0.071853,
+            -0.09733,
+            0.059357,
+            0.993481
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX02184DC928E74E498E5B4BF5A5917C74",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.205685049,
+          0.210701972,
+          0.2107016
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.366165,
+            0.520269,
+            -0.436307
+          ],
+          "rotation": [
+            -0.296174,
+            0.939701,
+            0.171006,
+            -0.714672,
+            -0.336809,
+            0.613029,
+            0.63366,
+            0.05935,
+            0.771332
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC6760B2B7C0041C5BBB9B3BCDCA65C36",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.107133739,
+          0.109746881,
+          0.109746687
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.626158,
+            1.191858,
+            -0.74136
+          ],
+          "rotation": [
+            -0.336802,
+            0.939701,
+            -0.059379,
+            -0.941518,
+            -0.336806,
+            0.010242,
+            -0.010374,
+            0.059356,
+            0.998183
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX47E00ACFECB744FD8B893CD2BA9595A2",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.231432915,
+          0.0890642405,
+          0.0890644938
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.686122,
+            1.363427,
+            -0.717148
+          ],
+          "rotation": [
+            -0.321376,
+            0.939701,
+            -0.116961,
+            -0.928994,
+            -0.336807,
+            -0.153401,
+            -0.183545,
+            0.059357,
+            0.981218
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF6B95B2AEA8E41309161C90EB7459FA8",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.254812747,
+          0.261027932,
+          0.261027485
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.182416,
+            0.056005,
+            -0.16165
+          ],
+          "rotation": [
+            -0.336799,
+            0.939701,
+            0.059395,
+            -0.881238,
+            -0.336806,
+            0.331634,
+            0.331641,
+            0.059353,
+            0.941537
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXECEB181B38634394A1CA3CCF0F541B68",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.23054482,
+          0.236168116,
+          0.236167699
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.284994,
+            0.319567,
+            -0.290309
+          ],
+          "rotation": [
+            -0.321368,
+            0.939702,
+            0.116977,
+            -0.810266,
+            -0.336807,
+            0.479615,
+            0.490094,
+            0.059351,
+            0.869647
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX440D6245F1A443948EE533270AE90F45",
+      "parent": "RBX9D23E876B3C545DE955CB44DE2745DE8",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.1811212,
+          0.185538977,
+          0.185538664
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.437449,
+            0.694766,
+            -0.574875
+          ],
+          "rotation": [
+            -0.321368,
+            0.939702,
+            0.116977,
+            -0.810266,
+            -0.336807,
+            0.479615,
+            0.490094,
+            0.059351,
+            0.869647
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX05DBC5ED974247C48A5129CC43CD1F48",
       "parent": "RBX52C3E40BA07C46C5B3D21021980B63E2",
       "class": "Model",
@@ -5246,6 +7091,966 @@
       "properties": {
         "PrimaryPart": null,
         "Name": "Model"
+      }
+    },
+    {
+      "id": "RBXC3929142894146E890CFF8B07DC7A95A",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.193255141,
+          0.1979689,
+          0.197968557
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.446032,
+            0.607641,
+            -0.467814
+          ],
+          "rotation": [
+            0.31,
+            0.939685,
+            -0.144541,
+            -0.765369,
+            0.336848,
+            0.548402,
+            0.564013,
+            -0.059377,
+            0.823628
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX6776F070DB1241E9929D84A13EDBD3A6",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.13169758,
+          0.134909868,
+          0.13490963
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.61685,
+            1.045731,
+            -0.685706
+          ],
+          "rotation": [
+            0.34204,
+            0.939686,
+            0.000008,
+            -0.925422,
+            0.336846,
+            0.173575,
+            0.163103,
+            -0.059377,
+            0.984821
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX102A89BF639B47CBB9B66C49E495C59C",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.156261414,
+          0.160072848,
+          0.160072565
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.55369,
+            0.87936,
+            -0.62972
+          ],
+          "rotation": [
+            0.336846,
+            0.939685,
+            -0.059385,
+            -0.881223,
+            0.336847,
+            0.331631,
+            0.331632,
+            -0.059377,
+            0.941538
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX2A77EFFF5B624BE0BB958AC76211401D",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.143831521,
+          0.147339776,
+          0.147339538
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.58717,
+            0.96699,
+            -0.662702
+          ],
+          "rotation": [
+            0.340738,
+            0.939686,
+            -0.029801,
+            -0.906774,
+            0.336846,
+            0.253567,
+            0.248311,
+            -0.059377,
+            0.966859
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXA7B2C261C51B42AEB4336AB8CF429099",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.242678791,
+          0.248598024,
+          0.248597577
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.282828,
+            0.202361,
+            -0.183987
+          ],
+          "rotation": [
+            0.330389,
+            0.939685,
+            -0.088515,
+            -0.848968,
+            0.336847,
+            0.407169,
+            0.412427,
+            -0.059377,
+            0.909054
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF92EA7496A5F47D2AB839067F903840A",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.168691307,
+          0.17280592,
+          0.172805592
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.518471,
+            0.788319,
+            -0.588833
+          ],
+          "rotation": [
+            0.330389,
+            0.939685,
+            -0.088515,
+            -0.848968,
+            0.336847,
+            0.407169,
+            0.412427,
+            -0.059377,
+            0.909054
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE9CD24E6ED4042C3AB68B13F1DB27E69",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.119563639,
+          0.122479953,
+          0.122479737
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.647263,
+            1.128591,
+            -0.697006
+          ],
+          "rotation": [
+            0.340737,
+            0.939686,
+            0.029818,
+            -0.937029,
+            0.336846,
+            0.092261,
+            0.076652,
+            -0.059377,
+            0.995288
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXADADADC58E014AB1B3D8AF1FA9991801",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.218114913,
+          0.223435059,
+          0.223434627
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.374799,
+            0.434253,
+            -0.323679
+          ],
+          "rotation": [
+            0.31,
+            0.939685,
+            -0.144541,
+            -0.765369,
+            0.336848,
+            0.548402,
+            0.564013,
+            -0.059377,
+            0.823628
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXA2BDDCE4CA914A12A7247D25F6319062",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0947038531,
+          0.0970138162,
+          0.0970136449
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.693667,
+            1.257284,
+            -0.701299
+          ],
+          "rotation": [
+            0.330383,
+            0.939686,
+            0.088532,
+            -0.938815,
+            0.336845,
+            -0.071849,
+            -0.097337,
+            -0.059377,
+            0.993479
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX1CC3176FDFE448BEBA8109DCD84A7211",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.205685049,
+          0.210701972,
+          0.2107016
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.412689,
+            0.526897,
+            -0.397677
+          ],
+          "rotation": [
+            0.296223,
+            0.939685,
+            -0.171009,
+            -0.714659,
+            0.336847,
+            0.613022,
+            0.633651,
+            -0.059378,
+            0.771337
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX17F816C15BA14AF49420D41A3D68CCC1",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.107133739,
+          0.109746881,
+          0.109746687
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.672685,
+            1.198476,
+            -0.702708
+          ],
+          "rotation": [
+            0.336842,
+            0.939686,
+            0.059401,
+            -0.941504,
+            0.336846,
+            0.010245,
+            -0.010382,
+            -0.059377,
+            0.998182
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXB6453415AB244ACBB7BDB6AE3D1FE69B",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.254812747,
+          0.261027932,
+          0.261027485
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.228885,
+            0.062639,
+            -0.122993
+          ],
+          "rotation": [
+            0.336846,
+            0.939685,
+            -0.059385,
+            -0.881223,
+            0.336847,
+            0.331631,
+            0.331632,
+            -0.059377,
+            0.941538
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX5A4804EF7F534E2EA9A87C18971C6E77",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.23054482,
+          0.236168116,
+          0.236167699
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.331522,
+            0.3262,
+            -0.251697
+          ],
+          "rotation": [
+            0.321418,
+            0.939685,
+            -0.116973,
+            -0.810252,
+            0.336848,
+            0.47961,
+            0.490085,
+            -0.059377,
+            0.86965
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXED7A15ECADE14DE9B856A7391818ACF2",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.1811212,
+          0.185538977,
+          0.185538664
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.483983,
+            0.701393,
+            -0.536243
+          ],
+          "rotation": [
+            0.321418,
+            0.939685,
+            -0.116973,
+            -0.810252,
+            0.336848,
+            0.47961,
+            0.490085,
+            -0.059377,
+            0.86965
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7B20F2982AFD4AB68C834C3FABAE39E4",
+      "parent": "RBX05DBC5ED974247C48A5129CC43CD1F48",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.231432915,
+          0.0890642405,
+          0.0890644938
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -0.732625,
+            1.370053,
+            -0.678494
+          ],
+          "rotation": [
+            0.32141,
+            0.939686,
+            0.116989,
+            -0.92898,
+            0.336846,
+            -0.153396,
+            -0.183551,
+            -0.059377,
+            0.981215
+          ]
+        }
       }
     },
     {
@@ -5572,6 +8377,7 @@
       "class": "MeshPart",
       "name": "Cowbell",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297200538",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5638,6 +8444,7 @@
       "class": "MeshPart",
       "name": "Necklace",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297200437",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5704,6 +8511,7 @@
       "class": "MeshPart",
       "name": "Ribbon",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297175817",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -25221,6 +28029,70 @@
       }
     },
     {
+      "id": "RBX010AE0E8029947A59989FA30FA830958",
+      "parent": "RBX5D2E75EF3612436790A0BE6768F48C43",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.384314,
+          0.145098,
+          0.819608
+        ],
+        "Massless": false,
+        "Material": 1568,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0.800000012,
+        "size": [
+          1,
+          24,
+          68
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -8.918637,
+            14.497415,
+            14.3916
+          ],
+          "rotation": [
+            0.000013,
+            -0.000019,
+            -1,
+            -0.000074,
+            1,
+            -0.000019,
+            1,
+            0.000074,
+            0.000013
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXA1BEEDA057DB4BE2980CA4F4E7EA567D",
       "parent": "RBX750AAA6C636746D3AC5A19FFCA7BB484",
       "class": "Part",
@@ -25464,6 +28336,7 @@
       "class": "MeshPart",
       "name": "Right Arm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6256403385",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -25522,6 +28395,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBXB8475EB174824163A7566EC3CE4EFBB9",
+      "parent": "RBX0459B9EACD114C29AAAA51E70802ACFD",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000964013743,
+            0.892460406,
+            0.00274245325
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851738,
+            -0.000648312271,
+            0.0010305217,
+            -0.999994695,
+            0.00309875305,
+            -0.000645121676,
+            -0.00309941894,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX75B5CCC5B9034982B45F63D7A84C1FD6",
+      "parent": "RBXB8475EB174824163A7566EC3CE4EFBB9",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000190734863,
+            0.890078783,
+            0
+          ],
+          "rotation": [
+            1,
+            0.00000145530794,
+            -2.6321527e-7,
+            -0.00000145530794,
+            1,
+            -1.46697417e-7,
+            2.63215043e-7,
+            1.46697801e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX81AB49BB5BD64727A0891695D581E660",
+      "parent": "RBX75B5CCC5B9034982B45F63D7A84C1FD6",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000190734863,
+            0.780449629,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            2.21189111e-9,
+            2.36439519e-7,
+            -2.21189111e-9,
+            1,
+            2.54085416e-11,
+            -2.36439519e-7,
+            -2.54090637e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -25722,6 +28679,7 @@
       "class": "MeshPart",
       "name": "Shirt R",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297221838",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -25780,6 +28738,34 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBXA096DFC82FDE4F0290B7D0CDAC1DBEEE",
+      "parent": "RBXF1A025AF49124561BD2B61186988EDD1",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000549316406,
+            0.188928127,
+            -0.000637054443
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102860481,
+            -0.00064831262,
+            0.00103060913,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941941,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
       }
     },
     {
@@ -25902,6 +28888,7 @@
       "class": "MeshPart",
       "name": "Right Glove",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297219283",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12669820455",
@@ -25963,11 +28950,96 @@
       }
     },
     {
+      "id": "RBX40F650DE62A04154B3C8A466B46A80DD",
+      "parent": "RBX54AB22A97FA64FD19AB55D7A55E4EC44",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000816345215,
+            1.2964344,
+            0.00224304199
+          ],
+          "rotation": [
+            0.999999344,
+            0.00102851738,
+            -0.000648312387,
+            0.0010305217,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941918,
+            -0.999995112
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX460DF824F61A4B8E92CEEA79C0663702",
+      "parent": "RBX40F650DE62A04154B3C8A466B46A80DD",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000190734863,
+            0.890078783,
+            0.0000114440918
+          ],
+          "rotation": [
+            1,
+            0.00000145530771,
+            -2.63273449e-7,
+            -0.00000145530771,
+            1,
+            -1.46930134e-7,
+            2.63273222e-7,
+            1.46930518e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX0AECE13485DD45DCA127C4C4B8B357FE",
+      "parent": "RBX460DF824F61A4B8E92CEEA79C0663702",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.780448675,
+            0
+          ],
+          "rotation": [
+            1,
+            2.21189089e-9,
+            2.3643949e-7,
+            -2.21189089e-9,
+            1,
+            2.55790718e-11,
+            -2.3643949e-7,
+            -2.5579594e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX79A389631AFD4377872EE7E87DA021DD",
       "parent": "RBX5054550EC1F345DC8F03B7DF5DDA96B3",
       "class": "MeshPart",
       "name": "Left Arm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6256403385",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -26026,6 +29098,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX287809712331458C9F7323BF572F63CE",
+      "parent": "RBX79A389631AFD4377872EE7E87DA021DD",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000964013743,
+            0.892460406,
+            0.00274245325
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851738,
+            -0.000648312271,
+            0.0010305217,
+            -0.999994695,
+            0.00309875305,
+            -0.000645121676,
+            -0.00309941894,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX823895A4E15D42E38CE27F548A230C44",
+      "parent": "RBX287809712331458C9F7323BF572F63CE",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000190734863,
+            0.890078783,
+            0
+          ],
+          "rotation": [
+            1,
+            0.00000145530794,
+            -2.6321527e-7,
+            -0.00000145530794,
+            1,
+            -1.46697417e-7,
+            2.63215043e-7,
+            1.46697801e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX8C26B04835E74FF6B79D17E3A49CA385",
+      "parent": "RBX823895A4E15D42E38CE27F548A230C44",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000190734863,
+            0.78044939,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            2.21189111e-9,
+            2.36439519e-7,
+            -2.21189111e-9,
+            1,
+            2.54085416e-11,
+            -2.36439519e-7,
+            -2.54090637e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -26226,6 +29382,7 @@
       "class": "MeshPart",
       "name": "Shirt L",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297245755",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -26284,6 +29441,34 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBXD7BC129E44164CB7ACEC3CEC6D52A554",
+      "parent": "RBXD112D89F4A484D2E8AD446C5FBD55D50",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000549316406,
+            0.188928127,
+            0.00241851807
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851714,
+            -0.000648312387,
+            0.00103052147,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941941,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
       }
     },
     {
@@ -26406,6 +29591,7 @@
       "class": "MeshPart",
       "name": "Left Glove",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297219471",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12669820455",
@@ -26467,11 +29653,96 @@
       }
     },
     {
+      "id": "RBXF0D4F5B5A1154E919882F46B7A979BB7",
+      "parent": "RBX776D8600192D4D8B89AA06F125F18FCF",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000816345215,
+            1.29643321,
+            0.00244522095
+          ],
+          "rotation": [
+            0.999999344,
+            0.00102856453,
+            -0.000648312503,
+            0.00103056885,
+            -0.999994695,
+            0.00309875351,
+            -0.000645121792,
+            -0.00309941918,
+            -0.999995112
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX1A685316FCF04BA8B8D6FB3B98DCA1AD",
+      "parent": "RBXF0D4F5B5A1154E919882F46B7A979BB7",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000152587891,
+            0.890078783,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            0.00000145530771,
+            -2.63273449e-7,
+            -0.00000145530771,
+            1,
+            -1.47132269e-7,
+            2.63273222e-7,
+            1.47132653e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX526D82E6B6E74F289C6F120799656093",
+      "parent": "RBX1A685316FCF04BA8B8D6FB3B98DCA1AD",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000114440918,
+            0.780448914,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            2.21189089e-9,
+            2.36264867e-7,
+            -2.21189089e-9,
+            1,
+            5.62745163e-11,
+            -2.36264867e-7,
+            -5.62750402e-11,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXDD343D8E1C4549A1B8839DAA11C37326",
       "parent": "RBX5054550EC1F345DC8F03B7DF5DDA96B3",
       "class": "MeshPart",
       "name": "Torso",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256534961",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -26548,6 +29819,7 @@
       "class": "MeshPart",
       "name": "Shirt",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297220853",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075429387",
@@ -26606,6 +29878,62 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX91E29302EB174B39B7E2B04643D90E79",
+      "parent": "RBXC95DCC331FE448FA9B462CC6563EB47C",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.133132935,
+            0.613199949,
+            0
+          ],
+          "rotation": [
+            7.54979013e-8,
+            1,
+            -1.22464698e-16,
+            -1,
+            7.54979013e-8,
+            1.43333187e-14,
+            1.43333187e-14,
+            1.22463613e-16,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXD6DB938539D8424ABFEDCEE1F3C62833",
+      "parent": "RBX91E29302EB174B39B7E2B04643D90E79",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            1.17674708,
+            1.01590347,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            9.24582767e-24,
+            0,
+            1,
+            0,
+            -9.24582767e-24,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {
@@ -26728,6 +30056,7 @@
       "class": "MeshPart",
       "name": "Panties",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297229742",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12670862811",
@@ -26794,6 +30123,7 @@
       "class": "MeshPart",
       "name": "Bikini",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297176322",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://9075427646",
@@ -26870,6 +30200,7 @@
       "class": "MeshPart",
       "name": "Buttcheek",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256904270",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -26936,6 +30267,7 @@
       "class": "MeshPart",
       "name": "Buttcheek",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256904072",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -27876,6 +31208,7 @@
       "class": "MeshPart",
       "name": "Nipples",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5270413632",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -28151,6 +31484,7 @@
       "class": "MeshPart",
       "name": "Nipples",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5270413936",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -28512,6 +31846,70 @@
       }
     },
     {
+      "id": "RBXFE9066ACFE1D429B8898EA3F6095B6F9",
+      "parent": "RBX32D39DDDFCC14683AE2E70E05A1F3E7F",
+      "class": "UnionOperation",
+      "name": "Abs",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.905882,
+          0.905882,
+          0.92549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0.5,
+        "size": [
+          1.18722439,
+          0.872590303,
+          0.301811099
+        ],
+        "Name": "Abs",
+        "LocalCFrame": {
+          "position": [
+            -5.01785,
+            -1.971186,
+            -0.325841
+          ],
+          "rotation": [
+            0.992124,
+            0.121073,
+            -0.032106,
+            -0.125257,
+            0.958911,
+            -0.254559,
+            -0.000033,
+            0.256575,
+            0.966524
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX8FFE9CE970FC4688B43BBB7DD54FC1CC",
       "parent": "RBXDD343D8E1C4549A1B8839DAA11C37326",
       "class": "Part",
@@ -28645,6 +32043,7 @@
       "class": "MeshPart",
       "name": "Right Leg",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6257084343",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -28703,6 +32102,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX0F7973626DAD4CB49F6799F160995E61",
+      "parent": "RBX24F18E6B582044E4A1B4A2F2507F6EE2",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00257624383,
+            0.797226846,
+            -0.00909164827
+          ],
+          "rotation": [
+            1,
+            -0.00000145730371,
+            2.67922431e-8,
+            -0.00000145730371,
+            -1,
+            -7.29435854e-8,
+            2.67923497e-8,
+            7.29435499e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX329D891F94DC430F9C835A74375CE7A5",
+      "parent": "RBX0F7973626DAD4CB49F6799F160995E61",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.890079021,
+            0.00000381469727
+          ],
+          "rotation": [
+            1,
+            0.0000014552727,
+            -2.63179771e-7,
+            -0.0000014552727,
+            1,
+            -7.29431946e-8,
+            2.63179658e-7,
+            7.29435783e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX5D8B85A512974BFEA787A0A9AF255CB6",
+      "parent": "RBX329D891F94DC430F9C835A74375CE7A5",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448794,
+            0
+          ],
+          "rotation": [
+            1,
+            2.03099537e-9,
+            2.36387535e-7,
+            -2.03094808e-9,
+            1,
+            -1.99687506e-7,
+            -2.36387535e-7,
+            1.99687506e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -28903,6 +32386,7 @@
       "class": "MeshPart",
       "name": "Right Thigh",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297220197",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12669810547",
@@ -28964,11 +32448,96 @@
       }
     },
     {
+      "id": "RBXC24B2B5C03604F0083071D9F06586AEF",
+      "parent": "RBX5860661A5DAD4FDCB909B90C8E1A23A3",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0318260193,
+            1.25533926,
+            -0.00492095947
+          ],
+          "rotation": [
+            1,
+            -0.00000145730371,
+            2.67922431e-8,
+            -0.00000145730371,
+            -1,
+            8.99770995e-8,
+            2.67921116e-8,
+            -8.99771351e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX0F8DE8FAB8B241779A9C127E27326E48",
+      "parent": "RBXC24B2B5C03604F0083071D9F06586AEF",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00000381469727,
+            0.890078783,
+            -0.00000381469727
+          ],
+          "rotation": [
+            1,
+            0.0000014552727,
+            -2.63179771e-7,
+            -0.0000014552727,
+            1,
+            -7.29432017e-8,
+            2.63179658e-7,
+            7.29435854e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXFD971D36ECF4411D972BFE48AADDD37B",
+      "parent": "RBX0F8DE8FAB8B241779A9C127E27326E48",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448914,
+            0
+          ],
+          "rotation": [
+            1,
+            2.03100425e-9,
+            2.36387535e-7,
+            -2.03095696e-9,
+            1,
+            -1.9968752e-7,
+            -2.36387535e-7,
+            1.9968752e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX27E0EF51B955462DAF80CAA518781AE6",
       "parent": "RBX5054550EC1F345DC8F03B7DF5DDA96B3",
       "class": "MeshPart",
       "name": "Left Leg",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6257252712",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -29222,11 +32791,96 @@
       }
     },
     {
+      "id": "RBX3B7BA1F9AC1243C38AA1160BF3812872",
+      "parent": "RBX27E0EF51B955462DAF80CAA518781AE6",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00257624383,
+            0.797226846,
+            0.0149920778
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX71CEC6ED98C6438CABEF954AAE3B12A1",
+      "parent": "RBX3B7BA1F9AC1243C38AA1160BF3812872",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000381469727,
+            0.890079021,
+            0
+          ],
+          "rotation": [
+            1,
+            5.64949834e-14,
+            -0.00000122115375,
+            -1.45570323e-13,
+            1,
+            -7.29435925e-8,
+            0.00000122115375,
+            7.29435925e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX3D19F04008904927B20EB35309DE1A2C",
+      "parent": "RBX71CEC6ED98C6438CABEF954AAE3B12A1",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448914,
+            0
+          ],
+          "rotation": [
+            1,
+            -3.62687683e-14,
+            -2.36396033e-7,
+            -1.09365574e-14,
+            1,
+            -1.99687463e-7,
+            2.36396033e-7,
+            1.99687463e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBX106F93DE95124D15AF3ED14D2B1D5F86",
       "parent": "RBX27E0EF51B955462DAF80CAA518781AE6",
       "class": "MeshPart",
       "name": "Left Thigh",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6297219854",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://12669810547",
@@ -29285,6 +32939,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX6A604CF373904A19A06CCD3DA3C8B9A5",
+      "parent": "RBX106F93DE95124D15AF3ED14D2B1D5F86",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0318260193,
+            1.25533926,
+            0.0390472412
+          ],
+          "rotation": [
+            1,
+            -0.0000015447265,
+            2.67922236e-8,
+            -0.0000015447265,
+            -1,
+            -2.35864277e-7,
+            2.67925877e-8,
+            2.35864235e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX718F74EB0E914B36A216B896D8E3385F",
+      "parent": "RBX6A604CF373904A19A06CCD3DA3C8B9A5",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00000381469727,
+            0.890079021,
+            -0.0000152587891
+          ],
+          "rotation": [
+            1,
+            0.00000145527258,
+            -2.63179771e-7,
+            -0.00000145527258,
+            1,
+            -7.29432088e-8,
+            2.63179658e-7,
+            7.29435925e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXBB86BDAFF93E448AA47E227F2C9BD104",
+      "parent": "RBX718F74EB0E914B36A216B896D8E3385F",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.780448735,
+            0
+          ],
+          "rotation": [
+            1,
+            2.03110528e-9,
+            2.36387521e-7,
+            -2.03105799e-9,
+            1,
+            -1.9968752e-7,
+            -2.36387521e-7,
+            1.9968752e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -29377,6 +33115,7 @@
       "class": "MeshPart",
       "name": "Meshes/lfembrow",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472596071",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -29443,6 +33182,7 @@
       "class": "MeshPart",
       "name": "Meshes/rfembrow",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472595966",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30113,6 +33853,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472596012",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30179,6 +33920,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472595912",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30265,6 +34007,7 @@
       "class": "MeshPart",
       "name": "Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30331,6 +34074,7 @@
       "class": "MeshPart",
       "name": "untitled",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://728936337",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30397,6 +34141,7 @@
       "class": "MeshPart",
       "name": "Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30463,6 +34208,7 @@
       "class": "MeshPart",
       "name": "untitled",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://728936337",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30529,6 +34275,7 @@
       "class": "MeshPart",
       "name": "untitled",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://728936337",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -30610,6 +34357,966 @@
       }
     },
     {
+      "id": "RBX67B09919121C469AAFCA5FED268699F0",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.193255141,
+          0.1979689,
+          0.197968557
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.600467,
+            0.600916,
+            -0.506381
+          ],
+          "rotation": [
+            -0.309951,
+            0.939701,
+            0.144541,
+            -0.765382,
+            -0.336807,
+            0.548408,
+            0.564022,
+            0.059351,
+            0.823624
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX11E59397C94B4F5B8E952E12915E63E4",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.13169758,
+          0.134909868,
+          0.13490963
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.429686,
+            1.039015,
+            -0.724262
+          ],
+          "rotation": [
+            -0.341995,
+            0.939702,
+            0.000009,
+            -0.925437,
+            -0.336806,
+            0.173575,
+            0.163112,
+            0.059354,
+            0.984821
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXD9356902156149AA8389C12538829575",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.156261414,
+          0.160072848,
+          0.160072565
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.492838,
+            0.872647,
+            -0.668319
+          ],
+          "rotation": [
+            -0.336799,
+            0.939701,
+            0.059395,
+            -0.881238,
+            -0.336806,
+            0.331634,
+            0.331641,
+            0.059353,
+            0.941537
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXA4487EE19EA0490EA9538778A0F4B534",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.143831521,
+          0.147339776,
+          0.147339538
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.459347,
+            0.960271,
+            -0.701272
+          ],
+          "rotation": [
+            -0.340693,
+            0.939702,
+            0.029814,
+            -0.906789,
+            -0.336805,
+            0.253568,
+            0.24832,
+            0.059354,
+            0.966858
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXB4CC6948CE714C6AB3B1BA3E72CBF96D",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.242678791,
+          0.248598024,
+          0.248597577
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.763648,
+            0.19563,
+            -0.222565
+          ],
+          "rotation": [
+            -0.33034,
+            0.939702,
+            0.088523,
+            -0.848983,
+            -0.336806,
+            0.407173,
+            0.412436,
+            0.059352,
+            0.909051
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX3A615F62725A46AFAACB92F328D1F052",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.168691307,
+          0.17280592,
+          0.172805592
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.528038,
+            0.7816,
+            -0.627432
+          ],
+          "rotation": [
+            -0.33034,
+            0.939702,
+            0.088523,
+            -0.848983,
+            -0.336806,
+            0.407173,
+            0.412436,
+            0.059352,
+            0.909051
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE14316E077D344FDB03AAEC60CAE268F",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.119563639,
+          0.122479953,
+          0.122479737
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.399292,
+            1.121871,
+            -0.735609
+          ],
+          "rotation": [
+            -0.340695,
+            0.939701,
+            -0.029799,
+            -0.937043,
+            -0.336806,
+            0.09226,
+            0.07666,
+            0.059355,
+            0.995289
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXDC4BD6BC8D3E41E198EFE4B5A803738E",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.218114913,
+          0.223435059,
+          0.223434627
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.671735,
+            0.427526,
+            -0.362259
+          ],
+          "rotation": [
+            -0.309951,
+            0.939701,
+            0.144541,
+            -0.765382,
+            -0.336807,
+            0.548408,
+            0.564022,
+            0.059351,
+            0.823624
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXB95C38026FFA42DB8C5BB016A82C0829",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0947038531,
+          0.0970138162,
+          0.0970136449
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.352878,
+            1.250568,
+            -0.739887
+          ],
+          "rotation": [
+            -0.330346,
+            0.939701,
+            -0.088507,
+            -0.938828,
+            -0.336807,
+            -0.071853,
+            -0.09733,
+            0.059357,
+            0.993481
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX2AB7E6C1C7944319876943DA176B3E8C",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.205685049,
+          0.210701972,
+          0.2107016
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.633835,
+            0.520174,
+            -0.436242
+          ],
+          "rotation": [
+            -0.296174,
+            0.939701,
+            0.171006,
+            -0.714672,
+            -0.336809,
+            0.613029,
+            0.63366,
+            0.05935,
+            0.771332
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX3B4599553F0C435A85CEBAB59A06D5A5",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.107133739,
+          0.109746881,
+          0.109746687
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.373842,
+            1.191763,
+            -0.741295
+          ],
+          "rotation": [
+            -0.336802,
+            0.939701,
+            -0.059379,
+            -0.941518,
+            -0.336806,
+            0.010242,
+            -0.010374,
+            0.059356,
+            0.998183
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX3A0CDE13BFC44CF0943C03BF730D4474",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.231432915,
+          0.0890642405,
+          0.0890644938
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.313878,
+            1.363332,
+            -0.717083
+          ],
+          "rotation": [
+            -0.321376,
+            0.939701,
+            -0.116961,
+            -0.928994,
+            -0.336807,
+            -0.153401,
+            -0.183545,
+            0.059357,
+            0.981218
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF81E50CF2C8343F484550F887242E15B",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.254812747,
+          0.261027932,
+          0.261027485
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.817584,
+            0.05591,
+            -0.161585
+          ],
+          "rotation": [
+            -0.336799,
+            0.939701,
+            0.059395,
+            -0.881238,
+            -0.336806,
+            0.331634,
+            0.331641,
+            0.059353,
+            0.941537
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXEFDED4033D22437AB734E5EAB8B7DD2D",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.23054482,
+          0.236168116,
+          0.236167699
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.715006,
+            0.319472,
+            -0.290244
+          ],
+          "rotation": [
+            -0.321368,
+            0.939702,
+            0.116977,
+            -0.810266,
+            -0.336807,
+            0.479615,
+            0.490094,
+            0.059351,
+            0.869647
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXE7DBADF90F774FF1933700D85492C2A8",
+      "parent": "RBX85729544A01A4C4A9E750C288D6CCD01",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.1811212,
+          0.185538977,
+          0.185538664
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -4.562551,
+            0.694671,
+            -0.57481
+          ],
+          "rotation": [
+            -0.321368,
+            0.939702,
+            0.116977,
+            -0.810266,
+            -0.336807,
+            0.479615,
+            0.490094,
+            0.059351,
+            0.869647
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXBE6B3941BF8641259496B49448E4A2D2",
       "parent": "RBXEA43EE6239AA405097978321905CB799",
       "class": "Model",
@@ -30617,6 +35324,966 @@
       "properties": {
         "PrimaryPart": null,
         "Name": "Model"
+      }
+    },
+    {
+      "id": "RBX07F834EA89F745A1AD6835E67E56B5B0",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.193255141,
+          0.1979689,
+          0.197968557
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.446032,
+            0.607546,
+            -0.467749
+          ],
+          "rotation": [
+            0.31,
+            0.939685,
+            -0.144541,
+            -0.765369,
+            0.336848,
+            0.548402,
+            0.564013,
+            -0.059377,
+            0.823628
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX57D6618AA4324078A68C5E2B5E687547",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.13169758,
+          0.134909868,
+          0.13490963
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.61685,
+            1.045636,
+            -0.685641
+          ],
+          "rotation": [
+            0.34204,
+            0.939686,
+            0.000008,
+            -0.925422,
+            0.336846,
+            0.173575,
+            0.163103,
+            -0.059377,
+            0.984821
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX68940C8E86D44166ADE7608EFF995A62",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.156261414,
+          0.160072848,
+          0.160072565
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.55369,
+            0.879265,
+            -0.629655
+          ],
+          "rotation": [
+            0.336846,
+            0.939685,
+            -0.059385,
+            -0.881223,
+            0.336847,
+            0.331631,
+            0.331632,
+            -0.059377,
+            0.941538
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX2EE71059E01E4E5CA6BBD72163A35E60",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.143831521,
+          0.147339776,
+          0.147339538
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.58717,
+            0.966895,
+            -0.662637
+          ],
+          "rotation": [
+            0.340738,
+            0.939686,
+            -0.029801,
+            -0.906774,
+            0.336846,
+            0.253567,
+            0.248311,
+            -0.059377,
+            0.966859
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF1FBBC344B2A47A09629D8C15DCD6EEF",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.242678791,
+          0.248598024,
+          0.248597577
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.282828,
+            0.202266,
+            -0.183922
+          ],
+          "rotation": [
+            0.330389,
+            0.939685,
+            -0.088515,
+            -0.848968,
+            0.336847,
+            0.407169,
+            0.412427,
+            -0.059377,
+            0.909054
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX2955AFB43D8147A2967295DD14C55DFD",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.168691307,
+          0.17280592,
+          0.172805592
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.518471,
+            0.788224,
+            -0.588768
+          ],
+          "rotation": [
+            0.330389,
+            0.939685,
+            -0.088515,
+            -0.848968,
+            0.336847,
+            0.407169,
+            0.412427,
+            -0.059377,
+            0.909054
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7A70AF15895A41CD94EE564A379840ED",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.119563639,
+          0.122479953,
+          0.122479737
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.647263,
+            1.128496,
+            -0.696941
+          ],
+          "rotation": [
+            0.340737,
+            0.939686,
+            0.029818,
+            -0.937029,
+            0.336846,
+            0.092261,
+            0.076652,
+            -0.059377,
+            0.995288
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXEFA8025B0A884A77A71FA2964AF0821C",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.218114913,
+          0.223435059,
+          0.223434627
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.374799,
+            0.434158,
+            -0.323614
+          ],
+          "rotation": [
+            0.31,
+            0.939685,
+            -0.144541,
+            -0.765369,
+            0.336848,
+            0.548402,
+            0.564013,
+            -0.059377,
+            0.823628
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXA812C75E08B04E0C9C0042B80654D240",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.0947038531,
+          0.0970138162,
+          0.0970136449
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.693667,
+            1.257189,
+            -0.701234
+          ],
+          "rotation": [
+            0.330383,
+            0.939686,
+            0.088532,
+            -0.938815,
+            0.336845,
+            -0.071849,
+            -0.097337,
+            -0.059377,
+            0.993479
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXA617826239AD49AAA266F618BA1626A0",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.205685049,
+          0.210701972,
+          0.2107016
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.412689,
+            0.526802,
+            -0.397612
+          ],
+          "rotation": [
+            0.296223,
+            0.939685,
+            -0.171009,
+            -0.714659,
+            0.336847,
+            0.613022,
+            0.633651,
+            -0.059378,
+            0.771337
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX11996AA36A4A40BC985A4945E982B331",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.107133739,
+          0.109746881,
+          0.109746687
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.672685,
+            1.198381,
+            -0.702643
+          ],
+          "rotation": [
+            0.336842,
+            0.939686,
+            0.059401,
+            -0.941504,
+            0.336846,
+            0.010245,
+            -0.010382,
+            -0.059377,
+            0.998182
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX979480C8E3DF4B45A0654399CEBAD17E",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.254812747,
+          0.261027932,
+          0.261027485
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.228885,
+            0.062544,
+            -0.122928
+          ],
+          "rotation": [
+            0.336846,
+            0.939685,
+            -0.059385,
+            -0.881223,
+            0.336847,
+            0.331631,
+            0.331632,
+            -0.059377,
+            0.941538
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX5A0B33D5CD444E95B5E71F2D061D3912",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.23054482,
+          0.236168116,
+          0.236167699
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.331522,
+            0.326105,
+            -0.251632
+          ],
+          "rotation": [
+            0.321418,
+            0.939685,
+            -0.116973,
+            -0.810252,
+            0.336848,
+            0.47961,
+            0.490085,
+            -0.059377,
+            0.86965
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF77985B1C3504B99B3711799131506E3",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.1811212,
+          0.185538977,
+          0.185538664
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.483983,
+            0.701298,
+            -0.536178
+          ],
+          "rotation": [
+            0.321418,
+            0.939685,
+            -0.116973,
+            -0.810252,
+            0.336848,
+            0.47961,
+            0.490085,
+            -0.059377,
+            0.86965
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX4E40C94B5CF04B15B48EDB427C744411",
+      "parent": "RBXBE6B3941BF8641259496B49448E4A2D2",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.917647,
+          0.717647
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.231432915,
+          0.0890642405,
+          0.0890644938
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            -5.732625,
+            1.369958,
+            -0.678429
+          ],
+          "rotation": [
+            0.32141,
+            0.939686,
+            0.116989,
+            -0.92898,
+            0.336846,
+            -0.153396,
+            -0.183551,
+            -0.059377,
+            0.981215
+          ]
+        }
       }
     },
     {
@@ -30943,6 +36610,7 @@
       "class": "MeshPart",
       "name": "Cowbell",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297200538",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31009,6 +36677,7 @@
       "class": "MeshPart",
       "name": "Necklace",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297200437",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31075,6 +36744,7 @@
       "class": "MeshPart",
       "name": "Ribbon",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6297175817",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31528,6 +37198,7 @@
       "class": "MeshPart",
       "name": "Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://724902976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31594,6 +37265,7 @@
       "class": "MeshPart",
       "name": "Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://724902976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31670,6 +37342,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31736,6 +37409,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31802,6 +37476,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31868,6 +37543,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -31944,6 +37620,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32010,6 +37687,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32076,6 +37754,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32142,6 +37821,7 @@
       "class": "MeshPart",
       "name": "Side Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://437432504",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32208,6 +37888,7 @@
       "class": "MeshPart",
       "name": "Hair",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://724902976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32269,11 +37950,108 @@
       }
     },
     {
+      "id": "RBX7AE6E6716E564A07B927ACA4AA7F7CDD",
+      "parent": "RBXD9AE15273E324AC19476E39673F9898A",
+      "class": "Motor6D",
+      "name": "Eyebrows",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0000244326384,
+            0.0585334748,
+            -0.583174586
+          ],
+          "rotation": [
+            0.999990582,
+            0.00496890163,
+            -0.000221553462,
+            -0.00496955588,
+            0.999990761,
+            0.00137597998,
+            0.000229046738,
+            -0.00137666974,
+            0.999997973
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0.999990463,
+            0.0049689156,
+            -0.000221553404,
+            -0.00496954005,
+            0.999990642,
+            0.00137597998,
+            0.000229046724,
+            -0.00137666962,
+            0.999997973
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD9AE15273E324AC19476E39673F9898A",
+        "Part1": "RBX9A6318D7BFDF4DC6BCA76CBDC7053386",
+        "Name": "Eyebrows"
+      }
+    },
+    {
+      "id": "RBX004EF419BD2E4659976BEA976D7E8B9C",
+      "parent": "RBXD9AE15273E324AC19476E39673F9898A",
+      "class": "Weld",
+      "name": "Face",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -0.00000407210655,
+            0
+          ],
+          "rotation": [
+            1,
+            9.59889007e-7,
+            -6.51046264e-7,
+            -9.59887871e-7,
+            1,
+            0.00000181787823,
+            6.51047969e-7,
+            -0.00000181787766,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXD9AE15273E324AC19476E39673F9898A",
+        "Part1": "RBX60E45F15407E47378E7BADB67BD77AA4",
+        "Name": "Face"
+      }
+    },
+    {
       "id": "RBX7F71DBF8FFEF44C38957AF394E1035D0",
       "parent": "RBX981336A37EA34E16BF0C14C3F3CB0C9E",
       "class": "MeshPart",
       "name": "Left Arm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6256403385",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32332,6 +38110,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX6B502977C6BB4647BFC9E94B7FEC4447",
+      "parent": "RBX7F71DBF8FFEF44C38957AF394E1035D0",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000944728672,
+            0.874606967,
+            0.00268759043
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851738,
+            -0.000648312271,
+            0.0010305217,
+            -0.999994695,
+            0.00309875305,
+            -0.000645121676,
+            -0.00309941894,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX6F7EC65A30BD4F8A9F19BAFE03402D7D",
+      "parent": "RBX6B502977C6BB4647BFC9E94B7FEC4447",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000305175781,
+            0.872272491,
+            -0.0000152587891
+          ],
+          "rotation": [
+            1,
+            0.00000145509694,
+            -2.63331685e-7,
+            -0.00000145509694,
+            1,
+            -1.47148569e-7,
+            2.63331458e-7,
+            1.47148953e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXC6738BE821694CAD917851B21639F914",
+      "parent": "RBX6F7EC65A30BD4F8A9F19BAFE03402D7D",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000152587891,
+            0.764836788,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            2.63844413e-9,
+            2.36555934e-7,
+            -2.63844413e-9,
+            1,
+            -5.95740242e-16,
+            -2.36555934e-7,
+            -2.83993703e-17,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -32532,6 +38394,7 @@
       "class": "MeshPart",
       "name": "Right Arm",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6256403385",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32590,6 +38453,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX7F6BF351BE514E6B8BFC5D9EBBACB53C",
+      "parent": "RBX94A1A4CCA21441A6B27F4A73B6CE43C3",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000944728672,
+            0.874606967,
+            0.00268759043
+          ],
+          "rotation": [
+            0.999999285,
+            0.00102851738,
+            -0.000648312271,
+            0.0010305217,
+            -0.999994695,
+            0.00309875305,
+            -0.000645121676,
+            -0.00309941894,
+            -0.999995053
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX03C0932ED3924D35BB4E97E9379DD12D",
+      "parent": "RBX7F6BF351BE514E6B8BFC5D9EBBACB53C",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000457763672,
+            0.872272968,
+            -0.0000152587891
+          ],
+          "rotation": [
+            1,
+            0.00000145509694,
+            -2.63331685e-7,
+            -0.00000145509694,
+            1,
+            -1.47148569e-7,
+            2.63331458e-7,
+            1.47148953e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX9560B914CDAB4242872D2DB7CE6922A0",
+      "parent": "RBX03C0932ED3924D35BB4E97E9379DD12D",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000305175781,
+            0.764837027,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            2.63844413e-9,
+            2.36555934e-7,
+            -2.63844413e-9,
+            1,
+            -5.95740242e-16,
+            -2.36555934e-7,
+            -2.83993703e-17,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -32790,6 +38737,7 @@
       "class": "MeshPart",
       "name": "Left Leg",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6257247882",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -32848,6 +38796,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBXE291539E4185421383F91E60FF9DC11D",
+      "parent": "RBXA667DF05320C4583A0FE340A1C3FCF4A",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00250841747,
+            0.823625684,
+            0.0221115388
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXACA115403063404B9FDEA4F0CD3844E3",
+      "parent": "RBXE291539E4185421383F91E60FF9DC11D",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.872272968,
+            0
+          ],
+          "rotation": [
+            1,
+            5.64949834e-14,
+            -0.00000122115375,
+            -1.45570323e-13,
+            1,
+            -7.29435925e-8,
+            0.00000122115375,
+            7.29435925e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX9354EA6046224E67AB0CA7BECDC6AB7C",
+      "parent": "RBXACA115403063404B9FDEA4F0CD3844E3",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.764836252,
+            0
+          ],
+          "rotation": [
+            1,
+            -3.62687548e-14,
+            -2.36396033e-7,
+            -1.09365709e-14,
+            1,
+            -1.99687463e-7,
+            2.36396033e-7,
+            1.99687463e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -33048,6 +39080,7 @@
       "class": "MeshPart",
       "name": "Right Leg",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6257082295",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -33106,6 +39139,90 @@
             -0.000013
           ]
         }
+      }
+    },
+    {
+      "id": "RBX69F52D45761749CDA73DEFA19D464A85",
+      "parent": "RBXE6B3A62614394A93A714E3ECC2F4DD19",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00250841747,
+            0.823625803,
+            0.00618145801
+          ],
+          "rotation": [
+            1,
+            -0.00000145730371,
+            2.67922431e-8,
+            -0.00000145730371,
+            -1,
+            -7.29435854e-8,
+            2.67923497e-8,
+            7.29435499e-8,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBXEB75F0C9127B490B853F30E50D50E1B2",
+      "parent": "RBX69F52D45761749CDA73DEFA19D464A85",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.872272491,
+            0
+          ],
+          "rotation": [
+            1,
+            0.0000014552727,
+            -2.63179771e-7,
+            -0.0000014552727,
+            1,
+            -7.29431662e-8,
+            2.63179658e-7,
+            7.29435499e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBX046E9F90D7D74181A311F99E429F7F7F",
+      "parent": "RBXEB75F0C9127B490B853F30E50D50E1B2",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.764836371,
+            0
+          ],
+          "rotation": [
+            1,
+            2.03097894e-9,
+            2.36387535e-7,
+            -2.03093165e-9,
+            1,
+            -1.99687534e-7,
+            -2.36387535e-7,
+            1.99687534e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
       }
     },
     {
@@ -33306,6 +39423,7 @@
       "class": "MeshPart",
       "name": "Torso",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6416715139",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -34387,6 +40505,7 @@
       "class": "MeshPart",
       "name": "Meshes/KilluaHairobj",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1901943351",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -34453,6 +40572,7 @@
       "class": "MeshPart",
       "name": "Meshes/KilluaHairobj",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1901943351",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -34519,6 +40639,7 @@
       "class": "MeshPart",
       "name": "Meshes/KilluaHairobj",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://1901943351",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -34585,6 +40706,7 @@
       "class": "MeshPart",
       "name": "Balls",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6416715343",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -34951,6 +41073,7 @@
       "class": "MeshPart",
       "name": "Buttcheek",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256906787",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -35017,6 +41140,7 @@
       "class": "MeshPart",
       "name": "Buttcheek",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6256906978",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -35292,6 +41416,7 @@
       "class": "MeshPart",
       "name": "Meshes/right1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6566887227",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -35358,6 +41483,7 @@
       "class": "MeshPart",
       "name": "Meshes/right2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6566887064",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -36038,6 +42164,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472596012",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -36104,6 +42231,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6472595912",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -36170,6 +42298,7 @@
       "class": "MeshPart",
       "name": "Ram Horn",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://434078905",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -36236,6 +42365,7 @@
       "class": "MeshPart",
       "name": "Ram Horn",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://434078905",
         "RenderFidelity": 1,
         "TextureID": null,

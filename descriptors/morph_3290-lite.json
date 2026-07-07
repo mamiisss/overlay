@@ -5,7 +5,14 @@
   "asset_id": "morph_3290-lite",
   "name": "Lite",
   "source_file": "3290-lite.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       328.307892,
@@ -29,8 +36,11 @@
     "Model": 3,
     "Part": 13,
     "SpecialMesh": 11,
+    "UnionOperation": 4,
     "ParticleEmitter": 2,
-    "Decal": 6
+    "Decal": 6,
+    "Motor6D": 2,
+    "Weld": 4
   },
   "nodes": [
     {
@@ -245,6 +255,70 @@
       }
     },
     {
+      "id": "RBX01D061CC4CAB4360880054DF536E2F09",
+      "parent": "RBXA5B0A002C779476DB6CDEFA99F5CAD72",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.173681527,
+          0.0590734594,
+          0.061074812
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            0.782257,
+            0.128632,
+            -1.25733
+          ],
+          "rotation": [
+            0.890439,
+            0.081215,
+            -0.447798,
+            0.025065,
+            0.973703,
+            0.226437,
+            0.454413,
+            -0.212853,
+            0.864987
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXB0D4AD81721B43E1A96F9E6EBF49F27A",
       "parent": "RBXA5B0A002C779476DB6CDEFA99F5CAD72",
       "class": "Part",
@@ -353,6 +427,70 @@
         "VelocityInheritance": 0,
         "ZOffset": 0,
         "Name": "Particles"
+      }
+    },
+    {
+      "id": "RBXAF96CFBA54074AFA900A0DB75F6D78A4",
+      "parent": "RBXA5B0A002C779476DB6CDEFA99F5CAD72",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.178814292,
+          0.0396504402,
+          0.178867429
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            0.783539,
+            0.068802,
+            -1.24707
+          ],
+          "rotation": [
+            0.966053,
+            -0.257652,
+            0.018897,
+            0.013904,
+            -0.021184,
+            -0.999679,
+            0.25797,
+            0.966006,
+            -0.016883
+          ]
+        }
       }
     },
     {
@@ -680,6 +818,150 @@
       }
     },
     {
+      "id": "RBXA9B45BCB792449C2998D63F49B2BD2EC",
+      "parent": "RBX12AE46E4A0D34562835AAFAFA8AC0BF9",
+      "class": "Motor6D",
+      "name": "[B] Nipple",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0239522457,
+            -0.441569328,
+            -0.521300554
+          ],
+          "rotation": [
+            0.967184484,
+            0.254041314,
+            -0.00414617686,
+            -0.153390631,
+            0.596841514,
+            0.787560523,
+            0.202547505,
+            -0.761080265,
+            0.616223454
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX12AE46E4A0D34562835AAFAFA8AC0BF9",
+        "Part1": "RBXF79C494A4A394F0F955F0FBF7B9AA29A",
+        "Name": "[B] Nipple"
+      }
+    },
+    {
+      "id": "RBX22D097B5357644E998F8F682CB034ABD",
+      "parent": "RBX12AE46E4A0D34562835AAFAFA8AC0BF9",
+      "class": "Motor6D",
+      "name": "Aerola",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.009796381,
+            -0.0884890556,
+            -0.2011621
+          ],
+          "rotation": [
+            0.990266502,
+            -0.00728217419,
+            -0.138993412,
+            0.108164795,
+            0.668736219,
+            0.735589743,
+            0.0875932351,
+            -0.743464112,
+            0.66301477
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX12AE46E4A0D34562835AAFAFA8AC0BF9",
+        "Part1": "RBX4BC2080B635A4CDDBBF5B8DA7C0EDB2D",
+        "Name": "Aerola"
+      }
+    },
+    {
+      "id": "RBXEB9B02229A4E4C9AB491CB6ED5DF8E02",
+      "parent": "RBX12AE46E4A0D34562835AAFAFA8AC0BF9",
+      "class": "Weld",
+      "name": "[Skin] Breast",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.000778436661,
+            -0.000370979309,
+            0.355139494
+          ],
+          "rotation": [
+            -0.0000881235101,
+            0.000014960824,
+            -1,
+            0.0000437339368,
+            1,
+            0.0000149569705,
+            1,
+            -0.0000437326198,
+            -0.0000881241649
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX12AE46E4A0D34562835AAFAFA8AC0BF9",
+        "Part1": "RBX0B5A202203714BD3AE467CEFE4CD3EE3",
+        "Name": "[Skin] Breast"
+      }
+    },
+    {
       "id": "RBX0B5A202203714BD3AE467CEFE4CD3EE3",
       "parent": "RBXA5B0A002C779476DB6CDEFA99F5CAD72",
       "class": "Part",
@@ -778,6 +1060,70 @@
       "properties": {
         "PrimaryPart": "RBXE1394457BD77428DA095EF1A8904A51D",
         "Name": "UpperL"
+      }
+    },
+    {
+      "id": "RBX65DFD0C49BFB4471A2E4EA1D7DDA21E2",
+      "parent": "RBXC43FB40E9F55461395877D18C0D1D329",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.19467108,
+          0.0662125349,
+          0.0684557557
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            -0.646485,
+            0.136612,
+            -1.28467
+          ],
+          "rotation": [
+            0.97546,
+            -0.040973,
+            0.216331,
+            -0.010315,
+            0.972949,
+            0.23079,
+            -0.219935,
+            -0.227358,
+            0.94865
+          ]
+        }
       }
     },
     {
@@ -889,6 +1235,70 @@
         "VelocityInheritance": 0,
         "ZOffset": 0,
         "Name": "Particles"
+      }
+    },
+    {
+      "id": "RBX8FB69BED5CEC4F11B464A544E7081D59",
+      "parent": "RBXC43FB40E9F55461395877D18C0D1D329",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.200424165,
+          0.044442229,
+          0.200483695
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.649872,
+            0.069344,
+            -1.27295
+          ],
+          "rotation": [
+            0.999506,
+            0.028185,
+            0.013877,
+            0.014466,
+            -0.020801,
+            -0.999679,
+            -0.027887,
+            0.999386,
+            -0.021199
+          ]
+        }
       }
     },
     {
@@ -1307,6 +1717,102 @@
       }
     },
     {
+      "id": "RBX911A9C6A8C1746FC99C805BD0CF67074",
+      "parent": "RBX3FD7937DBEAB4BCEA8D06768951B6BA8",
+      "class": "Weld",
+      "name": "[B] Nipple",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0433011055,
+            -0.4446491,
+            -0.517274141
+          ],
+          "rotation": [
+            0.967183709,
+            0.254044235,
+            -0.0041458467,
+            -0.153392792,
+            0.596841455,
+            0.787560165,
+            0.202549517,
+            -0.761079431,
+            0.616223872
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX3FD7937DBEAB4BCEA8D06768951B6BA8",
+        "Part1": "RBX41773F9141A840DEAD23C564564A13E7",
+        "Name": "[B] Nipple"
+      }
+    },
+    {
+      "id": "RBX0BF1D07F267D405AB373FDFFC105BA8B",
+      "parent": "RBX3FD7937DBEAB4BCEA8D06768951B6BA8",
+      "class": "Weld",
+      "name": "Aerola",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0097951889,
+            -0.088490963,
+            -0.201171756
+          ],
+          "rotation": [
+            0.990266621,
+            -0.00727812992,
+            -0.138992831,
+            0.108161218,
+            0.668740094,
+            0.735586703,
+            0.0875963718,
+            -0.743460596,
+            0.663018227
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX3FD7937DBEAB4BCEA8D06768951B6BA8",
+        "Part1": "RBX8326620EC25C49A8B6B65DB26A85AFA8",
+        "Name": "Aerola"
+      }
+    },
+    {
       "id": "RBX72908D8274AA4A8CB6CF08FB29718823",
       "parent": "RBXC43FB40E9F55461395877D18C0D1D329",
       "class": "Part",
@@ -1395,6 +1901,54 @@
           1
         ],
         "Name": "Mesh"
+      }
+    },
+    {
+      "id": "RBX853840D50D2942C18CEDC9E7403B2730",
+      "parent": "RBX72908D8274AA4A8CB6CF08FB29718823",
+      "class": "Weld",
+      "name": "[Skin] Breast",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.355148077,
+            0.00038599968,
+            -0.000732421875
+          ],
+          "rotation": [
+            -0.0000599617779,
+            0.0000423703168,
+            1,
+            0.00000844888928,
+            1,
+            -0.0000423698111,
+            -1,
+            0.00000844634906,
+            -0.000059962138
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX72908D8274AA4A8CB6CF08FB29718823",
+        "Part1": "RBX3FD7937DBEAB4BCEA8D06768951B6BA8",
+        "Name": "[Skin] Breast"
       }
     }
   ]

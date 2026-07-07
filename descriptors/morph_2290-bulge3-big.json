@@ -6,6 +6,13 @@
   "name": "Bulge3 (Big)",
   "source_file": "2290-bulge3-big.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       39.0015793,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 4,
     "ParticleEmitter": 1,
+    "UnionOperation": 1,
     "MeshPart": 1,
+    "SurfaceAppearance": 1,
     "SpecialMesh": 1
   },
   "nodes": [
@@ -228,6 +237,70 @@
       }
     },
     {
+      "id": "RBX759CD0CA3D97444AA4ACBC002B84C0AA",
+      "parent": "RBX157B1DA946134B2D8D9C818AF73C1399",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.356863,
+          0.364706,
+          0.411765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.667823374,
+          0.300454378,
+          0.650003076
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            0.001964,
+            0.000627,
+            -0.312799
+          ],
+          "rotation": [
+            -0.999965,
+            -0.000913,
+            -0.008306,
+            0.00821,
+            0.077535,
+            -0.996956,
+            0.001554,
+            -0.996989,
+            -0.077525
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXBFE8EF991519425F83CCF972D5932392",
       "parent": "RBX54B66C9A3C9C466997D7A8E063DCE2B5",
       "class": "Model",
@@ -307,6 +380,7 @@
       "class": "MeshPart",
       "name": "color8",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12532892619",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -365,6 +439,20 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXEE67E5A6FEDA46E1BAF5360433CECAF3",
+      "parent": "RBXA12ED41FEF7947E0BD8E4FD50BF1E5C5",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": null,
+        "RoughnessMap": "rbxassetid://14429033345",
+        "Name": "SurfaceAppearance"
       }
     },
     {

@@ -5,7 +5,14 @@
   "asset_id": "morph_1010-small",
   "name": "Small",
   "source_file": "1010-small.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -79.0822067,
@@ -29,6 +36,7 @@
     "Model": 3,
     "Part": 4,
     "SpecialMesh": 4,
+    "UnionOperation": 1,
     "MeshPart": 2
   },
   "nodes": [
@@ -234,6 +242,70 @@
       }
     },
     {
+      "id": "RBX607C278E093344889B79CA7F44F107CC",
+      "parent": "RBX184B74DFA10647CB8C73D98AD69E9015",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.982434869,
+          0.922482193,
+          0.746903658
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.019165,
+            -0.853904,
+            0.1875
+          ],
+          "rotation": [
+            -1,
+            -0.0004,
+            -0.000935,
+            -0.001017,
+            0.408634,
+            0.912698,
+            0.000017,
+            0.912698,
+            -0.408634
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXC065FC545E954A4FBAC13F4A5959E771",
       "parent": "RBX1A2DF03C80F4406B9745F9298C22ECF0",
       "class": "Model",
@@ -340,6 +412,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014170419",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -507,6 +580,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7014168388",
         "RenderFidelity": 1,
         "TextureID": null,

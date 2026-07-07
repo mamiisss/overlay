@@ -6,6 +6,13 @@
   "name": "Mal0 skull",
   "source_file": "0455-mal0-skull.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -43,
@@ -29,7 +36,9 @@
     "Model": 1,
     "Part": 3,
     "SpecialMesh": 1,
-    "MeshPart": 7
+    "MeshPart": 7,
+    "UnionOperation": 1,
+    "Bone": 22
   },
   "nodes": [
     {
@@ -148,6 +157,7 @@
       "class": "MeshPart",
       "name": "Jaw",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18479552103",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://18479545201",
@@ -273,11 +283,76 @@
       }
     },
     {
+      "id": "RBX1023C62FFF3D4981BD4A08515D7B1A2D",
+      "parent": "RBXA4824028720A421FB826E1689B2F50B0",
+      "class": "UnionOperation",
+      "name": "Eyebrow",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.066667,
+          0.066667,
+          0.066667
+        ],
+        "Massless": false,
+        "Material": 288,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.863193512,
+          0.0980989486,
+          0.29801178
+        ],
+        "Name": "Eyebrow",
+        "LocalCFrame": {
+          "position": [
+            -0.020332,
+            0.400979,
+            -0.49501
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            0.996195,
+            0.087156,
+            0,
+            -0.087156,
+            0.996195
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXB552A6DD4B8D47C49E387B5A73A2CD1E",
       "parent": "RBXA4824028720A421FB826E1689B2F50B0",
       "class": "MeshPart",
       "name": "upper teeth",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18479552133",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -408,6 +483,7 @@
       "class": "MeshPart",
       "name": "Tongue",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://6696845081",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -469,11 +545,628 @@
       }
     },
     {
+      "id": "RBX1AEA806AA1A94E97BE9474F4D94EC15A",
+      "parent": "RBXA70AFCC9649843E3A9C0989D12E3D01A",
+      "class": "Bone",
+      "name": "root",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00000215108935,
+            -0.0794242248,
+            0.283483773
+          ],
+          "rotation": [
+            -3.57627897e-7,
+            3.13916416e-7,
+            -1,
+            1.62920671e-7,
+            -1,
+            -3.13916473e-7,
+            -1,
+            -1.62920784e-7,
+            3.5762784e-7
+          ]
+        },
+        "Visible": false,
+        "Name": "root"
+      }
+    },
+    {
+      "id": "RBX5A32B2B23891492AA735D13D9ED40A2B",
+      "parent": "RBX1AEA806AA1A94E97BE9474F4D94EC15A",
+      "class": "Bone",
+      "name": "Tongue_00",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000852584839,
+            0.000262260437,
+            0
+          ],
+          "rotation": [
+            -0.57379967,
+            0.818995774,
+            9.98421228e-7,
+            -0.818995774,
+            -0.57379967,
+            3.58031684e-7,
+            8.66120104e-7,
+            -6.12264216e-7,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Tongue_00"
+      }
+    },
+    {
+      "id": "RBXAE9FFF1B6156457BBFF915DA74826FEB",
+      "parent": "RBX5A32B2B23891492AA735D13D9ED40A2B",
+      "class": "Bone",
+      "name": "Tongue_01",
+      "properties": {
+        "CFrame": {
+          "position": [
+            4.76837158e-7,
+            0.14158535,
+            9.53674316e-7
+          ],
+          "rotation": [
+            0.899084568,
+            -0.437775195,
+            -2.9514382e-9,
+            0.437775195,
+            0.899084568,
+            -3.39020033e-7,
+            1.51068122e-7,
+            3.03515549e-7,
+            1.00000024
+          ]
+        },
+        "Visible": false,
+        "Name": "Tongue_01"
+      }
+    },
+    {
+      "id": "RBXD197DF50116848A087961A103966F847",
+      "parent": "RBXAE9FFF1B6156457BBFF915DA74826FEB",
+      "class": "Bone",
+      "name": "Tongue_02",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -5.96046448e-7,
+            0.119102478,
+            -9.53674316e-7
+          ],
+          "rotation": [
+            0.929113984,
+            -0.369793534,
+            -7.52813548e-7,
+            0.369793504,
+            0.929114044,
+            -7.14892849e-7,
+            9.63812226e-7,
+            3.85831385e-7,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Tongue_02"
+      }
+    },
+    {
+      "id": "RBXD8800C94199E4EE599F1A299E9F02396",
+      "parent": "RBXD197DF50116848A087961A103966F847",
+      "class": "Bone",
+      "name": "Tongue_03",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.132024765,
+            0
+          ],
+          "rotation": [
+            0.993993461,
+            0.109440506,
+            -0.0000108132108,
+            -0.109440513,
+            0.993993402,
+            0.0000020160071,
+            0.0000109688917,
+            -8.20494392e-7,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Tongue_03"
+      }
+    },
+    {
+      "id": "RBX2D2E8EA0565D4F8590ADA553E15731AE",
+      "parent": "RBXD8800C94199E4EE599F1A299E9F02396",
+      "class": "Bone",
+      "name": "Tongue_04",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -2.38418579e-7,
+            0.115618706,
+            0
+          ],
+          "rotation": [
+            0.994071722,
+            0.108726181,
+            -0.0000457533642,
+            -0.108726174,
+            0.994071782,
+            0.00000584570716,
+            0.0000461177042,
+            -8.36464437e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Tongue_04"
+      }
+    },
+    {
+      "id": "RBX5E4BE9C13FF349208F22A568166F4154",
+      "parent": "RBX2D2E8EA0565D4F8590ADA553E15731AE",
+      "class": "Bone",
+      "name": "Tongue_05",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0991439819,
+            0
+          ],
+          "rotation": [
+            0.995175779,
+            0.0981085896,
+            0.00006553188,
+            -0.0981085971,
+            0.995175719,
+            -1.96529072e-7,
+            -0.0000652350209,
+            -0.00000623365941,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Tongue_05"
+      }
+    },
+    {
+      "id": "RBXE2839E9E353849ECB95414938E979B01",
+      "parent": "RBX5E4BE9C13FF349208F22A568166F4154",
+      "class": "Bone",
+      "name": "Tongue_06",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.0378084183,
+            0
+          ],
+          "rotation": [
+            0.998199642,
+            -0.0599798635,
+            -0.00000794283551,
+            0.0599798597,
+            0.998199701,
+            -5.34993205e-7,
+            0.00000796062341,
+            5.76198218e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Tongue_06"
+      }
+    },
+    {
+      "id": "RBX1398026BC34E4093AAF1AFCADB5F27E6",
+      "parent": "RBXE2839E9E353849ECB95414938E979B01",
+      "class": "Bone",
+      "name": "T_R.006",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000699937344,
+            -0.0448732376,
+            -0.105937958
+          ],
+          "rotation": [
+            0.999721408,
+            -0.0138438381,
+            0.0191189852,
+            0.0223025847,
+            0.819281399,
+            -0.572957814,
+            -0.00773189263,
+            0.573224545,
+            0.819361925
+          ]
+        },
+        "Visible": false,
+        "Name": "T_R.006"
+      }
+    },
+    {
+      "id": "RBX7ACCA1373BA04E0192FAC7055EE2CD99",
+      "parent": "RBXE2839E9E353849ECB95414938E979B01",
+      "class": "Bone",
+      "name": "T_L.006",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000820457935,
+            -0.0467433929,
+            0.108169556
+          ],
+          "rotation": [
+            0.998484731,
+            -0.0506142452,
+            -0.0215965658,
+            0.0533468165,
+            0.793999076,
+            0.605573714,
+            -0.0135030048,
+            -0.605808258,
+            0.795496047
+          ]
+        },
+        "Visible": false,
+        "Name": "T_L.006"
+      }
+    },
+    {
+      "id": "RBXEA181208C6394E4DA94468EEC4AAE765",
+      "parent": "RBX5E4BE9C13FF349208F22A568166F4154",
+      "class": "Bone",
+      "name": "T_R.005",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00595843792,
+            -0.0412874222,
+            -0.118471146
+          ],
+          "rotation": [
+            0.997550309,
+            -0.061781466,
+            0.0328099281,
+            0.069272697,
+            0.937709868,
+            -0.340443343,
+            -0.00973310322,
+            0.341882169,
+            0.939692557
+          ]
+        },
+        "Visible": false,
+        "Name": "T_R.005"
+      }
+    },
+    {
+      "id": "RBXEF510BF47DFF4609A9B40242CF73D8C2",
+      "parent": "RBX5E4BE9C13FF349208F22A568166F4154",
+      "class": "Bone",
+      "name": "T_L.005",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00588929653,
+            -0.0412740707,
+            0.121638298
+          ],
+          "rotation": [
+            0.996638238,
+            -0.0643731654,
+            -0.0506802425,
+            0.0788419917,
+            0.921776712,
+            0.379620522,
+            0.0222784895,
+            -0.382340014,
+            0.923753262
+          ]
+        },
+        "Visible": false,
+        "Name": "T_L.005"
+      }
+    },
+    {
+      "id": "RBX5734DA1C05C141E9A1F3D761F6D01776",
+      "parent": "RBX2D2E8EA0565D4F8590ADA553E15731AE",
+      "class": "Bone",
+      "name": "T_R.004",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0092959404,
+            -0.040643692,
+            -0.13576889
+          ],
+          "rotation": [
+            0.997175157,
+            -0.0751118362,
+            -0.000318923965,
+            0.0739155188,
+            0.982029974,
+            -0.173647702,
+            0.013356193,
+            0.173133567,
+            0.984807849
+          ]
+        },
+        "Visible": false,
+        "Name": "T_R.004"
+      }
+    },
+    {
+      "id": "RBX9CC3834387E0490285FC4A6FFFC9B3F3",
+      "parent": "RBX2D2E8EA0565D4F8590ADA553E15731AE",
+      "class": "Bone",
+      "name": "T_L.004",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0091509819,
+            -0.0407705307,
+            0.135808945
+          ],
+          "rotation": [
+            0.9972803,
+            -0.0736473203,
+            0.00283866189,
+            0.0724866837,
+            0.987073362,
+            0.142940298,
+            -0.0133291362,
+            -0.142345771,
+            0.989727259
+          ]
+        },
+        "Visible": false,
+        "Name": "T_L.004"
+      }
+    },
+    {
+      "id": "RBX65B3E54EC2AE4559A7C19BADDD001C2C",
+      "parent": "RBXD8800C94199E4EE599F1A299E9F02396",
+      "class": "Bone",
+      "name": "T_R.003",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0238649845,
+            -0.0405006409,
+            -0.13576889
+          ],
+          "rotation": [
+            0.986599803,
+            -0.163158745,
+            0.0000123858599,
+            0.163158745,
+            0.986599803,
+            -6.00429075e-7,
+            -0.0000121219218,
+            0.00000261324476,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "T_R.003"
+      }
+    },
+    {
+      "id": "RBX1228F1FD7DD740A6B843DA99DF12FBED",
+      "parent": "RBXD8800C94199E4EE599F1A299E9F02396",
+      "class": "Bone",
+      "name": "T_L.003",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0237083435,
+            -0.0407648087,
+            0.135808945
+          ],
+          "rotation": [
+            0.986521959,
+            -0.163628817,
+            0.0000120686664,
+            0.163628817,
+            0.986521959,
+            -3.2422804e-7,
+            -0.0000118529515,
+            0.00000229463967,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "T_L.003"
+      }
+    },
+    {
+      "id": "RBX61FB8AE162A44C34A805624F708DA3A6",
+      "parent": "RBXD197DF50116848A087961A103966F847",
+      "class": "Bone",
+      "name": "T_R.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0191082954,
+            -0.0425758362,
+            -0.13576889
+          ],
+          "rotation": [
+            0.999997079,
+            -0.00242984248,
+            0.0000014797522,
+            0.00242984248,
+            0.999997139,
+            3.59590269e-9,
+            -0.00000147975641,
+            -3.27628061e-13,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "T_R.002"
+      }
+    },
+    {
+      "id": "RBX7B55925B4275451593B396B161381EA8",
+      "parent": "RBXD197DF50116848A087961A103966F847",
+      "class": "Bone",
+      "name": "T_L.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0189304352,
+            -0.0429182053,
+            0.135808945
+          ],
+          "rotation": [
+            0.999999166,
+            0.00131006504,
+            0.00000181023415,
+            -0.00131006504,
+            0.999999225,
+            -6.77447431e-8,
+            -0.00000181032112,
+            6.53731647e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "T_L.002"
+      }
+    },
+    {
+      "id": "RBX980D7D53A7C34E769CD5C9E94751AD09",
+      "parent": "RBXAE9FFF1B6156457BBFF915DA74826FEB",
+      "class": "Bone",
+      "name": "T_R.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0339361429,
+            -0.0320777893,
+            -0.135769844
+          ],
+          "rotation": [
+            0.999994397,
+            -0.00336910714,
+            2.41693101e-7,
+            0.00336910714,
+            0.999994397,
+            -7.1923175e-8,
+            -2.41449413e-7,
+            7.27370519e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "T_R.001"
+      }
+    },
+    {
+      "id": "RBXB644369328E64474A8AD49392E771351",
+      "parent": "RBXAE9FFF1B6156457BBFF915DA74826FEB",
+      "class": "Bone",
+      "name": "T_L.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0339362621,
+            -0.0320777893,
+            0.135807991
+          ],
+          "rotation": [
+            0.999991953,
+            -0.00403471198,
+            4.82171117e-7,
+            0.00403471198,
+            0.999991953,
+            1.9453803e-9,
+            -4.82174983e-7,
+            5.68434053e-14,
+            1.00000024
+          ]
+        },
+        "Visible": false,
+        "Name": "T_L.001"
+      }
+    },
+    {
+      "id": "RBX67A57EF88A1D4864A08C0F68BD4AAFE8",
+      "parent": "RBX5A32B2B23891492AA735D13D9ED40A2B",
+      "class": "Bone",
+      "name": "T_R.000",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0444717407,
+            -0.0145959854,
+            -0.135767937
+          ],
+          "rotation": [
+            0.999997139,
+            0.00240474916,
+            1.19250615e-7,
+            -0.00240474916,
+            0.999997139,
+            -6.07715194e-8,
+            -1.19396404e-7,
+            6.04845738e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "T_R.000"
+      }
+    },
+    {
+      "id": "RBX8409C564EB9846279C4924303ED98906",
+      "parent": "RBX5A32B2B23891492AA735D13D9ED40A2B",
+      "class": "Bone",
+      "name": "T_L.000",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0444717407,
+            -0.0145959854,
+            0.135808945
+          ],
+          "rotation": [
+            0.999999881,
+            0.000590115786,
+            -4.00487465e-7,
+            -0.000590115786,
+            0.999999881,
+            2.36390851e-10,
+            4.00487522e-7,
+            -5.68434189e-14,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "T_L.000"
+      }
+    },
+    {
       "id": "RBX0129BA2D1A9B4D2398D55552AFA2BFB0",
       "parent": "RBXA4824028720A421FB826E1689B2F50B0",
       "class": "MeshPart",
       "name": "lower teeth",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18479552124",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -540,6 +1233,7 @@
       "class": "MeshPart",
       "name": "Eyelashes",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18479552050",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -606,6 +1300,7 @@
       "class": "MeshPart",
       "name": "Head",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18479552155",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://18479545201",
@@ -672,6 +1367,7 @@
       "class": "MeshPart",
       "name": "Brows",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18479552044",
         "RenderFidelity": 0,
         "TextureID": null,

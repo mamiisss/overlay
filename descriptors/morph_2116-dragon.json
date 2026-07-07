@@ -5,7 +5,14 @@
   "asset_id": "morph_2116-dragon",
   "name": "Dragon",
   "source_file": "2116-dragon.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -4397.10205,
@@ -30,7 +37,8 @@
     "Part": 4,
     "SpecialMesh": 1,
     "MeshPart": 2,
-    "ParticleEmitter": 1
+    "ParticleEmitter": 1,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -149,6 +157,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6994413971",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -215,6 +224,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6994414468",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -532,6 +542,70 @@
         "VelocityInheritance": 0,
         "ZOffset": 0,
         "Name": "Particles"
+      }
+    },
+    {
+      "id": "RBX669FBEA4337540D0AC614A3FB1B69793",
+      "parent": "RBXD78A752D356B4D1BB27191388B0DFFA0",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.356863,
+          0.364706,
+          0.411765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.662982345,
+          0.165864557,
+          0.637195289
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.00391,
+            -0.9415,
+            -1.29615
+          ],
+          "rotation": [
+            -0.999965,
+            -0.000913,
+            -0.008306,
+            0.006625,
+            0.519191,
+            -0.854632,
+            0.005092,
+            -0.854658,
+            -0.519167
+          ]
+        }
       }
     }
   ]

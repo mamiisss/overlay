@@ -5,7 +5,14 @@
   "asset_id": "morph_2474-chasity",
   "name": "Chasity",
   "source_file": "2474-chasity.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -3937.79761,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 7,
     "SpecialMesh": 4,
-    "MeshPart": 2
+    "MeshPart": 2,
+    "UnionOperation": 1,
+    "Bone": 3
   },
   "nodes": [
     {
@@ -360,6 +369,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6416715343",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -512,11 +522,76 @@
       }
     },
     {
+      "id": "RBX41CD25C8165C4249A85BE5E26F15A5E8",
+      "parent": "RBX0FCB5C20CB884A5EBF18F12C38091AF6",
+      "class": "UnionOperation",
+      "name": "Union",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.501961,
+          0.498039,
+          0.509804
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.364470184,
+          0.639771879,
+          0.464583874
+        ],
+        "Name": "Union",
+        "LocalCFrame": {
+          "position": [
+            0.01001,
+            -0.2031,
+            -0.089355
+          ],
+          "rotation": [
+            -0.960399,
+            -0.185121,
+            -0.208241,
+            -0.274601,
+            0.502252,
+            0.81996,
+            -0.047203,
+            0.844671,
+            -0.533195
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX3B41E94E27584BD5898D1C43269A3493",
       "parent": "RBX0FCB5C20CB884A5EBF18F12C38091AF6",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -575,6 +650,90 @@
             -0.999997
           ]
         }
+      }
+    },
+    {
+      "id": "RBX0AC6578A7550471ABC109B0ABE1373F8",
+      "parent": "RBX3B41E94E27584BD5898D1C43269A3493",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000934220327,
+            0.311695993,
+            0.0335404351
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX6DBCC66955394729854E55DF49E93012",
+      "parent": "RBX0AC6578A7550471ABC109B0ABE1373F8",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.26953125,
+            0.0000610351562
+          ],
+          "rotation": [
+            0.707106829,
+            -0.707106769,
+            -4.09782004e-8,
+            0.707106769,
+            0.707106888,
+            -4.09782288e-8,
+            5.79519437e-8,
+            2.48689958e-14,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX4D72616AC5D74BEC9007E702EF760442",
+      "parent": "RBX0AC6578A7550471ABC109B0ABE1373F8",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.26953125,
+            0.0000610351562
+          ],
+          "rotation": [
+            0.707106829,
+            0.707106769,
+            -1.00582852e-7,
+            -0.707106769,
+            0.707106888,
+            1.00582852e-7,
+            1.42245625e-7,
+            -8.8817842e-15,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {

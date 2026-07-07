@@ -5,7 +5,14 @@
   "asset_id": "morph_3186-uv-3",
   "name": "UV 3",
   "source_file": "3186-uv-3.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -16.6384392,
@@ -28,7 +35,9 @@
     "Folder": 1,
     "Model": 1,
     "MeshPart": 2,
+    "Motor6D": 2,
     "Part": 2,
+    "Bone": 2,
     "SpecialMesh": 1
   },
   "nodes": [
@@ -57,6 +66,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -115,6 +125,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX33E6D71916DA40248A4C0CC06F6935B9",
+      "parent": "RBXD20D1992EF394545A7C6033D8210B082",
+      "class": "Motor6D",
+      "name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX8AC7A1AC12D74A699EF794A74C3101C2",
+        "Part1": "RBXD20D1992EF394545A7C6033D8210B082",
+        "Name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq"
       }
     },
     {
@@ -182,11 +240,68 @@
       }
     },
     {
+      "id": "RBX4BF634C84F354E9C96E850690E3AA758",
+      "parent": "RBX8AC7A1AC12D74A699EF794A74C3101C2",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            1.66517103,
+            0.601628363
+          ],
+          "rotation": [
+            1,
+            -3.67394082e-16,
+            -1.22464818e-16,
+            -3.67394135e-16,
+            -1,
+            -4.93897176e-7,
+            -1.22464632e-16,
+            4.93897176e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXF39E67A95C2F4E3B9C895D68FFAA2AA7",
+      "parent": "RBX4BF634C84F354E9C96E850690E3AA758",
+      "class": "Bone",
+      "name": "Io.ms.wq.io.j.Bk.Ho.mm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.574072838,
+            -9.53674316e-7
+          ],
+          "rotation": [
+            1,
+            1.01213085e-16,
+            -5.35189959e-17,
+            -1.01213112e-16,
+            0.562984765,
+            -0.826467395,
+            -5.35189231e-17,
+            0.826467395,
+            0.562984765
+          ]
+        },
+        "Visible": false,
+        "Name": "Io.ms.wq.io.j.Bk.Ho.mm"
+      }
+    },
+    {
       "id": "RBX7CF541361F9B42A7A591792B017A2314",
       "parent": "RBX6EC3A6A55E2E4F8F9AB9ABEE5CC8F450",
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://121824717320146",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -245,6 +360,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX2D09BA26F1474D3C906FDC96F46B9413",
+      "parent": "RBX7CF541361F9B42A7A591792B017A2314",
+      "class": "Motor6D",
+      "name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.912014663,
+            -0.0474848934
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX8AC7A1AC12D74A699EF794A74C3101C2",
+        "Part1": "RBX7CF541361F9B42A7A591792B017A2314",
+        "Name": "es.ys.ku.lq.H.Ak.Jq.dk.mu.ak.eq.lq"
       }
     },
     {

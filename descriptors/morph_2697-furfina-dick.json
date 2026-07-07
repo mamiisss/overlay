@@ -5,7 +5,14 @@
   "asset_id": "morph_2697-furfina-dick",
   "name": "Furfina dick",
   "source_file": "2697-furfina-dick.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       0.278362006,
@@ -30,8 +37,10 @@
     "Part": 18,
     "SpecialMesh": 15,
     "MeshPart": 11,
+    "Bone": 3,
     "Texture": 156,
-    "ParticleEmitter": 1
+    "ParticleEmitter": 1,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -224,6 +233,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -282,6 +292,90 @@
             -0.984808
           ]
         }
+      }
+    },
+    {
+      "id": "RBXF41E01D19C5645CBAB5E77D6304DDEF0",
+      "parent": "RBX917AEB0562624BB4920642F70CB74313",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00111432222,
+            0.420656949,
+            0.0376818702
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXEE18EA3F29334531B3C9BCF5C54EC2E4",
+      "parent": "RBXF41E01D19C5645CBAB5E77D6304DDEF0",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.359848022,
+            0
+          ],
+          "rotation": [
+            0.707106411,
+            -0.707107186,
+            -3.16100852e-8,
+            0.707107186,
+            0.707106471,
+            -1.15903831e-7,
+            1.04308114e-7,
+            5.9604627e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX34BF4D378A184D45B41FC8DFB9271597",
+      "parent": "RBXF41E01D19C5645CBAB5E77D6304DDEF0",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.359848022,
+            0
+          ],
+          "rotation": [
+            0.707106411,
+            0.707107186,
+            -1.08001288e-7,
+            -0.707107186,
+            0.707106471,
+            2.37076527e-8,
+            9.31322433e-8,
+            5.96046448e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {
@@ -589,6 +683,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -769,6 +864,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8489982498",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -944,8 +1040,72 @@
       }
     },
     {
-      "id": "RBXBCE12A38B9D3488E9423C2E9CDE746A6",
+      "id": "RBX77E07F67254E447C8280D31604D55B88",
       "parent": "RBXE43908A79B3A4362833D9B4BDD05D575",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.917647,
+          0.721569,
+          0.572549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.57572114,
+          0.562620223,
+          0.501670122
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.038714,
+            -0.796356,
+            -1.1483
+          ],
+          "rotation": [
+            -0.007294,
+            0.023744,
+            -0.999691,
+            -0.059846,
+            0.997916,
+            0.024139,
+            0.998181,
+            0.060004,
+            -0.005858
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXBCE12A38B9D3488E9423C2E9CDE746A6",
+      "parent": "RBX77E07F67254E447C8280D31604D55B88",
       "class": "Texture",
       "name": "fure",
       "properties": {
@@ -964,7 +1124,7 @@
     },
     {
       "id": "RBX783F2BED9D1646079C287B0451AE8C86",
-      "parent": "RBXE43908A79B3A4362833D9B4BDD05D575",
+      "parent": "RBX77E07F67254E447C8280D31604D55B88",
       "class": "Texture",
       "name": "fure",
       "properties": {
@@ -983,7 +1143,7 @@
     },
     {
       "id": "RBX2FAAED0461E341929AFB18611492F551",
-      "parent": "RBXE43908A79B3A4362833D9B4BDD05D575",
+      "parent": "RBX77E07F67254E447C8280D31604D55B88",
       "class": "Texture",
       "name": "fure",
       "properties": {
@@ -1002,7 +1162,7 @@
     },
     {
       "id": "RBX14133A50345E47E2949FC6DE979915E3",
-      "parent": "RBXE43908A79B3A4362833D9B4BDD05D575",
+      "parent": "RBX77E07F67254E447C8280D31604D55B88",
       "class": "Texture",
       "name": "fure",
       "properties": {
@@ -1021,7 +1181,7 @@
     },
     {
       "id": "RBXB59D011030704619B99AF254F0C631EE",
-      "parent": "RBXE43908A79B3A4362833D9B4BDD05D575",
+      "parent": "RBX77E07F67254E447C8280D31604D55B88",
       "class": "Texture",
       "name": "fure",
       "properties": {
@@ -1040,7 +1200,7 @@
     },
     {
       "id": "RBX1ECC3ADEA3D04B7A85CA8D020488361A",
-      "parent": "RBXE43908A79B3A4362833D9B4BDD05D575",
+      "parent": "RBX77E07F67254E447C8280D31604D55B88",
       "class": "Texture",
       "name": "fure",
       "properties": {
@@ -3933,6 +4093,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4113,6 +4274,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://3270017",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4293,6 +4455,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4473,6 +4636,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4653,6 +4817,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -4833,6 +4998,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5013,6 +5179,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -5193,6 +5360,7 @@
       "class": "MeshPart",
       "name": "FireSociety",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://2591997453",
         "RenderFidelity": 1,
         "TextureID": null,

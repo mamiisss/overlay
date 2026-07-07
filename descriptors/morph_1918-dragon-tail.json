@@ -5,7 +5,14 @@
   "asset_id": "morph_1918-dragon-tail",
   "name": "Dragon Tail",
   "source_file": "1918-dragon-tail.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       93.973999,
@@ -29,7 +36,9 @@
     "Model": 1,
     "Part": 2,
     "SpecialMesh": 1,
-    "MeshPart": 4
+    "Bone": 10,
+    "MeshPart": 4,
+    "Motor6D": 4
   },
   "nodes": [
     {
@@ -207,11 +216,292 @@
       }
     },
     {
+      "id": "RBX6FE01531E63149C4B2A31A3198DA3A73",
+      "parent": "RBX242D6E2B8CF147939645360461FFF29D",
+      "class": "Bone",
+      "name": "pm0621_00",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            -1.99520278e-23,
+            -2.44929371e-16,
+            -2.44929371e-16,
+            -1.62920685e-7,
+            -1,
+            -1.99520341e-23,
+            1,
+            -1.62920685e-7
+          ]
+        },
+        "Visible": false,
+        "Name": "pm0621_00"
+      }
+    },
+    {
+      "id": "RBXB8020009C3C74C188FC5646A2B91AE55",
+      "parent": "RBX6FE01531E63149C4B2A31A3198DA3A73",
+      "class": "Bone",
+      "name": "Origin",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            -3.25059923e-30,
+            0,
+            1,
+            0,
+            3.25059923e-30,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Origin"
+      }
+    },
+    {
+      "id": "RBX700574882F164E0C93439481AE1C240B",
+      "parent": "RBXB8020009C3C74C188FC5646A2B91AE55",
+      "class": "Bone",
+      "name": "Waist",
+      "properties": {
+        "CFrame": {
+          "position": [
+            9.64452269e-8,
+            0.244606763,
+            -1.50557101
+          ],
+          "rotation": [
+            -0.579311013,
+            8.70888042e-17,
+            -0.815106571,
+            0,
+            1,
+            1.06843452e-16,
+            0.815106571,
+            6.18955893e-17,
+            -0.579311013
+          ]
+        },
+        "Visible": false,
+        "Name": "Waist"
+      }
+    },
+    {
+      "id": "RBXF01543EEB4804C2AB539216D588D1C70",
+      "parent": "RBX700574882F164E0C93439481AE1C240B",
+      "class": "Bone",
+      "name": "Hips",
+      "properties": {
+        "CFrame": {
+          "position": [
+            5.67585687e-7,
+            1.41896422e-7,
+            7.80430298e-7
+          ],
+          "rotation": [
+            -0.815109491,
+            0,
+            -0.579306901,
+            0,
+            1,
+            0,
+            0.579306901,
+            0,
+            -0.815109491
+          ]
+        },
+        "Visible": false,
+        "Name": "Hips"
+      }
+    },
+    {
+      "id": "RBXD4EF298827D84404BD7ABCC4CA2469DF",
+      "parent": "RBXF01543EEB4804C2AB539216D588D1C70",
+      "class": "Bone",
+      "name": "LThigh",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.199501395,
+            -0.282099694,
+            -0.584384739
+          ],
+          "rotation": [
+            0.867559075,
+            -3.51940263e-15,
+            -0.497334331,
+            0,
+            1,
+            -7.07653422e-15,
+            0.497334331,
+            6.13931005e-15,
+            0.867559075
+          ]
+        },
+        "Visible": false,
+        "Name": "LThigh"
+      }
+    },
+    {
+      "id": "RBX79F9826EEE8C4AC79AE1C92D2009BEB9",
+      "parent": "RBXF01543EEB4804C2AB539216D588D1C70",
+      "class": "Bone",
+      "name": "RThigh",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.199501827,
+            -0.282098979,
+            0.584386706
+          ],
+          "rotation": [
+            0.86790657,
+            -3.51649349e-15,
+            -0.496727467,
+            0,
+            1,
+            -7.0793218e-15,
+            0.496727467,
+            6.14418981e-15,
+            0.86790657
+          ]
+        },
+        "Visible": false,
+        "Name": "RThigh"
+      }
+    },
+    {
+      "id": "RBX6E6C3D17EBD941AA9742AE40B6ABCDB5",
+      "parent": "RBXF01543EEB4804C2AB539216D588D1C70",
+      "class": "Bone",
+      "name": "Tail1",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.520605087,
+            0.412038714,
+            -1.43310274e-7
+          ],
+          "rotation": [
+            0.373648077,
+            -2.85457917e-15,
+            -0.927570522,
+            0,
+            1,
+            -3.07747928e-15,
+            0.927570522,
+            1.14989424e-15,
+            0.373648077
+          ]
+        },
+        "Visible": false,
+        "Name": "Tail1"
+      }
+    },
+    {
+      "id": "RBXFEB574AD4DD848EA8745ADD19E37DBBC",
+      "parent": "RBX6E6C3D17EBD941AA9742AE40B6ABCDB5",
+      "class": "Bone",
+      "name": "Tail2",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.12548247,
+            0.833692551,
+            0.31150344
+          ],
+          "rotation": [
+            0.957364976,
+            -1.10765726e-15,
+            -0.288881183,
+            1.77635684e-15,
+            1,
+            2.05262426e-15,
+            0.288881183,
+            -2.47826657e-15,
+            0.957364976
+          ]
+        },
+        "Visible": false,
+        "Name": "Tail2"
+      }
+    },
+    {
+      "id": "RBX3BA607B31A554E07BCC0918588A124FD",
+      "parent": "RBXFEB574AD4DD848EA8745ADD19E37DBBC",
+      "class": "Bone",
+      "name": "Tail3",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00875067711,
+            1.08136415,
+            0.0970679745
+          ],
+          "rotation": [
+            0.977531672,
+            7.10342635e-16,
+            -0.210788831,
+            0,
+            1,
+            3.36992566e-15,
+            0.210788831,
+            -3.29420875e-15,
+            0.977531672
+          ]
+        },
+        "Visible": false,
+        "Name": "Tail3"
+      }
+    },
+    {
+      "id": "RBX4D6D146390BB435CA29DAB2DE2C178B8",
+      "parent": "RBX700574882F164E0C93439481AE1C240B",
+      "class": "Bone",
+      "name": "Spine1",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000113517137,
+            0.00000113517137,
+            3.54741047e-7
+          ],
+          "rotation": [
+            1,
+            -1.42108547e-14,
+            0.00000190734863,
+            1.42108547e-14,
+            1,
+            2.71050543e-20,
+            -0.00000190734863,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Spine1"
+      }
+    },
+    {
       "id": "RBXE486DB7B027B4985910ADE558650501B",
       "parent": "RBX266E7A50E02C4C3AA5A4DDCA946EC302",
       "class": "MeshPart",
       "name": "Druddigon.013",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://16432882997",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -273,11 +563,60 @@
       }
     },
     {
+      "id": "RBX75EE5E06D54145FA84E6C70658E3D9F6",
+      "parent": "RBXE486DB7B027B4985910ADE558650501B",
+      "class": "Motor6D",
+      "name": "Druddigon.013Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            -1.14466703,
+            -1.90205801
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX242D6E2B8CF147939645360461FFF29D",
+        "Part1": "RBXE486DB7B027B4985910ADE558650501B",
+        "Name": "Druddigon.013Motor6D"
+      }
+    },
+    {
       "id": "RBX40F9871A66974B078C654435DB2341AE",
       "parent": "RBX266E7A50E02C4C3AA5A4DDCA946EC302",
       "class": "MeshPart",
       "name": "Druddigon.014",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://16432882999",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -339,11 +678,60 @@
       }
     },
     {
+      "id": "RBX9AC01C5897534E27A6C8C48224A395CC",
+      "parent": "RBX40F9871A66974B078C654435DB2341AE",
+      "class": "Motor6D",
+      "name": "Druddigon.014Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            -0.945362508,
+            -2.54228806
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX242D6E2B8CF147939645360461FFF29D",
+        "Part1": "RBX40F9871A66974B078C654435DB2341AE",
+        "Name": "Druddigon.014Motor6D"
+      }
+    },
+    {
       "id": "RBXB0589954C8074715B11074E737C44281",
       "parent": "RBX266E7A50E02C4C3AA5A4DDCA946EC302",
       "class": "MeshPart",
       "name": "Druddigon",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://16432883007",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -405,11 +793,60 @@
       }
     },
     {
+      "id": "RBXB349A76A938B4D928F9D0E4514F07C39",
+      "parent": "RBXB0589954C8074715B11074E737C44281",
+      "class": "Motor6D",
+      "name": "DruddigonMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.0033824204,
+            -0.951102495,
+            -1.73775351
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX242D6E2B8CF147939645360461FFF29D",
+        "Part1": "RBXB0589954C8074715B11074E737C44281",
+        "Name": "DruddigonMotor6D"
+      }
+    },
+    {
       "id": "RBXEC6A109D1E784525993A8A79B8E63D22",
       "parent": "RBX266E7A50E02C4C3AA5A4DDCA946EC302",
       "class": "MeshPart",
       "name": "Druddigon.012",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://16432883008",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -468,6 +905,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX3A9B89BD66484BFB9A5105A42BBE990F",
+      "parent": "RBXEC6A109D1E784525993A8A79B8E63D22",
+      "class": "Motor6D",
+      "name": "Druddigon.012Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            -1.28842974,
+            -1.31687248
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX242D6E2B8CF147939645360461FFF29D",
+        "Part1": "RBXEC6A109D1E784525993A8A79B8E63D22",
+        "Name": "Druddigon.012Motor6D"
       }
     }
   ]

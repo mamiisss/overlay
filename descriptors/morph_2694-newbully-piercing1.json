@@ -5,7 +5,18 @@
   "asset_id": "morph_2694-newbully-piercing1",
   "name": "newbully piercing1",
   "source_file": "2694-newbully-piercing1.rbxmx",
-  "anchor": "Head",
+  "anchor": "RightHand",
+  "anchor_candidates": [
+    "RightHand",
+    "RightLowerArm",
+    "RightUpperArm",
+    "LeftHand",
+    "LeftLowerArm",
+    "LeftUpperArm",
+    "UpperTorso",
+    "Torso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       61.6335144,
@@ -30,7 +41,10 @@
     "Part": 4,
     "SpecialMesh": 1,
     "MeshPart": 2,
-    "ParticleEmitter": 1
+    "Bone": 3,
+    "ParticleEmitter": 1,
+    "UnionOperation": 5,
+    "WeldConstraint": 1
   },
   "nodes": [
     {
@@ -223,6 +237,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -281,6 +296,90 @@
             -0.95106
           ]
         }
+      }
+    },
+    {
+      "id": "RBXE651EA4BFEAB4132AA17D452DA9B8E55",
+      "parent": "RBXA33A3B2D705B4F32884F5775A03817E3",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00160414691,
+            0.704272032,
+            0.0488531068
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX2F708274808E4CAEA52073B60DB6D4A1",
+      "parent": "RBXE651EA4BFEAB4132AA17D452DA9B8E55",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.602432251,
+            0.00000762939453
+          ],
+          "rotation": [
+            0.70710665,
+            -0.707106948,
+            -5.26835571e-8,
+            0.707106948,
+            0.707106709,
+            -1.05367182e-8,
+            4.47034765e-8,
+            -2.98023224e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX9906E70C3914480484174A14A3C95DBE",
+      "parent": "RBXE651EA4BFEAB4132AA17D452DA9B8E55",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000762939453,
+            0.602432251,
+            0.00000762939453
+          ],
+          "rotation": [
+            0.70710665,
+            0.707106948,
+            -8.42936885e-8,
+            -0.707106948,
+            0.707106709,
+            1.2644054e-7,
+            1.49011598e-7,
+            -2.98023011e-8,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {
@@ -469,11 +568,268 @@
       }
     },
     {
-      "id": "RBX6BCCB47845C24887A969D26F06552B07",
+      "id": "RBXB5AC356B26214BF39EDAD5C7187B9179",
       "parent": "RBX4788A94457A54AED8B04F852D496F157",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.639216,
+          0.635294,
+          0.647059
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.418150365,
+          0.387192547,
+          0.263452083
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.014156,
+            -0.583781,
+            -2.164362
+          ],
+          "rotation": [
+            1,
+            -0.000026,
+            0.000015,
+            0.00003,
+            0.944454,
+            -0.32866,
+            0.000005,
+            0.328662,
+            0.944452
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXC2F9B9EA94094782B252EF1763A41924",
+      "parent": "RBX4788A94457A54AED8B04F852D496F157",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.639216,
+          0.635294,
+          0.647059
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.576461375,
+          0.636270821,
+          1.3033222
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.036369,
+            -0.855224,
+            -1.380699
+          ],
+          "rotation": [
+            0.86411,
+            0.475324,
+            0.165474,
+            -0.456448,
+            0.878629,
+            -0.140278,
+            -0.21206,
+            0.045692,
+            0.976192
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX4C80F9779D764D9F9751106A7BEDF240",
+      "parent": "RBX4788A94457A54AED8B04F852D496F157",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.639216,
+          0.635294,
+          0.647059
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.422908038,
+          0.811801016,
+          1.94068837
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.013901,
+            -0.89517,
+            -1.423622
+          ],
+          "rotation": [
+            1,
+            -0.000025,
+            0.000017,
+            0.00003,
+            0.919219,
+            -0.393762,
+            0.000005,
+            0.393764,
+            0.919216
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX2BA6FB0AACB74C60BCC78680A415C421",
+      "parent": "RBX4788A94457A54AED8B04F852D496F157",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.639216,
+          0.635294,
+          0.647059
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.416386545,
+          0.372763216,
+          0.399077356
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            0.014152,
+            -0.559658,
+            -2.228602
+          ],
+          "rotation": [
+            1,
+            -0.000026,
+            0.000015,
+            0.00003,
+            0.944454,
+            -0.32866,
+            0.000005,
+            0.328662,
+            0.944452
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX6BCCB47845C24887A969D26F06552B07",
+      "parent": "RBX2BA6FB0AACB74C60BCC78680A415C421",
       "class": "MeshPart",
       "name": "Handle",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8745487512",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://8734338819",
@@ -530,6 +886,79 @@
             0.000003,
             -0.669132,
             0.743147
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX2DC56AA0C1774E5089D23145260E1031",
+      "parent": "RBX2BA6FB0AACB74C60BCC78680A415C421",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
+      "id": "RBX8359A3B2AEFA47899BA57113DB448A45",
+      "parent": "RBX4788A94457A54AED8B04F852D496F157",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.639216,
+          0.635294,
+          0.647059
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.600191891,
+          0.718098581,
+          1.92242432
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.014149,
+            -0.831975,
+            -1.352333
+          ],
+          "rotation": [
+            1,
+            -0.000029,
+            0.000007,
+            0.000029,
+            0.999791,
+            -0.02073,
+            0.000004,
+            0.020733,
+            0.999789
           ]
         }
       }

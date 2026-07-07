@@ -5,7 +5,14 @@
   "asset_id": "morph_0389-pet-collar",
   "name": "Pet Collar",
   "source_file": "0389-pet-collar.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       0.135916993,
@@ -29,6 +36,7 @@
     "Model": 1,
     "Part": 3,
     "SpecialMesh": 2,
+    "Weld": 4,
     "Decal": 1,
     "MeshPart": 2
   },
@@ -235,6 +243,54 @@
       }
     },
     {
+      "id": "RBXE1A1DE1EEF5D4D40B3C4FA267B0D5A68",
+      "parent": "RBX4B6253115D954AF5B9E010FD4DA01E20",
+      "class": "Weld",
+      "name": "Connection",
+      "properties": {
+        "C0": {
+          "position": [
+            0.0000972747803,
+            -0.469623566,
+            -0.0224151611
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": null,
+        "Part1": "RBX4B6253115D954AF5B9E010FD4DA01E20",
+        "Name": "Connection"
+      }
+    },
+    {
       "id": "RBXC2F51FF3D90849CFB49AC09A5366255D",
       "parent": "RBX4B6253115D954AF5B9E010FD4DA01E20",
       "class": "Decal",
@@ -252,11 +308,60 @@
       }
     },
     {
+      "id": "RBX9CE5D65E575A431DB3E0073797BC24B3",
+      "parent": "RBX4B6253115D954AF5B9E010FD4DA01E20",
+      "class": "Weld",
+      "name": "Metal",
+      "properties": {
+        "C0": {
+          "position": [
+            0.209960938,
+            -0.0863528252,
+            0.0134887695
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX4B6253115D954AF5B9E010FD4DA01E20",
+        "Part1": "RBXDA9F28441FBC42BF905FA31B04067A89",
+        "Name": "Metal"
+      }
+    },
+    {
       "id": "RBXDA9F28441FBC42BF905FA31B04067A89",
       "parent": "RBX4090F6E789884EAEA358F52C8CCE16F2",
       "class": "MeshPart",
       "name": "Metal",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12186647284",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://12186647345",
@@ -318,11 +423,60 @@
       }
     },
     {
+      "id": "RBXD84AC7F00A7D4FFC8E7339CD5835D891",
+      "parent": "RBXDA9F28441FBC42BF905FA31B04067A89",
+      "class": "Weld",
+      "name": "Joint",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.221038818,
+            -0.13313818,
+            -0.711853027
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXDA9F28441FBC42BF905FA31B04067A89",
+        "Part1": "RBX2C6EFD3777874B8AAB3F0F7DDD85FFAC",
+        "Name": "Joint"
+      }
+    },
+    {
       "id": "RBX7D8CF6364CD74891B1D33F2054155133",
       "parent": "RBX4090F6E789884EAEA358F52C8CCE16F2",
       "class": "MeshPart",
       "name": "Tag",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12186649097",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://12186649178",
@@ -445,6 +599,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX75E72CBB1E8F49D4B2F87EFD3E8CB15C",
+      "parent": "RBX2C6EFD3777874B8AAB3F0F7DDD85FFAC",
+      "class": "Weld",
+      "name": "TagOffset",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.00302124023,
+            -0.12369442,
+            -0.00231933594
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX2C6EFD3777874B8AAB3F0F7DDD85FFAC",
+        "Part1": "RBX7D8CF6364CD74891B1D33F2054155133",
+        "Name": "TagOffset"
       }
     }
   ]

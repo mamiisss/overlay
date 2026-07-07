@@ -5,7 +5,14 @@
   "asset_id": "morph_2935-boobs-seagreenheart",
   "name": "boobs seagreenheart",
   "source_file": "2935-boobs-seagreenheart.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       13.6942835,
@@ -31,6 +38,7 @@
     "SpecialMesh": 5,
     "ParticleEmitter": 2,
     "Decal": 2,
+    "WeldConstraint": 2,
     "MeshPart": 2
   },
   "nodes": [
@@ -364,11 +372,21 @@
       }
     },
     {
+      "id": "RBXDA102E79256C4EF586D2DCCF06F7D191",
+      "parent": "RBX687FBCE48CAC44F0A0CBA8309B95ECC4",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX36BB2DB16D62405796A32E5D437F23CA",
       "parent": "RBX687FBCE48CAC44F0A0CBA8309B95ECC4",
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8135652375",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -723,6 +741,15 @@
       }
     },
     {
+      "id": "RBXE0184778E95F4F699667D611E94ADBEF",
+      "parent": "RBXC2A4C594D15C4F669D20C1F29591A246",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX9DBBABFD1382463894BF305706C3A994",
       "parent": "RBXC2A4C594D15C4F669D20C1F29591A246",
       "class": "SpecialMesh",
@@ -755,6 +782,7 @@
       "class": "MeshPart",
       "name": "MeshPart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8135651002",
         "RenderFidelity": 1,
         "TextureID": null,

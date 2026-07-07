@@ -5,7 +5,14 @@
   "asset_id": "morph_2980-tz-phys-uv-boobs-pants",
   "name": "Tz phys uv boobs  (pants)",
   "source_file": "2980-tz-phys-uv-boobs-pants.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -344.895721,
@@ -29,7 +36,10 @@
     "Model": 1,
     "Part": 2,
     "SpecialMesh": 1,
-    "MeshPart": 2
+    "MeshPart": 2,
+    "Motor6D": 2,
+    "Bone": 4,
+    "Weld": 2
   },
   "nodes": [
     {
@@ -148,6 +158,7 @@
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://133733754286824",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://5364800800",
@@ -209,11 +220,60 @@
       }
     },
     {
+      "id": "RBX288F99E79E824662B0836AA04FB5009F",
+      "parent": "RBX748E458EC9924158AFD892270805A1DA",
+      "class": "Motor6D",
+      "name": "SportsBallInner3Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.152005598,
+            0.818291485,
+            -0.328915447
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+        "Part1": "RBX748E458EC9924158AFD892270805A1DA",
+        "Name": "SportsBallInner3Motor6D"
+      }
+    },
+    {
       "id": "RBXA9B9E12F740E4A06A688A51504D60666",
       "parent": "RBX94520E2661024B14A8916AF38342A656",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://89304112355698",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -272,6 +332,54 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX59C1A2E7008E448EB0B8301408D734D7",
+      "parent": "RBXA9B9E12F740E4A06A688A51504D60666",
+      "class": "Motor6D",
+      "name": "SportsBallInnerMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.151168302,
+            0.818309546,
+            -0.330230474
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+        "Part1": "RBXA9B9E12F740E4A06A688A51504D60666",
+        "Name": "SportsBallInnerMotor6D"
       }
     },
     {
@@ -336,6 +444,214 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX0A786A9074E74D71958C9381BFDD48FE",
+      "parent": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.260988116,
+            1.44881594,
+            -0.665731549
+          ],
+          "rotation": [
+            1,
+            1.96121206e-7,
+            -5.91453908e-9,
+            1.96121206e-7,
+            -1,
+            2.54588542e-7,
+            -5.91448934e-9,
+            -2.54588542e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
+      }
+    },
+    {
+      "id": "RBX61A647B1751B4CF1ABA72C9E43B03939",
+      "parent": "RBX0A786A9074E74D71958C9381BFDD48FE",
+      "class": "Bone",
+      "name": "Bone.003",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.807774603,
+            0.00000314712543
+          ],
+          "rotation": [
+            0.833220959,
+            -0.551594794,
+            -0.0385488309,
+            -0.0385483615,
+            -0.127493337,
+            0.99109,
+            -0.551594853,
+            -0.824310958,
+            -0.127493188
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.003"
+      }
+    },
+    {
+      "id": "RBX84DA1F32A1E04A48814F75810DB463C1",
+      "parent": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0413482711,
+            1.44881594,
+            -0.66573143
+          ],
+          "rotation": [
+            1,
+            -5.0790149e-8,
+            2.68431393e-7,
+            -5.07902165e-8,
+            -1,
+            2.54588571e-7,
+            2.68431393e-7,
+            -2.54588571e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX63CF8DF0C14D4DAABF456CE38E38060E",
+      "parent": "RBX84DA1F32A1E04A48814F75810DB463C1",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.807774603,
+            0.00000314712543
+          ],
+          "rotation": [
+            0.833975494,
+            0.551594913,
+            -0.0151050687,
+            0.102193207,
+            -0.127493128,
+            0.986560941,
+            0.542256057,
+            -0.824311078,
+            -0.162695408
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBXED219A77D9D047B9AA9D9CF1E7FD53BA",
+      "parent": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0.743591309,
+            -1.1920929e-7,
+            0
+          ],
+          "rotation": [
+            -1.81494804e-30,
+            3.33066854e-16,
+            1,
+            -2.72459964e-15,
+            -0.999999762,
+            1.66533411e-15,
+            1,
+            -5.44919906e-16,
+            9.07474022e-31
+          ]
+        },
+        "C1": {
+          "position": [
+            -1.01483154,
+            -0.974477589,
+            0.398994446
+          ],
+          "rotation": [
+            -6.53381062e-30,
+            -9.99200405e-16,
+            1,
+            -4.90428138e-15,
+            -0.999999285,
+            2.9976009e-15,
+            0.999997854,
+            1.63477253e-15,
+            -3.81138978e-30
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+        "Part1": "RBX2A354A419D7F4D489021492268231538",
+        "Name": "Weld"
+      }
+    },
+    {
+      "id": "RBX7020B8D3B7384F9A986E722F06C4CD89",
+      "parent": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0.743591309,
+            -1.1920929e-7,
+            0
+          ],
+          "rotation": [
+            -1.81494804e-30,
+            3.33066854e-16,
+            1,
+            -2.72459964e-15,
+            -0.999999762,
+            1.66533411e-15,
+            1,
+            -5.44919906e-16,
+            9.07474022e-31
+          ]
+        },
+        "C1": {
+          "position": [
+            -1.0157547,
+            -0.974497378,
+            0.400436401
+          ],
+          "rotation": [
+            -6.53381062e-30,
+            -9.99200405e-16,
+            1,
+            -4.90428138e-15,
+            -0.999999285,
+            2.9976009e-15,
+            0.999997854,
+            1.63477253e-15,
+            -3.81138978e-30
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXA25F2E7364FE4E6ABBD70626B7DB5C8A",
+        "Part1": "RBXF84A769A2A3B41B2BD1722E76D1A1E20",
+        "Name": "Weld"
       }
     }
   ]

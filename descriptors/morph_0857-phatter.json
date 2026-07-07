@@ -6,6 +6,13 @@
   "name": "PHATTER",
   "source_file": "0857-phatter.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -0.669650972,
@@ -29,6 +36,7 @@
     "Model": 3,
     "Part": 4,
     "SpecialMesh": 4,
+    "UnionOperation": 1,
     "Decal": 6,
     "MeshPart": 2
   },
@@ -235,8 +243,72 @@
       }
     },
     {
-      "id": "RBXBD599E1E70CE4AA3913572586F48BC21",
+      "id": "RBX8D957A8012D94F83BA53C56F27A825E9",
       "parent": "RBXD5659DB527CF41D0B7D07AA99434FDC2",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1312,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.043464,
+            -0.847154,
+            0.201173
+          ],
+          "rotation": [
+            -1,
+            -0.0004,
+            -0.000935,
+            -0.001017,
+            0.408634,
+            0.912698,
+            0.000017,
+            0.912698,
+            -0.408634
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXBD599E1E70CE4AA3913572586F48BC21",
+      "parent": "RBX8D957A8012D94F83BA53C56F27A825E9",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -253,7 +325,7 @@
     },
     {
       "id": "RBX0BFF24CE946F4640B87CF0927A3F463A",
-      "parent": "RBXD5659DB527CF41D0B7D07AA99434FDC2",
+      "parent": "RBX8D957A8012D94F83BA53C56F27A825E9",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -270,7 +342,7 @@
     },
     {
       "id": "RBX83574EE3766D47A298AD19DB7C38BA20",
-      "parent": "RBXD5659DB527CF41D0B7D07AA99434FDC2",
+      "parent": "RBX8D957A8012D94F83BA53C56F27A825E9",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -287,7 +359,7 @@
     },
     {
       "id": "RBX2F85D8374743401B9D457217A57D81C0",
-      "parent": "RBXD5659DB527CF41D0B7D07AA99434FDC2",
+      "parent": "RBX8D957A8012D94F83BA53C56F27A825E9",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -304,7 +376,7 @@
     },
     {
       "id": "RBXA4903D243A2A42DC95377D72AAFC74CF",
-      "parent": "RBXD5659DB527CF41D0B7D07AA99434FDC2",
+      "parent": "RBX8D957A8012D94F83BA53C56F27A825E9",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -321,7 +393,7 @@
     },
     {
       "id": "RBXCFA2E9089AAC45D390B88593E6C3B6D8",
-      "parent": "RBXD5659DB527CF41D0B7D07AA99434FDC2",
+      "parent": "RBX8D957A8012D94F83BA53C56F27A825E9",
       "class": "Decal",
       "name": "fur light",
       "properties": {
@@ -443,6 +515,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14153798158",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -610,6 +683,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14153799148",
         "RenderFidelity": 0,
         "TextureID": null,

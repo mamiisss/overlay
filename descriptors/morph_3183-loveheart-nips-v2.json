@@ -6,6 +6,13 @@
   "name": "Loveheart nips v2",
   "source_file": "3183-loveheart-nips-v2.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       130.09375,
@@ -30,7 +37,9 @@
     "MeshPart": 2,
     "Part": 7,
     "SpecialMesh": 5,
-    "ParticleEmitter": 2
+    "ParticleEmitter": 2,
+    "UnionOperation": 2,
+    "Weld": 2
   },
   "nodes": [
     {
@@ -58,6 +67,7 @@
       "class": "MeshPart",
       "name": "is.pm.os.jm.ki",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8135652375",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -124,6 +134,7 @@
       "class": "MeshPart",
       "name": "is.pm.os.jm.ti",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://8135652375",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -387,6 +398,70 @@
       }
     },
     {
+      "id": "RBX8E3E33290AAD484289F0C19D47D2921C",
+      "parent": "RBX89DFCEC811CD4C86907558037B0F40F8",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.580392,
+          0.580392
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.263999999,
+          0.272000015,
+          0.0350000001
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            -0.003924,
+            0.025177,
+            -0.009945
+          ],
+          "rotation": [
+            -0.912548,
+            -0.15325,
+            -0.379171,
+            0.019135,
+            0.910123,
+            -0.413897,
+            0.408522,
+            -0.384956,
+            -0.827598
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXDED1E7689AB1494690FFE0B0FB1A8E92",
       "parent": "RBX89DFCEC811CD4C86907558037B0F40F8",
       "class": "Part",
@@ -589,6 +664,70 @@
       }
     },
     {
+      "id": "RBXCB84B9F117784EDC9D691B0C05104044",
+      "parent": "RBX89DFCEC811CD4C86907558037B0F40F8",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          0.580392,
+          0.580392
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.264466286,
+          0.272065163,
+          0.0345982574
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            -0.914676,
+            0.033646,
+            0.403088
+          ],
+          "rotation": [
+            -0.912548,
+            -0.15325,
+            -0.379171,
+            0.019135,
+            0.910123,
+            -0.413897,
+            0.408522,
+            -0.384956,
+            -0.827598
+          ]
+        }
+      }
+    },
+    {
       "id": "RBXC1280A82EFFB40A2B13242A527125838",
       "parent": "RBX89DFCEC811CD4C86907558037B0F40F8",
       "class": "Part",
@@ -677,6 +816,54 @@
           1
         ],
         "Name": "Mesh"
+      }
+    },
+    {
+      "id": "RBX5573FD1937A94790B94AED6ED2D63B8E",
+      "parent": "RBXC1280A82EFFB40A2B13242A527125838",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            -0.5
+          ],
+          "rotation": [
+            -1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -1
+          ]
+        },
+        "C1": {
+          "position": [
+            1,
+            -0.00000286102295,
+            0.100006104
+          ],
+          "rotation": [
+            -1,
+            0.00000321863536,
+            0.00000321864582,
+            0.00000321862467,
+            1,
+            -0.00000321867674,
+            -0.00000321865627,
+            -0.00000321866628,
+            -1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXC1280A82EFFB40A2B13242A527125838",
+        "Part1": null,
+        "Name": "Weld"
       }
     },
     {
@@ -778,6 +965,54 @@
           1
         ],
         "Name": "Mesh"
+      }
+    },
+    {
+      "id": "RBXF50B0D00C7354C108235DEF532D913B6",
+      "parent": "RBX5A531C400FAF468890FDA96EFEE41B31",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0.100000001
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -1,
+            0,
+            -0.5
+          ],
+          "rotation": [
+            1,
+            -0.00000321862467,
+            0.00000321865627,
+            0.00000321863536,
+            1,
+            -0.00000321866628,
+            -0.00000321864582,
+            0.00000321867674,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX5A531C400FAF468890FDA96EFEE41B31",
+        "Part1": null,
+        "Name": "Weld"
       }
     },
     {

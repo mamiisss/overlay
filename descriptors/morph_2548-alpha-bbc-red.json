@@ -5,7 +5,14 @@
   "asset_id": "morph_2548-alpha-bbc-red",
   "name": "Alpha BBC red",
   "source_file": "2548-alpha-bbc-red.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       7,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 4,
     "SpecialMesh": 1,
+    "UnionOperation": 1,
     "ParticleEmitter": 3,
+    "Bone": 3,
     "Decal": 1,
     "MeshPart": 1
   },
@@ -219,8 +228,72 @@
       }
     },
     {
-      "id": "RBX7645A6769FA8431A9F0BE35EA3F6AC94",
+      "id": "RBX1B44EFDD722B4BB3918624878684F5F6",
       "parent": "RBX49D545ED732545B1801A83BB0655B5C6",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": false,
+        "CanTouch": false,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 2309,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.49636626,
+          1.41815889,
+          0.916523218
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.004314,
+            -1.60099,
+            -0.306966
+          ],
+          "rotation": [
+            -0.999996,
+            0.001957,
+            -0.002006,
+            0.00233,
+            0.978257,
+            -0.207365,
+            0.001556,
+            -0.207368,
+            -0.978262
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX7645A6769FA8431A9F0BE35EA3F6AC94",
+      "parent": "RBX1B44EFDD722B4BB3918624878684F5F6",
       "class": "ParticleEmitter",
       "name": "Mist",
       "properties": {
@@ -266,8 +339,92 @@
       }
     },
     {
+      "id": "RBXB0076022CE424A93B1DD458C7D74F9D1",
+      "parent": "RBX1B44EFDD722B4BB3918624878684F5F6",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00224914565,
+            0.833732903,
+            0.0897151008
+          ],
+          "rotation": [
+            1,
+            -1.24900143e-16,
+            -1.11022302e-16,
+            -1.24900143e-16,
+            -1,
+            1.38666897e-32,
+            -1.11022302e-16,
+            1.17549435e-38,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX6BBB632E7BA44DC28483A7E1B5790A07",
+      "parent": "RBXB0076022CE424A93B1DD458C7D74F9D1",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000167846683,
+            0.713145912,
+            0.00000104904177
+          ],
+          "rotation": [
+            0.707106829,
+            -0.707106829,
+            -4.09782004e-8,
+            0.707106769,
+            0.707106829,
+            -4.09782288e-8,
+            5.79519437e-8,
+            2.14147903e-14,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBXDF5FDFDF46F948E8B5D5AF482B43741C",
+      "parent": "RBXB0076022CE424A93B1DD458C7D74F9D1",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000167846683,
+            0.713145792,
+            0.00000104904177
+          ],
+          "rotation": [
+            0.707106829,
+            0.707106829,
+            -1.00582852e-7,
+            -0.707106769,
+            0.707106829,
+            1.00582852e-7,
+            1.42245625e-7,
+            -4.03284245e-16,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
+      }
+    },
+    {
       "id": "RBXBC725E69DCF34501B5AF1BD5FDF2BC9C",
-      "parent": "RBX49D545ED732545B1801A83BB0655B5C6",
+      "parent": "RBX1B44EFDD722B4BB3918624878684F5F6",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -298,6 +455,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://120495708894122",
         "RenderFidelity": 0,
         "TextureID": null,

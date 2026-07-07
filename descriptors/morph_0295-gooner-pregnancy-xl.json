@@ -5,7 +5,14 @@
   "asset_id": "morph_0295-gooner-pregnancy-xl",
   "name": "Gooner Pregnancy XL",
   "source_file": "0295-gooner-pregnancy-xl.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       186366.984,
@@ -29,6 +36,7 @@
     "Model": 1,
     "Part": 1,
     "SpecialMesh": 1,
+    "UnionOperation": 1,
     "Decal": 18
   },
   "nodes": [
@@ -143,8 +151,72 @@
       }
     },
     {
-      "id": "RBX059B97E2EE124D5283201B8B7140CA07",
+      "id": "RBXA041B059B04C481E932668E04AF75D23",
       "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          2.2370882,
+          1.97414637,
+          2.20814896
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.016,
+            -0.418,
+            -0.8281
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            0.984808,
+            0.173648,
+            0,
+            -0.173648,
+            0.984808
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX059B97E2EE124D5283201B8B7140CA07",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 2",
       "properties": {
@@ -161,7 +233,7 @@
     },
     {
       "id": "RBXAE5AE426C1A04809A1CEFC3D435B5C8E",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 2",
       "properties": {
@@ -178,7 +250,7 @@
     },
     {
       "id": "RBXA317AB77548A466AAC3A8907A16DC979",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -195,7 +267,7 @@
     },
     {
       "id": "RBXFDB278385F5A44ECB7DE2605015D2B10",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -212,7 +284,7 @@
     },
     {
       "id": "RBX01ABF6817C554C9DB385F2CC58EC363E",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -229,7 +301,7 @@
     },
     {
       "id": "RBX5CCD9F90EB304C90B82E5730BC5C7490",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -246,7 +318,7 @@
     },
     {
       "id": "RBX3DC0677C98E9437BAC42BF796D645011",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -263,7 +335,7 @@
     },
     {
       "id": "RBX3B9ECA369BE6437F829DF9D88EE0F2B0",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -280,7 +352,7 @@
     },
     {
       "id": "RBXD537A09F40044C74A007A5E5F4472F79",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 2",
       "properties": {
@@ -297,7 +369,7 @@
     },
     {
       "id": "RBX4FC9B70643FF4DB4835249FF717FD621",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 2",
       "properties": {
@@ -314,7 +386,7 @@
     },
     {
       "id": "RBXA1D777A3320F45B7BDA349FC6BB104BB",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -331,7 +403,7 @@
     },
     {
       "id": "RBX658AEE89913D4EC0BE0C8A6F30B5DA1B",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 2",
       "properties": {
@@ -348,7 +420,7 @@
     },
     {
       "id": "RBX1F93225E5C6E4F6F95607F68C7D07064",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -365,7 +437,7 @@
     },
     {
       "id": "RBX8A71196A4230487CA3A53EEE855A9502",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -382,7 +454,7 @@
     },
     {
       "id": "RBXBAEC0564F11A4EBA993C4525F69D6AB0",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -399,7 +471,7 @@
     },
     {
       "id": "RBX4167CEED03D94FF4AAE42A5350AFAC37",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -416,7 +488,7 @@
     },
     {
       "id": "RBX4C04CC15132B43ACACB34F7737952150",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 3",
       "properties": {
@@ -433,7 +505,7 @@
     },
     {
       "id": "RBXC7806B92AD41413781E75704280765CF",
-      "parent": "RBX2631F9A291444CC28CA9A6E0DF8E7175",
+      "parent": "RBXA041B059B04C481E932668E04AF75D23",
       "class": "Decal",
       "name": "stuff 2",
       "properties": {

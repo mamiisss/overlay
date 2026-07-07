@@ -5,7 +5,14 @@
   "asset_id": "morph_1616-anus-sex-toy",
   "name": "Anus (sex toy)",
   "source_file": "1616-anus-sex-toy.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -366.62915,
@@ -30,7 +37,9 @@
     "Part": 3,
     "SpecialMesh": 3,
     "MeshPart": 6,
-    "Decal": 2
+    "Decal": 2,
+    "WeldConstraint": 2,
+    "Weld": 3
   },
   "nodes": [
     {
@@ -149,6 +158,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10191889916",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -215,6 +225,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10191890130",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -448,6 +459,15 @@
       }
     },
     {
+      "id": "RBX2E48580B70C04CEBA5AB31224E040694",
+      "parent": "RBXBDFEEE9228DE4833ADDE5A9FD2F5C774",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBXCDD3DDFB6340467F81F62820FFC4D273",
       "parent": "RBXBDFEEE9228DE4833ADDE5A9FD2F5C774",
       "class": "SpecialMesh",
@@ -492,11 +512,21 @@
       }
     },
     {
+      "id": "RBX061B57E4BA72424CA3F1BA7044533C15",
+      "parent": "RBXC308A67E65334D1DA233A707C4A9CCB7",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
       "id": "RBX3440E196173F4EB8B3F440AA01AEBBEC",
       "parent": "RBXF8E93963438740A58E7219AB8B86EC10",
       "class": "MeshPart",
       "name": "SexToy",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10314480972",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -563,6 +593,7 @@
       "class": "MeshPart",
       "name": "HeartBase",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10314480262",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -629,6 +660,7 @@
       "class": "MeshPart",
       "name": "Heart",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10314474312",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -690,11 +722,60 @@
       }
     },
     {
+      "id": "RBX8BDA4E140AE8410ABC14102F65AF5691",
+      "parent": "RBX2729319C5CD244FFB51CE1FF859FD3A6",
+      "class": "Weld",
+      "name": "HeartWeld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.146632046,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX2729319C5CD244FFB51CE1FF859FD3A6",
+        "Part1": "RBXCC2ADD730F514EE59A394A6670EFAFD7",
+        "Name": "HeartWeld"
+      }
+    },
+    {
       "id": "RBXD45354FA31104D8BADA9DD3608B9339F",
       "parent": "RBX3440E196173F4EB8B3F440AA01AEBBEC",
       "class": "MeshPart",
       "name": "Glass",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://10314479380",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -753,6 +834,102 @@
             0
           ]
         }
+      }
+    },
+    {
+      "id": "RBX99F227F0BDC74FBD995B19A87482DDA7",
+      "parent": "RBX3440E196173F4EB8B3F440AA01AEBBEC",
+      "class": "Weld",
+      "name": "HeartBaseWeld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0.853952825,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX3440E196173F4EB8B3F440AA01AEBBEC",
+        "Part1": "RBX2729319C5CD244FFB51CE1FF859FD3A6",
+        "Name": "HeartBaseWeld"
+      }
+    },
+    {
+      "id": "RBX2F2648088EC74104B2CB138DDE1DAA21",
+      "parent": "RBX3440E196173F4EB8B3F440AA01AEBBEC",
+      "class": "Weld",
+      "name": "GlassWeld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            -0.00264747161,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX3440E196173F4EB8B3F440AA01AEBBEC",
+        "Part1": "RBXD45354FA31104D8BADA9DD3608B9339F",
+        "Name": "GlassWeld"
       }
     }
   ]

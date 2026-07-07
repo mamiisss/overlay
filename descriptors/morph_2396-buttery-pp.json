@@ -5,7 +5,14 @@
   "asset_id": "morph_2396-buttery-pp",
   "name": "Buttery PP",
   "source_file": "2396-buttery-pp.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -15801.4844,
@@ -30,7 +37,8 @@
     "Part": 4,
     "ParticleEmitter": 3,
     "MeshPart": 2,
-    "SpecialMesh": 1
+    "SpecialMesh": 1,
+    "UnionOperation": 1
   },
   "nodes": [
     {
@@ -233,6 +241,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://93925131542621",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -346,6 +355,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://111141613201292",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -518,8 +528,72 @@
       }
     },
     {
-      "id": "RBX8594F45EB8BF4FC2BDBDF888574162D1",
+      "id": "RBXDE7CC5C39A08460AB9184D7558F21599",
       "parent": "RBXE73347ADE0054FCE8B97FB07DEDE926B",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.411765,
+          0.25098,
+          0.156863
+        ],
+        "Massless": true,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.736505568,
+          0.934571505,
+          0.623325109
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            -0.002232,
+            -1.327239,
+            0.392212
+          ],
+          "rotation": [
+            0.999751,
+            -0.000842,
+            0.022278,
+            -0.022175,
+            0.065385,
+            0.997615,
+            -0.002297,
+            -0.997859,
+            0.06535
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX8594F45EB8BF4FC2BDBDF888574162D1",
+      "parent": "RBXDE7CC5C39A08460AB9184D7558F21599",
       "class": "ParticleEmitter",
       "name": "Mist",
       "properties": {

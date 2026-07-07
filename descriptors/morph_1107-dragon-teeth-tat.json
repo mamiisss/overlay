@@ -6,31 +6,40 @@
   "name": "Dragon Teeth tat",
   "source_file": "1107-dragon-teeth-tat.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
-      7.19620943,
-      217.772247,
-      -3.34802675
+      7.39738131,
+      216.924957,
+      -3.30457067
     ],
     "rotation": [
-      1.24099031e-7,
-      -6.20495584e-8,
-      1,
-      -9.90448598e-7,
-      1,
-      -6.20495584e-8,
-      -1,
-      9.90448598e-7,
-      -1.24099031e-7
+      0.0000168759416,
+      0.912698209,
+      -0.408634424,
+      -0.00101602462,
+      0.408634156,
+      0.912697732,
+      0.999999523,
+      0.00040036306,
+      0.000936129421
     ]
   },
   "class_counts": {
     "Folder": 1,
     "Model": 3,
+    "UnionOperation": 1,
     "Part": 3,
     "SpecialMesh": 1,
     "MeshPart": 6,
-    "Decal": 2
+    "Decal": 2,
+    "WeldConstraint": 4
   },
   "nodes": [
     {
@@ -50,6 +59,70 @@
       "properties": {
         "PrimaryPart": "RBX88D124329A89457B8A3B6C323137FF1B",
         "Name": "LowerStatic"
+      }
+    },
+    {
+      "id": "RBX832E120A9D01455CB5BA26B44CFB4CCC",
+      "parent": "RBX3453DFA4EF454308A4C6AEEEE357A571",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.486275,
+          0.360784,
+          0.27451
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.05393267,
+          0.989616811,
+          0.801260352
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0.000002,
+            0,
+            1,
+            0,
+            0.000002,
+            0,
+            1
+          ]
+        }
       }
     },
     {
@@ -98,20 +171,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            0,
-            0,
-            0
+            -0.04432,
+            0.162605,
+            0.855485
           ],
           "rotation": [
-            1,
-            -0.000002,
-            0,
-            -0.000002,
-            1,
-            0,
-            0,
-            0,
-            1
+            -1,
+            -0.001015,
+            0.000017,
+            -0.000401,
+            0.408634,
+            0.912698,
+            -0.000937,
+            0.912698,
+            -0.408634
           ]
         }
       }
@@ -159,6 +232,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7316929694",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -201,20 +275,20 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            0.553868,
-            -0.999039,
-            0.513158
+            -0.597164,
+            0.222501,
+            -0.266548
           ],
           "rotation": [
-            -0.00004,
-            0.000093,
-            -1,
-            -0.000116,
-            1,
-            0.000095,
-            1,
-            0.000116,
-            -0.000041
+            0.000058,
+            -0.00111,
+            0.999999,
+            0.912651,
+            0.40874,
+            0.000402,
+            -0.40874,
+            0.91265,
+            0.001039
           ]
         }
       }
@@ -242,6 +316,7 @@
       "class": "MeshPart",
       "name": "LowerT",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18742591279",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://18703185589",
@@ -284,22 +359,31 @@
         "Name": "LowerT",
         "LocalCFrame": {
           "position": [
-            0.536242,
-            -1.20218,
-            1.285739
+            -0.579318,
+            0.84463,
+            -0.76764
           ],
           "rotation": [
-            0.999722,
-            0.005313,
-            0.022977,
-            -0.000663,
-            -0.967601,
-            0.252483,
-            0.023574,
-            -0.252428,
-            -0.967329
+            -0.999721,
+            -0.004333,
+            -0.023251,
+            0.020845,
+            -0.625788,
+            -0.779715,
+            -0.011173,
+            -0.779981,
+            0.625703
           ]
         }
+      }
+    },
+    {
+      "id": "RBXB8734255429247BBBA90DE1C308D3F6E",
+      "parent": "RBX7B489763EF674349BCF8655A19DD1A22",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     },
     {
@@ -308,6 +392,7 @@
       "class": "MeshPart",
       "name": "UpperT",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18742591279",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://18703185589",
@@ -350,22 +435,31 @@
         "Name": "UpperT",
         "LocalCFrame": {
           "position": [
-            0.545229,
-            -0.646073,
-            1.135277
+            -0.588872,
+            0.934545,
+            -0.198607
           ],
           "rotation": [
-            -0.996195,
-            -0.061629,
-            -0.061628,
-            0,
-            0.707107,
-            -0.707107,
-            0.087156,
-            -0.704416,
-            -0.704416
+            0.996196,
+            0.060898,
+            0.062335,
+            0.079946,
+            -0.353947,
+            -0.931843,
+            -0.034682,
+            0.933281,
+            -0.357468
           ]
         }
+      }
+    },
+    {
+      "id": "RBX6782D1B85E064FEF9911674460B2C4E4",
+      "parent": "RBX40B131EA82614BB5A391AE93865A52ED",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     },
     {
@@ -414,20 +508,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            0.37,
-            -1.000122,
-            0.500488
+            -0.413294,
+            0.210568,
+            -0.262187
           ],
           "rotation": [
-            1,
-            -0.000001,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            1
+            -1,
+            -0.001016,
+            0.000017,
+            -0.0004,
+            0.408634,
+            0.912698,
+            -0.000936,
+            0.912698,
+            -0.408634
           ]
         }
       }
@@ -448,6 +542,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7310579572",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -490,20 +585,20 @@
         "Name": "color5",
         "LocalCFrame": {
           "position": [
-            -0.601016,
-            -1.012511,
-            0.513088
+            0.557734,
+            0.217393,
+            -0.277735
           ],
           "rotation": [
-            -0.00004,
-            0.000093,
-            -1,
-            -0.000116,
-            1,
-            0.000095,
-            1,
-            0.000116,
-            -0.000041
+            0.000058,
+            -0.00111,
+            0.999999,
+            0.912651,
+            0.40874,
+            0.000402,
+            -0.40874,
+            0.91265,
+            0.001039
           ]
         }
       }
@@ -531,6 +626,7 @@
       "class": "MeshPart",
       "name": "LowerT",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18742591279",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://18703185589",
@@ -573,22 +669,31 @@
         "Name": "LowerT",
         "LocalCFrame": {
           "position": [
-            -0.685478,
-            -1.202193,
-            1.285738
+            0.642402,
+            0.845112,
+            -0.76651
           ],
           "rotation": [
-            0.996195,
-            0.061629,
-            0.061628,
-            0.043577,
-            -0.964581,
-            0.260164,
-            0.075479,
-            -0.256489,
-            -0.963596
+            -0.996237,
+            -0.060653,
+            -0.061909,
+            0.086298,
+            -0.628282,
+            -0.773184,
+            0.007998,
+            -0.775618,
+            0.631152
           ]
         }
+      }
+    },
+    {
+      "id": "RBX839A42A0A8AC4C2EA5E898694E805695",
+      "parent": "RBXC404007F43514EAA93DA9EDEC367C5C3",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     },
     {
@@ -597,6 +702,7 @@
       "class": "MeshPart",
       "name": "UpperT",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://18742591279",
         "RenderFidelity": 0,
         "TextureID": "rbxassetid://18703185589",
@@ -639,22 +745,31 @@
         "Name": "UpperT",
         "LocalCFrame": {
           "position": [
-            -0.676488,
-            -0.646071,
-            1.135252
+            0.632844,
+            0.935012,
+            -0.197454
           ],
           "rotation": [
-            -0.984808,
-            0.122787,
-            0.122788,
-            0,
-            0.707107,
-            -0.707107,
-            -0.173648,
-            -0.696364,
-            -0.696364
+            0.984804,
+            -0.123518,
+            -0.122081,
+            -0.158094,
+            -0.346672,
+            -0.924568,
+            0.071881,
+            0.929818,
+            -0.360931
           ]
         }
+      }
+    },
+    {
+      "id": "RBXDA7E0A1CA424483C9C364225ADCF6B2A",
+      "parent": "RBXC8093EA9A5AF427F99D2FFDE07F7E667",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     },
     {
@@ -703,20 +818,20 @@
         "Name": "Middle",
         "LocalCFrame": {
           "position": [
-            -0.339843,
-            -1,
-            0.500488
+            0.296548,
+            0.210902,
+            -0.261412
           ],
           "rotation": [
-            1,
-            0,
-            0,
-            -0.000001,
-            1,
-            0,
-            0,
-            0,
-            1
+            -1,
+            -0.001016,
+            0.000017,
+            -0.0004,
+            0.408634,
+            0.912698,
+            -0.000936,
+            0.912698,
+            -0.408634
           ]
         }
       }

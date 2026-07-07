@@ -5,7 +5,14 @@
   "asset_id": "morph_2712-hot-demon-dick",
   "name": "hot demon dick",
   "source_file": "2712-hot-demon-dick.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -11122.8252,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 4,
     "SpecialMesh": 1,
-    "MeshPart": 3
+    "MeshPart": 3,
+    "Motor6D": 2,
+    "Bone": 7
   },
   "nodes": [
     {
@@ -222,6 +231,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7715521569",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -362,6 +372,7 @@
       "class": "MeshPart",
       "name": "Tip",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://10570105085",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -420,6 +431,54 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX1751A2C8B6CA4F838B4E9ECCF473B3C5",
+      "parent": "RBXB957EE7AC19542C0AB797EBE7D6EBC8A",
+      "class": "Motor6D",
+      "name": "TipMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.00000911092502,
+            0.216463327,
+            1.25746465
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            -0.00885743462,
+            -0.362975597
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1.00000024,
+            -4.74974584e-8,
+            0,
+            4.74974584e-8,
+            1.00000024
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX638E50DFD93645FF91D6E6EA77AE7304",
+        "Part1": "RBXB957EE7AC19542C0AB797EBE7D6EBC8A",
+        "Name": "TipMotor6D"
       }
     },
     {
@@ -487,11 +546,208 @@
       }
     },
     {
+      "id": "RBX68E5B9BADBE348F9819E4039ECEB9FAA",
+      "parent": "RBX638E50DFD93645FF91D6E6EA77AE7304",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0,
+            -4.55546072e-8
+          ],
+          "rotation": [
+            1,
+            1.31645967e-16,
+            -4.75562837e-16,
+            -4.88785497e-16,
+            0.132098526,
+            -0.991236627,
+            -6.76711562e-17,
+            0.991236627,
+            0.132098526
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX8C7C1570F6D84AC1B340BD0A283D95F9",
+      "parent": "RBX68E5B9BADBE348F9819E4039ECEB9FAA",
+      "class": "Bone",
+      "name": "Bone.004",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.184740067,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.004"
+      }
+    },
+    {
+      "id": "RBX62817665A97D440C8A186BE323EF5972",
+      "parent": "RBX8C7C1570F6D84AC1B340BD0A283D95F9",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.184723854,
+            -3.57627869e-7
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
+      }
+    },
+    {
+      "id": "RBX9AFBC79354E84324AEC756E2DA0D3803",
+      "parent": "RBX62817665A97D440C8A186BE323EF5972",
+      "class": "Bone",
+      "name": "Bone.005",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.184737206,
+            -1.1920929e-7
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.005"
+      }
+    },
+    {
+      "id": "RBXB6A7CAF6E6BC46A1BE2B72CA4BC49D18",
+      "parent": "RBX9AFBC79354E84324AEC756E2DA0D3803",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.184732437,
+            3.57627869e-7
+          ],
+          "rotation": [
+            1,
+            6.21724826e-14,
+            4.76837727e-7,
+            -1.87645952e-8,
+            0.999225497,
+            0.0393520407,
+            -4.76468301e-7,
+            -0.0393520407,
+            0.999225497
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX583316E6F9D041D48AB95A945D625572",
+      "parent": "RBXB6A7CAF6E6BC46A1BE2B72CA4BC49D18",
+      "class": "Bone",
+      "name": "Bone.006",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.158234596,
+            0
+          ],
+          "rotation": [
+            1,
+            -2.84217433e-14,
+            -5.93303184e-13,
+            2.84217094e-14,
+            1,
+            -5.96046306e-8,
+            5.93303184e-13,
+            5.96046306e-8,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.006"
+      }
+    },
+    {
+      "id": "RBXEBA9ECA373B643D98E7C7DA29CA23A6A",
+      "parent": "RBX583316E6F9D041D48AB95A945D625572",
+      "class": "Bone",
+      "name": "Bone.003",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.158227921,
+            7.15255737e-7
+          ],
+          "rotation": [
+            1,
+            1.754632e-8,
+            3.23170685e-10,
+            -1.75463271e-8,
+            0.999322832,
+            0.036797408,
+            3.22707194e-10,
+            -0.036797408,
+            0.999322832
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.003"
+      }
+    },
+    {
       "id": "RBXE124FFF696414D2FAF168632650CC24C",
       "parent": "RBX2354834F61A44B40877B08329B851ABF",
       "class": "MeshPart",
       "name": "Shaft",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://10570105044",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://10983955537",
@@ -550,6 +806,54 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXE2DC85AF6862484BB498B8B987D964D7",
+      "parent": "RBXE124FFF696414D2FAF168632650CC24C",
+      "class": "Motor6D",
+      "name": "ShaftMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.00000911092502,
+            0.0929423869,
+            0.213650957
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            -0.00459535467,
+            0.00920660328,
+            -0.552302361
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1.00000012,
+            0,
+            0,
+            0,
+            1.00000012
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX638E50DFD93645FF91D6E6EA77AE7304",
+        "Part1": "RBXE124FFF696414D2FAF168632650CC24C",
+        "Name": "ShaftMotor6D"
       }
     }
   ]

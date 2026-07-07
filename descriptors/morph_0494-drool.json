@@ -5,7 +5,14 @@
   "asset_id": "morph_0494-drool",
   "name": "Drool",
   "source_file": "0494-drool.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -15.0122261,
@@ -30,7 +37,9 @@
     "Part": 4,
     "SpecialMesh": 3,
     "Attachment": 4,
-    "MeshPart": 1
+    "Weld": 2,
+    "MeshPart": 1,
+    "Bone": 3
   },
   "nodes": [
     {
@@ -171,6 +180,54 @@
       }
     },
     {
+      "id": "RBX351F5903E5D546F4A0CE9458C14278E3",
+      "parent": "RBX239AD298A7094458A99572EF3391CF65",
+      "class": "Weld",
+      "name": "Drool",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0123596191,
+            -0.667030334,
+            -0.717681885
+          ],
+          "rotation": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX239AD298A7094458A99572EF3391CF65",
+        "Part1": "RBX86C46B8FB1C14483B11EB082BAEEBD11",
+        "Name": "Drool"
+      }
+    },
+    {
       "id": "RBX81339007E6464477A9E97331E5F79E4F",
       "parent": "RBX239AD298A7094458A99572EF3391CF65",
       "class": "Folder",
@@ -249,6 +306,7 @@
       "class": "MeshPart",
       "name": "Drool",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6976475976",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -310,6 +368,90 @@
       }
     },
     {
+      "id": "RBX466CAF3728414FE69E5E3D6C45B5E0D2",
+      "parent": "RBX86C46B8FB1C14483B11EB082BAEEBD11",
+      "class": "Bone",
+      "name": "Shoulder",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.000122070312,
+            0.0817947388,
+            0.0206298828
+          ],
+          "rotation": [
+            1,
+            -1.65773333e-13,
+            0.00000138205201,
+            -1.75035767e-14,
+            -1,
+            -1.07282325e-7,
+            0.00000138205201,
+            1.07282325e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Shoulder"
+      }
+    },
+    {
+      "id": "RBX9C441DA428CC4D6F995BB7677A58CAB9",
+      "parent": "RBX466CAF3728414FE69E5E3D6C45B5E0D2",
+      "class": "Bone",
+      "name": "Forearm",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000915527344,
+            0.124328613,
+            0.02003479
+          ],
+          "rotation": [
+            1,
+            -2.29338028e-7,
+            -0.00000126660098,
+            2.29338568e-7,
+            1,
+            4.30270859e-7,
+            0.00000126660086,
+            -4.30271143e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Forearm"
+      }
+    },
+    {
+      "id": "RBXE3DF662A7A7747E5B37AE1040D0A6848",
+      "parent": "RBX9C441DA428CC4D6F995BB7677A58CAB9",
+      "class": "Bone",
+      "name": "Hand",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0000915527344,
+            0.0613555908,
+            -0.0199737549
+          ],
+          "rotation": [
+            1,
+            -1.06171044e-7,
+            -2.38418949e-7,
+            1.06170987e-7,
+            1,
+            -2.23517631e-7,
+            2.38418977e-7,
+            2.23517603e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Hand"
+      }
+    },
+    {
       "id": "RBXC2EC2A6EEA9540E0B22B354311743D70",
       "parent": "RBX86C46B8FB1C14483B11EB082BAEEBD11",
       "class": "Attachment",
@@ -334,6 +476,54 @@
           ]
         },
         "Name": "Attachment"
+      }
+    },
+    {
+      "id": "RBXECAFB638FA6D4D6BBC13C40D4FBA099C",
+      "parent": "RBX86C46B8FB1C14483B11EB082BAEEBD11",
+      "class": "Weld",
+      "name": "Weight",
+      "properties": {
+        "C0": {
+          "position": [
+            0.00231933594,
+            -0.232978821,
+            0.0123596191
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX86C46B8FB1C14483B11EB082BAEEBD11",
+        "Part1": "RBXCBC0F400227548ECA677236AAA59E644",
+        "Name": "Weight"
       }
     },
     {

@@ -5,7 +5,14 @@
   "asset_id": "morph_2449-temp-dickdown",
   "name": "temp-dickDown",
   "source_file": "2449-temp-dickdown.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       50.3241386,
@@ -31,7 +38,10 @@
     "SpecialMesh": 4,
     "Decal": 36,
     "MeshPart": 4,
-    "ParticleEmitter": 1
+    "WeldConstraint": 2,
+    "ParticleEmitter": 1,
+    "UnionOperation": 1,
+    "Bone": 3
   },
   "nodes": [
     {
@@ -509,6 +519,7 @@
       "class": "MeshPart",
       "name": "shark fin",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://4876132413",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://5213418462",
@@ -575,6 +586,7 @@
       "class": "MeshPart",
       "name": "shark fin",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://4876132413",
         "RenderFidelity": 1,
         "TextureID": "rbxassetid://5213418462",
@@ -633,6 +645,24 @@
             -0.573578
           ]
         }
+      }
+    },
+    {
+      "id": "RBX10C75356654C4BF39FA8EC21D2E108C9",
+      "parent": "RBXE358D4714CD14CE3B8B530875A945B75",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
+      }
+    },
+    {
+      "id": "RBX78D40AAEC29E4CA4AF2E07AFF650970D",
+      "parent": "RBXE358D4714CD14CE3B8B530875A945B75",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     },
     {
@@ -940,8 +970,72 @@
       }
     },
     {
-      "id": "RBX96EB57E22C244A4FAE0A575EF12CDF0D",
+      "id": "RBX989994DD7FD547DCA204A716EC62D2EF",
       "parent": "RBXA25C658D48F7442995A234BE3BEA636C",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": -0.0199999996,
+        "Transparency": 0,
+        "size": [
+          0.369769394,
+          0.269542992,
+          0.38622269
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.000024,
+            -0.415802,
+            -0.355736
+          ],
+          "rotation": [
+            0.999991,
+            0.004166,
+            0.000366,
+            0.00192,
+            -0.535006,
+            0.844846,
+            0.003716,
+            -0.844838,
+            -0.535009
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX96EB57E22C244A4FAE0A575EF12CDF0D",
+      "parent": "RBX989994DD7FD547DCA204A716EC62D2EF",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -958,7 +1052,7 @@
     },
     {
       "id": "RBX7D2BCF836D3342339EA2EE313D551D44",
-      "parent": "RBXA25C658D48F7442995A234BE3BEA636C",
+      "parent": "RBX989994DD7FD547DCA204A716EC62D2EF",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -975,7 +1069,7 @@
     },
     {
       "id": "RBXA52AE0ED2F11400F9B58E3769496DF96",
-      "parent": "RBXA25C658D48F7442995A234BE3BEA636C",
+      "parent": "RBX989994DD7FD547DCA204A716EC62D2EF",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -992,7 +1086,7 @@
     },
     {
       "id": "RBXB67570E7E13D46199139336F8DE1E1D2",
-      "parent": "RBXA25C658D48F7442995A234BE3BEA636C",
+      "parent": "RBX989994DD7FD547DCA204A716EC62D2EF",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1009,7 +1103,7 @@
     },
     {
       "id": "RBX5BD5834E686644FCB8FB3D7D07BB59A9",
-      "parent": "RBXA25C658D48F7442995A234BE3BEA636C",
+      "parent": "RBX989994DD7FD547DCA204A716EC62D2EF",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1026,7 +1120,7 @@
     },
     {
       "id": "RBX021590BD9F9940A8882D67ABEBEDF504",
-      "parent": "RBXA25C658D48F7442995A234BE3BEA636C",
+      "parent": "RBX989994DD7FD547DCA204A716EC62D2EF",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -1047,6 +1141,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7628766135",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1289,6 +1384,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://18166799404",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -1347,6 +1443,90 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXEFE4A4CD484C4BB698CC1A86BA4037CD",
+      "parent": "RBX73F42DBDFC3E4BD4B4A8519206FC1B31",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0011411499,
+            0.460959882,
+            0.0339843556
+          ],
+          "rotation": [
+            1,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1.22464685e-16,
+            -1,
+            -6.12323426e-17,
+            -1.22464685e-16,
+            6.12323426e-17,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBXF27EDDC4A2CA44C49191618262DB9D64",
+      "parent": "RBXEFE4A4CD484C4BB698CC1A86BA4037CD",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000381469727,
+            0.394287109,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            -0.707106769,
+            -4.09782004e-8,
+            0.707106769,
+            0.707106888,
+            -4.09782288e-8,
+            5.79519437e-8,
+            2.48689958e-14,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBX40E9F510714E42D9945BD44B139054CC",
+      "parent": "RBXEFE4A4CD484C4BB698CC1A86BA4037CD",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.00000381469727,
+            0.394287109,
+            0
+          ],
+          "rotation": [
+            0.707106829,
+            0.707106769,
+            -1.00582852e-7,
+            -0.707106769,
+            0.707106888,
+            1.00582852e-7,
+            1.42245625e-7,
+            -8.8817842e-15,
+            1.00000012
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
       }
     },
     {

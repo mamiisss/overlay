@@ -5,7 +5,14 @@
   "asset_id": "morph_0301-jiggle-belly",
   "name": "Jiggle belly ++",
   "source_file": "0301-jiggle-belly.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -15.5218496,
@@ -29,6 +36,7 @@
     "Model": 1,
     "Part": 1,
     "MeshPart": 3,
+    "Bone": 2,
     "Decal": 27
   },
   "nodes": [
@@ -121,6 +129,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://17850816718",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -179,6 +188,62 @@
             -0.996043
           ]
         }
+      }
+    },
+    {
+      "id": "RBX99788D708E264547BD115EC180C8250A",
+      "parent": "RBXBF06D0DC78094A3BA2D3386FAC3B5C24",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.000521426497,
+            0.251468271,
+            -1.31093407
+          ],
+          "rotation": [
+            1,
+            -4.39809682e-16,
+            4.13175392e-17,
+            -4.05348782e-16,
+            -0.950761497,
+            -0.309923649,
+            1.75590526e-16,
+            0.309923649,
+            -0.950761497
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX7BC92E32F1F54404A23D0766898BCB75",
+      "parent": "RBX99788D708E264547BD115EC180C8250A",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            1.14790177,
+            0.00549554825
+          ],
+          "rotation": [
+            1,
+            -5.04484421e-13,
+            2.38419005e-7,
+            -1.70269047e-7,
+            0.699982107,
+            0.714160383,
+            -1.66889393e-7,
+            -0.714160383,
+            0.699982107
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {
@@ -340,6 +405,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5276376752",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -559,6 +625,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5276376752",
         "RenderFidelity": 1,
         "TextureID": null,

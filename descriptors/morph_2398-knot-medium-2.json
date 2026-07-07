@@ -6,6 +6,13 @@
   "name": "Knot Medium 2",
   "source_file": "2398-knot-medium-2.rbxmx",
   "anchor": "Head",
+  "anchor_candidates": [
+    "Head",
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       94122.6953,
@@ -29,7 +36,9 @@
     "Model": 3,
     "Part": 3,
     "SpecialMesh": 1,
-    "MeshPart": 7
+    "MeshPart": 7,
+    "Bone": 3,
+    "SurfaceAppearance": 5
   },
   "nodes": [
     {
@@ -222,6 +231,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://72675750175794",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -283,6 +293,90 @@
       }
     },
     {
+      "id": "RBXDD86088EA1284DD48FE04F6EBF2AF453",
+      "parent": "RBX24C0ADFECA7640BE8ADC0DD4995B531F",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.00787933357,
+            0.713537455,
+            -0.18302238
+          ],
+          "rotation": [
+            -7.54979013e-8,
+            1.22464659e-16,
+            -1,
+            -1.49975976e-32,
+            -1,
+            -1.22464659e-16,
+            -1,
+            -9.24582452e-24,
+            7.54979013e-8
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX29C1FAB88E604245B1B5BCA375BF8323",
+      "parent": "RBXDD86088EA1284DD48FE04F6EBF2AF453",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.648845971,
+            6.55651089e-9
+          ],
+          "rotation": [
+            0.933628559,
+            -0.35824278,
+            -1.34110451e-7,
+            0.293366224,
+            0.764551759,
+            -0.573931277,
+            0.205606803,
+            0.535838485,
+            0.818903685
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
+      "id": "RBXAD7607B7DA1B4ED79422F37A47CF935C",
+      "parent": "RBXDD86088EA1284DD48FE04F6EBF2AF453",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -3.81469718e-8,
+            0.648846447,
+            5.78165071e-8
+          ],
+          "rotation": [
+            0.936135709,
+            -0.351639211,
+            7.4505806e-8,
+            0.281893581,
+            0.750458539,
+            0.597786009,
+            -0.210205048,
+            -0.559608698,
+            0.801655889
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
+      }
+    },
+    {
       "id": "RBX725B8061F9F9411387A043BC778E8EF4",
       "parent": "RBX175A92A839B44990B0BAFAB571EA023A",
       "class": "Model",
@@ -298,6 +392,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12921743140",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -359,11 +454,26 @@
       }
     },
     {
+      "id": "RBX8426BA2498A04FB5A91E725992D847E5",
+      "parent": "RBX6BBB25C2DEF94A2DB5C921FFD8779B5D",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": "rbxassetid://116046373613229",
+        "RoughnessMap": "rbxassetid://12776289446",
+        "Name": "SurfaceAppearance"
+      }
+    },
+    {
       "id": "RBX7245D542BA354FEFB4DE11EECC8987FB",
       "parent": "RBX725B8061F9F9411387A043BC778E8EF4",
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12921742575",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -425,11 +535,26 @@
       }
     },
     {
+      "id": "RBXCC6CDDA2995A4B9FA4FBCDCAA9969F59",
+      "parent": "RBX7245D542BA354FEFB4DE11EECC8987FB",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": "rbxassetid://116046373613229",
+        "RoughnessMap": "rbxassetid://12776289446",
+        "Name": "SurfaceAppearance"
+      }
+    },
+    {
       "id": "RBXA182C3E8F52E425298DEBED839088ADC",
       "parent": "RBX725B8061F9F9411387A043BC778E8EF4",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://87666170519286",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -491,11 +616,26 @@
       }
     },
     {
+      "id": "RBXA07963159E424C7B9DCE021BD558B1BA",
+      "parent": "RBXA182C3E8F52E425298DEBED839088ADC",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": "rbxassetid://16771555820",
+        "RoughnessMap": "rbxassetid://124690189037182",
+        "Name": "SurfaceAppearance"
+      }
+    },
+    {
       "id": "RBXA0D576F8A68A47F9B7B145614CEFF603",
       "parent": "RBX725B8061F9F9411387A043BC778E8EF4",
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://108773363221994",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -557,11 +697,26 @@
       }
     },
     {
+      "id": "RBXBC7B316D800243E195C32D2AC770E028",
+      "parent": "RBXA0D576F8A68A47F9B7B145614CEFF603",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": "rbxassetid://16771555820",
+        "RoughnessMap": "rbxassetid://124690189037182",
+        "Name": "SurfaceAppearance"
+      }
+    },
+    {
       "id": "RBXF6F135DA8FED462988418B992F4AD716",
       "parent": "RBX725B8061F9F9411387A043BC778E8EF4",
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14522943491",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -628,6 +783,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://92752032090923",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -686,6 +842,20 @@
             0.965926
           ]
         }
+      }
+    },
+    {
+      "id": "RBX3BC495B2B74F481FAC763F6378836BB4",
+      "parent": "RBX0FE1447CAD384E0EBC21E608362FDF58",
+      "class": "SurfaceAppearance",
+      "name": "SurfaceAppearance",
+      "properties": {
+        "AlphaMode": 0,
+        "ColorMap": null,
+        "MetalnessMap": null,
+        "NormalMap": "rbxassetid://16771555820",
+        "RoughnessMap": "rbxassetid://124690189037182",
+        "Name": "SurfaceAppearance"
       }
     },
     {

@@ -5,7 +5,14 @@
   "asset_id": "morph_1126-tz-s-physbutt-uv",
   "name": "Tz's PhysButt UV",
   "source_file": "1126-tz-s-physbutt-uv.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -643.840576,
@@ -30,7 +37,9 @@
     "Part": 5,
     "SpecialMesh": 3,
     "MeshPart": 3,
-    "Decal": 12
+    "Motor6D": 2,
+    "Decal": 12,
+    "Bone": 4
   },
   "nodes": [
     {
@@ -149,6 +158,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://16243955924",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -225,6 +235,7 @@
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://112416109479458",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -283,6 +294,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX05D4E7159A8F4713BD401CE41A9CE9C9",
+      "parent": "RBXB37CF6CF86B342D4A3C3CF91ADE0FDBD",
+      "class": "Motor6D",
+      "name": "TZRightMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.584854126,
+            -0.0173868835,
+            0.0239486396
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX263E7D44E4274A38B63E3D81E46C05F0",
+        "Part1": "RBXB37CF6CF86B342D4A3C3CF91ADE0FDBD",
+        "Name": "TZRightMotor6D"
       }
     },
     {
@@ -452,6 +511,62 @@
       }
     },
     {
+      "id": "RBX57ED4E0160034C3D9564A015936E7472",
+      "parent": "RBX263E7D44E4274A38B63E3D81E46C05F0",
+      "class": "Bone",
+      "name": "Bone.002",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.48695153,
+            0.533219814,
+            -0.493597776
+          ],
+          "rotation": [
+            -1,
+            -4.17109021e-7,
+            -0.00000247545358,
+            4.17109419e-7,
+            -1,
+            -1.62919648e-7,
+            -0.00000247545358,
+            -1.62920685e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.002"
+      }
+    },
+    {
+      "id": "RBX5EA87F565BC545F695D8A8C75FE8E84F",
+      "parent": "RBX57ED4E0160034C3D9564A015936E7472",
+      "class": "Bone",
+      "name": "Bone.003",
+      "properties": {
+        "CFrame": {
+          "position": [
+            2.98023224e-8,
+            0.571597755,
+            2.98023224e-8
+          ],
+          "rotation": [
+            0.985654771,
+            -0.149127021,
+            -0.0790307,
+            -0.0229016934,
+            0.345753878,
+            -0.9380458,
+            0.167213142,
+            0.926399171,
+            0.337378711
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.003"
+      }
+    },
+    {
       "id": "RBX65212846DCAE4430833867EAB018149F",
       "parent": "RBXA997E4839481459088A59EFEE02E2BCC",
       "class": "Part",
@@ -558,6 +673,7 @@
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://79271636151984",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -616,6 +732,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXB7FFA3ABA85F4FF589C9F6EE8F39E10E",
+      "parent": "RBXFDE7EA9694134466A5097DCA09481B14",
+      "class": "Motor6D",
+      "name": "TZLeftMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.584274292,
+            -0.0173869133,
+            0.0239486396
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX47BF3A82718D47E1ADEBAD6910E3AEB7",
+        "Part1": "RBXFDE7EA9694134466A5097DCA09481B14",
+        "Name": "TZLeftMotor6D"
       }
     },
     {
@@ -782,6 +946,62 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX8F480BAB84A94D1E9CDD57F628D5707C",
+      "parent": "RBX47BF3A82718D47E1ADEBAD6910E3AEB7",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.485748261,
+            0.533219814,
+            -0.493597776
+          ],
+          "rotation": [
+            -1,
+            3.6497039e-7,
+            -2.62862557e-7,
+            -3.64970333e-7,
+            -1,
+            -1.62920784e-7,
+            -2.62862613e-7,
+            -1.62920685e-7,
+            1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX25DE7A4BD4D34158A2C35191BF707CF1",
+      "parent": "RBX8F480BAB84A94D1E9CDD57F628D5707C",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -2.98023224e-8,
+            0.571597755,
+            2.98023224e-8
+          ],
+          "rotation": [
+            0.98845619,
+            0.149124548,
+            0.0267649163,
+            -0.026765395,
+            0.345753878,
+            -0.937943459,
+            -0.149124473,
+            0.926399529,
+            0.345753938
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
       }
     },
     {

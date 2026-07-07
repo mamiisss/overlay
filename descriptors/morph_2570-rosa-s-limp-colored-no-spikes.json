@@ -5,7 +5,14 @@
   "asset_id": "morph_2570-rosa-s-limp-colored-no-spikes",
   "name": "Rosa's Limp colored no spikes",
   "source_file": "2570-rosa-s-limp-colored-no-spikes.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -88.9995728,
@@ -30,6 +37,7 @@
     "Part": 5,
     "ParticleEmitter": 1,
     "MeshPart": 3,
+    "UnionOperation": 2,
     "SpecialMesh": 1
   },
   "nodes": [
@@ -233,6 +241,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7628766135",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -363,6 +372,7 @@
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7628766135",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -424,11 +434,76 @@
       }
     },
     {
+      "id": "RBX1C1F934C23584295B6E13E66258E3A41",
+      "parent": "RBX27A4527AF0DF444F821818E204EC247A",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.972549,
+          0.972549,
+          0.972549
+        ],
+        "Massless": false,
+        "Material": 1568,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0.100000001,
+        "Transparency": 0.439999998,
+        "size": [
+          1.06550217,
+          0.701599121,
+          0.768106461
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.011215,
+            -0.514039,
+            -0.613778
+          ],
+          "rotation": [
+            -0.507402,
+            -0.834733,
+            -0.213925,
+            0.774622,
+            -0.333082,
+            -0.537606,
+            0.377505,
+            -0.438491,
+            0.815611
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX621792DB4FEC4A05828926AC79BC604D",
       "parent": "RBX27A4527AF0DF444F821818E204EC247A",
       "class": "MeshPart",
       "name": "color2",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://11485682698",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -558,6 +633,70 @@
             0,
             0,
             0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF26F741DD42947EB9F66F34BEE25CC55",
+      "parent": "RBX4ED20713B3F44366902379585F133134",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": true,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.992157,
+          0.917647,
+          0.552941
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.42033386,
+          1.55819941,
+          0.973199368
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.010406,
+            -0.483027,
+            -0.061353
+          ],
+          "rotation": [
+            1,
+            0.000001,
+            0,
+            -0.000001,
+            1,
+            -0.000003,
+            0,
+            0.000003,
             1
           ]
         }

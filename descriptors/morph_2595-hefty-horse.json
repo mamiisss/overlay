@@ -5,7 +5,14 @@
   "asset_id": "morph_2595-hefty-horse",
   "name": "Hefty Horse",
   "source_file": "2595-hefty-horse.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       1.44389999,
@@ -31,7 +38,8 @@
     "SpecialMesh": 3,
     "MeshPart": 4,
     "Decal": 20,
-    "ParticleEmitter": 1
+    "ParticleEmitter": 1,
+    "UnionOperation": 5
   },
   "nodes": [
     {
@@ -224,6 +232,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12356912381",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -481,8 +490,136 @@
       }
     },
     {
-      "id": "RBX223E4FA3E34F49DE9B8B01865EAAF08C",
+      "id": "RBXA674A708930C486F96402992014BE4CB",
       "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "class": "UnionOperation",
+      "name": "color5",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.937255,
+          0.721569,
+          0.219608
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.707028031,
+          0.659849524,
+          0.679389358
+        ],
+        "Name": "color5",
+        "LocalCFrame": {
+          "position": [
+            0.011077,
+            -0.891004,
+            -0.64599
+          ],
+          "rotation": [
+            0.999043,
+            -0.043745,
+            0.000245,
+            0.043676,
+            0.997752,
+            0.050825,
+            -0.002468,
+            -0.050766,
+            0.998708
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX4D58A7ED0257489484BFAD8C8A2C0ED5",
+      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0,
+          0.560784,
+          0.611765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.778822005,
+          0.593874335,
+          0.490890265
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            -0.051216,
+            -0.841466,
+            -2.471375
+          ],
+          "rotation": [
+            0.999044,
+            -0.028562,
+            0.033108,
+            0.028126,
+            0.999516,
+            0.013291,
+            -0.033471,
+            -0.012355,
+            0.999363
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX223E4FA3E34F49DE9B8B01865EAAF08C",
+      "parent": "RBX4D58A7ED0257489484BFAD8C8A2C0ED5",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -499,7 +636,7 @@
     },
     {
       "id": "RBX7147362C84B1420EACED68B6977825C3",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX4D58A7ED0257489484BFAD8C8A2C0ED5",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -516,7 +653,7 @@
     },
     {
       "id": "RBXDA9A4C32C4B54567B771360208D5D46D",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX4D58A7ED0257489484BFAD8C8A2C0ED5",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -533,7 +670,7 @@
     },
     {
       "id": "RBX2B76C6E646EA4FA6992851D3E5FD893D",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX4D58A7ED0257489484BFAD8C8A2C0ED5",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -550,7 +687,7 @@
     },
     {
       "id": "RBX7AC4C10F96CC4622BF35835431D43C90",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX4D58A7ED0257489484BFAD8C8A2C0ED5",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -566,8 +703,72 @@
       }
     },
     {
-      "id": "RBX16E6C21106D8411680C32D8B16FF99CC",
+      "id": "RBX87819FD169E14FDE8028374776BA60A3",
       "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "class": "UnionOperation",
+      "name": "color1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": false,
+        "CanTouch": true,
+        "Color3uint8": [
+          0,
+          0.560784,
+          0.611765
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          0.752077818,
+          0.819543839,
+          1.88340223
+        ],
+        "Name": "color1",
+        "LocalCFrame": {
+          "position": [
+            -0.001134,
+            -0.923043,
+            -1.652425
+          ],
+          "rotation": [
+            0.999044,
+            -0.033889,
+            0.02764,
+            0.037889,
+            0.986309,
+            -0.160502,
+            -0.021821,
+            0.161387,
+            0.986649
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX16E6C21106D8411680C32D8B16FF99CC",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Negative",
       "properties": {
@@ -584,7 +785,7 @@
     },
     {
       "id": "RBXCDAA5B1B15E54D64A61359030931EF43",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Negative",
       "properties": {
@@ -601,7 +802,7 @@
     },
     {
       "id": "RBX80C497DA1F784B54B50AA00343DF5112",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Negative",
       "properties": {
@@ -618,7 +819,7 @@
     },
     {
       "id": "RBXF516F02AFFB54A4384AF68CE1E6C98DA",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -635,7 +836,7 @@
     },
     {
       "id": "RBX7F0FE577D42641A5BAE32E18E42BA9DA",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -652,7 +853,7 @@
     },
     {
       "id": "RBX654D38FE3CC8413CA93541D92C13826E",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -669,7 +870,7 @@
     },
     {
       "id": "RBXF14F7D796C4B4F5DA8B3FE4042FAF0B8",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -686,7 +887,7 @@
     },
     {
       "id": "RBX3C98B759CA57464B9D840CB85475CC60",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -703,7 +904,7 @@
     },
     {
       "id": "RBX3E86A65B029E4A8FA7728149A9ADC6E5",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Negative",
       "properties": {
@@ -720,7 +921,7 @@
     },
     {
       "id": "RBXB7A79117DA124AE8BA6153EFE6EEB990",
-      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "parent": "RBX87819FD169E14FDE8028374776BA60A3",
       "class": "Decal",
       "name": "Negative",
       "properties": {
@@ -736,11 +937,76 @@
       }
     },
     {
+      "id": "RBX1FF8B257A73D4F559292ACF945D43E67",
+      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          1,
+          1
+        ],
+        "Massless": false,
+        "Material": 1568,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          0.798999965,
+          0.613999963,
+          0.490999997
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.051408,
+            -0.841643,
+            -2.471289
+          ],
+          "rotation": [
+            0.999044,
+            -0.028553,
+            0.033108,
+            0.028126,
+            0.999516,
+            0.013291,
+            -0.033472,
+            -0.012347,
+            0.999363
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX524EF4FB49574215B9966825BDEE8808",
       "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://12356912381",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -797,6 +1063,70 @@
             -0.018335,
             -0.100154,
             0.994803
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX17B9F4F8905342FA8E28A74EA1BA3068",
+      "parent": "RBX67E5376CB4BC44A19D8F529B4DC58069",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          1,
+          1,
+          1
+        ],
+        "Massless": false,
+        "Material": 1568,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 1,
+        "size": [
+          1.66460812,
+          0.792865098,
+          0.851507783
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.008979,
+            -0.928038,
+            -1.861539
+          ],
+          "rotation": [
+            0,
+            0,
+            -1,
+            -0.144529,
+            0.9895,
+            0,
+            0.9895,
+            0.144529,
+            0
           ]
         }
       }
@@ -908,6 +1238,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14332784842",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -974,6 +1305,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://14332784842",
         "RenderFidelity": 1,
         "TextureID": null,

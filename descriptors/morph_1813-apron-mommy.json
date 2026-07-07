@@ -5,7 +5,18 @@
   "asset_id": "morph_1813-apron-mommy",
   "name": "Apron mommy",
   "source_file": "1813-apron-mommy.rbxmx",
-  "anchor": "Head",
+  "anchor": "RightHand",
+  "anchor_candidates": [
+    "RightHand",
+    "RightLowerArm",
+    "RightUpperArm",
+    "LeftHand",
+    "LeftLowerArm",
+    "LeftUpperArm",
+    "UpperTorso",
+    "Torso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       0.125275999,
@@ -30,7 +41,8 @@
     "Part": 4,
     "MeshPart": 1,
     "Decal": 3,
-    "SpecialMesh": 4
+    "SpecialMesh": 4,
+    "WeldConstraint": 1
   },
   "nodes": [
     {
@@ -122,6 +134,7 @@
       "class": "MeshPart",
       "name": "Apron",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://6491183076",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -288,6 +301,15 @@
           1
         ],
         "Name": "SpecialMesh"
+      }
+    },
+    {
+      "id": "RBXD3DF9BA65A4848A98B60ECD06DBC311A",
+      "parent": "RBX97B16B2EA2F148B5A0116E189D77F068",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     },
     {

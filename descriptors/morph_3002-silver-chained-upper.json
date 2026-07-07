@@ -5,7 +5,14 @@
   "asset_id": "morph_3002-silver-chained-upper",
   "name": "Silver Chained Upper",
   "source_file": "3002-silver-chained-upper.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       37.3659592,
@@ -31,7 +38,8 @@
     "SpecialMesh": 5,
     "ParticleEmitter": 2,
     "Decal": 2,
-    "MeshPart": 2
+    "MeshPart": 2,
+    "WeldConstraint": 2
   },
   "nodes": [
     {
@@ -470,6 +478,7 @@
       "class": "MeshPart",
       "name": "chain",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://16910484005",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -528,6 +537,15 @@
             0.433006
           ]
         }
+      }
+    },
+    {
+      "id": "RBXFF254D856D924FAEB9B250CB78653E20",
+      "parent": "RBX3D3A73005E8F47E7BF490C15423F1714",
+      "class": "WeldConstraint",
+      "name": "WeldConstraint",
+      "properties": {
+        "Name": "WeldConstraint"
       }
     },
     {
@@ -807,6 +825,15 @@
       }
     },
     {
+      "id": "RBXA02EBD414F6D4C5F827380BE782FF760",
+      "parent": "RBX6E975C9C34BD409F9D20C2A70DE49209",
+      "class": "WeldConstraint",
+      "name": "WeldContraint",
+      "properties": {
+        "Name": "WeldContraint"
+      }
+    },
+    {
       "id": "RBX74084747044B44EA9CCDB9D600535554",
       "parent": "RBX6E975C9C34BD409F9D20C2A70DE49209",
       "class": "Decal",
@@ -856,6 +883,7 @@
       "class": "MeshPart",
       "name": "chain",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://16910484005",
         "RenderFidelity": 0,
         "TextureID": null,

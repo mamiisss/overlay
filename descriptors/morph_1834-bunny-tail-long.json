@@ -5,7 +5,14 @@
   "asset_id": "morph_1834-bunny-tail-long",
   "name": "Bunny Tail(Long)",
   "source_file": "1834-bunny-tail-long.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       14829.9678,
@@ -29,7 +36,8 @@
     "Model": 1,
     "Part": 1,
     "SpecialMesh": 1,
-    "MeshPart": 1
+    "MeshPart": 1,
+    "Bone": 2
   },
   "nodes": [
     {
@@ -148,6 +156,7 @@
       "class": "MeshPart",
       "name": "Tail",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://17155691502",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -206,6 +215,62 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXA9965E1B584F493E9676BB5B68F94916",
+      "parent": "RBXD60434319C824618A1887E6F1009C136",
+      "class": "Bone",
+      "name": "Spine",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000368999681,
+            2.09965944,
+            0.761111379
+          ],
+          "rotation": [
+            1,
+            -6.55849564e-16,
+            -2.38418664e-7,
+            1.42958989e-9,
+            -0.999982059,
+            0.00599613599,
+            -2.38414358e-7,
+            -0.00599613599,
+            -0.999982059
+          ]
+        },
+        "Visible": false,
+        "Name": "Spine"
+      }
+    },
+    {
+      "id": "RBXD4B97CF793BA4BE18E958660A3CCEC8E",
+      "parent": "RBXA9965E1B584F493E9676BB5B68F94916",
+      "class": "Bone",
+      "name": "TailBone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            1.83871841,
+            0.0000152587891
+          ],
+          "rotation": [
+            1,
+            2.38214653e-7,
+            -2.2855555e-7,
+            -2.38214412e-7,
+            0.0413683206,
+            -0.999144077,
+            -2.28555749e-7,
+            0.999144077,
+            0.0413683206
+          ]
+        },
+        "Visible": false,
+        "Name": "TailBone"
       }
     }
   ]

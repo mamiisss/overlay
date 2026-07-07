@@ -5,7 +5,14 @@
   "asset_id": "morph_3178-booba-tats",
   "name": "Booba Tats",
   "source_file": "3178-booba-tats.rbxmx",
-  "anchor": "Head",
+  "anchor": "LowerTorso",
+  "anchor_candidates": [
+    "LowerTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "UpperTorso"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -18.099493,
@@ -28,9 +35,11 @@
     "Folder": 1,
     "Model": 3,
     "Part": 13,
+    "Weld": 2,
     "SpecialMesh": 13,
     "MeshPart": 9,
-    "Decal": 24
+    "Decal": 24,
+    "UnionOperation": 2
   },
   "nodes": [
     {
@@ -114,6 +123,54 @@
             1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXBC599A0CC7FC46A5AAC9D30B9A253D6C",
+      "parent": "RBX0F0F0AE0E2AF485C827B509A68BC531D",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0.0000129999999,
+            1,
+            0,
+            1,
+            -0.0000129999999,
+            -1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0.0000129999999,
+            1,
+            0,
+            1,
+            -0.0000129999999,
+            -1,
+            0,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX0F0F0AE0E2AF485C827B509A68BC531D",
+        "Part1": "RBX0F0F0AE0E2AF485C827B509A68BC531D",
+        "Name": "Weld"
       }
     },
     {
@@ -218,6 +275,54 @@
       }
     },
     {
+      "id": "RBX432F165658F34CD09FBD3957735F42CF",
+      "parent": "RBXFD7BD9296D044056B2227F8908E88D79",
+      "class": "Weld",
+      "name": "Weld",
+      "properties": {
+        "C0": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBXFD7BD9296D044056B2227F8908E88D79",
+        "Part1": "RBXFD7BD9296D044056B2227F8908E88D79",
+        "Name": "Weld"
+      }
+    },
+    {
       "id": "RBXFA7CC06FDDF24736B4B6D4A83AA1C05F",
       "parent": "RBXFD7BD9296D044056B2227F8908E88D79",
       "class": "SpecialMesh",
@@ -250,6 +355,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7135906486",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -316,6 +422,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5648950996",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -416,6 +523,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5648950996",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -499,6 +607,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5648950996",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1492,6 +1601,70 @@
       }
     },
     {
+      "id": "RBXB802D30BAF8647B1BB73D85A59E5EC88",
+      "parent": "RBX3132ECA708B2418DA40DDE1AEDDF0180",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0,
+          0,
+          0
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.634240568,
+          0.155764028,
+          0.176491052
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            0.785307,
+            -0.204743,
+            -1.366282
+          ],
+          "rotation": [
+            0.851514,
+            -0.380409,
+            -0.360851,
+            0.415354,
+            0.909407,
+            0.021429,
+            0.320009,
+            -0.168128,
+            0.932377
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX39561094DBF34601B3DE58E25096FBDD",
       "parent": "RBX7C3EF58BDC704F58A5D132709318FBC3",
       "class": "Model",
@@ -1706,6 +1879,7 @@
       "class": "MeshPart",
       "name": "color5",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://7135906486",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1772,6 +1946,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5648950996",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1872,6 +2047,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5648950996",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -1955,6 +2131,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://5648950996",
         "RenderFidelity": 1,
         "TextureID": null,
@@ -2084,11 +2261,76 @@
       }
     },
     {
+      "id": "RBX091A616AA34B47569AE6AA03E98DBBD8",
+      "parent": "RBX39561094DBF34601B3DE58E25096FBDD",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0,
+          0,
+          0
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 0,
+        "size": [
+          0.634240568,
+          0.155764028,
+          0.176491052
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            -0.724438,
+            -0.204744,
+            -1.37777
+          ],
+          "rotation": [
+            0.917386,
+            0.346499,
+            0.19581,
+            -0.318199,
+            0.934063,
+            -0.162097,
+            -0.239065,
+            0.086398,
+            0.967152
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX38610758C1874DC3A1F19BF973E894A7",
       "parent": "RBX39561094DBF34601B3DE58E25096FBDD",
       "class": "MeshPart",
       "name": "Ring",
       "properties": {
+        "HasSkinnedMesh": false,
         "MeshId": "rbxassetid://11140269772",
         "RenderFidelity": 1,
         "TextureID": null,

@@ -5,7 +5,14 @@
   "asset_id": "morph_3241-squid-tits-clothed",
   "name": "Squid Tits [Clothed]",
   "source_file": "3241-squid-tits-clothed.rbxmx",
-  "anchor": "Head",
+  "anchor": "UpperTorso",
+  "anchor_candidates": [
+    "UpperTorso",
+    "Torso",
+    "HumanoidRootPart",
+    "Head"
+  ],
+  "jiggle": false,
   "root_cframe": {
     "position": [
       -0.0877325982,
@@ -30,6 +37,7 @@
     "Part": 6,
     "SpecialMesh": 4,
     "ParticleEmitter": 2,
+    "UnionOperation": 6,
     "Decal": 3
   },
   "nodes": [
@@ -356,8 +364,72 @@
       }
     },
     {
-      "id": "RBX540ADDCD2CE94C7080E762EB4BDE978D",
+      "id": "RBX51D8474B870D405F84CF361E544FD556",
       "parent": "RBX7B1C1941F4C6457E84C7A65E63C77137",
+      "class": "UnionOperation",
+      "name": "Skin1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.960784,
+          0.803922,
+          0.188235
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.5410434,
+          1.57545209,
+          2.0362525
+        ],
+        "Name": "Skin1",
+        "LocalCFrame": {
+          "position": [
+            0.578779,
+            -0.068665,
+            -0.927273
+          ],
+          "rotation": [
+            0.964682,
+            0.089249,
+            -0.247838,
+            0.121974,
+            0.682573,
+            0.720571,
+            0.233476,
+            -0.725345,
+            0.647574
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBX540ADDCD2CE94C7080E762EB4BDE978D",
+      "parent": "RBX51D8474B870D405F84CF361E544FD556",
       "class": "Decal",
       "name": "Decal",
       "properties": {
@@ -370,6 +442,134 @@
         "Transparency": 0,
         "Face": 1,
         "Name": "Decal"
+      }
+    },
+    {
+      "id": "RBX3AE3ACCF176743048E501D7EE2A13B97",
+      "parent": "RBX7B1C1941F4C6457E84C7A65E63C77137",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.570957184,
+          0.192039326,
+          0.194421917
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            0.967778,
+            -0.228119,
+            -1.740754
+          ],
+          "rotation": [
+            0.838626,
+            -0.083734,
+            -0.538234,
+            0.200253,
+            0.966315,
+            0.161684,
+            0.50656,
+            -0.243373,
+            0.827138
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXEFD3D27D49C741AFB4576F4C12F82C4A",
+      "parent": "RBX7B1C1941F4C6457E84C7A65E63C77137",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.295358509,
+          0.0654930472,
+          0.295446247
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            1.026373,
+            -0.290966,
+            -1.787757
+          ],
+          "rotation": [
+            0.809478,
+            -0.490975,
+            0.322007,
+            0.208178,
+            -0.272803,
+            -0.939279,
+            0.549004,
+            0.827354,
+            -0.118616
+          ]
+        }
       }
     },
     {
@@ -494,6 +694,70 @@
       }
     },
     {
+      "id": "RBX6E8C80A01FB64372872CF291FD9509FE",
+      "parent": "RBX1578AC32C6F44A74AB63287BFE511B17",
+      "class": "UnionOperation",
+      "name": "Ring",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.439216,
+          0.85098,
+          1
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.295358509,
+          0.0654930472,
+          0.295446247
+        ],
+        "Name": "Ring",
+        "LocalCFrame": {
+          "position": [
+            -0.919622,
+            -0.270344,
+            -1.801962
+          ],
+          "rotation": [
+            0.712861,
+            0.336545,
+            -0.615278,
+            -0.493536,
+            -0.382564,
+            -0.781064,
+            -0.498246,
+            0.860452,
+            -0.106618
+          ]
+        }
+      }
+    },
+    {
       "id": "RBX8C673FCD61594BD3B84D31FAEB4024CC",
       "parent": "RBX1578AC32C6F44A74AB63287BFE511B17",
       "class": "Part",
@@ -585,8 +849,136 @@
       }
     },
     {
-      "id": "RBXF51706575B944378961B32E45C87BCFD",
+      "id": "RBX80BFAE6337D34E36B9396650B6FDE9AE",
       "parent": "RBX1578AC32C6F44A74AB63287BFE511B17",
+      "class": "UnionOperation",
+      "name": "Piercing",
+      "properties": {
+        "UsePartColor": false,
+        "Anchored": true,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.764706,
+          0.764706,
+          0.764706
+        ],
+        "Massless": false,
+        "Material": 1088,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 1,
+        "Transparency": 1,
+        "size": [
+          0.570957184,
+          0.192039326,
+          0.194421917
+        ],
+        "Name": "Piercing",
+        "LocalCFrame": {
+          "position": [
+            -0.874585,
+            -0.211979,
+            -1.748957
+          ],
+          "rotation": [
+            0.855319,
+            0.241056,
+            0.458608,
+            -0.342297,
+            0.927386,
+            0.150937,
+            -0.388923,
+            -0.28608,
+            0.875724
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXD4B150607D1140539223F79555739839",
+      "parent": "RBX1578AC32C6F44A74AB63287BFE511B17",
+      "class": "UnionOperation",
+      "name": "Skin1",
+      "properties": {
+        "UsePartColor": true,
+        "Anchored": false,
+        "CanCollide": false,
+        "CanQuery": true,
+        "CanTouch": true,
+        "Color3uint8": [
+          0.960784,
+          0.803922,
+          0.188235
+        ],
+        "Massless": false,
+        "Material": 272,
+        "PivotOffset": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Reflectance": 0,
+        "Transparency": 0,
+        "size": [
+          1.47975373,
+          1.54749548,
+          2.00750828
+        ],
+        "Name": "Skin1",
+        "LocalCFrame": {
+          "position": [
+            -0.590044,
+            -0.084446,
+            -0.939957
+          ],
+          "rotation": [
+            0.976281,
+            -0.154222,
+            0.151956,
+            0.000827,
+            0.704503,
+            0.709697,
+            -0.216504,
+            -0.692738,
+            0.68792
+          ]
+        }
+      }
+    },
+    {
+      "id": "RBXF51706575B944378961B32E45C87BCFD",
+      "parent": "RBXD4B150607D1140539223F79555739839",
       "class": "Decal",
       "name": "Decal",
       "properties": {

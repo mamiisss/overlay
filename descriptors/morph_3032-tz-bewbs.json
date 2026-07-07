@@ -5,7 +5,14 @@
   "asset_id": "morph_3032-tz-bewbs",
   "name": "Tz Bewbs",
   "source_file": "3032-tz-bewbs.rbxmx",
-  "anchor": "Head",
+  "anchor": "HumanoidRootPart",
+  "anchor_candidates": [
+    "HumanoidRootPart",
+    "UpperTorso",
+    "Torso",
+    "Head"
+  ],
+  "jiggle": true,
   "root_cframe": {
     "position": [
       -245243.047,
@@ -29,8 +36,10 @@
     "Model": 3,
     "Part": 7,
     "SpecialMesh": 1,
+    "Bone": 4,
     "ParticleEmitter": 2,
-    "MeshPart": 4
+    "MeshPart": 4,
+    "Motor6D": 4
   },
   "nodes": [
     {
@@ -282,6 +291,62 @@
       }
     },
     {
+      "id": "RBX0791493E3FB74B35BD05BEA7E7EDAED9",
+      "parent": "RBX3FD1450C12B445FAA8B03FA99680AA8C",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            -0.0376165174,
+            1.31805515,
+            -0.60564667
+          ],
+          "rotation": [
+            1,
+            -1.37172989e-7,
+            1.37172989e-7,
+            -1.37173018e-7,
+            -1,
+            2.17789861e-7,
+            1.37172961e-7,
+            -2.17789875e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX7EECA612E26B4746A430F9CF0BFF59EB",
+      "parent": "RBX0791493E3FB74B35BD05BEA7E7EDAED9",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.0000305175781,
+            0.73486948,
+            0
+          ],
+          "rotation": [
+            0.833975434,
+            0.551594913,
+            -0.0151048526,
+            0.102193095,
+            -0.127493352,
+            0.986560822,
+            0.542256057,
+            -0.824311018,
+            -0.162695527
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
       "id": "RBX856F0BB0611F42499977378BAAB9E455",
       "parent": "RBX7EFBAEB9A694494DA075E3B27C637A38",
       "class": "Part",
@@ -398,6 +463,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://118415375147278",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -459,11 +525,60 @@
       }
     },
     {
+      "id": "RBXC68A2431D7AF427B9A4F97770A7F187D",
+      "parent": "RBX739999659E604EEAB2B76884EFB17E4B",
+      "class": "Motor6D",
+      "name": "SportsBallInner2Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.416212678,
+            0.703169882,
+            0.113453016
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX3FD1450C12B445FAA8B03FA99680AA8C",
+        "Part1": "RBX739999659E604EEAB2B76884EFB17E4B",
+        "Name": "SportsBallInner2Motor6D"
+      }
+    },
+    {
       "id": "RBX4F312CD67AD84C189502F30DCDCE793E",
       "parent": "RBX7EFBAEB9A694494DA075E3B27C637A38",
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://106952816111916",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -522,6 +637,54 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBX8CF1B79053564E98B3DCC2028845DDE6",
+      "parent": "RBX4F312CD67AD84C189502F30DCDCE793E",
+      "class": "Motor6D",
+      "name": "SportsBallInnerMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            0.253448278,
+            0.744454086,
+            -0.300425947
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX3FD1450C12B445FAA8B03FA99680AA8C",
+        "Part1": "RBX4F312CD67AD84C189502F30DCDCE793E",
+        "Name": "SportsBallInnerMotor6D"
       }
     },
     {
@@ -663,6 +826,62 @@
       }
     },
     {
+      "id": "RBX2271BF3E0C6042BE84BD6616F677EBC6",
+      "parent": "RBX8A3302F335674DBA8AE336B059C44A11",
+      "class": "Bone",
+      "name": "Bone",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0.202975303,
+            1.31805515,
+            -0.60564667
+          ],
+          "rotation": [
+            1,
+            1.37172989e-7,
+            -1.37172989e-7,
+            1.37173018e-7,
+            -1,
+            2.17789861e-7,
+            -1.37172961e-7,
+            -2.17789875e-7,
+            -1
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone"
+      }
+    },
+    {
+      "id": "RBX883EB6A3F1684937A5D5D518B008A43E",
+      "parent": "RBX2271BF3E0C6042BE84BD6616F677EBC6",
+      "class": "Bone",
+      "name": "Bone.001",
+      "properties": {
+        "CFrame": {
+          "position": [
+            0,
+            0.73486948,
+            0
+          ],
+          "rotation": [
+            0.833220899,
+            -0.551594853,
+            -0.0385488309,
+            -0.038548395,
+            -0.127493382,
+            0.991090059,
+            -0.551594853,
+            -0.824310958,
+            -0.127493247
+          ]
+        },
+        "Visible": false,
+        "Name": "Bone.001"
+      }
+    },
+    {
       "id": "RBXADBAFF11F2C6487192705372E549E7CA",
       "parent": "RBX411157A9175C493796F0CCB3D900E515",
       "class": "Part",
@@ -779,6 +998,7 @@
       "class": "MeshPart",
       "name": "color1",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://105332049373771",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -840,11 +1060,60 @@
       }
     },
     {
+      "id": "RBX3ADBCE2D76C247439BF96BCFDF3B4645",
+      "parent": "RBXA63756CC409946CFA38D557C0108591D",
+      "class": "Motor6D",
+      "name": "SportsBallInner2Motor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.250853866,
+            0.703169882,
+            0.113453016
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX8A3302F335674DBA8AE336B059C44A11",
+        "Part1": "RBXA63756CC409946CFA38D557C0108591D",
+        "Name": "SportsBallInner2Motor6D"
+      }
+    },
+    {
       "id": "RBX977BF603933F4C6A80A08D2418E6326A",
       "parent": "RBX411157A9175C493796F0CCB3D900E515",
       "class": "MeshPart",
       "name": "Cloth",
       "properties": {
+        "HasSkinnedMesh": true,
         "MeshId": "rbxassetid://80542605894342",
         "RenderFidelity": 0,
         "TextureID": null,
@@ -903,6 +1172,54 @@
             -1
           ]
         }
+      }
+    },
+    {
+      "id": "RBXBE545F001A30401580A12093F5911B75",
+      "parent": "RBX977BF603933F4C6A80A08D2418E6326A",
+      "class": "Motor6D",
+      "name": "SportsBallInnerMotor6D",
+      "properties": {
+        "C0": {
+          "position": [
+            -0.0880894735,
+            0.744454026,
+            -0.300425947
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "C1": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "Enabled": true,
+        "Part0": "RBX8A3302F335674DBA8AE336B059C44A11",
+        "Part1": "RBX977BF603933F4C6A80A08D2418E6326A",
+        "Name": "SportsBallInnerMotor6D"
       }
     }
   ]
