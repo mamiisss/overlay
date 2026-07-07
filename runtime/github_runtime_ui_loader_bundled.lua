@@ -1329,6 +1329,30 @@ local function safeGet(instance, property, fallback)
 	return fallback
 end
 
+local function safeSetAttribute(instance, name, value)
+	if instance == nil or type(name) ~= "string" or name == "" then
+		return
+	end
+	if type(value) == "string" or type(value) == "number" or type(value) == "boolean" then
+		pcall(function()
+			instance:SetAttribute(name, value)
+		end)
+	elseif type(value) == "table" and #value == 3 then
+		pcall(function()
+			instance:SetAttribute(name, Vector3.new(tonumber(value[1]) or 0, tonumber(value[2]) or 0, tonumber(value[3]) or 0))
+		end)
+	end
+end
+
+local function applyDescriptorAttributes(instance, attributes)
+	if type(attributes) ~= "table" then
+		return
+	end
+	for key, value in pairs(attributes) do
+		safeSetAttribute(instance, tostring(key), value)
+	end
+end
+
 local function applyBasePartDescriptor(part, properties, anchorPart)
 	safeSet(part, "Size", descriptorVector3(properties.size or properties.Size, Vector3.new(1, 1, 1)))
 	safeSet(part, "Color", descriptorColor(properties.Color3uint8 or properties.Color, Color3.new(1, 1, 1)))
@@ -1358,8 +1382,9 @@ local function createDescriptorInstance(node)
 		local ok, instance = pcall(Instance.new, className)
 		return ok and instance or Instance.new("Part")
 	elseif className == "MeshPart" then
-		local ok, instance = pcall(Instance.new, "MeshPart")
-		return ok and instance or Instance.new("Part")
+		local instance = Instance.new("Part")
+		safeSetAttribute(instance, "OverlaySourceClass", "MeshPart")
+		return instance
 	elseif className == "SpecialMesh" then
 		return Instance.new("SpecialMesh")
 	elseif className == "ParticleEmitter" then
@@ -1405,12 +1430,28 @@ end
 local function applyDescriptorInstanceProperties(instance, node, anchorPart)
 	local properties = type(node.properties) == "table" and node.properties or {}
 	safeSet(instance, "Name", tostring(node.name or properties.Name or node.class or "OverlayNode"))
+	applyDescriptorAttributes(instance, node.attributes)
 
 	if instance:IsA("BasePart") then
 		applyBasePartDescriptor(instance, properties, anchorPart)
-		if instance:IsA("MeshPart") then
-			safeSet(instance, "MeshId", descriptorContent(properties.MeshId))
-			safeSet(instance, "TextureID", descriptorContent(properties.TextureID or properties.TextureId))
+		if node.class == "MeshPart" then
+			local meshId = descriptorContent(properties.MeshId)
+			if meshId then
+				local mesh = instance:FindFirstChild("OverlayMeshPartFallback")
+				if mesh == nil or not mesh:IsA("SpecialMesh") then
+					mesh = Instance.new("SpecialMesh")
+					mesh.Name = "OverlayMeshPartFallback"
+					mesh.Parent = instance
+				end
+				safeSet(mesh, "MeshType", Enum.MeshType.FileMesh)
+				safeSet(mesh, "MeshId", meshId)
+				safeSet(mesh, "TextureId", descriptorContent(properties.TextureID or properties.TextureId))
+				safeSet(mesh, "Scale", descriptorVector3(properties.size or properties.Size, Vector3.new(1, 1, 1)))
+				safeSet(mesh, "Offset", Vector3.new())
+			elseif instance:IsA("MeshPart") then
+				safeSet(instance, "MeshId", descriptorContent(properties.MeshId))
+				safeSet(instance, "TextureID", descriptorContent(properties.TextureID or properties.TextureId))
+			end
 		end
 	elseif instance:IsA("SpecialMesh") then
 		safeSet(instance, "MeshId", descriptorContent(properties.MeshId))
@@ -1565,6 +1606,259 @@ local function resolveMorphAnchor(character, descriptor, fallback)
 	return findCharacterPart(character, descriptorAnchorCandidates(descriptor)) or fallback
 end
 
+local SMART_BONE_DEFAULTS = {
+	Damping = 0.1,
+	Stiffness = 0.2,
+	Inertia = 0,
+	Elasticity = 0.5,
+	AnchorDepth = 0,
+	Gravity = Vector3.new(0, -1, 0),
+	Force = Vector3.new(0, 0.2, 0),
+	WindDirection = Vector3.new(-1, 0, 0),
+	WindSpeed = 8,
+	WindStrength = 1,
+	WindInfluence = 1,
+	UpdateRate = 60,
+}
+
+local function attributeValue(instance, names)
+	for _, name in ipairs(names) do
+		local ok, value = pcall(function()
+			return instance:GetAttribute(name)
+		end)
+		if ok and value ~= nil then
+			return value
+		end
+	end
+	return nil
+end
+
+local function attributeNumber(instance, names, fallback, minValue, maxValue)
+	local value = attributeValue(instance, names)
+	local numeric = tonumber(value)
+	if numeric == nil then
+		return fallback
+	end
+	if minValue ~= nil or maxValue ~= nil then
+		numeric = math.clamp(numeric, minValue or numeric, maxValue or numeric)
+	end
+	return numeric
+end
+
+local function attributeVector(instance, names, fallback)
+	local value = attributeValue(instance, names)
+	if typeof(value) == "Vector3" then
+		return value
+	end
+	return fallback
+end
+
+local function smartBoneSettings(rootPart)
+	return {
+		Damping = attributeNumber(rootPart, { "Damping", "Dampen", "Dampening", "damping", "dampen" }, SMART_BONE_DEFAULTS.Damping, 0, 1),
+		Stiffness = attributeNumber(rootPart, { "Stiffness", "stiffness" }, SMART_BONE_DEFAULTS.Stiffness, 0, 1),
+		Inertia = attributeNumber(rootPart, { "Inertia", "inertia" }, SMART_BONE_DEFAULTS.Inertia, 0, 1),
+		Elasticity = attributeNumber(rootPart, { "Elasticity", "elasticity" }, SMART_BONE_DEFAULTS.Elasticity, 0, 1),
+		AnchorDepth = math.floor(attributeNumber(rootPart, { "AnchorDepth", "anchorDepth" }, SMART_BONE_DEFAULTS.AnchorDepth, 0, 12)),
+		Gravity = attributeVector(rootPart, { "Gravity", "gravity" }, SMART_BONE_DEFAULTS.Gravity),
+		Force = attributeVector(rootPart, { "Force", "force" }, SMART_BONE_DEFAULTS.Force),
+		WindDirection = attributeVector(rootPart, { "WindDirection", "windDirection" }, SMART_BONE_DEFAULTS.WindDirection),
+		WindSpeed = attributeNumber(rootPart, { "WindSpeed", "windSpeed" }, SMART_BONE_DEFAULTS.WindSpeed, 0, 30),
+		WindStrength = attributeNumber(rootPart, { "WindStrength", "windStrength" }, SMART_BONE_DEFAULTS.WindStrength, 0, 10),
+		WindInfluence = attributeNumber(rootPart, { "WindInfluence", "windInfluence" }, SMART_BONE_DEFAULTS.WindInfluence, 0, 10),
+		UpdateRate = attributeNumber(rootPart, { "UpdateRate", "updateRate" }, SMART_BONE_DEFAULTS.UpdateRate, 1, 120),
+	}
+end
+
+local function findDescendantBoneByName(rootPart, name)
+	name = trimString(name)
+	if name == "" then
+		return nil
+	end
+	for _, descendant in ipairs(rootPart:GetDescendants()) do
+		if descendant:IsA("Bone") and descendant.Name == name then
+			return descendant
+		end
+	end
+	return nil
+end
+
+local function childBones(bone)
+	local out = {}
+	for _, child in ipairs(bone:GetChildren()) do
+		if child:IsA("Bone") then
+			table.insert(out, child)
+		end
+	end
+	return out
+end
+
+local function ensureTailBone(bone, parentBone)
+	local existing = bone:FindFirstChild(bone.Name .. "_OverlayTail")
+	if existing and existing:IsA("Bone") then
+		return existing
+	end
+	local tail = Instance.new("Bone")
+	tail.Name = bone.Name .. "_OverlayTail"
+	tail.Parent = bone
+	local offset = Vector3.new(0, 0.1, 0)
+	if parentBone then
+		local direction = bone.WorldPosition - parentBone.WorldPosition
+		if direction.Magnitude > 0.001 then
+			offset = bone.CFrame:VectorToObjectSpace(direction.Unit * math.max(direction.Magnitude, 0.05))
+		end
+	end
+	tail.CFrame = CFrame.new(offset)
+	return tail
+end
+
+local function appendSmartBoneParticle(tree, bone, parentIndex, depth)
+	local parent = parentIndex > 0 and tree.particles[parentIndex] or nil
+	local particle = {
+		bone = bone,
+		parentIndex = parentIndex,
+		depth = depth,
+		position = bone.WorldPosition,
+		lastPosition = bone.WorldPosition,
+		restWorld = bone.WorldCFrame,
+		restLength = parent and (parent.bone.WorldPosition - bone.WorldPosition).Magnitude or 0,
+		restLocal = parent and parent.bone.WorldCFrame:ToObjectSpace(bone.WorldCFrame) or CFrame.new(),
+		anchored = parentIndex == 0 or depth <= tree.settings.AnchorDepth,
+		phase = (#tree.particles + 1) * 0.71,
+	}
+	table.insert(tree.particles, particle)
+	local index = #tree.particles
+	local children = childBones(bone)
+	if #children == 0 and parentIndex > 0 then
+		table.insert(children, ensureTailBone(bone, parent and parent.bone or nil))
+	end
+	for _, child in ipairs(children) do
+		appendSmartBoneParticle(tree, child, index, depth + 1)
+	end
+end
+
+local function createSmartBoneController(rootPart)
+	if rootPart == nil or not rootPart:IsA("BasePart") then
+		return nil
+	end
+	local rootsRaw = attributeValue(rootPart, { "Roots", "roots", "Root", "root" })
+	if type(rootsRaw) ~= "string" or trimString(rootsRaw) == "" then
+		return nil
+	end
+	local settings = smartBoneSettings(rootPart)
+	local controller = {
+		rootPart = rootPart,
+		lastRootPosition = rootPart.Position,
+		settings = settings,
+		accumulator = 0,
+		trees = {},
+	}
+	for rootName in string.gmatch(rootsRaw, "([^,]+)") do
+		local rootBone = findDescendantBoneByName(rootPart, rootName)
+		if rootBone then
+			local tree = {
+				root = rootBone,
+				rootPart = rootPart,
+				settings = settings,
+				particles = {},
+			}
+			appendSmartBoneParticle(tree, rootBone, 0, 0)
+			if #tree.particles > 1 then
+				table.insert(controller.trees, tree)
+			end
+		end
+	end
+	if #controller.trees == 0 then
+		return nil
+	end
+	return controller
+end
+
+local function rotationBetween(fromVector, toVector)
+	if fromVector.Magnitude <= 0.0001 or toVector.Magnitude <= 0.0001 then
+		return CFrame.new()
+	end
+	local fromUnit = fromVector.Unit
+	local toUnit = toVector.Unit
+	local dot = math.clamp(fromUnit:Dot(toUnit), -1, 1)
+	if dot > 0.999 then
+		return CFrame.new()
+	end
+	local axis = fromUnit:Cross(toUnit)
+	if axis.Magnitude <= 0.0001 then
+		axis = Vector3.new(1, 0, 0)
+	end
+	return CFrame.fromAxisAngle(axis.Unit, math.acos(dot))
+end
+
+local function updateSmartBoneController(controller, delta)
+	if controller == nil or controller.rootPart == nil or controller.rootPart.Parent == nil then
+		return
+	end
+	local settings = controller.settings
+	local frameTime = 1 / math.max(settings.UpdateRate or 60, 1)
+	controller.accumulator += delta
+	if controller.accumulator < frameTime then
+		return
+	end
+	local dt = math.clamp(controller.accumulator, 1 / 240, 1 / 20)
+	controller.accumulator = 0
+	local rootMove = controller.rootPart.Position - controller.lastRootPosition
+	controller.lastRootPosition = controller.rootPart.Position
+	local gravity = (settings.Gravity + settings.Force) * dt * dt
+	local now = os.clock()
+
+	for _, tree in ipairs(controller.trees) do
+		for _, particle in ipairs(tree.particles) do
+			if particle.anchored then
+				particle.lastPosition = particle.bone.WorldPosition
+				particle.position = particle.bone.WorldPosition
+			else
+				local velocity = particle.position - particle.lastPosition
+				particle.lastPosition = particle.position + (rootMove * settings.Inertia)
+				local wind = Vector3.new()
+				if settings.WindInfluence > 0 and particle.restLength > 0 then
+					local t = now * settings.WindSpeed + particle.phase
+					wind = Vector3.new(
+						settings.WindDirection.X * math.sin(t),
+						0.05 * math.sin(t * 0.63),
+						settings.WindDirection.Z * math.cos(t)
+					) * (settings.WindStrength * settings.WindInfluence * 0.002 * math.max(particle.depth, 1))
+				end
+				particle.position += velocity * (1 - settings.Damping) + gravity + rootMove * settings.Inertia + wind
+			end
+		end
+
+		for _ = 1, 2 do
+			for _, particle in ipairs(tree.particles) do
+				local parent = particle.parentIndex > 0 and tree.particles[particle.parentIndex] or nil
+				if parent and not particle.anchored then
+					local restPosition = (parent.bone.WorldCFrame * particle.restLocal).Position
+					particle.position = particle.position:Lerp(restPosition, math.clamp(settings.Elasticity * dt * 10, 0, 1))
+					local deltaPos = particle.position - parent.position
+					local length = deltaPos.Magnitude
+					if length > 0.0001 then
+						local target = parent.position + deltaPos.Unit * math.max(particle.restLength, 0.001)
+						particle.position = particle.position:Lerp(target, math.clamp(0.65 + settings.Stiffness * 0.35, 0, 1))
+					end
+				end
+			end
+		end
+
+		for _, particle in ipairs(tree.particles) do
+			local parent = particle.parentIndex > 0 and tree.particles[particle.parentIndex] or nil
+			if parent and parent.bone and parent.bone.Parent and not parent.anchored then
+				local direction = particle.position - parent.position
+				if direction.Magnitude > 0.0001 then
+					local current = parent.bone.WorldCFrame
+					local rotated = CFrame.new(parent.position) * rotationBetween(current.UpVector, direction.Unit) * current.Rotation
+					safeSet(parent.bone, "WorldCFrame", current:Lerp(rotated, 0.9))
+				end
+			end
+		end
+	end
+end
+
 local function clearDescriptorMorph(handle)
 	if handle and handle.descriptorMorphRoot then
 		pcall(function()
@@ -1576,6 +1870,7 @@ local function clearDescriptorMorph(handle)
 		handle.descriptorMorphAssetId = nil
 		handle.descriptorMorphAnchor = nil
 		handle.descriptorMorphJiggle = nil
+		handle.descriptorMorphSmartBones = nil
 	end
 end
 
