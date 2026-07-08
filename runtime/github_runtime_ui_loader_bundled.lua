@@ -47,7 +47,7 @@ local CONFIG = {
 	native_morph_archive_max_bytes = 128 * 1024 * 1024,
 	native_morph_max_base_parts = 2500,
 	native_morph_enable_smart_bones = true,
-	native_morph_infer_smart_bone_roots = true,
+	native_morph_infer_smart_bone_roots = false,
 	native_morph_max_smart_bone_controllers = 24,
 	native_morph_max_smart_bone_particles = 420,
 	native_morph_operation_budget_seconds = 0.008,
@@ -86,6 +86,8 @@ elseif GLOBAL.OverlayNativeMorphSmartBones == true then
 end
 if GLOBAL.OverlayNativeMorphInferSmartBoneRoots == false then
 	CONFIG.native_morph_infer_smart_bone_roots = false
+elseif GLOBAL.OverlayNativeMorphInferSmartBoneRoots == true then
+	CONFIG.native_morph_infer_smart_bone_roots = true
 end
 if tonumber(GLOBAL.OverlayNativeMorphMaxSmartBoneControllers) then
 	CONFIG.native_morph_max_smart_bone_controllers = math.max(0, math.floor(tonumber(GLOBAL.OverlayNativeMorphMaxSmartBoneControllers)))
@@ -1181,6 +1183,19 @@ local function destroyHandle(handle)
 	if handle == nil then
 		return
 	end
+	if handle.animationTrack then
+		pcall(function()
+			handle.animationTrack:Stop(0.15)
+			handle.animationTrack:Destroy()
+		end)
+		handle.animationTrack = nil
+	end
+	if handle.animationObject then
+		pcall(function()
+			handle.animationObject:Destroy()
+		end)
+		handle.animationObject = nil
+	end
 	if type(handle.nativeMorphHiddenParts) == "table" then
 		for _, item in ipairs(handle.nativeMorphHiddenParts) do
 			local part = item and item.part
@@ -1261,6 +1276,147 @@ local function assetIdFromComponent(component)
 		return component
 	end
 	return nil
+end
+
+local function robloxAssetUrl(value)
+	value = trimString(value)
+	if value == "" then
+		return nil
+	end
+	local lower = string.lower(value)
+	if string.sub(lower, 1, 13) == "rbxassetid://" then
+		return value
+	end
+	local digits = string.match(value, "^%s*(%d+)%s*$")
+	if digits then
+		return "rbxassetid://" .. digits
+	end
+	return nil
+end
+
+local function animationAssetUrl(animation)
+	if type(animation) ~= "table" then
+		return nil
+	end
+	for _, key in ipairs({ "animation_id", "animationId", "roblox_asset_id", "robloxAssetId", "url", "asset_url", "assetUrl", "asset_id", "id" }) do
+		local value = animation[key]
+		if type(value) == "number" or type(value) == "string" then
+			local url = robloxAssetUrl(value)
+			if url then
+				return url
+			end
+		end
+	end
+	local assetId = assetIdFromComponent(animation)
+	local manifest = assetId and Client.assetManifests[assetId] or nil
+	if type(manifest) == "table" then
+		for _, key in ipairs({ "animation_id", "animationId", "roblox_asset_id", "robloxAssetId", "url", "asset_url", "assetUrl" }) do
+			local url = robloxAssetUrl(manifest[key])
+			if url then
+				return url
+			end
+		end
+	end
+	return nil
+end
+
+local function clearAnimation(handle)
+	if handle == nil then
+		return
+	end
+	if handle.animationTrack then
+		pcall(function()
+			handle.animationTrack:Stop(0.15)
+			handle.animationTrack:Destroy()
+		end)
+		handle.animationTrack = nil
+	end
+	if handle.animationObject then
+		pcall(function()
+			handle.animationObject:Destroy()
+		end)
+		handle.animationObject = nil
+	end
+	handle.animationKey = nil
+	handle.animationCharacter = nil
+end
+
+local function applyAnimationToCharacter(handle, character, components, entityId)
+	if handle == nil or character == nil or type(components) ~= "table" then
+		clearAnimation(handle)
+		return
+	end
+	local animation = components.animation
+	if type(animation) ~= "table" or animation.enabled == false or animation.stopped == true then
+		clearAnimation(handle)
+		return
+	end
+
+	local assetUrl = animationAssetUrl(animation)
+	if assetUrl == nil then
+		if handle.animationUnsupportedKey ~= tostring(animation.name or animation.preset or entityId) then
+			handle.animationUnsupportedKey = tostring(animation.name or animation.preset or entityId)
+			emitBridgeEvent("animation.unsupported", {
+				entity_id = entityId,
+				name = animation.name or animation.preset,
+				reason = "missing_roblox_animation_id",
+			})
+		end
+		return
+	end
+	handle.animationUnsupportedKey = nil
+
+	local speed = tonumber(animation.speed or animation.playback_speed or animation.playbackSpeed) or 1
+	speed = math.clamp(speed, 0.05, 4)
+	local weight = tonumber(animation.weight)
+	if weight == nil then
+		weight = math.clamp((tonumber(animation.intensity) or 100) / 100, 0.05, 1)
+	end
+	local looped = animation.looped ~= false
+	local key = assetUrl .. "|" .. tostring(looped)
+	if handle.animationTrack and handle.animationKey == key and handle.animationCharacter == character then
+		pcall(function()
+			handle.animationTrack:AdjustSpeed(speed)
+		end)
+		return
+	end
+
+	clearAnimation(handle)
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if humanoid == nil then
+		return
+	end
+	local animator = humanoid:FindFirstChildOfClass("Animator")
+	if animator == nil then
+		animator = Instance.new("Animator")
+		animator.Parent = humanoid
+	end
+	local anim = Instance.new("Animation")
+	anim.Name = "OverlayAnimation"
+	anim.AnimationId = assetUrl
+	anim.Parent = handle.folder or character
+	local ok, track = pcall(function()
+		return animator:LoadAnimation(anim)
+	end)
+	if not ok or track == nil then
+		pcall(function()
+			anim:Destroy()
+		end)
+		emitBridgeEvent("animation.load_failed", {
+			entity_id = entityId,
+			animation_id = assetUrl,
+		})
+		return
+	end
+	pcall(function()
+		track.Looped = looped
+		track.Priority = Enum.AnimationPriority.Action
+		track:Play(0.15, weight, speed)
+	end)
+	handle.animationObject = anim
+	handle.animationTrack = track
+	handle.animationKey = key
+	handle.animationCharacter = character
 end
 
 local function assetLooksLikeKind(asset, kind)
@@ -2051,7 +2207,10 @@ local SMART_BONE_DEFAULTS = {
 	Stiffness = 0.2,
 	Inertia = 0,
 	Elasticity = 0.5,
+	BlendWeight = 1,
+	Radius = 0.2,
 	AnchorDepth = 0,
+	AnchorsRotate = false,
 	Gravity = Vector3.new(0, -1, 0),
 	Force = Vector3.new(0, 0.2, 0),
 	WindDirection = Vector3.new(-1, 0, 0),
@@ -2059,6 +2218,8 @@ local SMART_BONE_DEFAULTS = {
 	WindStrength = 1,
 	WindInfluence = 1,
 	UpdateRate = 60,
+	ActivationDistance = 45,
+	ThrottleDistance = 15,
 }
 
 local function attributeValue(instance, names)
@@ -2099,14 +2260,19 @@ local function smartBoneSettings(rootPart)
 		Stiffness = attributeNumber(rootPart, { "Stiffness", "stiffness" }, SMART_BONE_DEFAULTS.Stiffness, 0, 1),
 		Inertia = attributeNumber(rootPart, { "Inertia", "inertia" }, SMART_BONE_DEFAULTS.Inertia, 0, 1),
 		Elasticity = attributeNumber(rootPart, { "Elasticity", "elasticity" }, SMART_BONE_DEFAULTS.Elasticity, 0, 1),
+		BlendWeight = attributeNumber(rootPart, { "BlendWeight", "blendWeight" }, SMART_BONE_DEFAULTS.BlendWeight, 0, 1),
+		Radius = attributeNumber(rootPart, { "Radius", "radius" }, SMART_BONE_DEFAULTS.Radius, 0, 10),
 		AnchorDepth = math.floor(attributeNumber(rootPart, { "AnchorDepth", "anchorDepth" }, SMART_BONE_DEFAULTS.AnchorDepth, 0, 12)),
+		AnchorsRotate = attributeValue(rootPart, { "AnchorsRotate", "anchorsRotate" }) == true,
 		Gravity = attributeVector(rootPart, { "Gravity", "gravity" }, SMART_BONE_DEFAULTS.Gravity),
 		Force = attributeVector(rootPart, { "Force", "force" }, SMART_BONE_DEFAULTS.Force),
 		WindDirection = attributeVector(rootPart, { "WindDirection", "windDirection" }, SMART_BONE_DEFAULTS.WindDirection),
 		WindSpeed = attributeNumber(rootPart, { "WindSpeed", "windSpeed" }, SMART_BONE_DEFAULTS.WindSpeed, 0, 30),
 		WindStrength = attributeNumber(rootPart, { "WindStrength", "windStrength" }, SMART_BONE_DEFAULTS.WindStrength, 0, 10),
 		WindInfluence = attributeNumber(rootPart, { "WindInfluence", "windInfluence" }, SMART_BONE_DEFAULTS.WindInfluence, 0, 10),
-		UpdateRate = attributeNumber(rootPart, { "UpdateRate", "updateRate" }, SMART_BONE_DEFAULTS.UpdateRate, 1, 120),
+		UpdateRate = attributeNumber(rootPart, { "UpdateRate", "updateRate" }, SMART_BONE_DEFAULTS.UpdateRate, 1, 165),
+		ActivationDistance = attributeNumber(rootPart, { "ActivationDistance", "activationDistance" }, SMART_BONE_DEFAULTS.ActivationDistance, 1, 500),
+		ThrottleDistance = attributeNumber(rootPart, { "ThrottleDistance", "throttleDistance" }, SMART_BONE_DEFAULTS.ThrottleDistance, 0, 500),
 	}
 end
 
@@ -2150,7 +2316,10 @@ NativeMorph.smartBoneSettingAttributes = {
 	"Stiffness",
 	"Inertia",
 	"Elasticity",
+	"BlendWeight",
+	"Radius",
 	"AnchorDepth",
+	"AnchorsRotate",
 	"Force",
 	"Gravity",
 	"WindDirection",
@@ -2158,6 +2327,8 @@ NativeMorph.smartBoneSettingAttributes = {
 	"WindStrength",
 	"WindInfluence",
 	"UpdateRate",
+	"ActivationDistance",
+	"ThrottleDistance",
 }
 
 function NativeMorph.hasCollectionTag(instance, tag)
@@ -2270,15 +2441,29 @@ local function appendSmartBoneParticle(tree, bone, parentIndex, depth)
 		return
 	end
 	local parent = parentIndex > 0 and tree.particles[parentIndex] or nil
+	local transform = bone.WorldCFrame:ToObjectSpace(tree.root.WorldCFrame):Inverse()
+	local localTransform = bone.CFrame:ToObjectSpace(tree.root.CFrame):Inverse()
+	local rootTransform = tree.root.WorldCFrame:ToObjectSpace(tree.rootPart.CFrame):Inverse()
+	local boneLength = parent and (parent.bone.WorldPosition - bone.WorldPosition).Magnitude or 0.05
 	local particle = {
 		bone = bone,
+		root = tree.root,
 		parentIndex = parentIndex,
 		depth = depth,
+		hierarchyLength = math.max(depth, 1),
 		position = bone.WorldPosition,
 		lastPosition = bone.WorldPosition,
 		restWorld = bone.WorldCFrame,
-		restLength = parent and (parent.bone.WorldPosition - bone.WorldPosition).Magnitude or 0,
-		restLocal = parent and parent.bone.WorldCFrame:ToObjectSpace(bone.WorldCFrame) or CFrame.new(),
+		restLength = boneLength,
+		boneLength = math.max(boneLength, 0.05),
+		weight = 0.7,
+		transform = transform,
+		localTransform = localTransform,
+		rootTransform = rootTransform,
+		transformOffset = bone.WorldCFrame,
+		lastTransformOffset = bone.WorldCFrame,
+		localTransformOffset = bone.CFrame,
+		calculatedWorldCFrame = bone.WorldCFrame,
 		anchored = parentIndex == 0 or depth <= tree.settings.AnchorDepth,
 		phase = (#tree.particles + 1) * 0.71,
 	}
@@ -2310,16 +2495,28 @@ local function createSmartBoneController(rootPart)
 		rootPart = rootPart,
 		lastRootPosition = rootPart.Position,
 		settings = settings,
-		accumulator = 0,
+		frameTime = 0,
+		inRange = false,
+		objectScale = math.abs(rootPart.Size.X) * 0.0002800336040324839,
 		trees = {},
 	}
 	for _, rootBone in ipairs(rootBones) do
+		local gravity = settings.Gravity or SMART_BONE_DEFAULTS.Gravity
+		local localGravity = gravity
+		if gravity.Magnitude > 0.0001 then
+			localGravity = rootBone.CFrame:PointToWorldSpace(gravity).Unit * gravity.Magnitude
+		end
 		local tree = {
 			root = rootBone,
 			rootPart = rootPart,
 			settings = settings,
 			particles = {},
 			truncated = false,
+			windOffset = math.random() * 1000000,
+			localGravity = localGravity,
+			restGravity = Vector3.new(),
+			objectMove = Vector3.new(),
+			objectPreviousPosition = rootPart.Position,
 		}
 		appendSmartBoneParticle(tree, rootBone, 0, 0)
 		if #tree.particles > 1 then
@@ -2332,21 +2529,64 @@ local function createSmartBoneController(rootPart)
 	return controller
 end
 
-local function rotationBetween(fromVector, toVector)
+local function rotationBetween(fromVector, toVector, fallbackAxis)
 	if fromVector.Magnitude <= 0.0001 or toVector.Magnitude <= 0.0001 then
 		return CFrame.new()
 	end
 	local fromUnit = fromVector.Unit
 	local toUnit = toVector.Unit
-	local dot = math.clamp(fromUnit:Dot(toUnit), -1, 1)
-	if dot > 0.999 then
+	local dot = fromUnit:Dot(toUnit)
+	if dot > 0.99999 then
 		return CFrame.new()
 	end
-	local axis = fromUnit:Cross(toUnit)
-	if axis.Magnitude <= 0.0001 then
-		axis = Vector3.new(1, 0, 0)
+	if dot < -0.99999 then
+		local axis = fallbackAxis or Vector3.new(1, 0, 0)
+		if axis.Magnitude <= 0.0001 then
+			axis = Vector3.new(1, 0, 0)
+		end
+		return CFrame.fromAxisAngle(axis.Unit, math.pi)
 	end
-	return CFrame.fromAxisAngle(axis.Unit, math.acos(dot))
+	local axis = fromUnit:Cross(toUnit)
+	return CFrame.new(0, 0, 0, axis.X, axis.Y, axis.Z, 1 + dot)
+end
+
+local function smartBoneWithinViewport(rootPart)
+	local camera = workspace.CurrentCamera
+	if camera == nil or rootPart == nil then
+		return true
+	end
+	local ok, _, visible = pcall(function()
+		return camera:WorldToViewportPoint(rootPart.Position)
+	end)
+	return ok and visible == true
+end
+
+local function resetSmartBoneTree(tree)
+	for _, particle in ipairs(tree.particles) do
+		if particle.bone and particle.bone.Parent then
+			local transformOffset
+			if particle.bone == tree.root then
+				transformOffset = tree.rootPart.CFrame * particle.rootTransform
+			else
+				transformOffset = tree.root.WorldCFrame * particle.transform
+			end
+			particle.transformOffset = transformOffset
+			particle.lastTransformOffset = transformOffset
+			particle.localTransformOffset = tree.root.CFrame * particle.localTransform
+			particle.lastPosition = transformOffset.Position
+			particle.position = transformOffset.Position
+			particle.calculatedWorldCFrame = transformOffset
+			safeSet(particle.bone, "WorldCFrame", transformOffset)
+		end
+	end
+	tree.objectPreviousPosition = tree.rootPart.Position
+	tree.objectMove = Vector3.new()
+end
+
+local function resetSmartBoneController(controller)
+	for _, tree in ipairs(controller.trees or {}) do
+		resetSmartBoneTree(tree)
+	end
 end
 
 local function updateSmartBoneController(controller, delta)
@@ -2355,69 +2595,140 @@ local function updateSmartBoneController(controller, delta)
 	end
 	delta = tonumber(delta) or (1 / 60)
 	local settings = controller.settings or SMART_BONE_DEFAULTS
-	controller.accumulator = tonumber(controller.accumulator) or 0
-	local frameTime = 1 / math.max(settings.UpdateRate or 60, 1)
-	controller.accumulator += delta
-	if controller.accumulator < frameTime then
+	controller.frameTime = (tonumber(controller.frameTime) or 0) + delta
+
+	local updateRate = math.max(settings.UpdateRate or 60, 1)
+	local camera = workspace.CurrentCamera
+	local distance = 0
+	if camera then
+		distance = (camera.CFrame.Position - controller.rootPart.Position).Magnitude
+	end
+	local activationDistance = math.max(settings.ActivationDistance or SMART_BONE_DEFAULTS.ActivationDistance, 1)
+	local throttleDistance = math.max(settings.ThrottleDistance or SMART_BONE_DEFAULTS.ThrottleDistance, 0)
+	local updateDistance = math.clamp(distance - throttleDistance, 0, activationDistance)
+	local updateThrottle = 1 - math.clamp(updateDistance / activationDistance, 0, 1)
+	updateRate = math.floor(math.clamp(updateThrottle * updateRate, 1, updateRate))
+
+	if controller.frameTime < (1 / updateRate) then
 		return
 	end
-	local dt = math.clamp(controller.accumulator, 1 / 240, 1 / 20)
-	controller.accumulator = 0
-	local rootMove = controller.rootPart.Position - controller.lastRootPosition
-	controller.lastRootPosition = controller.rootPart.Position
-	local gravity = ((settings.Gravity or SMART_BONE_DEFAULTS.Gravity) + (settings.Force or SMART_BONE_DEFAULTS.Force)) * dt * dt
+
+	local dt = math.clamp(controller.frameTime, 1 / 240, 0.1)
+	controller.frameTime = 0
+	if distance >= activationDistance or not smartBoneWithinViewport(controller.rootPart) then
+		if controller.inRange then
+			controller.inRange = false
+			resetSmartBoneController(controller)
+		end
+		return
+	end
+	controller.inRange = true
+
+	local timeVar = dt * 10
+	local gravity = settings.Gravity or SMART_BONE_DEFAULTS.Gravity
+	local gravityDirection = gravity.Magnitude > 0.0001 and gravity.Unit or Vector3.new(0, -1, 0)
 	local now = os.clock()
 
 	for _, tree in ipairs(controller.trees) do
-		for _, particle in ipairs(tree.particles) do
-			particle.phase = tonumber(particle.phase) or 0
-			particle.restLength = tonumber(particle.restLength) or 0
-			particle.depth = tonumber(particle.depth) or 0
-			if particle.anchored then
-				particle.lastPosition = particle.bone.WorldPosition
-				particle.position = particle.bone.WorldPosition
-			else
-				local velocity = particle.position - particle.lastPosition
-				particle.lastPosition = particle.position + (rootMove * (settings.Inertia or 0))
-				local wind = Vector3.new()
-				local windInfluence = settings.WindInfluence or 0
-				if windInfluence > 0 and particle.restLength > 0 then
-					local windDirection = settings.WindDirection or SMART_BONE_DEFAULTS.WindDirection
-					local t = now * (settings.WindSpeed or SMART_BONE_DEFAULTS.WindSpeed) + particle.phase
-					wind = Vector3.new(
-						windDirection.X * math.sin(t),
-						0.05 * math.sin(t * 0.63),
-						windDirection.Z * math.cos(t)
-					) * ((settings.WindStrength or 0) * windInfluence * 0.002 * math.max(particle.depth, 1))
-				end
-				particle.position += velocity * (1 - (settings.Damping or 0)) + gravity + rootMove * (settings.Inertia or 0) + wind
-			end
-		end
+		if tree.root and tree.root.Parent and tree.rootPart and tree.rootPart.Parent then
+			tree.objectMove = tree.rootPart.Position - tree.objectPreviousPosition
+			tree.objectPreviousPosition = tree.rootPart.Position
+			tree.restGravity = tree.root.CFrame:PointToWorldSpace(tree.localGravity)
+			local projectedForce = gravityDirection * math.max(tree.restGravity:Dot(gravityDirection), 0)
+			local force = (gravity - projectedForce + (settings.Force or SMART_BONE_DEFAULTS.Force)) * ((controller.objectScale or 0) * timeVar)
 
-		for _ = 1, 2 do
 			for _, particle in ipairs(tree.particles) do
-				local parent = particle.parentIndex > 0 and tree.particles[particle.parentIndex] or nil
+				if particle.bone and particle.bone.Parent then
+					particle.lastTransformOffset = particle.transformOffset
+					if particle.bone == tree.root then
+						particle.transformOffset = tree.rootPart.CFrame * particle.rootTransform
+					else
+						particle.transformOffset = tree.root.WorldCFrame * particle.transform
+					end
+					particle.localTransformOffset = tree.root.CFrame * particle.localTransform
+				end
+			end
+
+			for _, particle in ipairs(tree.particles) do
+				if particle.parentIndex >= 1 and not particle.anchored and particle.bone and particle.bone.Parent then
+					local windMove = Vector3.new()
+					if (settings.WindInfluence or 0) > 0 and (settings.WindStrength or 0) > 0 then
+						local windDirection = settings.WindDirection or SMART_BONE_DEFAULTS.WindDirection
+						local distanceFromRoot = (particle.transformOffset.Position - tree.root.WorldPosition).Magnitude
+						local timeModifier = (tree.windOffset or 0) + (now - ((particle.hierarchyLength or 1) / 5)) + ((distanceFromRoot / 5) * (settings.WindInfluence or 1))
+						windMove = Vector3.new(
+							windDirection.X + (windDirection.X * math.sin(timeModifier * (settings.WindSpeed or 8))),
+							windDirection.Y + (0.05 * math.sin(timeModifier * (settings.WindSpeed or 8))),
+							windDirection.Z + (windDirection.X * math.sin(timeModifier * (settings.WindSpeed or 8)))
+						)
+						windMove /= math.max(particle.boneLength or 0.05, 0.05)
+						windMove *= (settings.WindInfluence or 1)
+						windMove *= ((settings.WindStrength or 1) / 100) * (math.clamp(particle.hierarchyLength or 1, 1, 10) / 10)
+						windMove *= (particle.weight or 0.7)
+					end
+					local velocity = particle.position - particle.lastPosition
+					local move = tree.objectMove * (settings.Inertia or 0)
+					particle.lastPosition = particle.position + move
+					particle.position += velocity * (1 - (settings.Damping or 0)) + force + move + windMove
+				else
+					particle.lastPosition = particle.transformOffset.Position
+					particle.position = particle.transformOffset.Position
+				end
+			end
+
+			for _, particle in ipairs(tree.particles) do
+				local parent = particle.parentIndex >= 1 and tree.particles[particle.parentIndex] or nil
 				if parent and not particle.anchored then
-					local restPosition = (parent.bone.WorldCFrame * particle.restLocal).Position
-					particle.position = particle.position:Lerp(restPosition, math.clamp((settings.Elasticity or 0) * dt * 10, 0, 1))
-					local deltaPos = particle.position - parent.position
-					local length = deltaPos.Magnitude
-					if length > 0.0001 then
-						local target = parent.position + deltaPos.Unit * math.max(particle.restLength, 0.001)
-						particle.position = particle.position:Lerp(target, math.clamp(0.65 + (settings.Stiffness or 0) * 0.35, 0, 1))
+					local restLength = (parent.transformOffset.Position - particle.transformOffset.Position).Magnitude
+					if (settings.Stiffness or 0) > 0 or (settings.Elasticity or 0) > 0 then
+						local mat = CFrame.new(parent.position) * parent.transformOffset.Rotation
+						local restPosition = (mat * CFrame.new(particle.localTransformOffset.Position)).Position
+						local difference = restPosition - particle.position
+						particle.position += difference * ((settings.Elasticity or 0) * timeVar)
+
+						if (settings.Stiffness or 0) > 0 then
+							difference = restPosition - particle.position
+							local length = difference.Magnitude
+							local maxLength = restLength * (1 - (settings.Stiffness or 0)) * 2
+							if length > maxLength and length > 0 then
+								particle.position += difference * ((length - maxLength) / length)
+							end
+						end
+					end
+
+					local difference = parent.position - particle.position
+					local length = difference.Magnitude
+					if length > 0 then
+						particle.position += difference * ((length - restLength) / length)
 					end
 				end
 			end
-		end
 
-		for _, particle in ipairs(tree.particles) do
-			local parent = particle.parentIndex > 0 and tree.particles[particle.parentIndex] or nil
-			if parent and parent.bone and parent.bone.Parent and not parent.anchored then
-				local direction = particle.position - parent.position
-				if direction.Magnitude > 0.0001 then
-					local current = parent.bone.WorldCFrame
-					local rotated = CFrame.new(parent.position) * rotationBetween(current.UpVector, direction.Unit) * current.Rotation
-					safeSet(parent.bone, "WorldCFrame", current:Lerp(rotated, 0.9))
+			for _, particle in ipairs(tree.particles) do
+				if particle.parentIndex >= 1 and not particle.anchored then
+					local parent = tree.particles[particle.parentIndex]
+					if parent and parent.bone and parent.bone.Parent and parent.bone ~= tree.root then
+						local localPosition = parent.localTransformOffset.Position
+						local reference = parent.transformOffset
+						local v0 = reference:PointToObjectSpace(localPosition)
+						local v1 = particle.position - parent.position
+						local rotation = rotationBetween(reference.UpVector, v1, v0).Rotation * reference.Rotation
+						local alpha = 1 - (0.00001 ^ timeVar)
+						parent.calculatedWorldCFrame = parent.bone.WorldCFrame:Lerp(CFrame.new(parent.position) * rotation, alpha)
+					end
+				end
+			end
+
+			for _, particle in ipairs(tree.particles) do
+				if particle.parentIndex >= 1 and not particle.anchored then
+					local parent = tree.particles[particle.parentIndex]
+					if parent and parent.bone and parent.bone.Parent and parent.bone ~= tree.root then
+						if parent.anchored and (settings.AnchorsRotate == false) then
+							safeSet(parent.bone, "WorldCFrame", parent.transformOffset)
+						elseif parent.calculatedWorldCFrame then
+							safeSet(parent.bone, "WorldCFrame", parent.calculatedWorldCFrame)
+						end
+					end
 				end
 			end
 		end
@@ -4019,6 +4330,7 @@ function OwnCharacterOverlayRenderer.onPatch(entity)
 		applyAppearanceAvatar(handle, anchor, entity.components, entity.entityId)
 	end
 	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId, character)
+	applyAnimationToCharacter(handle, character, entity.components, entity.entityId)
 end
 
 function OwnCharacterOverlayRenderer.onDestroy(entity)
@@ -4131,6 +4443,7 @@ function NativeCharacterOverlayRenderer.onPatch(entity)
 		applyAppearanceAvatar(handle, anchor, entity.components, entity.entityId)
 	end
 	applyDescriptorMorph(handle, morphAnchor, entity.components, entity.entityId, character)
+	applyAnimationToCharacter(handle, character, entity.components, entity.entityId)
 end
 
 function NativeCharacterOverlayRenderer.onDestroy(entity)
@@ -5222,7 +5535,11 @@ local function bridgePlayAnimation(payload)
 	end
 
 	task.spawn(function()
-		local asset, assetError = resolveBridgeAsset("animation", payload)
+		local directAnimationId = robloxAssetUrl(payload.animation_id or payload.animationId or payload.roblox_asset_id or payload.robloxAssetId or payload.value or payload.input or payload.id)
+		local asset, assetError = nil, nil
+		if directAnimationId == nil then
+			asset, assetError = resolveBridgeAsset("animation", payload)
+		end
 		if assetError then
 			emitBridgeError("asset.resolve_failed", assetError)
 			return
@@ -5232,6 +5549,9 @@ local function bridgePlayAnimation(payload)
 			name = trimString(payload.name or payload.preset or payload.value) ~= "" and trimString(payload.name or payload.preset or payload.value) or "Idle",
 			intensity = tonumber(payload.intensity) or 50,
 		}
+		if directAnimationId then
+			animation.animation_id = directAnimationId
+		end
 		if asset then
 			animation.asset_id = asset.asset_id
 			animation.asset_type = asset.type
