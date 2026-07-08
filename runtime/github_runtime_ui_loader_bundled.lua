@@ -43,6 +43,8 @@ local CONFIG = {
 	asset_require_hash_verification = false,
 	asset_catalog_url = nil,
 	native_morph_archive_path = "overlay-native-morph-tests/morphlar.rbxm",
+	native_morph_archive_url = nil, -- optional; set getgenv().OverlayNativeMorphArchiveUrl after uploading morphlar.rbxm
+	native_morph_archive_max_bytes = 128 * 1024 * 1024,
 }
 
 local HttpService = game:GetService("HttpService")
@@ -61,6 +63,9 @@ if type(GLOBAL.OverlayAssetCatalogUrl) == "string" then
 end
 if type(GLOBAL.OverlayNativeMorphArchivePath) == "string" then
 	CONFIG.native_morph_archive_path = GLOBAL.OverlayNativeMorphArchivePath
+end
+if type(GLOBAL.OverlayNativeMorphArchiveUrl) == "string" then
+	CONFIG.native_morph_archive_url = GLOBAL.OverlayNativeMorphArchiveUrl
 end
 
 local function log(...)
@@ -237,6 +242,10 @@ local Client = {
 	assetCatalog = {},
 	assetCatalogById = {},
 	nativeMorphArchive = nil,
+	nativeMorphArchiveStatus = "idle",
+	nativeMorphArchiveError = nil,
+	nativeMorphArchiveLoading = false,
+	nativeMorphCatalog = {},
 	nativeMorphLookup = {},
 	nativeMorphLoadAttempted = false,
 	nativeMorphCatalogEmitted = false,
@@ -525,6 +534,12 @@ local function requestHttp(url)
 			end
 		end
 	end
+	local ok, body = pcall(function()
+		return game:HttpGet(url)
+	end)
+	if ok and type(body) == "string" then
+		return body
+	end
 	return nil
 end
 
@@ -569,6 +584,11 @@ local function safeFileName(value)
 	value = tostring(value or "asset")
 	value = value:gsub("[^%w%._%-]", "_")
 	return string.sub(value, 1, 96)
+end
+
+local function parentFolder(path)
+	path = tostring(path or "")
+	return string.match(path, "^(.*)/[^/]+$") or ""
 end
 
 local function assetExtension(asset)
@@ -2178,6 +2198,77 @@ local function nativeMorphQuery(morph)
 	return raw
 end
 
+local function ensureNativeMorphArchiveFile()
+	local path = trimString(CONFIG.native_morph_archive_path)
+	if path == "" then
+		Client.nativeMorphArchiveStatus = "path_required"
+		Client.nativeMorphArchiveError = "Native morph archive path is empty"
+		return nil, Client.nativeMorphArchiveError
+	end
+
+	local isfileFn = getGlobalFunction("isfile")
+	if not isfileFn then
+		Client.nativeMorphArchiveStatus = "filesystem_unavailable"
+		Client.nativeMorphArchiveError = "Executor filesystem API is missing"
+		return nil, Client.nativeMorphArchiveError
+	end
+
+	local existsOk, exists = pcall(isfileFn, path)
+	if existsOk and exists then
+		Client.nativeMorphArchiveStatus = "cached"
+		Client.nativeMorphArchiveError = nil
+		return path, "cached"
+	end
+
+	local url = trimString(CONFIG.native_morph_archive_url)
+	local writefileFn = getGlobalFunction("writefile")
+	if url == "" then
+		Client.nativeMorphArchiveStatus = "missing"
+		Client.nativeMorphArchiveError = "Native morph archive is missing and no download URL is configured"
+		return nil, Client.nativeMorphArchiveError
+	end
+	if not writefileFn then
+		Client.nativeMorphArchiveStatus = "write_unavailable"
+		Client.nativeMorphArchiveError = "Executor writefile API is missing"
+		return nil, Client.nativeMorphArchiveError
+	end
+
+	local folder = parentFolder(path)
+	if folder ~= "" and not ensureFolder(folder) then
+		Client.nativeMorphArchiveStatus = "folder_failed"
+		Client.nativeMorphArchiveError = "Could not create native morph cache folder"
+		return nil, Client.nativeMorphArchiveError
+	end
+
+	Client.nativeMorphArchiveStatus = "downloading"
+	Client.nativeMorphArchiveError = nil
+	emitBridgeState("native morph archive downloading")
+	log("downloading native morph archive", url)
+	local body = responseBody(requestHttp(url))
+	if type(body) ~= "string" or #body == 0 then
+		Client.nativeMorphArchiveStatus = "download_failed"
+		Client.nativeMorphArchiveError = "Native morph archive download failed"
+		return nil, Client.nativeMorphArchiveError
+	end
+	if #body > CONFIG.native_morph_archive_max_bytes then
+		Client.nativeMorphArchiveStatus = "too_large"
+		Client.nativeMorphArchiveError = "Native morph archive is too large"
+		return nil, Client.nativeMorphArchiveError
+	end
+
+	local writeOk = pcall(writefileFn, path, body)
+	if not writeOk then
+		Client.nativeMorphArchiveStatus = "write_failed"
+		Client.nativeMorphArchiveError = "Native morph archive could not be written to workspace"
+		return nil, Client.nativeMorphArchiveError
+	end
+
+	Client.nativeMorphArchiveStatus = "downloaded"
+	Client.nativeMorphArchiveError = nil
+	emitBridgeState("native morph archive cached: " .. tostring(#body) .. " bytes")
+	return path, "downloaded"
+end
+
 local function emitNativeMorphCatalog(archive)
 	if archive == nil or Client.nativeMorphCatalogEmitted then
 		return
@@ -2226,17 +2317,27 @@ local function emitNativeMorphCatalog(archive)
 	table.sort(assets, function(a, b)
 		return tostring(a.display_name):lower() < tostring(b.display_name):lower()
 	end)
+
+	Client.nativeMorphCatalog = assets
+	Client.assetCatalog = assets
+	Client.assetCatalogById = {}
+	for _, asset in ipairs(assets) do
+		Client.assetCatalogById[asset.asset_id] = asset
+	end
+
 	Client.nativeMorphCatalogEmitted = true
 	emitBridgeEvent("asset.catalog", {
 		assets = assets,
 		total = #assets,
 		source = "native_morph_archive",
+		status = Client.nativeMorphArchiveStatus,
+		path = CONFIG.native_morph_archive_path,
 	})
 	emitBridgeState("native morph catalog loaded: " .. tostring(#assets))
 end
 
 local function loadNativeMorphArchive()
-	if Client.nativeMorphArchive and Client.nativeMorphArchive.Parent ~= nil then
+	if typeof(Client.nativeMorphArchive) == "Instance" then
 		emitNativeMorphCatalog(Client.nativeMorphArchive)
 		return Client.nativeMorphArchive
 	end
@@ -2249,30 +2350,45 @@ local function loadNativeMorphArchive()
 		return Client.nativeMorphArchive
 	end
 	Client.nativeMorphLoadAttempted = true
-
-	local path = trimString(CONFIG.native_morph_archive_path)
-	local isfileFn = getGlobalFunction("isfile")
-	local getcustomassetFn = getGlobalFunction("getcustomasset")
-	if path == "" or not isfileFn or not getcustomassetFn or not game.GetObjects then
-		return nil
+	if Client.nativeMorphArchiveLoading then
+		return Client.nativeMorphArchive
 	end
-	local existsOk, exists = pcall(isfileFn, path)
-	if not existsOk or not exists then
+	Client.nativeMorphArchiveLoading = true
+
+	local path, pathError = ensureNativeMorphArchiveFile()
+	local getcustomassetFn = getGlobalFunction("getcustomasset")
+	if not path or not getcustomassetFn or not game.GetObjects then
+		Client.nativeMorphArchiveLoading = false
+		if pathError then
+			emitBridgeError("native_morph.archive_unavailable", pathError)
+			log("native morph archive unavailable:", pathError)
+		end
 		return nil
 	end
 	local assetOk, assetUrl = pcall(getcustomassetFn, path)
 	if not assetOk or type(assetUrl) ~= "string" or assetUrl == "" then
+		Client.nativeMorphArchiveStatus = "custom_asset_failed"
+		Client.nativeMorphArchiveError = "getcustomasset failed for native morph archive"
+		Client.nativeMorphArchiveLoading = false
+		emitBridgeError("native_morph.custom_asset_failed", Client.nativeMorphArchiveError)
 		return nil
 	end
 	local objectsOk, objects = pcall(function()
 		return game:GetObjects(assetUrl)
 	end)
 	if not objectsOk or type(objects) ~= "table" or #objects == 0 then
+		Client.nativeMorphArchiveStatus = "load_failed"
+		Client.nativeMorphArchiveError = "game:GetObjects returned no native morph archive objects"
+		Client.nativeMorphArchiveLoading = false
+		emitBridgeError("native_morph.load_failed", Client.nativeMorphArchiveError)
 		return nil
 	end
 
 	Client.nativeMorphArchive = objects[1]
 	GLOBAL.OverlayNativeMorphArchive = Client.nativeMorphArchive
+	Client.nativeMorphArchiveStatus = "loaded"
+	Client.nativeMorphArchiveError = nil
+	Client.nativeMorphArchiveLoading = false
 	log("native morph archive loaded", Client.nativeMorphArchive.Name)
 	emitNativeMorphCatalog(Client.nativeMorphArchive)
 	return Client.nativeMorphArchive
@@ -3705,6 +3821,19 @@ function OverlayBridge.onEvent(callback)
 
 	table.insert(Client.bridgeSubscribers, callback)
 	local active = true
+	if type(Client.nativeMorphCatalog) == "table" and #Client.nativeMorphCatalog > 0 then
+		task.spawn(function()
+			if active then
+				pcall(callback, "asset.catalog", {
+					assets = Client.nativeMorphCatalog,
+					total = #Client.nativeMorphCatalog,
+					source = "native_morph_archive",
+					status = Client.nativeMorphArchiveStatus,
+					path = CONFIG.native_morph_archive_path,
+				})
+			end
+		end)
+	end
 	return function()
 		if not active then
 			return
@@ -3722,12 +3851,21 @@ end
 OverlayBridge.OnEvent = OverlayBridge.onEvent
 
 function OverlayBridge.getState()
+	local assets = Client.nativeMorphCatalog
+	if type(assets) ~= "table" or #assets == 0 then
+		assets = Client.assetCatalog
+	end
 	return {
 		connected = Client.connected,
 		user = Client.user,
 		room = Client.room,
 		rooms = Client.cachedRooms,
-		assets = Client.assetCatalog,
+		assets = assets,
+		native_morph_archive = {
+			status = Client.nativeMorphArchiveStatus,
+			error = Client.nativeMorphArchiveError,
+			path = CONFIG.native_morph_archive_path,
+		},
 	}
 end
 
@@ -4430,10 +4568,22 @@ OverlayBridge.setAvatar = bridgeSetAvatar
 OverlayBridge.applyMorph = bridgeApplyMorph
 OverlayBridge.playAnimation = bridgePlayAnimation
 OverlayBridge.loadAssetCatalog = loadAssetCatalog
+OverlayBridge.loadNativeMorphArchive = loadNativeMorphArchive
+OverlayBridge.reloadNativeMorphCatalog = function()
+	Client.nativeMorphLoadAttempted = false
+	Client.nativeMorphCatalogEmitted = false
+	task.spawn(function()
+		loadNativeMorphArchive()
+	end)
+end
 OverlayBridge.patchEffect = bridgePatchEffect
 OverlayBridge.previewEffect = bridgePreviewEffect
 
 GLOBAL.OverlayBridge = OverlayBridge
+
+task.spawn(function()
+	loadNativeMorphArchive()
+end)
 
 local function runSession()
 	disconnectWsConnections()
