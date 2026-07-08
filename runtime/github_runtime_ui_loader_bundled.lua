@@ -1865,9 +1865,39 @@ local MORPH_GROUP_MOUNTS = {
 	UpperR = { anchor = "Torso", offset = "torso_upper_right_front" },
 	LowerL = { anchor = "Torso", offset = "torso_lower_left_back" },
 	LowerR = { anchor = "Torso", offset = "torso_lower_right_back" },
+	AccRod = { anchorGroup = "Rod", anchorPart = "M6DRod" },
 }
 
 local NativeMorph = {
+	groupOrder = {
+		"Rod",
+		"Orbs",
+		"UpperL",
+		"UpperR",
+		"LowerL",
+		"LowerR",
+		"UpperStatic",
+		"UpperStaticA",
+		"UpperStaticB",
+		"LowerStatic",
+		"LowerStaticA",
+		"LowerStaticB",
+		"RearStatic",
+		"TorsoAcc",
+		"AccRod",
+		"Cage",
+		"HeadAcc",
+		"ArmL",
+		"ArmR",
+		"LegL",
+		"LegR",
+		"BodyLeftArm",
+		"BodyRightArm",
+		"BodyLeftLeg",
+		"BodyRightLeg",
+		"BodyTorso",
+		"Face",
+	},
 	slotLabels = {
 		["1"] = "1 Pink",
 		["2"] = "2 Green",
@@ -2841,9 +2871,24 @@ local function topNativeMorphGroups(clone)
 	if MORPH_GROUP_MOUNTS[clone.Name] then
 		table.insert(groups, clone)
 	end
+	for _, groupName in ipairs(NativeMorph.groupOrder) do
+		local child = clone:FindFirstChild(groupName)
+		if child and MORPH_GROUP_MOUNTS[child.Name] then
+			table.insert(groups, child)
+		end
+	end
 	for _, child in ipairs(clone:GetChildren()) do
 		if MORPH_GROUP_MOUNTS[child.Name] then
-			table.insert(groups, child)
+			local seen = false
+			for _, group in ipairs(groups) do
+				if group == child then
+					seen = true
+					break
+				end
+			end
+			if not seen then
+				table.insert(groups, child)
+			end
 		end
 	end
 	if #groups == 0 then
@@ -2930,6 +2975,127 @@ function NativeMorph.forceColors(root, color)
 		if descendant:IsA("BasePart") then
 			safeSet(descendant, "Color", color)
 		end
+	end
+end
+
+function NativeMorph.setMarker(instance, name, value)
+	if instance == nil then
+		return
+	end
+	pcall(function()
+		instance:SetAttribute(name, value)
+	end)
+end
+
+function NativeMorph.isDirectCharacterMount(character)
+	return character ~= nil and character:IsA("Model") and character:FindFirstChildOfClass("Humanoid") ~= nil
+end
+
+function NativeMorph.groupParent(character, fallbackRoot)
+	if NativeMorph.isDirectCharacterMount(character) then
+		return character
+	end
+	return fallbackRoot
+end
+
+function NativeMorph.trackMountedGroup(state, group)
+	if state == nil or group == nil then
+		return
+	end
+	state.mountedGroups = state.mountedGroups or {}
+	table.insert(state.mountedGroups, group)
+end
+
+function NativeMorph.trackMountedJoint(state, joint)
+	if state == nil or joint == nil then
+		return
+	end
+	state.mountedJoints = state.mountedJoints or {}
+	table.insert(state.mountedJoints, joint)
+end
+
+function NativeMorph.findCharacterMorphGroup(character, groupName)
+	if not NativeMorph.isDirectCharacterMount(character) then
+		return nil
+	end
+	local child = character:FindFirstChild(groupName)
+	if child and (child:IsA("Folder") or child:IsA("Model")) then
+		return child
+	end
+	return nil
+end
+
+function NativeMorph.findRodAnchor(character)
+	local rod = NativeMorph.findCharacterMorphGroup(character, "Rod")
+	if rod == nil then
+		return nil
+	end
+	local anchor = rod:FindFirstChild("M6DRod") or rod:FindFirstChild("Middle")
+	if anchor and anchor:IsA("BasePart") then
+		return anchor
+	end
+	return nil
+end
+
+function NativeMorph.destroyTrackedMounts(state)
+	if state == nil then
+		return
+	end
+	for _, joint in ipairs(state.mountedJoints or {}) do
+		if joint and joint.Parent then
+			destroyInstanceDeferred(joint)
+		end
+	end
+	for _, group in ipairs(state.mountedGroups or {}) do
+		if group and group.Parent then
+			destroyInstanceDeferred(group)
+		end
+	end
+	state.mountedJoints = nil
+	state.mountedGroups = nil
+end
+
+function NativeMorph.groupConflictNames(groups)
+	local groupNames = {}
+	for _, group in ipairs(groups or {}) do
+		if group and MORPH_GROUP_MOUNTS[group.Name] then
+			groupNames[group.Name] = true
+		end
+	end
+	if groupNames.Cage then
+		groupNames.Rod = true
+		groupNames.AccRod = true
+	end
+	if groupNames.Rod or groupNames.AccRod then
+		groupNames.Cage = true
+	end
+	return groupNames
+end
+
+function NativeMorph.removeChildIfPresent(root, name)
+	if root == nil then
+		return
+	end
+	local child = root:FindFirstChild(name)
+	if child then
+		destroyInstanceDeferred(child)
+	end
+end
+
+function NativeMorph.applyCageRules(handle, clone, slot)
+	if clone == nil or clone:FindFirstChild("Cage") == nil then
+		return
+	end
+	NativeMorph.removeChildIfPresent(clone, "AccRod")
+	NativeMorph.removeChildIfPresent(clone, "Rod")
+	local slotsToClear = {}
+	for otherSlot, state in pairs(handle.nativeMorphSlots or {}) do
+		if otherSlot ~= slot and type(state.groupNames) == "table" and (state.groupNames.Rod or state.groupNames.AccRod) then
+			table.insert(slotsToClear, otherSlot)
+		end
+	end
+	for _, otherSlot in ipairs(slotsToClear) do
+		NativeMorph.clearSlot(handle, otherSlot)
 	end
 end
 
@@ -3032,6 +3198,7 @@ function NativeMorph.clearSlot(handle, slot)
 		return
 	end
 	restoreNativeMorphHiddenParts(state)
+	NativeMorph.destroyTrackedMounts(state)
 	if state.root then
 		destroyInstanceDeferred(state.root)
 	end
@@ -3062,9 +3229,18 @@ local function clearNativeMorph(handle)
 	handle.nativeMorphSmartBones = nil
 end
 
-local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, slotState, palette)
+local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, slotState, palette, root)
 	local mount = MORPH_GROUP_MOUNTS[group.Name]
-	local anchor = mount and findCharacterPart(character, { mount.anchor }) or nil
+	local sourceRoot = group.Parent
+	local anchor = nil
+	if mount and mount.anchorGroup == "Rod" then
+		anchor = NativeMorph.findRodAnchor(character)
+		if anchor == nil then
+			return false
+		end
+	elseif mount then
+		anchor = findCharacterPart(character, { mount.anchor })
+	end
 	anchor = anchor or fallbackAnchor
 	if anchor == nil or not anchor:IsA("BasePart") then
 		return false
@@ -3087,19 +3263,29 @@ local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, s
 	local joint
 	if mount and mount.offset then
 		joint = Instance.new("Motor6D")
+		joint.Name = "M6D" .. group.Name
 	else
 		joint = Instance.new("Weld")
+		joint.Name = "OverlayNativeMorphWeld_" .. group.Name
 	end
-	joint.Name = "OverlayNativeMorphMount"
 	joint.Part0 = anchor
 	joint.Part1 = middle
 	joint.C0 = offset
 	joint.C1 = CFrame.new()
-	joint.Parent = middle
+	joint.Parent = anchor
+	NativeMorph.trackMountedJoint(slotState, joint)
+
+	if joint:IsA("Motor6D") then
+		middle.Name = "M6D" .. group.Name
+	end
+
+	NativeMorph.setMarker(group, "OverlayNativeMorphGroup", true)
+	group.Parent = NativeMorph.groupParent(character, root)
+	NativeMorph.trackMountedGroup(slotState, group)
 
 	if mount and BODY_REPLACEMENT_TARGETS[group.Name] then
 		NativeMorph.forceColors(group, anchor.Color)
-		if not NativeMorph.hasMarker(group.Parent, "IsNone") then
+		if not NativeMorph.hasMarker(sourceRoot, "IsNone") then
 			hideNativeMorphTarget(slotState or handle, anchor)
 		end
 	end
@@ -3107,12 +3293,7 @@ local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, s
 end
 
 function NativeMorph.clearConflictingGroups(handle, exceptSlot, groups)
-	local groupNames = {}
-	for _, group in ipairs(groups or {}) do
-		if group and MORPH_GROUP_MOUNTS[group.Name] then
-			groupNames[group.Name] = true
-		end
-	end
+	local groupNames = NativeMorph.groupConflictNames(groups)
 	local slotsToClear = {}
 	for slot, state in pairs(handle.nativeMorphSlots or {}) do
 		if slot ~= exceptSlot and type(state.groupNames) == "table" then
@@ -3130,7 +3311,7 @@ function NativeMorph.clearConflictingGroups(handle, exceptSlot, groups)
 	return groupNames
 end
 
-local function createNativeSmartBoneControllers(root)
+local function createNativeSmartBoneControllers(root, extraRoots)
 	if not CONFIG.native_morph_enable_smart_bones then
 		return nil
 	end
@@ -3139,16 +3320,30 @@ local function createNativeSmartBoneControllers(root)
 		return nil
 	end
 	local controllers = {}
-	for _, part in ipairs(collectBaseParts(root)) do
-		local ok, controller = pcall(createSmartBoneController, part)
-		if not ok then
-			controller = nil
+	local roots = {}
+	if root then
+		table.insert(roots, root)
+	end
+	for _, extraRoot in ipairs(extraRoots or {}) do
+		if extraRoot and extraRoot.Parent then
+			table.insert(roots, extraRoot)
 		end
-		if controller then
-			table.insert(controllers, controller)
-			if #controllers >= maxControllers then
-				break
+	end
+	for _, scanRoot in ipairs(roots) do
+		for _, part in ipairs(collectBaseParts(scanRoot)) do
+			local ok, controller = pcall(createSmartBoneController, part)
+			if not ok then
+				controller = nil
 			end
+			if controller then
+				table.insert(controllers, controller)
+				if #controllers >= maxControllers then
+					break
+				end
+			end
+		end
+		if #controllers >= maxControllers then
+			break
 		end
 	end
 	return #controllers > 0 and controllers or nil
@@ -3203,11 +3398,12 @@ function NativeMorph.applySlot(handle, anchorPart, components, entityId, charact
 	clone.Name = source.Name
 	clone.Parent = root
 
+	NativeMorph.applyCageRules(handle, clone, slot)
 	local groups = topNativeMorphGroups(clone)
 	local groupNames = NativeMorph.clearConflictingGroups(handle, slot, groups)
 	local mountedAny = false
 	for _, group in ipairs(groups) do
-		if mountNativeMorphGroup(handle, group, character, anchorPart, state, palette) then
+		if mountNativeMorphGroup(handle, group, character, anchorPart, state, palette, root) then
 			mountedAny = true
 		end
 	end
@@ -3243,7 +3439,7 @@ function NativeMorph.applySlot(handle, anchorPart, components, entityId, charact
 	state.key = key
 	state.character = character
 	state.groupNames = groupNames
-	state.smartBones = createNativeSmartBoneControllers(root)
+	state.smartBones = createNativeSmartBoneControllers(root, state.mountedGroups)
 	NativeMorph.rebuildSmartBones(handle)
 	return true
 end
