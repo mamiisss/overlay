@@ -45,9 +45,11 @@ local CONFIG = {
 	native_morph_archive_path = "overlay-native-morph-tests/morphlar.rbxm",
 	native_morph_archive_url = nil, -- optional; set getgenv().OverlayNativeMorphArchiveUrl after uploading morphlar.rbxm
 	native_morph_archive_max_bytes = 128 * 1024 * 1024,
-	native_morph_max_base_parts = 900,
-	native_morph_enable_smart_bones = false,
-	native_morph_max_smart_bone_controllers = 6,
+	native_morph_max_base_parts = 2500,
+	native_morph_enable_smart_bones = true,
+	native_morph_infer_smart_bone_roots = true,
+	native_morph_max_smart_bone_controllers = 24,
+	native_morph_max_smart_bone_particles = 420,
 	native_morph_operation_budget_seconds = 0.008,
 }
 
@@ -55,6 +57,9 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local TeleportService = game:GetService("TeleportService")
+pcall(function()
+	CONFIG.collection_service = game:GetService("CollectionService")
+end)
 local AssetService = nil
 pcall(function()
 	AssetService = game:GetService("AssetService")
@@ -72,10 +77,21 @@ if type(GLOBAL.OverlayNativeMorphArchiveUrl) == "string" then
 	CONFIG.native_morph_archive_url = GLOBAL.OverlayNativeMorphArchiveUrl
 end
 if tonumber(GLOBAL.OverlayNativeMorphMaxBaseParts) then
-	CONFIG.native_morph_max_base_parts = math.max(1, math.floor(tonumber(GLOBAL.OverlayNativeMorphMaxBaseParts)))
+	CONFIG.native_morph_max_base_parts = math.max(0, math.floor(tonumber(GLOBAL.OverlayNativeMorphMaxBaseParts)))
 end
-if GLOBAL.OverlayNativeMorphSmartBones == true then
+if GLOBAL.OverlayNativeMorphSmartBones == false then
+	CONFIG.native_morph_enable_smart_bones = false
+elseif GLOBAL.OverlayNativeMorphSmartBones == true then
 	CONFIG.native_morph_enable_smart_bones = true
+end
+if GLOBAL.OverlayNativeMorphInferSmartBoneRoots == false then
+	CONFIG.native_morph_infer_smart_bone_roots = false
+end
+if tonumber(GLOBAL.OverlayNativeMorphMaxSmartBoneControllers) then
+	CONFIG.native_morph_max_smart_bone_controllers = math.max(0, math.floor(tonumber(GLOBAL.OverlayNativeMorphMaxSmartBoneControllers)))
+end
+if tonumber(GLOBAL.OverlayNativeMorphMaxSmartBoneParticles) then
+	CONFIG.native_morph_max_smart_bone_particles = math.max(0, math.floor(tonumber(GLOBAL.OverlayNativeMorphMaxSmartBoneParticles)))
 end
 
 local function log(...)
@@ -2087,6 +2103,117 @@ local function childBones(bone)
 	return out
 end
 
+NativeMorph.smartBoneSignalAttributes = {
+	"SmartBone",
+	"smartBone",
+	"smartbone",
+	"Jiggle",
+	"jiggle",
+	"PhysicsBone",
+	"physicsBone",
+}
+
+NativeMorph.smartBoneSettingAttributes = {
+	"Roots",
+	"Root",
+	"Damping",
+	"Stiffness",
+	"Inertia",
+	"Elasticity",
+	"AnchorDepth",
+	"Force",
+	"Gravity",
+	"WindDirection",
+	"WindSpeed",
+	"WindStrength",
+	"WindInfluence",
+	"UpdateRate",
+}
+
+function NativeMorph.hasCollectionTag(instance, tag)
+	if CONFIG.collection_service == nil or instance == nil then
+		return false
+	end
+	local ok, result = pcall(function()
+		return CONFIG.collection_service:HasTag(instance, tag)
+	end)
+	return ok and result == true
+end
+
+function NativeMorph.hasSmartBoneSignal(rootPart)
+	if rootPart == nil then
+		return false
+	end
+	if NativeMorph.hasCollectionTag(rootPart, "SmartBone") then
+		return true
+	end
+	local rootsRaw = attributeValue(rootPart, { "Roots", "roots", "Root", "root" })
+	if type(rootsRaw) == "string" and trimString(rootsRaw) ~= "" then
+		return true
+	end
+	for _, name in ipairs(NativeMorph.smartBoneSignalAttributes) do
+		local value = attributeValue(rootPart, { name })
+		if value ~= nil and value ~= false and trimString(tostring(value)) ~= "" then
+			return true
+		end
+	end
+	for _, name in ipairs(NativeMorph.smartBoneSettingAttributes) do
+		if attributeValue(rootPart, { name }) ~= nil then
+			return true
+		end
+	end
+	return false
+end
+
+function NativeMorph.inferSmartBoneRoots(rootPart)
+	local roots = {}
+	local firstBone = nil
+	for _, descendant in ipairs(rootPart:GetDescendants()) do
+		if descendant:IsA("Bone") then
+			firstBone = firstBone or descendant
+			local hasBoneParent = false
+			local parent = descendant.Parent
+			while parent and parent ~= rootPart do
+				if parent:IsA("Bone") then
+					hasBoneParent = true
+					break
+				end
+				parent = parent.Parent
+			end
+			if not hasBoneParent then
+				table.insert(roots, descendant)
+				if #roots >= 8 then
+					break
+				end
+			end
+		end
+	end
+	if #roots == 0 and firstBone then
+		table.insert(roots, firstBone)
+	end
+	return roots
+end
+
+function NativeMorph.smartBoneRootBones(rootPart)
+	local roots = {}
+	local rootsRaw = attributeValue(rootPart, { "Roots", "roots", "Root", "root" })
+	if type(rootsRaw) == "string" and trimString(rootsRaw) ~= "" then
+		for rootName in string.gmatch(rootsRaw, "([^,]+)") do
+			local rootBone = findDescendantBoneByName(rootPart, rootName)
+			if rootBone then
+				table.insert(roots, rootBone)
+			end
+		end
+		if #roots > 0 then
+			return roots
+		end
+	end
+	if NativeMorph.hasSmartBoneSignal(rootPart) or CONFIG.native_morph_infer_smart_bone_roots then
+		return NativeMorph.inferSmartBoneRoots(rootPart)
+	end
+	return roots
+end
+
 local function ensureTailBone(bone, parentBone)
 	local existing = bone:FindFirstChild(bone.Name .. "_OverlayTail")
 	if existing and existing:IsA("Bone") then
@@ -2107,6 +2234,11 @@ local function ensureTailBone(bone, parentBone)
 end
 
 local function appendSmartBoneParticle(tree, bone, parentIndex, depth)
+	local maxParticles = tonumber(CONFIG.native_morph_max_smart_bone_particles) or 0
+	if maxParticles > 0 and #tree.particles >= maxParticles then
+		tree.truncated = true
+		return
+	end
 	local parent = parentIndex > 0 and tree.particles[parentIndex] or nil
 	local particle = {
 		bone = bone,
@@ -2127,6 +2259,10 @@ local function appendSmartBoneParticle(tree, bone, parentIndex, depth)
 		table.insert(children, ensureTailBone(bone, parent and parent.bone or nil))
 	end
 	for _, child in ipairs(children) do
+		if maxParticles > 0 and #tree.particles >= maxParticles then
+			tree.truncated = true
+			break
+		end
 		appendSmartBoneParticle(tree, child, index, depth + 1)
 	end
 end
@@ -2135,8 +2271,8 @@ local function createSmartBoneController(rootPart)
 	if rootPart == nil or not rootPart:IsA("BasePart") then
 		return nil
 	end
-	local rootsRaw = attributeValue(rootPart, { "Roots", "roots", "Root", "root" })
-	if type(rootsRaw) ~= "string" or trimString(rootsRaw) == "" then
+	local rootBones = NativeMorph.smartBoneRootBones(rootPart)
+	if #rootBones == 0 then
 		return nil
 	end
 	local settings = smartBoneSettings(rootPart)
@@ -2147,19 +2283,17 @@ local function createSmartBoneController(rootPart)
 		accumulator = 0,
 		trees = {},
 	}
-	for rootName in string.gmatch(rootsRaw, "([^,]+)") do
-		local rootBone = findDescendantBoneByName(rootPart, rootName)
-		if rootBone then
-			local tree = {
-				root = rootBone,
-				rootPart = rootPart,
-				settings = settings,
-				particles = {},
-			}
-			appendSmartBoneParticle(tree, rootBone, 0, 0)
-			if #tree.particles > 1 then
-				table.insert(controller.trees, tree)
-			end
+	for _, rootBone in ipairs(rootBones) do
+		local tree = {
+			root = rootBone,
+			rootPart = rootPart,
+			settings = settings,
+			particles = {},
+			truncated = false,
+		}
+		appendSmartBoneParticle(tree, rootBone, 0, 0)
+		if #tree.particles > 1 then
+			table.insert(controller.trees, tree)
 		end
 	end
 	if #controller.trees == 0 then
@@ -2569,6 +2703,20 @@ local function collectBaseParts(root)
 end
 
 local function countBasePartsLimited(root, limit)
+	limit = tonumber(limit) or 0
+	if limit <= 0 then
+		local count = root:IsA("BasePart") and 1 or 0
+		local startedAt = os.clock()
+		for index, descendant in ipairs(root:GetDescendants()) do
+			if descendant:IsA("BasePart") then
+				count += 1
+			end
+			if index % 250 == 0 then
+				startedAt = yieldIfBudgetSpent(startedAt)
+			end
+		end
+		return count, true
+	end
 	local count = root:IsA("BasePart") and 1 or 0
 	if count > limit then
 		return count, false
@@ -2883,12 +3031,19 @@ local function createNativeSmartBoneControllers(root)
 	if not CONFIG.native_morph_enable_smart_bones then
 		return nil
 	end
+	local maxControllers = tonumber(CONFIG.native_morph_max_smart_bone_controllers) or 0
+	if maxControllers <= 0 then
+		return nil
+	end
 	local controllers = {}
 	for _, part in ipairs(collectBaseParts(root)) do
-		local controller = createSmartBoneController(part)
+		local ok, controller = pcall(createSmartBoneController, part)
+		if not ok then
+			controller = nil
+		end
 		if controller then
 			table.insert(controllers, controller)
-			if #controllers >= CONFIG.native_morph_max_smart_bone_controllers then
+			if #controllers >= maxControllers then
 				break
 			end
 		end
