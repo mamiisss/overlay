@@ -1810,12 +1810,12 @@ Client.room.version=joinResponse.data.current_version or Client.room.version or
 =tryTeleportToRoute(joinResponse.data.teleport_route or joinResponse.data.
 roblox_route,joinResponse.data.room_id)if okTeleport then return joinResponse,
 'teleporting'end log('teleport failed:',teleportError)end end Client.joining=nil
-return joinResponse,joinError end local OverlayBridge={}function OverlayBridge.
-onEvent(callback)if type(callback)~='function'then return function()end end
-table.insert(Client.bridgeSubscribers,callback)local active=true if type(Client.
-nativeMorphCatalog)=='table'and#Client.nativeMorphCatalog>0 then task.spawn(
-function()if active then pcall(callback,'asset.catalog',{assets=Client.
-nativeMorphCatalog,total=#Client.nativeMorphCatalog,source=
+return joinResponse,joinError end local OverlayBridge={}local bridgeListRooms
+function OverlayBridge.onEvent(callback)if type(callback)~='function'then return
+function()end end table.insert(Client.bridgeSubscribers,callback)local active=
+true if type(Client.nativeMorphCatalog)=='table'and#Client.nativeMorphCatalog>0
+then task.spawn(function()if active then pcall(callback,'asset.catalog',{assets=
+Client.nativeMorphCatalog,total=#Client.nativeMorphCatalog,source=
 'native_morph_archive',status=Client.nativeMorphArchiveStatus,path=CONFIG.
 native_morph_archive_path,slots=Client.nativeMorphCatalogSlots})end end)end
 return function()if not active then return end active=false for index,existing
@@ -1827,8 +1827,8 @@ assetCatalog end return{connected=Client.connected,user=Client.user,room=Client.
 room,rooms=Client.cachedRooms,assets=assets,asset_slots=Client.
 nativeMorphCatalogSlots,native_morph_archive={status=Client.
 nativeMorphArchiveStatus,error=Client.nativeMorphArchiveError,path=CONFIG.
-native_morph_archive_path}}end local function installOverlayBridge()local 
-function bridgeListRooms()if not Client.connected then emitBridgeError(
+native_morph_archive_path}}end local function installOverlayBridge()
+bridgeListRooms=function()if not Client.connected then emitBridgeError(
 'runtime.disconnected','Runtime is not connected')return end task.spawn(function
 ()local response,err=awaitRequest('room.list',{})if response==nil then
 emitBridgeError('room.list_failed',tostring(err))return end Client.cachedRooms=
@@ -2085,7 +2085,12 @@ nativeMorphLoadAttempted=false Client.nativeMorphCatalogEmitted=false task.
 spawn(function()loadNativeMorphArchive()end)end OverlayBridge.patchEffect=
 bridgePatchEffect OverlayBridge.previewEffect=bridgePreviewEffect end
 installOverlayBridge()GLOBAL.OverlayBridge=OverlayBridge task.spawn(function()
-loadNativeMorphArchive()end)local function runSession()disconnectWsConnections()
+loadNativeMorphArchive()end)local function refreshBridgeRoomList()if not Client.
+connected then return end task.spawn(function()local response,err=awaitRequest(
+'room.list',{})if response==nil then emitBridgeError('room.list_failed',
+tostring(err))return end Client.cachedRooms=response.data.rooms or{}
+emitBridgeEvent('room.list',{rooms=Client.cachedRooms,online_count=response.data
+.online_count})end)end local function runSession()disconnectWsConnections()
 Client.sessionId=Client.sessionId+1 local sessionId=Client.sessionId Client.
 avatarReadyRoomId=nil local ws=wsConnect(CONFIG.url)if ws==nil then return false
 ,
@@ -2115,41 +2120,42 @@ or 0)if joinResponse==nil and string.find(tostring(joinError),'room.not_found',1
 ,true)then log('previous room missing')Client.room=nil Client.avatarReadyRoomId=
 nil if CONFIG.auto_join_default_room then roomId,resumeFrom,roomError=
 resolveRoom()if roomId==nil then return false,roomError end joinResponse,
-joinError=requestRoomJoin(roomId,resumeFrom or 0)else bridgeListRooms()
+joinError=requestRoomJoin(roomId,resumeFrom or 0)else refreshBridgeRoomList()
 emitBridgeState('ready')joinResponse=nil joinError=nil end end if joinResponse==
 nil then if joinError then return false,'room.join failed: '..tostring(joinError
 )end else if Client.teleporting then return true end log('joined room',Client.
 room.id,'at version',joinResponse.data.current_version)local _,avatarError=
 ensureOwnAvatarEntity(Client.room.id)if avatarError then return false,
 avatarError end emitBridgeState('joined '..tostring(Client.room.id))end else if
-roomError then return false,roomError end bridgeListRooms()emitBridgeState(
-'ready')end task.spawn(function()while Client.running and Client.connected do
-task.wait(Client.heartbeatSeconds*0.8)sendMessage('ping',{client_time_ms=math.
-floor(os.clock()*1000)})if os.clock()-Client.lastServerContact>Client.
-heartbeatSeconds*3 then log('no server contact; forcing reconnect')Client.
-connected=false pcall(function()Client.ws:Close()end)end end end)local
-moveInterval=1/CONFIG.move_hz local moveKeepaliveSeconds=CONFIG.
-move_keepalive_seconds or 10 local lastMoveCFrame=nil local lastMoveRoomId=nil
-local lastMoveEntityId=nil local lastMoveSentAt=0 while Client.running and
-Client.connected do task.wait(moveInterval)local character=LocalPlayer.Character
-local root=character and character:FindFirstChild('HumanoidRootPart')if root and
-Client.room and Client.room.id and Client.roomClosingId~=Client.room.id and
-Client.ownAvatarId and Client.avatarReadyRoomId==Client.room.id then if
-lastMoveRoomId~=Client.room.id or lastMoveEntityId~=Client.ownAvatarId then
-lastMoveCFrame=nil lastMoveRoomId=Client.room.id lastMoveEntityId=Client.
-ownAvatarId end local cf=root.CFrame if not sameCFrameForMove(lastMoveCFrame,cf)
-or os.clock()-lastMoveSentAt>=moveKeepaliveSeconds then lastMoveCFrame=cf
-lastMoveSentAt=os.clock()local rx,ry,rz=cf:ToOrientation()sendMessage(
-'state.move',{room_id=Client.room.id,entity_id=Client.ownAvatarId,transform={
-position={cf.Position.X,cf.Position.Y,cf.Position.Z},rotation={math.deg(rx),math
-.deg(ry),math.deg(rz)}}})end end end return true end GLOBAL.OverlayStop=function
-()Client.running=false Client.connected=false pcall(function()Client.ws:Close()
-end)disconnectWsConnections()disconnectTrackedConnections()clearLocalPreview()
-clearEntities()entityFolder:Destroy()if GLOBAL.OverlayBridge==OverlayBridge then
-GLOBAL.OverlayBridge=nil end log('stopped')end task.spawn(function()local
-backoff=1 while Client.running do log('connecting to',CONFIG.url)local ok,err=
-runSession()Client.connected=false Client.pending={}pcall(function()Client.ws:
-Close()end)disconnectWsConnections()if Client.teleporting then log(
+roomError then return false,roomError end refreshBridgeRoomList()
+emitBridgeState('ready')end task.spawn(function()while Client.running and Client
+.connected do task.wait(Client.heartbeatSeconds*0.8)sendMessage('ping',{
+client_time_ms=math.floor(os.clock()*1000)})if os.clock()-Client.
+lastServerContact>Client.heartbeatSeconds*3 then log(
+'no server contact; forcing reconnect')Client.connected=false pcall(function()
+Client.ws:Close()end)end end end)local moveInterval=1/CONFIG.move_hz local
+moveKeepaliveSeconds=CONFIG.move_keepalive_seconds or 10 local lastMoveCFrame=
+nil local lastMoveRoomId=nil local lastMoveEntityId=nil local lastMoveSentAt=0
+while Client.running and Client.connected do task.wait(moveInterval)local
+character=LocalPlayer.Character local root=character and character:
+FindFirstChild('HumanoidRootPart')if root and Client.room and Client.room.id and
+Client.roomClosingId~=Client.room.id and Client.ownAvatarId and Client.
+avatarReadyRoomId==Client.room.id then if lastMoveRoomId~=Client.room.id or
+lastMoveEntityId~=Client.ownAvatarId then lastMoveCFrame=nil lastMoveRoomId=
+Client.room.id lastMoveEntityId=Client.ownAvatarId end local cf=root.CFrame if
+not sameCFrameForMove(lastMoveCFrame,cf)or os.clock()-lastMoveSentAt>=
+moveKeepaliveSeconds then lastMoveCFrame=cf lastMoveSentAt=os.clock()local rx,ry
+,rz=cf:ToOrientation()sendMessage('state.move',{room_id=Client.room.id,entity_id
+=Client.ownAvatarId,transform={position={cf.Position.X,cf.Position.Y,cf.Position
+.Z},rotation={math.deg(rx),math.deg(ry),math.deg(rz)}}})end end end return true
+end GLOBAL.OverlayStop=function()Client.running=false Client.connected=false
+pcall(function()Client.ws:Close()end)disconnectWsConnections()
+disconnectTrackedConnections()clearLocalPreview()clearEntities()entityFolder:
+Destroy()if GLOBAL.OverlayBridge==OverlayBridge then GLOBAL.OverlayBridge=nil
+end log('stopped')end task.spawn(function()local backoff=1 while Client.running
+do log('connecting to',CONFIG.url)local ok,err=runSession()Client.connected=
+false Client.pending={}pcall(function()Client.ws:Close()end)
+disconnectWsConnections()if Client.teleporting then log(
 'waiting for Roblox teleport')break end if not Client.running then break end if
 ok then backoff=1 log('disconnected; reconnecting')else log('session error:',err
 )backoff=math.min(backoff*2,CONFIG.reconnect_max_delay)end task.wait(backoff)end
