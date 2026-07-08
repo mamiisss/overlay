@@ -1531,14 +1531,39 @@ string.gsub(nextText,'/Female/','/Male/',1)nextText=string.gsub(nextText,
 .gsub(nextText,'%sF$',' M',1)end if string.match(nextText,'%sF%d+$')then return
 string.gsub(nextText,'%sF(%d+)$',' M%1',1)end if string.match(nextText,'F%d*$')
 then return string.gsub(nextText,'F(%d*)$','M%1',1)end return nextText end
-return text end local function nativeAnimationQuery(animation)if type(animation)
-~='table'then return nil end local raw=trimString(animation.native_name or
-animation.animation_name or animation.query or animation.name or animation.
-preset or animation.value)if raw==''then raw=trimString(animation.asset_id)end
-if raw==''then return nil end local lower=string.lower(raw)if lower=='none'or
-lower=='off'or lower=='disabled'or lower=='stop'then return nil end return raw
-end local function ensureNativeAnimationArchiveFile()local path=trimString(
-CONFIG.native_animation_archive_path)if path==''then Client.
+return text end local function animationPairKey(value)local text=string.lower(
+tostring(value or''))text=string.gsub(text,'\\','/')text=string.gsub(text,
+'^male/','')text=string.gsub(text,'^female/','')local prefix=''local leaf=text
+local slash=string.match(text,'^.*()/')if slash then prefix=string.sub(text,1,
+slash)leaf=string.sub(text,slash+1)end leaf=string.gsub(leaf,'%s+female$','')
+leaf=string.gsub(leaf,'%s+male$','')leaf=string.gsub(leaf,'[%s_%-%+]+[mf](%d*)$'
+,'#%1')leaf=string.gsub(leaf,'[mf](%d*)$','#%1')leaf=string.gsub(leaf,'[^%w#]+',
+'')prefix=string.gsub(prefix,'[^%w/#]+','')return prefix..leaf end local 
+function applyNativeAnimationCounterparts(assets)if type(assets)~='table'then
+return assets end local groups={}local byName={}for _,asset in ipairs(assets)do
+local displayName=trimString(asset.display_name or asset.name)if displayName~=''
+then byName[displayName]=asset local role=animationRoleFromName(displayName)if
+role=='any'then role=animationRoleFromName(asset.name)end asset.role=role asset.
+counterpart_name=nil asset.counterpart_asset_id=nil if role=='male'or role==
+'female'then local key=animationPairKey(displayName)groups[key]=groups[key]or{
+male={},female={}}table.insert(groups[key][role],asset)end end end for _,asset
+in ipairs(assets)do local role=asset.role if role=='male'or role=='female'then
+local displayName=trimString(asset.display_name or asset.name)local group=groups
+[animationPairKey(displayName)]local oppositeList=group and group[role=='male'
+and'female'or'male']or nil local counterpart=nil local preferredName=
+counterpartAnimationName(displayName)if preferredName~=displayName then
+counterpart=byName[preferredName]end if counterpart==nil and type(oppositeList)
+=='table'and#oppositeList>0 then counterpart=oppositeList[1]end if counterpart
+and counterpart~=asset then asset.counterpart_name=trimString(counterpart.
+display_name or counterpart.name)asset.counterpart_asset_id=counterpart.asset_id
+end end end return assets end local function nativeAnimationQuery(animation)if
+type(animation)~='table'then return nil end local raw=trimString(animation.
+native_name or animation.animation_name or animation.query or animation.name or
+animation.preset or animation.value)if raw==''then raw=trimString(animation.
+asset_id)end if raw==''then return nil end local lower=string.lower(raw)if lower
+=='none'or lower=='off'or lower=='disabled'or lower=='stop'then return nil end
+return raw end local function ensureNativeAnimationArchiveFile()local path=
+trimString(CONFIG.native_animation_archive_path)if path==''then Client.
 nativeAnimationArchiveStatus='path_required'Client.nativeAnimationArchiveError=
 'Native animation archive path is empty'return nil,Client.
 nativeAnimationArchiveError end local isfileFn=getGlobalFunction('isfile')if not
@@ -1619,10 +1644,11 @@ counterpartName or nil,looped=item.looped==true})table.insert(index,{instance=
 nil,normalizedPath=normalizeAnimationName(displayName),normalizedName=
 normalizeAnimationName(item.name or displayName),displayName=displayName,role=
 role})end end end if#assets==0 then Client.nativeAnimationManifestLoaded=true
-return nil end Client.nativeAnimationManifestLoaded=true Client.
-nativeAnimationManifestRevision=manifest.revision applyNativeAnimationCatalog(
-assets,index,'native_animation_manifest','manifest')return assets end local 
-function writeNativeAnimationManifest(assets)local path=trimString(CONFIG.
+return nil end applyNativeAnimationCounterparts(assets)Client.
+nativeAnimationManifestLoaded=true Client.nativeAnimationManifestRevision=
+manifest.revision applyNativeAnimationCatalog(assets,index,
+'native_animation_manifest','manifest')return assets end local function 
+writeNativeAnimationManifest(assets)local path=trimString(CONFIG.
 native_animation_manifest_path)local writefileFn=getGlobalFunction('writefile')
 if path==''or not writefileFn then return end local folder=parentFolder(path)if
 folder~=''then ensureFolder(folder)end local manifest={revision=tostring(os.
@@ -1652,19 +1678,19 @@ addSequence(archive)end for indexNumber,descendant in ipairs(archive:
 GetDescendants())do if descendant:IsA('KeyframeSequence')then addSequence(
 descendant)end if indexNumber%100==0 then startedAt=yieldIfBudgetSpent(startedAt
 )end end table.sort(assets,function(a,b)return tostring(a.display_name):lower()<
-tostring(b.display_name):lower()end)Client.nativeAnimationCatalog=assets
-writeNativeAnimationManifest(assets)applyNativeAnimationCatalog(assets,index,
-'native_animation_archive',Client.nativeAnimationArchiveStatus)end function
-loadNativeAnimationArchive()if typeof(Client.nativeAnimationArchive)=='Instance'
-then emitNativeAnimationCatalog(Client.nativeAnimationArchive)return Client.
-nativeAnimationArchive end if typeof(GLOBAL.OverlayNativeAnimationArchive)==
-'Instance'then Client.nativeAnimationArchive=GLOBAL.
-OverlayNativeAnimationArchive emitNativeAnimationCatalog(Client.
-nativeAnimationArchive)return Client.nativeAnimationArchive end if Client.
-nativeAnimationLoadAttempted then return Client.nativeAnimationArchive end
-Client.nativeAnimationLoadAttempted=true if Client.nativeAnimationArchiveLoading
-then return Client.nativeAnimationArchive end Client.
-nativeAnimationArchiveLoading=true local path,pathError=
+tostring(b.display_name):lower()end)applyNativeAnimationCounterparts(assets)
+Client.nativeAnimationCatalog=assets writeNativeAnimationManifest(assets)
+applyNativeAnimationCatalog(assets,index,'native_animation_archive',Client.
+nativeAnimationArchiveStatus)end function loadNativeAnimationArchive()if typeof(
+Client.nativeAnimationArchive)=='Instance'then emitNativeAnimationCatalog(Client
+.nativeAnimationArchive)return Client.nativeAnimationArchive end if typeof(
+GLOBAL.OverlayNativeAnimationArchive)=='Instance'then Client.
+nativeAnimationArchive=GLOBAL.OverlayNativeAnimationArchive
+emitNativeAnimationCatalog(Client.nativeAnimationArchive)return Client.
+nativeAnimationArchive end if Client.nativeAnimationLoadAttempted then return
+Client.nativeAnimationArchive end Client.nativeAnimationLoadAttempted=true if
+Client.nativeAnimationArchiveLoading then return Client.nativeAnimationArchive
+end Client.nativeAnimationArchiveLoading=true local path,pathError=
 ensureNativeAnimationArchiveFile()local getcustomassetFn=getGlobalFunction(
 'getcustomasset')if not path or not getcustomassetFn or not game.GetObjects then
 Client.nativeAnimationArchiveLoading=false if pathError then log(
@@ -1735,13 +1761,13 @@ descendant:IsA('Motor6D')or descendant:IsA('Motor')then table.insert(motors,
 descendant)end end local rig={root=root,partList={},partListByName={},originalC1
 ={}}local visited={}local lineNumber=1 local function connectedParts(item)local
 parts={}local joints={}for _,motor in ipairs(motors)do local
-__DARKLUA_CONTINUE_118=false repeat if(motor.Part1 and motor.Part1.Name==
+__DARKLUA_CONTINUE_120=false repeat if(motor.Part1 and motor.Part1.Name==
 'ProxyPart')or(motor.Part0 and motor.Part0.Name=='ProxyPart')then
-__DARKLUA_CONTINUE_118=true break elseif motor.Part0==item.part and motor.Part1
+__DARKLUA_CONTINUE_120=true break elseif motor.Part0==item.part and motor.Part1
 ~=nil and not visited[motor.Part1]then table.insert(parts,motor.Part1)table.
 insert(joints,motor)elseif motor.Part1==item.part and motor.Part0~=nil and not
 visited[motor.Part0]then table.insert(parts,motor.Part0)table.insert(joints,
-motor)end __DARKLUA_CONTINUE_118=true until true if not __DARKLUA_CONTINUE_118
+motor)end __DARKLUA_CONTINUE_120=true until true if not __DARKLUA_CONTINUE_120
 then break end end return parts,joints end local function visit(item)visited[
 item.part]=true rig.partList[item.part]=item rig.partListByName[item.name]=item
 if item.motor then rig.originalC1[item.motor]=item.motor.C1 end local parts,
@@ -1799,98 +1825,100 @@ fallback.Z)end return fallback end local function defaultSeatOffset(role)role=
 string.lower(tostring(role or''))if role=='male'or role=='m'then return Vector3.
 new(-0.9,0,0)end if role=='female'or role=='f'then return Vector3.new(0.9,0,0)
 end return Vector3.zero end local function clearNativeAnimationSeat(handle)if
-handle==nil then return end handle.nativeAnimationSeatLock=nil if handle.
-nativeAnimationSeat then pcall(function()handle.nativeAnimationSeat:Destroy()end
-)handle.nativeAnimationSeat=nil end end local function 
-updateNativeAnimationSeatLock(handle,character)local lock=handle and handle.
-nativeAnimationSeatLock if type(lock)~='table'or character==nil then return end
-local root=character:FindFirstChild('HumanoidRootPart')if root==nil then return
-end local target=lock.rootCFrame if typeof(target)=='CFrame'then if(root.
-Position-target.Position).Magnitude>0.35 then pcall(function()root.CFrame=target
-end)end end pcall(function()root.AssemblyLinearVelocity=Vector3.zero root.
-AssemblyAngularVelocity=Vector3.zero end)end local function 
-applyNativeAnimationSeat(handle,character,animation)if handle==nil or character
-==nil or type(animation)~='table'then return end local seat=type(animation.seat)
-=='table'and animation.seat or nil if seat==nil or seat.enabled==false then
-clearNativeAnimationSeat(handle)return end local root=character:FindFirstChild(
-'HumanoidRootPart')local humanoid=character:FindFirstChildOfClass('Humanoid')if
-root==nil or humanoid==nil then return end local origin=type(seat.origin)==
-'table'and transformToCFrame(seat.origin)or root.CFrame local offset=seatVector(
-seat.offset,defaultSeatOffset(seat.role or animation.role))local rootCFrame=
-origin*CFrame.new(offset)local seatCFrame=rootCFrame*CFrame.new(0,-2.1,0)local
-seatPart=handle.nativeAnimationSeat if seatPart==nil or seatPart.Parent==nil
-then seatPart=Instance.new('Seat')seatPart.Name='OverlaySyncSeat'seatPart.Size=
-Vector3.new(2,0.35,2)seatPart.Transparency=1 seatPart.CanCollide=false seatPart.
-Anchored=true pcall(function()seatPart.Disabled=false end)seatPart.Parent=handle
-.folder or entityFolder handle.nativeAnimationSeat=seatPart end seatPart.CFrame=
-seatCFrame handle.nativeAnimationSeatLock={rootCFrame=rootCFrame,seatCFrame=
-seatCFrame}pcall(function()seatPart:Sit(humanoid)end)
-updateNativeAnimationSeatLock(handle,character)end function NativeAnimation.
-clear(handle)if handle==nil or handle.nativeAnimation==nil then
-clearNativeAnimationSeat(handle)return end local state=handle.nativeAnimation if
-state.connection then pcall(function()state.connection:Disconnect()end)end if
-type(state.originalC1)=='table'then for motor,c1 in pairs(state.originalC1)do if
-motor and motor.Parent then pcall(function()motor.C1=c1 motor.CurrentAngle=0 end
-)end end end if state.animateScript and state.animateWasDisabled~=nil and state.
-animateScript.Parent then pcall(function()state.animateScript.Disabled=state.
-animateWasDisabled end)end clearNativeAnimationSeat(handle)handle.
-nativeAnimation=nil end local function estimatedServerNowMs()if tonumber(Client.
-serverTimeOffsetMs)then return os.clock()*1000+Client.serverTimeOffsetMs end
-return nil end function NativeAnimation.apply(handle,character,components,
-entityId)local animation=components and components.animation local query=
-nativeAnimationQuery(animation)if query==nil then return false end local
-sequence=findNativeAnimationByName(query)if sequence==nil then return false end
-local speed=tonumber(animation.speed or animation.playback_speed or animation.
-playbackSpeed)or 1 speed=math.clamp(speed,0,8)local startedAt=tonumber(animation
-.started_at_server_ms)local key=tostring(sequence)..'|'..tostring(startedAt or''
-)..'|'..tostring(animation.looped)if handle.nativeAnimation and handle.
-nativeAnimation.key==key and handle.nativeAnimation.character==character then
-handle.nativeAnimation.speed=speed applyNativeAnimationSeat(handle,character,
-animation)return true end NativeAnimation.clear(handle)local rig=
-buildNativeAnimationRig(character)if rig==nil then emitBridgeEvent(
-'animation.load_failed',{entity_id=entityId,name=sequence.Name,reason=
-'rig_not_found'})return true end local clip=buildNativeAnimationClip(sequence,
-rig)if animation.looped~=nil then clip.looped=animation.looped~=false end local
-state={key=key,character=character,sequence=sequence,clip=clip,rig=rig,speed=
-speed,time=0,startClock=os.clock(),startedAtServerMs=startedAt,firstFrame=true,
-originalC1=rig.originalC1}local animateScript=character:FindFirstChild('Animate'
-)if character==LocalPlayer.Character and animateScript then state.animateScript=
-animateScript state.animateWasDisabled=animateScript.Disabled pcall(function()
-animateScript.Disabled=true end)local humanoid=character:FindFirstChildOfClass(
-'Humanoid')if humanoid then for _,track in ipairs(humanoid:
-GetPlayingAnimationTracks())do pcall(function()track:Stop(0.1)end)end end end
-state.connection=RunService.Stepped:Connect(function(_,delta)if handle.
-nativeAnimation~=state or character.Parent==nil then NativeAnimation.clear(
-handle)return end local timePosition local serverNow=state.startedAtServerMs and
-estimatedServerNowMs()or nil if serverNow then timePosition=math.max(0,((
-serverNow-state.startedAtServerMs)/1000)*state.speed)else state.time=state.time+
-(tonumber(delta)or(1/60))*state.speed timePosition=state.time end if clip.looped
-then timePosition=timePosition%clip.length elseif timePosition>=clip.length then
-NativeAnimation.clear(handle)return end local alpha=math.clamp(timePosition/clip
-.length,0,1)if state.firstFrame and timePosition<0.1 then alpha=0.75 end state.
-firstFrame=false for part,item in pairs(rig.partList)do if item.motor and item.
-motor.Parent then local target=getNativeMotorC1(clip,item,timePosition)pcall(
-function()item.motor.C1=item.motor.C1:Lerp(target,alpha)end)end end
-updateNativeAnimationSeatLock(handle,character)end)applyNativeAnimationSeat(
-handle,character,animation)handle.nativeAnimation=state handle.
-animationUnsupportedKey=nil return true end local function appearanceUserIdFor(
-components)local avatar=components and components.avatar if type(avatar)~=
-'table'then return nil end local userId=tonumber(avatar.appearance_user_id)if
-userId and userId>0 then return math.floor(userId)end return nil end local 
-function restoreAppearanceSourceCharacter(handle)if handle==nil or type(handle.
-appearanceHiddenParts)~='table'then return end for _,item in ipairs(handle.
-appearanceHiddenParts)do local instance=item.instance if instance and instance.
-Parent then pcall(function()instance.Transparency=item.transparency end)if item.
-localTransparencyModifier~=nil then pcall(function()instance.
-LocalTransparencyModifier=item.localTransparencyModifier end)end end end handle.
-appearanceHiddenParts=nil handle.appearanceHiddenCharacter=nil end local 
-function characterFromAnchor(anchorPart)local current=anchorPart while current
-and current~=workspace do if current:IsA('Model')and current:
-FindFirstChildOfClass('Humanoid')then return current end current=current.Parent
-end return nil end local function hideAppearanceSourceCharacter(handle,
-anchorPart)if handle==nil or anchorPart==nil then return end local character=
-characterFromAnchor(anchorPart)if character==nil then
-restoreAppearanceSourceCharacter(handle)return end if handle.
+handle==nil then return end if handle.nativeAnimationSeatHumanoid and handle.
+nativeAnimationSeatAutoRotate~=nil then pcall(function()handle.
+nativeAnimationSeatHumanoid.AutoRotate=handle.nativeAnimationSeatAutoRotate end)
+end handle.nativeAnimationSeatHumanoid=nil handle.nativeAnimationSeatAutoRotate=
+nil handle.nativeAnimationSeatKey=nil if handle.nativeAnimationSeat then pcall(
+function()handle.nativeAnimationSeat:Destroy()end)handle.nativeAnimationSeat=nil
+end end local function applyNativeAnimationSeat(handle,character,animation)if
+handle==nil or character==nil or type(animation)~='table'then return end local
+seat=type(animation.seat)=='table'and animation.seat or nil if seat==nil or seat
+.enabled==false then clearNativeAnimationSeat(handle)return end if character~=
+LocalPlayer.Character then clearNativeAnimationSeat(handle)return end local root
+=character:FindFirstChild('HumanoidRootPart')local humanoid=character:
+FindFirstChildOfClass('Humanoid')if root==nil or humanoid==nil then return end
+local origin=type(seat.origin)=='table'and transformToCFrame(seat.origin)or root
+.CFrame local offset=seatVector(seat.offset,defaultSeatOffset(seat.role or
+animation.role))local seatCFrame=origin*CFrame.new(offset)*CFrame.new(0,0.5,0)
+local seatKey=tostring(seatCFrame)local seatPart=handle.nativeAnimationSeat if
+seatPart==nil or seatPart.Parent==nil then seatPart=Instance.new('Seat')seatPart
+.Name='OverlaySyncSeat'seatPart.Size=Vector3.new(2,0.35,2)seatPart.Transparency=
+1 seatPart.CanCollide=false seatPart.Anchored=true pcall(function()seatPart.
+Disabled=false end)seatPart.Parent=handle.folder or entityFolder handle.
+nativeAnimationSeat=seatPart end seatPart.CFrame=seatCFrame if handle.
+nativeAnimationSeatHumanoid~=humanoid then if handle.nativeAnimationSeatHumanoid
+and handle.nativeAnimationSeatAutoRotate~=nil then pcall(function()handle.
+nativeAnimationSeatHumanoid.AutoRotate=handle.nativeAnimationSeatAutoRotate end)
+end handle.nativeAnimationSeatHumanoid=humanoid handle.
+nativeAnimationSeatAutoRotate=humanoid.AutoRotate end pcall(function()humanoid:
+UnequipTools()end)pcall(function()humanoid.AutoRotate=false end)if handle.
+nativeAnimationSeatKey~=seatKey or humanoid.SeatPart~=seatPart then handle.
+nativeAnimationSeatKey=seatKey pcall(function()seatPart:Sit(humanoid)end)end end
+function NativeAnimation.clear(handle)if handle==nil or handle.nativeAnimation==
+nil then clearNativeAnimationSeat(handle)return end local state=handle.
+nativeAnimation if state.connection then pcall(function()state.connection:
+Disconnect()end)end if type(state.originalC1)=='table'then for motor,c1 in
+pairs(state.originalC1)do if motor and motor.Parent then pcall(function()motor.
+C1=c1 motor.CurrentAngle=0 end)end end end if state.animateScript and state.
+animateWasDisabled~=nil and state.animateScript.Parent then pcall(function()
+state.animateScript.Disabled=state.animateWasDisabled end)end
+clearNativeAnimationSeat(handle)handle.nativeAnimation=nil end local function 
+estimatedServerNowMs()if tonumber(Client.serverTimeOffsetMs)then return os.
+clock()*1000+Client.serverTimeOffsetMs end return nil end function
+NativeAnimation.apply(handle,character,components,entityId)local animation=
+components and components.animation local query=nativeAnimationQuery(animation)
+if query==nil then return false end local sequence=findNativeAnimationByName(
+query)if sequence==nil then return false end local speed=tonumber(animation.
+speed or animation.playback_speed or animation.playbackSpeed)or 1 speed=math.
+clamp(speed,0,8)local startedAt=tonumber(animation.started_at_server_ms)local
+key=tostring(sequence)..'|'..tostring(startedAt or'')..'|'..tostring(animation.
+looped)if handle.nativeAnimation and handle.nativeAnimation.key==key and handle.
+nativeAnimation.character==character then handle.nativeAnimation.speed=speed
+applyNativeAnimationSeat(handle,character,animation)return true end
+NativeAnimation.clear(handle)local rig=buildNativeAnimationRig(character)if rig
+==nil then emitBridgeEvent('animation.load_failed',{entity_id=entityId,name=
+sequence.Name,reason='rig_not_found'})return true end local clip=
+buildNativeAnimationClip(sequence,rig)if animation.looped~=nil then clip.looped=
+animation.looped~=false end local state={key=key,character=character,sequence=
+sequence,clip=clip,rig=rig,speed=speed,time=0,startClock=os.clock(),
+startedAtServerMs=startedAt,firstFrame=true,originalC1=rig.originalC1}local
+animateScript=character:FindFirstChild('Animate')if character==LocalPlayer.
+Character and animateScript then state.animateScript=animateScript state.
+animateWasDisabled=animateScript.Disabled pcall(function()animateScript.Disabled
+=true end)local humanoid=character:FindFirstChildOfClass('Humanoid')if humanoid
+then for _,track in ipairs(humanoid:GetPlayingAnimationTracks())do pcall(
+function()track:Stop(0.1)end)end end end state.connection=RunService.Stepped:
+Connect(function(_,delta)if handle.nativeAnimation~=state or character.Parent==
+nil then NativeAnimation.clear(handle)return end local timePosition local
+serverNow=state.startedAtServerMs and estimatedServerNowMs()or nil if serverNow
+then timePosition=math.max(0,((serverNow-state.startedAtServerMs)/1000)*state.
+speed)else state.time=state.time+(tonumber(delta)or(1/60))*state.speed
+timePosition=state.time end if clip.looped then timePosition=timePosition%clip.
+length elseif timePosition>=clip.length then NativeAnimation.clear(handle)return
+end local alpha=math.clamp(timePosition/clip.length,0,1)if state.firstFrame and
+timePosition<0.1 then alpha=0.75 end state.firstFrame=false for part,item in
+pairs(rig.partList)do if item.motor and item.motor.Parent then local target=
+getNativeMotorC1(clip,item,timePosition)pcall(function()item.motor.C1=item.motor
+.C1:Lerp(target,alpha)end)end end end)applyNativeAnimationSeat(handle,character,
+animation)handle.nativeAnimation=state handle.animationUnsupportedKey=nil return
+true end local function appearanceUserIdFor(components)local avatar=components
+and components.avatar if type(avatar)~='table'then return nil end local userId=
+tonumber(avatar.appearance_user_id)if userId and userId>0 then return math.
+floor(userId)end return nil end local function restoreAppearanceSourceCharacter(
+handle)if handle==nil or type(handle.appearanceHiddenParts)~='table'then return
+end for _,item in ipairs(handle.appearanceHiddenParts)do local instance=item.
+instance if instance and instance.Parent then pcall(function()instance.
+Transparency=item.transparency end)if item.localTransparencyModifier~=nil then
+pcall(function()instance.LocalTransparencyModifier=item.
+localTransparencyModifier end)end end end handle.appearanceHiddenParts=nil
+handle.appearanceHiddenCharacter=nil end local function characterFromAnchor(
+anchorPart)local current=anchorPart while current and current~=workspace do if
+current:IsA('Model')and current:FindFirstChildOfClass('Humanoid')then return
+current end current=current.Parent end return nil end local function 
+hideAppearanceSourceCharacter(handle,anchorPart)if handle==nil or anchorPart==
+nil then return end local character=characterFromAnchor(anchorPart)if character
+==nil then restoreAppearanceSourceCharacter(handle)return end if handle.
 appearanceHiddenCharacter==character then return end
 restoreAppearanceSourceCharacter(handle)handle.appearanceHiddenCharacter=
 character handle.appearanceHiddenParts={}for _,descendant in ipairs(character:
@@ -2494,21 +2522,26 @@ payload.partner_user_id or payload.partnerUserId)if partnerUserId~=''then
 animation.partner_user_id=partnerUserId elseif Client.syncPartnerUserId then
 animation.partner_user_id=Client.syncPartnerUserId end if payload.seat_enabled==
 true then animation.seat={enabled=true,role=animation.role,origin=
-localRootTransform()}end if directAnimationId then animation.animation_id=
-directAnimationId end if asset then animation.asset_id=asset.asset_id animation.
-asset_type=asset.type end local response,err=awaitRequest('cmd.animation.play',{
-room_id=roomId,entity_id=Client.ownAvatarId,animation=animation})if response==
-nil then emitBridgeError('animation.play_failed',tostring(err))return end
-emitBridgeEvent('animation.played',{room_id=roomId,entity_id=response.data.
-entity_id,asset_id=asset and asset.asset_id or nil,name=animation.name})
-emitBridgeState('animation played: '..tostring(animation.name))end)end local 
-function bridgeStopAnimation(payload)payload=bridgePayloadTable(payload)local
-roomId=bridgeRequireRoom('stopping animation')if not roomId then return end task
-.spawn(function()local partnerUserId=trimString(payload.partner_user_id or
-payload.partnerUserId)if partnerUserId==''then partnerUserId=Client.
-syncPartnerUserId end local response,err=awaitRequest('cmd.animation.stop',{
-room_id=roomId,entity_id=Client.ownAvatarId,sync_enabled=payload.sync_enabled==
-true,partner_user_id=partnerUserId})if response==nil then emitBridgeError(
+localRootTransform()}end local counterpartName=trimString(payload.
+counterpart_name or payload.counterpartName)if counterpartName~=''then animation
+.counterpart_name=counterpartName end local counterpartAssetId=trimString(
+payload.counterpart_asset_id or payload.counterpartAssetId)if counterpartAssetId
+~=''then animation.counterpart_asset_id=counterpartAssetId end if
+directAnimationId then animation.animation_id=directAnimationId end if asset
+then animation.asset_id=asset.asset_id animation.asset_type=asset.type end local
+response,err=awaitRequest('cmd.animation.play',{room_id=roomId,entity_id=Client.
+ownAvatarId,animation=animation})if response==nil then emitBridgeError(
+'animation.play_failed',tostring(err))return end emitBridgeEvent(
+'animation.played',{room_id=roomId,entity_id=response.data.entity_id,asset_id=
+asset and asset.asset_id or nil,name=animation.name})emitBridgeState(
+'animation played: '..tostring(animation.name))end)end local function 
+bridgeStopAnimation(payload)payload=bridgePayloadTable(payload)local roomId=
+bridgeRequireRoom('stopping animation')if not roomId then return end task.spawn(
+function()local partnerUserId=trimString(payload.partner_user_id or payload.
+partnerUserId)if partnerUserId==''then partnerUserId=Client.syncPartnerUserId
+end local response,err=awaitRequest('cmd.animation.stop',{room_id=roomId,
+entity_id=Client.ownAvatarId,sync_enabled=payload.sync_enabled==true,
+partner_user_id=partnerUserId})if response==nil then emitBridgeError(
 'animation.stop_failed',tostring(err))return end emitBridgeEvent(
 'animation.stopped',{room_id=roomId,entity_id=response.data.entity_id})
 emitBridgeState('animation stopped')end)end local function bridgeRequestSync(
@@ -3091,10 +3124,18 @@ function OverlayUI:_selectedAnimationName()
 	return DEFAULT_ANIMATIONS[1]
 end
 
-function OverlayUI:_selectedAnimationRole()
+function OverlayUI:_selectedAnimationAsset()
 	local selected = self.State.SelectedAnimation
 	if type(selected) == "string" and self.AnimationById[selected] then
-		local role = string.lower(tostring(self.AnimationById[selected].role or "any"))
+		return self.AnimationById[selected]
+	end
+	return nil
+end
+
+function OverlayUI:_selectedAnimationRole()
+	local animation = self:_selectedAnimationAsset()
+	if animation then
+		local role = string.lower(tostring(animation.role or "any"))
 		if role == "male" then
 			return "Male"
 		elseif role == "female" then
@@ -4015,6 +4056,7 @@ function OverlayUI:_buildAnimation()
 			local syncToggle = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationSync
 			local seatToggle = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationSeat
 			local value = trimString(asset and asset.Value or "")
+			local selectedAnimation = self:_selectedAnimationAsset()
 			self:_emit("cmd.animation.play", {
 				name = self:_selectedAnimationName(),
 				intensity = intensity and intensity.Value or 50,
@@ -4024,6 +4066,8 @@ function OverlayUI:_buildAnimation()
 				sync_enabled = syncToggle and syncToggle.Value == true,
 				seat_enabled = seatToggle and seatToggle.Value == true,
 				partner_user_id = self:_selectedMemberId(),
+				counterpart_name = selectedAnimation and selectedAnimation.counterpart_name or nil,
+				counterpart_asset_id = selectedAnimation and selectedAnimation.counterpart_asset_id or nil,
 				value = value,
 			})
 		end,
