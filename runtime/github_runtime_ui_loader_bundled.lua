@@ -41,7 +41,7 @@ local CONFIG = {
 	asset_cache_folder = "overlay-cache/assets",
 	asset_max_bytes = 32 * 1024 * 1024,
 	asset_require_hash_verification = false,
-	asset_catalog_url = nil,
+	asset_catalog_url = "https://raw.githubusercontent.com/mamiisss/overlay/main/descriptors/catalog.json",
 	native_morph_archive_path = "overlay-native-morph-tests/morphlar.rbxm",
 }
 
