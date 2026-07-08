@@ -15,9 +15,9 @@ native_morph_archive_max_bytes=128*1024*1024,native_animation_archive_path=
 native_animation_archive_max_bytes=96*1024*1024,native_animation_manifest_path=
 'overlay-native-animation-tests/anims_manifest.json',native_animation_autoload=
 false,native_morph_max_base_parts=2500,native_morph_enable_smart_bones=true,
-native_morph_infer_smart_bone_roots=true,native_morph_max_smart_bone_controllers
-=6,native_morph_max_smart_bone_particles=160,
-native_morph_smart_bone_frame_budget_seconds=0.003,
+native_morph_infer_smart_bone_roots=false,
+native_morph_max_smart_bone_controllers=6,native_morph_max_smart_bone_particles=
+160,native_morph_smart_bone_frame_budget_seconds=0.003,
 native_morph_operation_budget_seconds=0.008}local HttpService=game:GetService(
 'HttpService')local Players=game:GetService('Players')local RunService=game:
 GetService('RunService')local TeleportService=game:GetService('TeleportService')
@@ -1838,55 +1838,34 @@ fallback.Z)end return fallback end local function defaultSeatOffset(role)role=
 string.lower(tostring(role or''))if role=='male'or role=='m'then return Vector3.
 new(-0.9,0,0)end if role=='female'or role=='f'then return Vector3.new(0.9,0,0)
 end return Vector3.zero end local function clearNativeAnimationSeat(handle)if
-handle==nil then return end if type(handle.nativeAnimationNoCollides)=='table'
-then for _,constraint in ipairs(handle.nativeAnimationNoCollides)do if
-constraint and constraint.Parent then pcall(function()constraint:Destroy()end)
-end end end handle.nativeAnimationNoCollides=nil handle.
-nativeAnimationNoCollisionKey=nil local humanoid=handle.
-nativeAnimationSeatHumanoid local seatPart=handle.nativeAnimationSeat if handle.
-nativeAnimationSeatHumanoid and handle.nativeAnimationSeatAutoRotate~=nil then
-pcall(function()handle.nativeAnimationSeatHumanoid.AutoRotate=handle.
-nativeAnimationSeatAutoRotate end)end if humanoid and humanoid.Parent and
-seatPart and humanoid.SeatPart==seatPart then pcall(function()humanoid.Sit=false
-end)end handle.nativeAnimationSeatHumanoid=nil handle.
-nativeAnimationSeatAutoRotate=nil handle.nativeAnimationSeatKey=nil handle.
-nativeAnimationSeatAttempt=nil if handle.nativeAnimationSeat then pcall(function
-()handle.nativeAnimationSeat:Destroy()end)handle.nativeAnimationSeat=nil end end
-local function addNoCollision(handle,part0,part1)if part0==nil or part1==nil or
-part0==part1 then return end if not part0:IsA('BasePart')or not part1:IsA(
-'BasePart')then return end local constraint=Instance.new('NoCollisionConstraint'
-)constraint.Name='OverlaySeatNoCollision'constraint.Part0=part0 constraint.Part1
-=part1 constraint.Parent=part0 handle.nativeAnimationNoCollides=handle.
-nativeAnimationNoCollides or{}table.insert(handle.nativeAnimationNoCollides,
-constraint)end local function configureNativeSeatNoCollision(handle,character,
-seatPart)if handle==nil or character==nil or seatPart==nil then return end if
-type(handle.nativeAnimationNoCollides)=='table'then for _,constraint in ipairs(
-handle.nativeAnimationNoCollides)do if constraint and constraint.Parent then
-pcall(function()constraint:Destroy()end)end end end handle.
-nativeAnimationNoCollides={}for _,ownPart in ipairs(character:GetDescendants())
-do if ownPart:IsA('BasePart')then addNoCollision(handle,ownPart,seatPart)for _,
-player in ipairs(Players:GetPlayers())do local otherCharacter=player.Character
-if otherCharacter and otherCharacter~=character then for _,otherPart in ipairs(
-otherCharacter:GetDescendants())do if otherPart:IsA('BasePart')then
-addNoCollision(handle,ownPart,otherPart)end end end end end end end local 
-function forceSitNativeAnimationSeat(handle,character,humanoid,root,seatPart,
-seatCFrame,seatKey)handle.nativeAnimationSeatAttempt=(handle.
-nativeAnimationSeatAttempt or 0)+1 local attemptToken=handle.
-nativeAnimationSeatAttempt task.spawn(function()for attempt=1,10 do if handle.
-nativeAnimationSeatAttempt~=attemptToken or handle.nativeAnimationSeat~=seatPart
-or character~=LocalPlayer.Character or character.Parent==nil or humanoid.Parent
-==nil or root.Parent==nil or seatPart.Parent==nil then return end pcall(function
-()root.Anchored=false root.AssemblyLinearVelocity=Vector3.zero root.
-AssemblyAngularVelocity=Vector3.zero root.CFrame=seatCFrame*CFrame.new(0,2.35,0)
-end)pcall(function()humanoid.Sit=false end)task.wait()pcall(function()seatPart:
-Sit(humanoid)end)pcall(function()humanoid.Sit=true end)if humanoid.SeatPart==
-seatPart then handle.nativeAnimationSeatKey=seatKey return end task.wait(0.08)
-end end)end local function applyNativeAnimationSeat(handle,character,animation)
-if handle==nil or character==nil or type(animation)~='table'then return end
-local seat=type(animation.seat)=='table'and animation.seat or nil if seat==nil
-or seat.enabled==false then clearNativeAnimationSeat(handle)return end if
-character~=LocalPlayer.Character then clearNativeAnimationSeat(handle)return end
-local root=character:FindFirstChild('HumanoidRootPart')local humanoid=character:
+handle==nil then return end local humanoid=handle.nativeAnimationSeatHumanoid
+local seatPart=handle.nativeAnimationSeat if handle.nativeAnimationSeatHumanoid
+and handle.nativeAnimationSeatAutoRotate~=nil then pcall(function()handle.
+nativeAnimationSeatHumanoid.AutoRotate=handle.nativeAnimationSeatAutoRotate end)
+end if humanoid and humanoid.Parent and seatPart and humanoid.SeatPart==seatPart
+then pcall(function()humanoid.Sit=false end)end handle.
+nativeAnimationSeatHumanoid=nil handle.nativeAnimationSeatAutoRotate=nil handle.
+nativeAnimationSeatKey=nil handle.nativeAnimationSeatAttempt=nil if handle.
+nativeAnimationSeat then pcall(function()handle.nativeAnimationSeat:Destroy()end
+)handle.nativeAnimationSeat=nil end end local function 
+forceSitNativeAnimationSeat(handle,character,humanoid,root,seatPart,seatCFrame,
+seatKey)handle.nativeAnimationSeatAttempt=(handle.nativeAnimationSeatAttempt or
+0)+1 local attemptToken=handle.nativeAnimationSeatAttempt task.spawn(function()
+for attempt=1,3 do if handle.nativeAnimationSeatAttempt~=attemptToken or handle.
+nativeAnimationSeat~=seatPart or character~=LocalPlayer.Character or character.
+Parent==nil or humanoid.Parent==nil or root.Parent==nil or seatPart.Parent==nil
+then return end if attempt==1 then pcall(function()root.Anchored=false root.
+AssemblyLinearVelocity=Vector3.zero root.AssemblyAngularVelocity=Vector3.zero
+root.CFrame=seatCFrame*CFrame.new(0,2.25,0)end)task.wait()end pcall(function()
+seatPart:Sit(humanoid)end)pcall(function()humanoid.Sit=true end)if humanoid.
+SeatPart==seatPart then handle.nativeAnimationSeatKey=seatKey return end task.
+wait(0.05)end handle.nativeAnimationSeatKey=seatKey end)end local function 
+applyNativeAnimationSeat(handle,character,animation)if handle==nil or character
+==nil or type(animation)~='table'then return end local seat=type(animation.seat)
+=='table'and animation.seat or nil if seat==nil or seat.enabled==false then
+clearNativeAnimationSeat(handle)return end if character~=LocalPlayer.Character
+then clearNativeAnimationSeat(handle)return end local root=character:
+FindFirstChild('HumanoidRootPart')local humanoid=character:
 FindFirstChildOfClass('Humanoid')if root==nil or humanoid==nil then return end
 local origin=type(seat.origin)=='table'and transformToCFrame(seat.origin)or root
 .CFrame local offset=seatVector(seat.offset,defaultSeatOffset(seat.role or
@@ -1897,11 +1876,9 @@ seatPart==nil or seatPart.Parent==nil then seatPart=Instance.new('Seat')seatPart
 1 seatPart.CanCollide=false seatPart.CanTouch=true seatPart.CanQuery=false
 seatPart.Anchored=true pcall(function()seatPart.Disabled=false end)seatPart.
 Parent=workspace handle.nativeAnimationSeat=seatPart end seatPart.CFrame=
-seatCFrame if handle.nativeAnimationNoCollisionKey~=seatKey then handle.
-nativeAnimationNoCollisionKey=seatKey configureNativeSeatNoCollision(handle,
-character,seatPart)end if handle.nativeAnimationSeatHumanoid~=humanoid then if
-handle.nativeAnimationSeatHumanoid and handle.nativeAnimationSeatAutoRotate~=nil
-then pcall(function()handle.nativeAnimationSeatHumanoid.AutoRotate=handle.
+seatCFrame if handle.nativeAnimationSeatHumanoid~=humanoid then if handle.
+nativeAnimationSeatHumanoid and handle.nativeAnimationSeatAutoRotate~=nil then
+pcall(function()handle.nativeAnimationSeatHumanoid.AutoRotate=handle.
 nativeAnimationSeatAutoRotate end)end handle.nativeAnimationSeatHumanoid=
 humanoid handle.nativeAnimationSeatAutoRotate=humanoid.AutoRotate end pcall(
 function()humanoid:UnequipTools()end)pcall(function()humanoid.AutoRotate=false
