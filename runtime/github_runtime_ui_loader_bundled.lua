@@ -42,6 +42,7 @@ local CONFIG = {
 	asset_max_bytes = 32 * 1024 * 1024,
 	asset_require_hash_verification = false,
 	asset_catalog_url = nil,
+	native_morph_archive_path = "overlay-native-morph-tests/morphlar.rbxm",
 }
 
 local HttpService = game:GetService("HttpService")
@@ -57,6 +58,9 @@ local LocalPlayer = Players.LocalPlayer
 local GLOBAL = typeof(getgenv) == "function" and getgenv() or _G
 if type(GLOBAL.OverlayAssetCatalogUrl) == "string" then
 	CONFIG.asset_catalog_url = GLOBAL.OverlayAssetCatalogUrl
+end
+if type(GLOBAL.OverlayNativeMorphArchivePath) == "string" then
+	CONFIG.native_morph_archive_path = GLOBAL.OverlayNativeMorphArchivePath
 end
 
 local function log(...)
@@ -194,6 +198,9 @@ local Client = {
 	assetDescriptors = {},
 	assetCatalog = {},
 	assetCatalogById = {},
+	nativeMorphArchive = nil,
+	nativeMorphLookup = {},
+	nativeMorphLoadAttempted = false,
 	previewHandle = nil,
 }
 
@@ -1077,6 +1084,20 @@ local function destroyHandle(handle)
 	if handle == nil then
 		return
 	end
+	if type(handle.nativeMorphHiddenParts) == "table" then
+		for _, item in ipairs(handle.nativeMorphHiddenParts) do
+			local part = item and item.part
+			if part and part.Parent then
+				pcall(function()
+					part.Transparency = item.transparency
+				end)
+				pcall(function()
+					part.LocalTransparencyModifier = item.localTransparencyModifier
+				end)
+			end
+		end
+		handle.nativeMorphHiddenParts = nil
+	end
 	if handle.connections then
 		for _, connection in ipairs(handle.connections) do
 			pcall(function()
@@ -1084,7 +1105,7 @@ local function destroyHandle(handle)
 			end)
 		end
 	end
-	for _, key in ipairs({ "billboard", "highlight", "auraParticle", "auraAttachment", "trail", "trailAttachment0", "trailAttachment1", "meshVisual", "textureDecal", "descriptorMorphRoot", "appearanceModel", "model", "folder" }) do
+	for _, key in ipairs({ "billboard", "highlight", "auraParticle", "auraAttachment", "trail", "trailAttachment0", "trailAttachment1", "meshVisual", "textureDecal", "nativeMorphRoot", "descriptorMorphRoot", "appearanceModel", "model", "folder" }) do
 		local instance = handle[key]
 		if instance then
 			pcall(function()
@@ -2087,7 +2108,422 @@ local function updateSmartBoneController(controller, delta)
 	end
 end
 
+local BODY_REPLACEMENT_TARGETS = {
+	BodyLeftArm = true,
+	BodyRightArm = true,
+	BodyLeftLeg = true,
+	BodyRightLeg = true,
+	BodyTorso = true,
+}
+
+local function normalizeMorphName(value)
+	value = string.lower(trimString(value))
+	if string.sub(value, 1, 7) == "native:" then
+		value = string.sub(value, 8)
+	end
+	return string.gsub(value, "[%s%p_%-]+", "")
+end
+
+local function nativeMorphQuery(morph)
+	if type(morph) ~= "table" then
+		return nil
+	end
+	local raw = trimString(morph.native_name or morph.morph_name or morph.query or morph.name or morph.preset)
+	if raw == "" then
+		return nil
+	end
+	local lower = string.lower(raw)
+	if lower == "none" or lower == "off" or lower == "disabled" then
+		return nil
+	end
+	return raw
+end
+
+local function loadNativeMorphArchive()
+	if Client.nativeMorphArchive and Client.nativeMorphArchive.Parent ~= nil then
+		return Client.nativeMorphArchive
+	end
+	if typeof(GLOBAL.OverlayNativeMorphArchive) == "Instance" then
+		Client.nativeMorphArchive = GLOBAL.OverlayNativeMorphArchive
+		return Client.nativeMorphArchive
+	end
+	if Client.nativeMorphLoadAttempted then
+		return Client.nativeMorphArchive
+	end
+	Client.nativeMorphLoadAttempted = true
+
+	local path = trimString(CONFIG.native_morph_archive_path)
+	local isfileFn = getGlobalFunction("isfile")
+	local getcustomassetFn = getGlobalFunction("getcustomasset")
+	if path == "" or not isfileFn or not getcustomassetFn or not game.GetObjects then
+		return nil
+	end
+	local existsOk, exists = pcall(isfileFn, path)
+	if not existsOk or not exists then
+		return nil
+	end
+	local assetOk, assetUrl = pcall(getcustomassetFn, path)
+	if not assetOk or type(assetUrl) ~= "string" or assetUrl == "" then
+		return nil
+	end
+	local objectsOk, objects = pcall(function()
+		return game:GetObjects(assetUrl)
+	end)
+	if not objectsOk or type(objects) ~= "table" or #objects == 0 then
+		return nil
+	end
+
+	Client.nativeMorphArchive = objects[1]
+	GLOBAL.OverlayNativeMorphArchive = Client.nativeMorphArchive
+	log("native morph archive loaded", Client.nativeMorphArchive.Name)
+	return Client.nativeMorphArchive
+end
+
+local function nativeMorphCandidateScore(instance)
+	if instance:IsA("Folder") then
+		return 3
+	end
+	if instance:IsA("Model") then
+		return 2
+	end
+	return 0
+end
+
+local function findNativeMorphByName(query)
+	local normalized = normalizeMorphName(query)
+	if normalized == "" then
+		return nil
+	end
+	if Client.nativeMorphLookup[normalized] ~= nil then
+		return Client.nativeMorphLookup[normalized]
+	end
+
+	local archive = loadNativeMorphArchive()
+	if archive == nil then
+		return nil
+	end
+
+	local exact = nil
+	local partial = nil
+	local function consider(instance)
+		local score = nativeMorphCandidateScore(instance)
+		if score <= 0 then
+			return
+		end
+		local name = normalizeMorphName(instance.Name)
+		if name == normalized then
+			if exact == nil or score > exact.score then
+				exact = { instance = instance, score = score }
+			end
+		elseif string.find(name, normalized, 1, true) or string.find(normalized, name, 1, true) then
+			if partial == nil or score > partial.score then
+				partial = { instance = instance, score = score }
+			end
+		end
+	end
+
+	consider(archive)
+	for _, descendant in ipairs(archive:GetDescendants()) do
+		consider(descendant)
+	end
+
+	local found = exact and exact.instance or (partial and partial.instance or nil)
+	Client.nativeMorphLookup[normalized] = found or false
+	return found
+end
+
+local function collectBaseParts(root)
+	local parts = {}
+	if root:IsA("BasePart") then
+		table.insert(parts, root)
+	end
+	for _, descendant in ipairs(root:GetDescendants()) do
+		if descendant:IsA("BasePart") then
+			table.insert(parts, descendant)
+		end
+	end
+	return parts
+end
+
+local function findDirectMiddle(root)
+	local middle = root:FindFirstChild("Middle")
+	if middle and middle:IsA("BasePart") then
+		return middle
+	end
+	for _, child in ipairs(root:GetChildren()) do
+		if child.Name == "Middle" and child:IsA("BasePart") then
+			return child
+		end
+	end
+	return nil
+end
+
+local function findMorphMiddle(root)
+	return findDirectMiddle(root) or root:FindFirstChild("Middle", true)
+end
+
+local function hasJointBetween(a, b)
+	if a == nil or b == nil then
+		return false
+	end
+	local function scan(root)
+		for _, item in ipairs(root:GetChildren()) do
+			if item:IsA("JointInstance") then
+				local part0 = safeGet(item, "Part0", nil)
+				local part1 = safeGet(item, "Part1", nil)
+				if (part0 == a and part1 == b) or (part0 == b and part1 == a) then
+					return true
+				end
+			elseif item:IsA("WeldConstraint") then
+				local part0 = safeGet(item, "Part0", nil)
+				local part1 = safeGet(item, "Part1", nil)
+				if (part0 == a and part1 == b) or (part0 == b and part1 == a) then
+					return true
+				end
+			end
+		end
+		return false
+	end
+	return scan(a) or scan(b)
+end
+
+local function ensureMiddleWelds(container)
+	local middle = findDirectMiddle(container)
+	if middle then
+		for _, child in ipairs(container:GetChildren()) do
+			if child:IsA("BasePart") and child ~= middle and not hasJointBetween(middle, child) then
+				local weld = Instance.new("Weld")
+				weld.Name = "OverlayNativeInternalWeld"
+				weld.Part0 = middle
+				weld.Part1 = child
+				local center = CFrame.new(middle.Position)
+				weld.C0 = middle.CFrame:Inverse() * center
+				weld.C1 = child.CFrame:Inverse() * center
+				weld.Parent = middle
+			end
+		end
+	end
+	for _, child in ipairs(container:GetChildren()) do
+		if child:IsA("Folder") or child:IsA("Model") then
+			ensureMiddleWelds(child)
+		end
+	end
+end
+
+local function topNativeMorphGroups(clone)
+	local groups = {}
+	if MORPH_GROUP_MOUNTS[clone.Name] then
+		table.insert(groups, clone)
+	end
+	for _, child in ipairs(clone:GetChildren()) do
+		if MORPH_GROUP_MOUNTS[child.Name] then
+			table.insert(groups, child)
+		end
+	end
+	if #groups == 0 then
+		table.insert(groups, clone)
+	end
+	return groups
+end
+
+local function moveMorphGroupByMiddle(group, middle, desiredMiddleCFrame)
+	local current = middle.CFrame
+	local delta = desiredMiddleCFrame * current:Inverse()
+	for _, part in ipairs(collectBaseParts(group)) do
+		part.CFrame = delta * part.CFrame
+	end
+end
+
+local function prepareNativeMorphPart(part)
+	safeSet(part, "Anchored", false)
+	safeSet(part, "CanCollide", false)
+	safeSet(part, "CanTouch", false)
+	safeSet(part, "CanQuery", false)
+	safeSet(part, "Massless", true)
+end
+
+local function hideNativeMorphTarget(handle, part)
+	if handle == nil or part == nil or not part:IsA("BasePart") then
+		return
+	end
+	handle.nativeMorphHiddenParts = handle.nativeMorphHiddenParts or {}
+	for _, item in ipairs(handle.nativeMorphHiddenParts) do
+		if item.part == part then
+			return
+		end
+	end
+	table.insert(handle.nativeMorphHiddenParts, {
+		part = part,
+		transparency = safeGet(part, "Transparency", 0),
+		localTransparencyModifier = safeGet(part, "LocalTransparencyModifier", 0),
+	})
+	safeSet(part, "LocalTransparencyModifier", 1)
+end
+
+local function restoreNativeMorphHiddenParts(handle)
+	if handle == nil or type(handle.nativeMorphHiddenParts) ~= "table" then
+		return
+	end
+	for _, item in ipairs(handle.nativeMorphHiddenParts) do
+		local part = item and item.part
+		if part and part.Parent then
+			safeSet(part, "Transparency", item.transparency)
+			safeSet(part, "LocalTransparencyModifier", item.localTransparencyModifier)
+		end
+	end
+	handle.nativeMorphHiddenParts = nil
+end
+
+local function clearNativeMorph(handle)
+	if handle == nil then
+		return
+	end
+	restoreNativeMorphHiddenParts(handle)
+	if handle.nativeMorphRoot then
+		pcall(function()
+			handle.nativeMorphRoot:Destroy()
+		end)
+	end
+	handle.nativeMorphRoot = nil
+	handle.nativeMorphKey = nil
+	handle.nativeMorphCharacter = nil
+	handle.nativeMorphSmartBones = nil
+end
+
+local function mountNativeMorphGroup(handle, group, character, fallbackAnchor)
+	local mount = MORPH_GROUP_MOUNTS[group.Name]
+	local anchor = mount and findCharacterPart(character, { mount.anchor }) or nil
+	anchor = anchor or fallbackAnchor
+	if anchor == nil or not anchor:IsA("BasePart") then
+		return false
+	end
+
+	ensureMiddleWelds(group)
+	local middle = findMorphMiddle(group)
+	if middle == nil or not middle:IsA("BasePart") then
+		return false
+	end
+
+	for _, part in ipairs(collectBaseParts(group)) do
+		prepareNativeMorphPart(part)
+	end
+
+	local offset = mount and morphMountOffset(anchor, mount.offset) or CFrame.new()
+	local desiredMiddle = anchor.CFrame * offset
+	moveMorphGroupByMiddle(group, middle, desiredMiddle)
+
+	local joint
+	if mount and mount.offset then
+		joint = Instance.new("Motor6D")
+	else
+		joint = Instance.new("Weld")
+	end
+	joint.Name = "OverlayNativeMorphMount"
+	joint.Part0 = anchor
+	joint.Part1 = middle
+	joint.C0 = offset
+	joint.C1 = CFrame.new()
+	joint.Parent = middle
+
+	if mount and BODY_REPLACEMENT_TARGETS[group.Name] then
+		hideNativeMorphTarget(handle, anchor)
+	end
+	return true
+end
+
+local function createNativeSmartBoneControllers(root)
+	local controllers = {}
+	for _, part in ipairs(collectBaseParts(root)) do
+		local controller = createSmartBoneController(part)
+		if controller then
+			table.insert(controllers, controller)
+		end
+	end
+	return #controllers > 0 and controllers or nil
+end
+
+local function applyNativeMorph(handle, anchorPart, components, entityId, character)
+	if handle == nil or type(components) ~= "table" then
+		return false
+	end
+	local morph = components.morph
+	local query = nativeMorphQuery(morph)
+	if query == nil then
+		return false
+	end
+
+	local source = findNativeMorphByName(query)
+	if source == nil then
+		clearNativeMorph(handle)
+		return true
+	end
+
+	character = character or (anchorPart and anchorPart.Parent)
+	local key = normalizeMorphName(query) .. ":" .. tostring(source)
+	if handle.nativeMorphRoot and handle.nativeMorphKey == key and handle.nativeMorphCharacter == character then
+		return true
+	end
+
+	clearNativeMorph(handle)
+	if handle.descriptorMorphRoot then
+		pcall(function()
+			handle.descriptorMorphRoot:Destroy()
+		end)
+	end
+	handle.descriptorMorphRoot = nil
+	handle.descriptorMorphAssetId = nil
+	handle.descriptorMorphAnchor = nil
+	handle.descriptorMorphJiggle = nil
+
+	local root = Instance.new("Folder")
+	root.Name = "OverlayNativeMorph_" .. tostring(entityId or query)
+	root.Parent = handle.folder or entityFolder
+
+	local clone = source:Clone()
+	clone.Name = source.Name
+	clone.Parent = root
+
+	local mountedAny = false
+	for _, group in ipairs(topNativeMorphGroups(clone)) do
+		if mountNativeMorphGroup(handle, group, character, anchorPart) then
+			mountedAny = true
+		end
+	end
+
+	if not mountedAny and anchorPart and anchorPart:IsA("BasePart") then
+		local parts = collectBaseParts(clone)
+		if #parts > 0 then
+			for _, part in ipairs(parts) do
+				prepareNativeMorphPart(part)
+			end
+			local pivot = parts[1].CFrame
+			local target = anchorPart.CFrame
+			for _, part in ipairs(parts) do
+				part.CFrame = target * pivot:Inverse() * part.CFrame
+				local weld = Instance.new("WeldConstraint")
+				weld.Name = "OverlayNativeFallbackWeld"
+				weld.Part0 = anchorPart
+				weld.Part1 = part
+				weld.Parent = part
+			end
+			mountedAny = true
+		end
+	end
+
+	if not mountedAny then
+		root:Destroy()
+		return true
+	end
+
+	handle.nativeMorphRoot = root
+	handle.nativeMorphKey = key
+	handle.nativeMorphCharacter = character
+	handle.nativeMorphSmartBones = createNativeSmartBoneControllers(root)
+	return true
+end
+
 local function clearDescriptorMorph(handle)
+	clearNativeMorph(handle)
 	if handle and handle.descriptorMorphRoot then
 		pcall(function()
 			handle.descriptorMorphRoot:Destroy()
@@ -2110,7 +2546,14 @@ local function applyDescriptorMorph(handle, anchorPart, components, entityId, ch
 	local morph = components.morph
 	local assetId = assetIdFromComponent(morph)
 	if assetId == nil or (type(morph) == "table" and morph.enabled == false) then
+		if type(morph) == "table" and morph.enabled ~= false and applyNativeMorph(handle, anchorPart, components, entityId, character) then
+			return
+		end
 		clearDescriptorMorph(handle)
+		return
+	end
+
+	if applyNativeMorph(handle, anchorPart, components, entityId, character) then
 		return
 	end
 
@@ -2871,6 +3314,11 @@ trackConnection(RunService.Heartbeat:Connect(function()
 					local twist = math.cos(now * (item.speed * 0.7) + item.phase) * item.amplitude * 0.45
 					safeSet(item.bone, "Transform", item.base * CFrame.Angles(sway, 0, twist))
 				end
+			end
+		end
+		if handle and handle.nativeMorphSmartBones then
+			for _, controller in ipairs(handle.nativeMorphSmartBones) do
+				updateSmartBoneController(controller, delta)
 			end
 		end
 	end
@@ -3641,19 +4089,30 @@ local function bridgeApplyMorph(payload)
 	end
 
 	task.spawn(function()
-		local asset, assetError = resolveBridgeAsset("morph", payload)
-		if assetError then
-			emitBridgeError("asset.resolve_failed", assetError)
-			return
+		local rawValue = trimString(payload.value or payload.input)
+		local hasExplicitAsset = trimString(payload.asset_id or payload.assetId or payload.id) ~= ""
+			or trimString(payload.url) ~= ""
+			or isHttpUrl(rawValue)
+		local asset, assetError = nil, nil
+		if hasExplicitAsset then
+			asset, assetError = resolveBridgeAsset("morph", payload)
+			if assetError then
+				emitBridgeError("asset.resolve_failed", assetError)
+				return
+			end
 		end
 
-		local preset = trimString(payload.preset or payload.name)
+		local preset = trimString(payload.preset or payload.name or payload.native_name or payload.morph_name)
+		if preset == "" and not hasExplicitAsset then
+			preset = rawValue
+		end
 		local morph = {}
 		if asset then
 			morph.asset_id = asset.asset_id
 			morph.asset_type = asset.type
 		elseif preset ~= "" and string.lower(preset) ~= "none" then
 			morph.preset = preset
+			morph.native = true
 		else
 			morph.preset = "None"
 			morph.enabled = false
@@ -4951,8 +5410,8 @@ function OverlayUI:_buildAvatarEffects()
 	})
 
 	effects:AddInput("Overlay_MorphAssetId", {
-		Text = "Morph asset id / URL",
-		Placeholder = "registered id or GitHub raw URL",
+		Text = "Morph name / asset URL",
+		Placeholder = "cheiBody, Garchomp, or GitHub raw URL",
 		Default = "",
 		Finished = true,
 		ClearTextOnFocus = false,
