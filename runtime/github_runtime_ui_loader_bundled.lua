@@ -12,8 +12,10 @@ asset_catalog_url=nil,native_morph_archive_path=
 'overlay-native-morph-tests/morphlar.rbxm',native_morph_archive_url=nil,
 native_morph_archive_max_bytes=128*1024*1024,native_animation_archive_path=
 'overlay-native-animation-tests/anims.rbxm',native_animation_archive_url=nil,
-native_animation_archive_max_bytes=96*1024*1024,native_morph_max_base_parts=2500
-,native_morph_enable_smart_bones=true,native_morph_infer_smart_bone_roots=false,
+native_animation_archive_max_bytes=96*1024*1024,native_animation_manifest_path=
+'overlay-native-animation-tests/anims_manifest.json',native_animation_autoload=
+false,native_morph_max_base_parts=2500,native_morph_enable_smart_bones=true,
+native_morph_infer_smart_bone_roots=false,
 native_morph_max_smart_bone_controllers=6,native_morph_max_smart_bone_particles=
 160,native_morph_smart_bone_frame_budget_seconds=0.003,
 native_morph_operation_budget_seconds=0.008}local HttpService=game:GetService(
@@ -34,7 +36,12 @@ type(GLOBAL.OverlayNativeAnimationArchiveUrl)=='string'then CONFIG.
 native_animation_archive_url=GLOBAL.OverlayNativeAnimationArchiveUrl end if
 tonumber(GLOBAL.OverlayNativeAnimationArchiveMaxBytes)then CONFIG.
 native_animation_archive_max_bytes=math.max(0,math.floor(tonumber(GLOBAL.
-OverlayNativeAnimationArchiveMaxBytes)))end if tonumber(GLOBAL.
+OverlayNativeAnimationArchiveMaxBytes)))end if type(GLOBAL.
+OverlayNativeAnimationManifestPath)=='string'then CONFIG.
+native_animation_manifest_path=GLOBAL.OverlayNativeAnimationManifestPath end if
+GLOBAL.OverlayNativeAnimationAutoload==true then CONFIG.
+native_animation_autoload=true elseif GLOBAL.OverlayNativeAnimationAutoload==
+false then CONFIG.native_animation_autoload=false end if tonumber(GLOBAL.
 OverlayNativeMorphMaxBaseParts)then CONFIG.native_morph_max_base_parts=math.max(
 0,math.floor(tonumber(GLOBAL.OverlayNativeMorphMaxBaseParts)))end if GLOBAL.
 OverlayNativeMorphSmartBones==false then CONFIG.native_morph_enable_smart_bones=
@@ -106,17 +113,18 @@ false,nativeAnimationArchive=nil,nativeAnimationArchiveStatus='idle',
 nativeAnimationArchiveError=nil,nativeAnimationArchiveLoading=false,
 nativeAnimationCatalog={},nativeAnimationCatalogIndex={},nativeAnimationLookup={
 },nativeAnimationLoadAttempted=false,nativeAnimationCatalogEmitted=false,
-serverTimeOffsetMs=nil,previewHandle=nil}local refreshRenderers local
-entityFolder=Instance.new('Folder')entityFolder.Name='OverlayEntities'
-entityFolder.Parent=workspace local function trackConnection(connection)if
-connection then table.insert(Client.connections,connection)end return connection
-end local function disconnectTrackedConnections()for _,connection in ipairs(
-Client.connections)do pcall(function()connection:Disconnect()end)end Client.
-connections={}end local function trackWsConnection(connection)if connection then
-table.insert(Client.wsConnections,connection)end return connection end local 
-function disconnectWsConnections()for _,connection in ipairs(Client.
-wsConnections)do pcall(function()connection:Disconnect()end)end Client.
-wsConnections={}end local function sameCFrameForMove(previous,current)if
+nativeAnimationManifestLoaded=false,nativeAnimationManifestRevision=nil,
+serverTimeOffsetMs=nil,syncPartnerUserId=nil,previewHandle=nil}local
+refreshRenderers local entityFolder=Instance.new('Folder')entityFolder.Name=
+'OverlayEntities'entityFolder.Parent=workspace local function trackConnection(
+connection)if connection then table.insert(Client.connections,connection)end
+return connection end local function disconnectTrackedConnections()for _,
+connection in ipairs(Client.connections)do pcall(function()connection:
+Disconnect()end)end Client.connections={}end local function trackWsConnection(
+connection)if connection then table.insert(Client.wsConnections,connection)end
+return connection end local function disconnectWsConnections()for _,connection
+in ipairs(Client.wsConnections)do pcall(function()connection:Disconnect()end)end
+Client.wsConnections={}end local function sameCFrameForMove(previous,current)if
 previous==nil then return false end if(current.Position-previous.Position).
 Magnitude>=0.05 then return false end local delta=previous:ToObjectSpace(current
 )local rx,ry,rz=delta:ToOrientation()local maxAngle=math.max(math.abs(rx),math.
@@ -1491,6 +1499,23 @@ nil end end end local function normalizeAnimationName(value)value=string.lower(
 trimString(value))if string.sub(value,1,17)=='native_animation:'then value=
 string.sub(value,18)elseif string.sub(value,1,7)=='native:'then value=string.
 sub(value,8)end return string.gsub(value,'[%s%p_%-]+','')end local function 
+animationRoleFromName(value)local text=tostring(value or'')local lower=string.
+lower(text)if string.find(lower,'/female/',1,true)or string.find(lower,
+'\\female\\',1,true)or string.match(text,'%sF$')or string.match(text,'%sFemale$'
+)or string.find(lower,' female',1,true)then return'female'end if string.find(
+lower,'/male/',1,true)or string.find(lower,'\\male\\',1,true)or string.match(
+text,'%sM$')or string.match(text,'%sMale$')or string.find(lower,' male',1,true)
+then return'male'end return'any'end local function oppositeAnimationRole(role)
+role=string.lower(tostring(role or''))if role=='male'or role=='m'then return
+'female'end if role=='female'or role=='f'then return'male'end return'any'end
+local function counterpartAnimationName(value)local text=tostring(value or'')if
+string.find(text,'/Male/',1,true)then return string.gsub(text,'/Male/',
+'/Female/',1)end if string.find(text,'/Female/',1,true)then return string.gsub(
+text,'/Female/','/Male/',1)end if string.match(text,'%sM$')then return string.
+gsub(text,'%sM$',' F',1)end if string.match(text,'%sF$')then return string.gsub(
+text,'%sF$',' M',1)end if string.match(text,'%sMale$')then return string.gsub(
+text,'%sMale$',' Female',1)end if string.match(text,'%sFemale$')then return
+string.gsub(text,'%sFemale$',' Male',1)end return text end local function 
 nativeAnimationQuery(animation)if type(animation)~='table'then return nil end
 local raw=trimString(animation.native_name or animation.animation_name or
 animation.query or animation.name or animation.preset or animation.value)if raw
@@ -1539,30 +1564,80 @@ Client.nativeAnimationArchiveError=nil emitBridgeState(
 'downloaded'end local function animationDisplayPath(root,sequence)local names={
 sequence.Name}local current=sequence.Parent while current and current~=root do
 table.insert(names,1,current.Name)current=current.Parent end return table.
-concat(names,'/')end local function emitNativeAnimationCatalog(archive)if
-archive==nil or Client.nativeAnimationCatalogEmitted then return end local
-assets={}local index={}Client.nativeAnimationLookup={}local startedAt=os.clock()
-local function addSequence(sequence)if sequence==nil or not sequence:IsA(
-'KeyframeSequence')then return end local pathName=animationDisplayPath(archive,
-sequence)table.insert(assets,{asset_id='native_animation:'..pathName,name=
-sequence.Name,display_name=pathName,type='native_animation',kind='animation',
-format='keyframe_sequence',source='native-rbxm',looped=sequence.Loop==true})
-local normalizedPath=normalizeAnimationName(pathName)local normalizedName=
+concat(names,'/')end local function applyNativeAnimationCatalog(assets,index,
+source,status)Client.nativeAnimationCatalog=assets or{}Client.
+nativeAnimationCatalogIndex=index or{}Client.nativeAnimationLookup={}for _,item
+in ipairs(Client.nativeAnimationCatalogIndex)do if item.normalizedPath and item.
+instance then Client.nativeAnimationLookup[item.normalizedPath]=item.instance
+end if item.normalizedName and item.instance and Client.nativeAnimationLookup[
+item.normalizedName]==nil then Client.nativeAnimationLookup[item.normalizedName]
+=item.instance end end Client.nativeAnimationCatalogEmitted=true
+emitBridgeEvent('animation.catalog',{animations=Client.nativeAnimationCatalog,
+total=#Client.nativeAnimationCatalog,source=source or'native_animation_archive',
+status=status or Client.nativeAnimationArchiveStatus,path=CONFIG.
+native_animation_archive_path,manifest_path=CONFIG.
+native_animation_manifest_path})emitBridgeState('animations: '..tostring(#Client
+.nativeAnimationCatalog)..' loaded')end local function 
+readNativeAnimationManifest()local path=trimString(CONFIG.
+native_animation_manifest_path)local readfileFn=getGlobalFunction('readfile')
+local isfileFn=getGlobalFunction('isfile')if path==''or not readfileFn or not
+isfileFn then return nil end local existsOk,exists=pcall(isfileFn,path)if not
+existsOk or not exists then return nil end local readOk,body=pcall(readfileFn,
+path)if not readOk or type(body)~='string'or body==''then return nil end local
+decodeOk,manifest=pcall(HttpService.JSONDecode,HttpService,body)if not decodeOk
+or type(manifest)~='table'or type(manifest.animations)~='table'then return nil
+end return manifest end function loadNativeAnimationManifest()if Client.
+nativeAnimationManifestLoaded then return Client.nativeAnimationCatalog end
+local manifest=readNativeAnimationManifest()if manifest==nil then Client.
+nativeAnimationManifestLoaded=true return nil end local assets={}local index={}
+for _,item in ipairs(manifest.animations)do if type(item)=='table'then local
+assetId=trimString(item.asset_id)local displayName=trimString(item.display_name
+or item.name)if assetId~=''and displayName~=''then local role=item.role or
+animationRoleFromName(displayName)table.insert(assets,{asset_id=assetId,name=
+trimString(item.name)~=''and trimString(item.name)or displayName,display_name=
+displayName,type='native_animation',kind='animation',format='keyframe_sequence',
+source='native-rbxm-manifest',role=role,counterpart_asset_id=item.
+counterpart_asset_id,counterpart_name=item.counterpart_name,looped=item.looped==
+true})table.insert(index,{instance=nil,normalizedPath=normalizeAnimationName(
+displayName),normalizedName=normalizeAnimationName(item.name or displayName),
+displayName=displayName,role=role})end end end if#assets==0 then Client.
+nativeAnimationManifestLoaded=true return nil end Client.
+nativeAnimationManifestLoaded=true Client.nativeAnimationManifestRevision=
+manifest.revision applyNativeAnimationCatalog(assets,index,
+'native_animation_manifest','manifest')return assets end local function 
+writeNativeAnimationManifest(assets)local path=trimString(CONFIG.
+native_animation_manifest_path)local writefileFn=getGlobalFunction('writefile')
+if path==''or not writefileFn then return end local folder=parentFolder(path)if
+folder~=''then ensureFolder(folder)end local manifest={revision=tostring(os.
+time()),archive_path=CONFIG.native_animation_archive_path,animations=assets}
+local ok,encoded=pcall(HttpService.JSONEncode,HttpService,manifest)if ok and
+type(encoded)=='string'then pcall(writefileFn,path,encoded)end end local 
+function emitNativeAnimationCatalog(archive)if archive==nil then return end if
+Client.nativeAnimationCatalogEmitted and type(Client.nativeAnimationCatalogIndex
+[1])=='table'and Client.nativeAnimationCatalogIndex[1].instance~=nil then return
+end local assets={}local index={}Client.nativeAnimationLookup={}local startedAt=
+os.clock()local function addSequence(sequence)if sequence==nil or not sequence:
+IsA('KeyframeSequence')then return end local pathName=animationDisplayPath(
+archive,sequence)local role=animationRoleFromName(pathName)local counterpartName
+=counterpartAnimationName(pathName)table.insert(assets,{asset_id=
+'native_animation:'..pathName,name=sequence.Name,display_name=pathName,type=
+'native_animation',kind='animation',format='keyframe_sequence',source=
+'native-rbxm',role=role,counterpart_name=counterpartName~=pathName and
+counterpartName or nil,counterpart_asset_id=counterpartName~=pathName and(
+'native_animation:'..counterpartName)or nil,looped=sequence.Loop==true})local
+normalizedPath=normalizeAnimationName(pathName)local normalizedName=
 normalizeAnimationName(sequence.Name)table.insert(index,{instance=sequence,
 normalizedPath=normalizedPath,normalizedName=normalizedName,displayName=pathName
-})Client.nativeAnimationLookup[normalizedPath]=sequence if Client.
+,role=role})Client.nativeAnimationLookup[normalizedPath]=sequence if Client.
 nativeAnimationLookup[normalizedName]==nil then Client.nativeAnimationLookup[
 normalizedName]=sequence end end if archive:IsA('KeyframeSequence')then
 addSequence(archive)end for indexNumber,descendant in ipairs(archive:
 GetDescendants())do if descendant:IsA('KeyframeSequence')then addSequence(
 descendant)end if indexNumber%100==0 then startedAt=yieldIfBudgetSpent(startedAt
 )end end table.sort(assets,function(a,b)return tostring(a.display_name):lower()<
-tostring(b.display_name):lower()end)Client.nativeAnimationCatalog=assets Client.
-nativeAnimationCatalogIndex=index Client.nativeAnimationCatalogEmitted=true
-emitBridgeEvent('animation.catalog',{animations=assets,total=#assets,source=
-'native_animation_archive',status=Client.nativeAnimationArchiveStatus,path=
-CONFIG.native_animation_archive_path})emitBridgeState(
-'native animation catalog loaded: '..tostring(#assets))end function
+tostring(b.display_name):lower()end)Client.nativeAnimationCatalog=assets
+writeNativeAnimationManifest(assets)applyNativeAnimationCatalog(assets,index,
+'native_animation_archive',Client.nativeAnimationArchiveStatus)end function
 loadNativeAnimationArchive()if typeof(Client.nativeAnimationArchive)=='Instance'
 then emitNativeAnimationCatalog(Client.nativeAnimationArchive)return Client.
 nativeAnimationArchive end if typeof(GLOBAL.OverlayNativeAnimationArchive)==
@@ -1595,12 +1670,12 @@ Client.nativeAnimationArchive Client.nativeAnimationArchiveStatus='loaded'Client
 'native animation archive loaded',Client.nativeAnimationArchive.Name)
 emitNativeAnimationCatalog(Client.nativeAnimationArchive)return Client.
 nativeAnimationArchive end local function findNativeAnimationByName(query)local
-normalized=normalizeAnimationName(query)if normalized==''then return nil end if
-Client.nativeAnimationLookup[normalized]~=nil then return Client.
-nativeAnimationLookup[normalized]end local archive=loadNativeAnimationArchive()
-if archive==nil then return nil end local exact=nil local partial=nil for _,item
-in ipairs(Client.nativeAnimationCatalogIndex or{})do local instance=item.
-instance if instance and instance.Parent then local name=item.normalizedName or
+normalized=normalizeAnimationName(query)if normalized==''then return nil end
+local cached=Client.nativeAnimationLookup[normalized]if cached~=nil and cached~=
+false then return cached end local archive=loadNativeAnimationArchive()if
+archive==nil then return nil end local exact=nil local partial=nil for _,item in
+ipairs(Client.nativeAnimationCatalogIndex or{})do local instance=item.instance
+if instance and instance.Parent then local name=item.normalizedName or
 normalizeAnimationName(instance.Name)local fullName=item.normalizedPath or name
 if name==normalized or fullName==normalized then exact=instance break elseif
 string.find(name,normalized,1,true)or string.find(normalized,name,1,true)or
@@ -1643,13 +1718,13 @@ descendant:IsA('Motor6D')or descendant:IsA('Motor')then table.insert(motors,
 descendant)end end local rig={root=root,partList={},partListByName={},originalC1
 ={}}local visited={}local lineNumber=1 local function connectedParts(item)local
 parts={}local joints={}for _,motor in ipairs(motors)do local
-__DARKLUA_CONTINUE_116=false repeat if(motor.Part1 and motor.Part1.Name==
+__DARKLUA_CONTINUE_118=false repeat if(motor.Part1 and motor.Part1.Name==
 'ProxyPart')or(motor.Part0 and motor.Part0.Name=='ProxyPart')then
-__DARKLUA_CONTINUE_116=true break elseif motor.Part0==item.part and motor.Part1
+__DARKLUA_CONTINUE_118=true break elseif motor.Part0==item.part and motor.Part1
 ~=nil and not visited[motor.Part1]then table.insert(parts,motor.Part1)table.
 insert(joints,motor)elseif motor.Part1==item.part and motor.Part0~=nil and not
 visited[motor.Part0]then table.insert(parts,motor.Part0)table.insert(joints,
-motor)end __DARKLUA_CONTINUE_116=true until true if not __DARKLUA_CONTINUE_116
+motor)end __DARKLUA_CONTINUE_118=true until true if not __DARKLUA_CONTINUE_118
 then break end end return parts,joints end local function visit(item)visited[
 item.part]=true rig.partList[item.part]=item rig.partListByName[item.name]=item
 if item.motor then rig.originalC1[item.motor]=item.motor.C1 end local parts,
@@ -1700,25 +1775,52 @@ end end for _,child in ipairs(sequence:GetChildren())do if child:IsA('Keyframe')
 then local frame=createKeyframe(child.Time)frame.name=child.Name for _,pose in
 ipairs(child:GetChildren())do if pose:IsA('Pose')then loadPose(frame,pose)end
 end end end clip.sortedTimesAsc=sortedKeys(clip.keyframes,false)return clip end
-function NativeAnimation.clear(handle)if handle==nil or handle.nativeAnimation==
-nil then return end local state=handle.nativeAnimation if state.connection then
-pcall(function()state.connection:Disconnect()end)end if type(state.originalC1)==
-'table'then for motor,c1 in pairs(state.originalC1)do if motor and motor.Parent
-then pcall(function()motor.C1=c1 motor.CurrentAngle=0 end)end end end if state.
-animateScript and state.animateWasDisabled~=nil and state.animateScript.Parent
-then pcall(function()state.animateScript.Disabled=state.animateWasDisabled end)
-end handle.nativeAnimation=nil end local function estimatedServerNowMs()if
-tonumber(Client.serverTimeOffsetMs)then return os.clock()*1000+Client.
-serverTimeOffsetMs end return nil end function NativeAnimation.apply(handle,
-character,components,entityId)local animation=components and components.
-animation local query=nativeAnimationQuery(animation)if query==nil then return
-false end local sequence=findNativeAnimationByName(query)if sequence==nil then
-return false end local speed=tonumber(animation.speed or animation.
-playback_speed or animation.playbackSpeed)or 1 speed=math.clamp(speed,0,8)local
-startedAt=tonumber(animation.started_at_server_ms)local key=tostring(sequence)..
-'|'..tostring(startedAt or'')..'|'..tostring(animation.looped)if handle.
-nativeAnimation and handle.nativeAnimation.key==key and handle.nativeAnimation.
-character==character then handle.nativeAnimation.speed=speed return true end
+local function seatVector(value,fallback)if type(value)=='table'then return
+Vector3.new(tonumber(value[1])or tonumber(value.x)or fallback.X,tonumber(value[2
+])or tonumber(value.y)or fallback.Y,tonumber(value[3])or tonumber(value.z)or
+fallback.Z)end return fallback end local function defaultSeatOffset(role)role=
+string.lower(tostring(role or''))if role=='male'or role=='m'then return Vector3.
+new(-0.9,0,0)end if role=='female'or role=='f'then return Vector3.new(0.9,0,0)
+end return Vector3.zero end local function clearNativeAnimationSeat(handle)if
+handle==nil then return end if handle.nativeAnimationSeat then pcall(function()
+handle.nativeAnimationSeat:Destroy()end)handle.nativeAnimationSeat=nil end end
+local function applyNativeAnimationSeat(handle,character,animation)if handle==
+nil or character==nil or type(animation)~='table'then return end local seat=
+type(animation.seat)=='table'and animation.seat or nil if seat==nil or seat.
+enabled==false then clearNativeAnimationSeat(handle)return end local root=
+character:FindFirstChild('HumanoidRootPart')local humanoid=character:
+FindFirstChildOfClass('Humanoid')if root==nil or humanoid==nil then return end
+local origin=type(seat.origin)=='table'and transformToCFrame(seat.origin)or root
+.CFrame local offset=seatVector(seat.offset,defaultSeatOffset(seat.role or
+animation.role))local seatCFrame=origin*CFrame.new(offset)local seatPart=handle.
+nativeAnimationSeat if seatPart==nil or seatPart.Parent==nil then seatPart=
+Instance.new('Seat')seatPart.Name='OverlaySyncSeat'seatPart.Size=Vector3.new(2,
+0.35,2)seatPart.Transparency=1 seatPart.CanCollide=false seatPart.Anchored=true
+pcall(function()seatPart.Disabled=false end)seatPart.Parent=handle.folder or
+entityFolder handle.nativeAnimationSeat=seatPart end seatPart.CFrame=seatCFrame
+pcall(function()seatPart:Sit(humanoid)end)pcall(function()root.
+AssemblyLinearVelocity=Vector3.zero root.AssemblyAngularVelocity=Vector3.zero
+end)end function NativeAnimation.clear(handle)if handle==nil or handle.
+nativeAnimation==nil then clearNativeAnimationSeat(handle)return end local state
+=handle.nativeAnimation if state.connection then pcall(function()state.
+connection:Disconnect()end)end if type(state.originalC1)=='table'then for motor,
+c1 in pairs(state.originalC1)do if motor and motor.Parent then pcall(function()
+motor.C1=c1 motor.CurrentAngle=0 end)end end end if state.animateScript and
+state.animateWasDisabled~=nil and state.animateScript.Parent then pcall(function
+()state.animateScript.Disabled=state.animateWasDisabled end)end
+clearNativeAnimationSeat(handle)handle.nativeAnimation=nil end local function 
+estimatedServerNowMs()if tonumber(Client.serverTimeOffsetMs)then return os.
+clock()*1000+Client.serverTimeOffsetMs end return nil end function
+NativeAnimation.apply(handle,character,components,entityId)local animation=
+components and components.animation local query=nativeAnimationQuery(animation)
+if query==nil then return false end local sequence=findNativeAnimationByName(
+query)if sequence==nil then return false end local speed=tonumber(animation.
+speed or animation.playback_speed or animation.playbackSpeed)or 1 speed=math.
+clamp(speed,0,8)local startedAt=tonumber(animation.started_at_server_ms)local
+key=tostring(sequence)..'|'..tostring(startedAt or'')..'|'..tostring(animation.
+looped)if handle.nativeAnimation and handle.nativeAnimation.key==key and handle.
+nativeAnimation.character==character then handle.nativeAnimation.speed=speed
+applyNativeAnimationSeat(handle,character,animation)return true end
 NativeAnimation.clear(handle)local rig=buildNativeAnimationRig(character)if rig
 ==nil then emitBridgeEvent('animation.load_failed',{entity_id=entityId,name=
 sequence.Name,reason='rig_not_found'})return true end local clip=
@@ -1743,26 +1845,27 @@ end local alpha=math.clamp(timePosition/clip.length,0,1)if state.firstFrame and
 timePosition<0.1 then alpha=0.75 end state.firstFrame=false for part,item in
 pairs(rig.partList)do if item.motor and item.motor.Parent then local target=
 getNativeMotorC1(clip,item,timePosition)pcall(function()item.motor.C1=item.motor
-.C1:Lerp(target,alpha)end)end end end)handle.nativeAnimation=state handle.
-animationUnsupportedKey=nil return true end local function appearanceUserIdFor(
-components)local avatar=components and components.avatar if type(avatar)~=
-'table'then return nil end local userId=tonumber(avatar.appearance_user_id)if
-userId and userId>0 then return math.floor(userId)end return nil end local 
-function clearAppearanceAvatar(handle)if handle and handle.appearanceModel then
-pcall(function()handle.appearanceModel:Destroy()end)end if handle then handle.
-appearanceModel=nil handle.appearanceUserId=nil handle.appearanceAnchor=nil
-handle.appearanceLoadingId=nil end end local function prepareAppearanceModel(
-model)for _,descendant in ipairs(model:GetDescendants())do if descendant:IsA(
-'BasePart')then descendant.CanCollide=false descendant.CanTouch=false descendant
-.CanQuery=false descendant.Massless=true elseif descendant:IsA('Script')or
-descendant:IsA('LocalScript')then descendant:Destroy()end end local humanoid=
-model:FindFirstChildOfClass('Humanoid')if humanoid then pcall(function()humanoid
-.DisplayDistanceType=Enum.HumanoidDisplayDistanceType.None end)end end local 
-function appearanceRootPart(model)return model:FindFirstChild('HumanoidRootPart'
-)or model.PrimaryPart or model:FindFirstChildWhichIsA('BasePart')end local 
-function createAppearanceModelFromUserId(userId)local ok,model=pcall(function()
-return Players:CreateHumanoidModelFromUserId(userId)end)if ok and model then
-return model end local descriptionOk,description=pcall(function()return Players:
+.C1:Lerp(target,alpha)end)end end end)applyNativeAnimationSeat(handle,character,
+animation)handle.nativeAnimation=state handle.animationUnsupportedKey=nil return
+true end local function appearanceUserIdFor(components)local avatar=components
+and components.avatar if type(avatar)~='table'then return nil end local userId=
+tonumber(avatar.appearance_user_id)if userId and userId>0 then return math.
+floor(userId)end return nil end local function clearAppearanceAvatar(handle)if
+handle and handle.appearanceModel then pcall(function()handle.appearanceModel:
+Destroy()end)end if handle then handle.appearanceModel=nil handle.
+appearanceUserId=nil handle.appearanceAnchor=nil handle.appearanceLoadingId=nil
+end end local function prepareAppearanceModel(model)for _,descendant in ipairs(
+model:GetDescendants())do if descendant:IsA('BasePart')then descendant.
+CanCollide=false descendant.CanTouch=false descendant.CanQuery=false descendant.
+Massless=true elseif descendant:IsA('Script')or descendant:IsA('LocalScript')
+then descendant:Destroy()end end local humanoid=model:FindFirstChildOfClass(
+'Humanoid')if humanoid then pcall(function()humanoid.DisplayDistanceType=Enum.
+HumanoidDisplayDistanceType.None end)end end local function appearanceRootPart(
+model)return model:FindFirstChild('HumanoidRootPart')or model.PrimaryPart or
+model:FindFirstChildWhichIsA('BasePart')end local function 
+createAppearanceModelFromUserId(userId)local ok,model=pcall(function()return
+Players:CreateHumanoidModelFromUserId(userId)end)if ok and model then return
+model end local descriptionOk,description=pcall(function()return Players:
 GetHumanoidDescriptionFromUserId(userId)end)if not descriptionOk or not
 description then return nil end local modelOk,fallbackModel=pcall(function()
 return Players:CreateHumanoidModelFromDescription(description,Enum.
@@ -2053,39 +2156,44 @@ message.data)elseif message.t=='room.member.left'then log('member left:',message
 scope or'?'),tostring(message.data.display_name or message.data.user_id or'?'),
 tostring(message.data.text or'')))if message.data.scope=='global'then
 emitBridgeEvent('chat.global',message.data)else emitBridgeEvent('chat.room',
-message.data)end elseif message.t=='error'then log('server error:',message.data
-and message.data.code,message.data and message.data.message)emitBridgeError(
-message.data and message.data.code,message.data and message.data.message)end end
-local function resolveRoom()if Client.room and Client.room.id then return Client
-.room.id,Client.room.version end local pendingRoomId=
-pendingRoomFromTeleportSetting()if pendingRoomId then return pendingRoomId,0 end
-local listResponse,listError=awaitRequest('room.list',{})if listResponse==nil
-then return nil,nil,'room.list failed: '..tostring(listError)end Client.
-cachedRooms=listResponse.data.rooms or{}emitBridgeEvent('room.list',{rooms=
-Client.cachedRooms})for _,room in ipairs(Client.cachedRooms)do if room.name==
-CONFIG.room_name then return room.room_id,0 end end local createResponse,
-createError=awaitRequest('room.create',mergeTables({name=CONFIG.room_name,
-visibility='public',max_members=50},currentRobloxCreateRoute()))if
-createResponse==nil then return nil,nil,'room.create failed: '..tostring(
-createError)end return createResponse.data.room_id,0 end local function 
-ensureOwnAvatarEntity(roomId)if not roomId then return nil,'room id missing'end
-if Client.avatarReadyRoomId==roomId and Client.ownAvatarId then return Client.
-ownAvatarId end Client.avatarReadyRoomId=nil local avatarResponse,avatarError=
-awaitRequest('cmd.avatar.set',{room_id=roomId,avatar={display_name=LocalPlayer.
-DisplayName,roblox_user_id=LocalPlayer.UserId,roblox_name=LocalPlayer.Name,
-render_surface='native_character_overlay',overlay_color=colorToArray(
-colorFromId(tostring(LocalPlayer.UserId)))}})if avatarResponse==nil then return
-nil,'cmd.avatar.set failed: '..tostring(avatarError)end Client.ownAvatarId=
-avatarResponse.data.entity_id Client.avatarReadyRoomId=roomId return Client.
-ownAvatarId end local function requestRoomJoin(roomId,resumeFrom)Client.
-avatarReadyRoomId=nil Client.joining={roomId=roomId,resumeFrom=resumeFrom or 0}
-local joinResponse,joinError=awaitRequest('room.join',mergeTables({room_id=
-roomId,resume_from_version=resumeFrom or 0},currentRobloxJoinContext()))if
-joinResponse~=nil and type(joinResponse.data)=='table'then Client.room=Client.
-room or{}Client.room.id=joinResponse.data.room_id if(resumeFrom or 0)<=0 then
-Client.room.version=joinResponse.data.current_version or Client.room.version or
-0 end if joinResponse.data.teleport_required then local okTeleport,teleportError
-=tryTeleportToRoute(joinResponse.data.teleport_route or joinResponse.data.
+message.data)end elseif message.t=='sync.requested'then emitBridgeEvent(
+'sync.requested',message.data)elseif message.t=='sync.linked'then Client.
+syncPartnerUserId=message.data and message.data.partner_user_id or Client.
+syncPartnerUserId emitBridgeEvent('sync.linked',message.data)elseif message.t==
+'sync.cleared'then Client.syncPartnerUserId=nil emitBridgeEvent('sync.cleared',
+message.data)elseif message.t=='error'then log('server error:',message.data and
+message.data.code,message.data and message.data.message)emitBridgeError(message.
+data and message.data.code,message.data and message.data.message)end end local 
+function resolveRoom()if Client.room and Client.room.id then return Client.room.
+id,Client.room.version end local pendingRoomId=pendingRoomFromTeleportSetting()
+if pendingRoomId then return pendingRoomId,0 end local listResponse,listError=
+awaitRequest('room.list',{})if listResponse==nil then return nil,nil,
+'room.list failed: '..tostring(listError)end Client.cachedRooms=listResponse.
+data.rooms or{}emitBridgeEvent('room.list',{rooms=Client.cachedRooms})for _,room
+in ipairs(Client.cachedRooms)do if room.name==CONFIG.room_name then return room.
+room_id,0 end end local createResponse,createError=awaitRequest('room.create',
+mergeTables({name=CONFIG.room_name,visibility='public',max_members=50},
+currentRobloxCreateRoute()))if createResponse==nil then return nil,nil,
+'room.create failed: '..tostring(createError)end return createResponse.data.
+room_id,0 end local function ensureOwnAvatarEntity(roomId)if not roomId then
+return nil,'room id missing'end if Client.avatarReadyRoomId==roomId and Client.
+ownAvatarId then return Client.ownAvatarId end Client.avatarReadyRoomId=nil
+local avatarResponse,avatarError=awaitRequest('cmd.avatar.set',{room_id=roomId,
+avatar={display_name=LocalPlayer.DisplayName,roblox_user_id=LocalPlayer.UserId,
+roblox_name=LocalPlayer.Name,render_surface='native_character_overlay',
+overlay_color=colorToArray(colorFromId(tostring(LocalPlayer.UserId)))}})if
+avatarResponse==nil then return nil,'cmd.avatar.set failed: '..tostring(
+avatarError)end Client.ownAvatarId=avatarResponse.data.entity_id Client.
+avatarReadyRoomId=roomId return Client.ownAvatarId end local function 
+requestRoomJoin(roomId,resumeFrom)Client.avatarReadyRoomId=nil Client.joining={
+roomId=roomId,resumeFrom=resumeFrom or 0}local joinResponse,joinError=
+awaitRequest('room.join',mergeTables({room_id=roomId,resume_from_version=
+resumeFrom or 0},currentRobloxJoinContext()))if joinResponse~=nil and type(
+joinResponse.data)=='table'then Client.room=Client.room or{}Client.room.id=
+joinResponse.data.room_id if(resumeFrom or 0)<=0 then Client.room.version=
+joinResponse.data.current_version or Client.room.version or 0 end if
+joinResponse.data.teleport_required then local okTeleport,teleportError=
+tryTeleportToRoute(joinResponse.data.teleport_route or joinResponse.data.
 roblox_route,joinResponse.data.room_id)if okTeleport then return joinResponse,
 'teleporting'end log('teleport failed:',teleportError)end end Client.joining=nil
 return joinResponse,joinError end local OverlayBridge={}local bridgeListRooms
@@ -2112,54 +2220,54 @@ nativeAnimationCatalog,asset_slots=Client.nativeMorphCatalogSlots,
 native_morph_archive={status=Client.nativeMorphArchiveStatus,error=Client.
 nativeMorphArchiveError,path=CONFIG.native_morph_archive_path},
 native_animation_archive={status=Client.nativeAnimationArchiveStatus,error=
-Client.nativeAnimationArchiveError,path=CONFIG.native_animation_archive_path}}
-end local function installOverlayBridge()bridgeListRooms=function()if not Client
-.connected then emitBridgeError('runtime.disconnected',
-'Runtime is not connected')return end task.spawn(function()local response,err=
-awaitRequest('room.list',{})if response==nil then emitBridgeError(
-'room.list_failed',tostring(err))return end Client.cachedRooms=response.data.
-rooms or{}emitBridgeEvent('room.list',{rooms=Client.cachedRooms,online_count=
-response.data.online_count})end)end local function bridgeJoinRoom(roomId)roomId=
+Client.nativeAnimationArchiveError,path=CONFIG.native_animation_archive_path},
+sync_partner_user_id=Client.syncPartnerUserId}end local function 
+installOverlayBridge()bridgeListRooms=function()if not Client.connected then
+emitBridgeError('runtime.disconnected','Runtime is not connected')return end
+task.spawn(function()local response,err=awaitRequest('room.list',{})if response
+==nil then emitBridgeError('room.list_failed',tostring(err))return end Client.
+cachedRooms=response.data.rooms or{}emitBridgeEvent('room.list',{rooms=Client.
+cachedRooms,online_count=response.data.online_count})end)end local function 
+bridgeJoinRoom(roomId)roomId=trimString(roomId)if roomId==''then
+emitBridgeError('room.required','Select a room first')return end if not Client.
+connected then emitBridgeError('runtime.disconnected','Runtime is not connected'
+)return end task.spawn(function()local response,err=requestRoomJoin(roomId,0)if
+response==nil then emitBridgeError('room.join_failed',tostring(err))return end
+if Client.teleporting then return end local _,avatarError=ensureOwnAvatarEntity(
+roomId)if avatarError then emitBridgeError('avatar.set_failed',tostring(
+avatarError))return end emitBridgeState('joined '..tostring(roomId))end)end
+local function bridgeCreateRoom(name)name=trimString(name)if name==''then
+emitBridgeError('room.name_required','Room name is required')return end if not
+Client.connected then emitBridgeError('runtime.disconnected',
+'Runtime is not connected')return end task.spawn(function()local listResponse=
+awaitRequest('room.list',{})if listResponse and listResponse.data then Client.
+cachedRooms=listResponse.data.rooms or{}for _,room in ipairs(Client.cachedRooms)
+do if room.name==name and Client.user and room.owner_user_id==Client.user.
+user_id then bridgeJoinRoom(room.room_id)emitBridgeEvent('room.list',{rooms=
+Client.cachedRooms})return end end end local response,err=awaitRequest(
+'room.create',mergeTables({name=name,visibility='public',max_members=50},
+currentRobloxCreateRoute()))if response==nil then emitBridgeError(
+'room.create_failed',tostring(err))return end bridgeJoinRoom(response.data.
+room_id)bridgeListRooms()end)end local function bridgeDeleteRoom(roomId)roomId=
 trimString(roomId)if roomId==''then emitBridgeError('room.required',
 'Select a room first')return end if not Client.connected then emitBridgeError(
 'runtime.disconnected','Runtime is not connected')return end task.spawn(function
-()local response,err=requestRoomJoin(roomId,0)if response==nil then
-emitBridgeError('room.join_failed',tostring(err))return end if Client.
-teleporting then return end local _,avatarError=ensureOwnAvatarEntity(roomId)if
-avatarError then emitBridgeError('avatar.set_failed',tostring(avatarError))
-return end emitBridgeState('joined '..tostring(roomId))end)end local function 
-bridgeCreateRoom(name)name=trimString(name)if name==''then emitBridgeError(
-'room.name_required','Room name is required')return end if not Client.connected
-then emitBridgeError('runtime.disconnected','Runtime is not connected')return
-end task.spawn(function()local listResponse=awaitRequest('room.list',{})if
-listResponse and listResponse.data then Client.cachedRooms=listResponse.data.
-rooms or{}for _,room in ipairs(Client.cachedRooms)do if room.name==name and
-Client.user and room.owner_user_id==Client.user.user_id then bridgeJoinRoom(room
-.room_id)emitBridgeEvent('room.list',{rooms=Client.cachedRooms})return end end
-end local response,err=awaitRequest('room.create',mergeTables({name=name,
-visibility='public',max_members=50},currentRobloxCreateRoute()))if response==nil
-then emitBridgeError('room.create_failed',tostring(err))return end
-bridgeJoinRoom(response.data.room_id)bridgeListRooms()end)end local function 
-bridgeDeleteRoom(roomId)roomId=trimString(roomId)if roomId==''then
-emitBridgeError('room.required','Select a room first')return end if not Client.
-connected then emitBridgeError('runtime.disconnected','Runtime is not connected'
-)return end task.spawn(function()if Client.room and Client.room.id==roomId then
-Client.roomClosingId=roomId Client.avatarReadyRoomId=nil end local response,err=
-awaitRequest('room.delete',{room_id=roomId})if response==nil then if Client.
-roomClosingId==roomId then Client.roomClosingId=nil end emitBridgeError(
-'room.delete_failed',tostring(err))return end bridgeListRooms()end)end local 
-function bridgeInviteRoom(userId,roomId)userId=trimString(userId)roomId=
-trimString(roomId)~=''and trimString(roomId)or(Client.room and Client.room.id)if
-userId==''then emitBridgeError('room.invite_user_required','User id is required'
-)return end if not roomId or roomId==''then emitBridgeError('room.required',
-'Join a room before inviting')return end if not Client.connected then
-emitBridgeError('runtime.disconnected','Runtime is not connected')return end
-task.spawn(function()local response,err=awaitRequest('room.invite',{room_id=
-roomId,user_id=userId})if response==nil then emitBridgeError(
-'room.invite_failed',tostring(err))return end emitBridgeState('invited '..
-tostring(userId))end)end local function bridgeKickRoom(userId,roomId)userId=
-trimString(userId)roomId=trimString(roomId)~=''and trimString(roomId)or(Client.
-room and Client.room.id)if userId==''then emitBridgeError(
+()if Client.room and Client.room.id==roomId then Client.roomClosingId=roomId
+Client.avatarReadyRoomId=nil end local response,err=awaitRequest('room.delete',{
+room_id=roomId})if response==nil then if Client.roomClosingId==roomId then
+Client.roomClosingId=nil end emitBridgeError('room.delete_failed',tostring(err))
+return end bridgeListRooms()end)end local function bridgeInviteRoom(userId,
+roomId)userId=trimString(userId)roomId=trimString(roomId)~=''and trimString(
+roomId)or(Client.room and Client.room.id)if userId==''then emitBridgeError(
+'room.invite_user_required','User id is required')return end if not roomId or
+roomId==''then emitBridgeError('room.required','Join a room before inviting')
+return end if not Client.connected then emitBridgeError('runtime.disconnected',
+'Runtime is not connected')return end task.spawn(function()local response,err=
+awaitRequest('room.invite',{room_id=roomId,user_id=userId})if response==nil then
+emitBridgeError('room.invite_failed',tostring(err))return end emitBridgeState(
+'invited '..tostring(userId))end)end local function bridgeKickRoom(userId,roomId
+)userId=trimString(userId)roomId=trimString(roomId)~=''and trimString(roomId)or(
+Client.room and Client.room.id)if userId==''then emitBridgeError(
 'room.kick_user_required','User id is required')return end if not roomId or
 roomId==''then emitBridgeError('room.required','Join a room before kicking')
 return end if not Client.connected then emitBridgeError('runtime.disconnected',
@@ -2191,35 +2299,41 @@ string.match(cleanUrl,'([^/\\]+)$')or cleanUrl fileName=string.gsub(fileName,
 assetId==kind..'_'then assetId=kind..'_'..safeFileName(tostring(os.time()))end
 return string.sub(assetId,1,120)end local function bridgePayloadTable(payload)if
 type(payload)=='table'then return payload end return{value=payload}end local 
-function parseAppearanceUserId(payload)payload=bridgePayloadTable(payload)local
-raw=trimString(payload.appearance_user_id or payload.appearanceUserId or payload
-.roblox_avatar_user_id)if raw==''then raw=trimString(payload.value or payload.
-input)end if raw==''or isHttpUrl(raw)then return nil end local lower=string.
-lower(raw)if string.sub(lower,1,5)=='user:'then raw=string.sub(raw,6)end if
-string.match(raw,'^%d+$')then local value=tonumber(raw)if value and value>0 then
-return math.floor(value)end end return nil end local function appearanceInputRaw
-(payload)payload=bridgePayloadTable(payload)local raw=trimString(payload.
+function cframeToTransform(cf)if typeof(cf)~='CFrame'then return nil end local
+rx,ry,rz=cf:ToOrientation()return{position={cf.Position.X,cf.Position.Y,cf.
+Position.Z},rotation={math.deg(rx),math.deg(ry),math.deg(rz)}}end local function 
+localRootTransform()local character=LocalPlayer.Character local root=character
+and character:FindFirstChild('HumanoidRootPart')return root and
+cframeToTransform(root.CFrame)or nil end local function parseAppearanceUserId(
+payload)payload=bridgePayloadTable(payload)local raw=trimString(payload.
 appearance_user_id or payload.appearanceUserId or payload.roblox_avatar_user_id)
-if raw==''then raw=trimString(payload.value or payload.input)end return raw end
-local function resolveAppearanceUserId(payload)local numericId=
-parseAppearanceUserId(payload)if numericId then return numericId end local raw=
-appearanceInputRaw(payload)if raw==''or isHttpUrl(raw)then return nil end local
-lower=string.lower(raw)if string.sub(lower,1,5)=='user:'then raw=string.sub(raw,
-6)elseif string.sub(lower,1,5)=='name:'then raw=string.sub(raw,6)elseif string.
-sub(raw,1,1)=='@'then raw=string.sub(raw,2)end raw=trimString(raw)if raw==''or
-string.match(raw,'[/%\\:%?]')then return nil end local ok,userId=pcall(function(
-)return Players:GetUserIdFromNameAsync(raw)end)if ok and tonumber(userId)then
-return tonumber(userId)end return nil end local function resolveBridgeAsset(kind
-,payload)payload=bridgePayloadTable(payload)local value=trimString(payload.value
-or payload.input)local url=trimString(payload.url)local assetId=trimString(
-payload.asset_id or payload.assetId or payload.id)if url==''and isHttpUrl(value)
-then url=value elseif assetId==''and value~=''then assetId=value end if url~=''
-then if assetId==''then assetId=assetIdFromUrl(kind,url)end local hash=
-trimString(payload.hash)if hash==''then hash='unsafe:'..assetId end local asset=
-{asset_id=assetId,type=trimString(payload.type)~=''and trimString(payload.type)
-or assetTypeForBridge(kind,url),kind=trimString(payload.kind)~=''and trimString(
-payload.kind)or assetTypeForBridge(kind,url),format=trimString(payload.format)~=
-''and trimString(payload.format)or assetFormatForBridge(kind,url),entrypoint=
+if raw==''then raw=trimString(payload.value or payload.input)end if raw==''or
+isHttpUrl(raw)then return nil end local lower=string.lower(raw)if string.sub(
+lower,1,5)=='user:'then raw=string.sub(raw,6)end if string.match(raw,'^%d+$')
+then local value=tonumber(raw)if value and value>0 then return math.floor(value)
+end end return nil end local function appearanceInputRaw(payload)payload=
+bridgePayloadTable(payload)local raw=trimString(payload.appearance_user_id or
+payload.appearanceUserId or payload.roblox_avatar_user_id)if raw==''then raw=
+trimString(payload.value or payload.input)end return raw end local function 
+resolveAppearanceUserId(payload)local numericId=parseAppearanceUserId(payload)if
+numericId then return numericId end local raw=appearanceInputRaw(payload)if raw
+==''or isHttpUrl(raw)then return nil end local lower=string.lower(raw)if string.
+sub(lower,1,5)=='user:'then raw=string.sub(raw,6)elseif string.sub(lower,1,5)==
+'name:'then raw=string.sub(raw,6)elseif string.sub(raw,1,1)=='@'then raw=string.
+sub(raw,2)end raw=trimString(raw)if raw==''or string.match(raw,'[/%\\:%?]')then
+return nil end local ok,userId=pcall(function()return Players:
+GetUserIdFromNameAsync(raw)end)if ok and tonumber(userId)then return tonumber(
+userId)end return nil end local function resolveBridgeAsset(kind,payload)payload
+=bridgePayloadTable(payload)local value=trimString(payload.value or payload.
+input)local url=trimString(payload.url)local assetId=trimString(payload.asset_id
+or payload.assetId or payload.id)if url==''and isHttpUrl(value)then url=value
+elseif assetId==''and value~=''then assetId=value end if url~=''then if assetId
+==''then assetId=assetIdFromUrl(kind,url)end local hash=trimString(payload.hash)
+if hash==''then hash='unsafe:'..assetId end local asset={asset_id=assetId,type=
+trimString(payload.type)~=''and trimString(payload.type)or assetTypeForBridge(
+kind,url),kind=trimString(payload.kind)~=''and trimString(payload.kind)or
+assetTypeForBridge(kind,url),format=trimString(payload.format)~=''and
+trimString(payload.format)or assetFormatForBridge(kind,url),entrypoint=
 trimString(payload.entrypoint)~=''and trimString(payload.entrypoint)or nil,
 preview=trimString(payload.preview)~=''and trimString(payload.preview)or nil,
 version=tonumber(payload.version)or 1,hash=hash,url=url,source=trimString(
@@ -2311,80 +2425,120 @@ then emitBridgeError('asset.resolve_failed',assetError)return end local
 animation={name=trimString(payload.name or payload.preset or payload.value)~=''
 and trimString(payload.name or payload.preset or payload.value)or'Idle',
 intensity=tonumber(payload.intensity)or 50,speed=tonumber(payload.speed or
-payload.playback_speed or payload.playbackSpeed)or 1}if directAnimationId then
-animation.animation_id=directAnimationId end if asset then animation.asset_id=
-asset.asset_id animation.asset_type=asset.type end local response,err=
-awaitRequest('cmd.animation.play',{room_id=roomId,entity_id=Client.ownAvatarId,
-animation=animation})if response==nil then emitBridgeError(
-'animation.play_failed',tostring(err))return end emitBridgeEvent(
-'animation.played',{room_id=roomId,entity_id=response.data.entity_id,asset_id=
-asset and asset.asset_id or nil,name=animation.name})emitBridgeState(
-'animation played: '..tostring(animation.name))end)end local function 
-bridgePatchEffect(effect)if type(effect)~='table'then emitBridgeError(
-'effect.invalid','Effect payload is required')return end if not Client.connected
-then emitBridgeError('runtime.disconnected','Runtime is not connected')return
-end if not Client.room or not Client.room.id then emitBridgeError(
-'room.required','Join a room before applying effects')return end task.spawn(
-function()local _,avatarError=ensureOwnAvatarEntity(Client.room.id)if
-avatarError then emitBridgeError('avatar.set_failed',tostring(avatarError))
-return end local response,err=awaitRequest('cmd.entity.patch',{room_id=Client.
-room.id,entity_id=Client.ownAvatarId,components={effect=effect}})if response==
-nil then emitBridgeError('effect.patch_failed',tostring(err))return end
-emitBridgeState('effect applied')end)end local function localPreviewAnchor()
-local character=LocalPlayer.Character if character==nil then return nil end
-return character:FindFirstChild('HumanoidRootPart')or character:FindFirstChild(
-'Head')end local function clearLocalPreview()if Client.previewHandle then
-destroyHandle(Client.previewHandle)Client.previewHandle=nil end end local 
-function bridgePreviewEffect(effect)if type(effect)~='table'then
-emitBridgeError('effect.invalid','Effect payload is required')return end local
-anchor=localPreviewAnchor()if anchor==nil then emitBridgeError(
-'preview.no_character','Local character is not ready')return end if Client.
-previewHandle==nil then Client.previewHandle={}end applyEffectToPart(Client.
-previewHandle,anchor,effectSettings('local_preview',{effect=effect,avatar={
-overlay_color=effect.color}}))emitBridgeState('preview applied')end function
-OverlayBridge.send(eventName,payload)payload=payload or{}if eventName==
-'room.list'then bridgeListRooms()elseif eventName=='room.create'then
-bridgeCreateRoom(payload.name)elseif eventName=='room.join'then bridgeJoinRoom(
-payload.room_id)elseif eventName=='room.delete'then bridgeDeleteRoom(payload.
-room_id)elseif eventName=='room.invite'then bridgeInviteRoom(payload.user_id,
-payload.room_id)elseif eventName=='room.kick'then bridgeKickRoom(payload.user_id
-,payload.room_id)elseif eventName=='chat.send'then bridgeSendChat(payload.scope,
-payload.text,payload.room_id)elseif eventName=='cmd.avatar.set'then
-bridgeSetAvatar(payload)elseif eventName=='cmd.morph.apply'then
-bridgeApplyMorph(payload)elseif eventName=='cmd.animation.play'then
-bridgePlayAnimation(payload)elseif eventName=='asset.catalog.load'then
+payload.playback_speed or payload.playbackSpeed)or 1,role=trimString(payload.
+role or payload.animation_role or payload.animationRole),looped=payload.looped~=
+false,sync_enabled=payload.sync_enabled==true}local partnerUserId=trimString(
+payload.partner_user_id or payload.partnerUserId)if partnerUserId~=''then
+animation.partner_user_id=partnerUserId elseif Client.syncPartnerUserId then
+animation.partner_user_id=Client.syncPartnerUserId end if payload.seat_enabled==
+true then animation.seat={enabled=true,role=animation.role,origin=
+localRootTransform()}end if directAnimationId then animation.animation_id=
+directAnimationId end if asset then animation.asset_id=asset.asset_id animation.
+asset_type=asset.type end local response,err=awaitRequest('cmd.animation.play',{
+room_id=roomId,entity_id=Client.ownAvatarId,animation=animation})if response==
+nil then emitBridgeError('animation.play_failed',tostring(err))return end
+emitBridgeEvent('animation.played',{room_id=roomId,entity_id=response.data.
+entity_id,asset_id=asset and asset.asset_id or nil,name=animation.name})
+emitBridgeState('animation played: '..tostring(animation.name))end)end local 
+function bridgeStopAnimation(payload)payload=bridgePayloadTable(payload)local
+roomId=bridgeRequireRoom('stopping animation')if not roomId then return end task
+.spawn(function()local partnerUserId=trimString(payload.partner_user_id or
+payload.partnerUserId)if partnerUserId==''then partnerUserId=Client.
+syncPartnerUserId end local response,err=awaitRequest('cmd.animation.stop',{
+room_id=roomId,entity_id=Client.ownAvatarId,sync_enabled=payload.sync_enabled==
+true,partner_user_id=partnerUserId})if response==nil then emitBridgeError(
+'animation.stop_failed',tostring(err))return end emitBridgeEvent(
+'animation.stopped',{room_id=roomId,entity_id=response.data.entity_id})
+emitBridgeState('animation stopped')end)end local function bridgeRequestSync(
+payload)payload=bridgePayloadTable(payload)local roomId=bridgeRequireRoom(
+'requesting sync')if not roomId then return end local targetUserId=trimString(
+payload.user_id or payload.userId or payload.partner_user_id or payload.
+partnerUserId)if targetUserId==''then emitBridgeError('sync.user_required',
+'Select a member first')return end task.spawn(function()local response,err=
+awaitRequest('cmd.sync.request',{room_id=roomId,user_id=targetUserId})if
+response==nil then emitBridgeError('sync.request_failed',tostring(err))return
+end if response.data and response.data.linked==true then Client.
+syncPartnerUserId=response.data.partner_user_id or targetUserId end
+emitBridgeEvent('sync.requested.local',response.data or{user_id=targetUserId})
+end)end local function bridgeClearSync()local roomId=bridgeRequireRoom(
+'clearing sync')if not roomId then return end task.spawn(function()local
+response,err=awaitRequest('cmd.sync.clear',{room_id=roomId})if response==nil
+then emitBridgeError('sync.clear_failed',tostring(err))return end Client.
+syncPartnerUserId=nil emitBridgeEvent('sync.cleared.local',response.data or{})
+emitBridgeState('sync cleared')end)end local function bridgePatchEffect(effect)
+if type(effect)~='table'then emitBridgeError('effect.invalid',
+'Effect payload is required')return end if not Client.connected then
+emitBridgeError('runtime.disconnected','Runtime is not connected')return end if
+not Client.room or not Client.room.id then emitBridgeError('room.required',
+'Join a room before applying effects')return end task.spawn(function()local _,
+avatarError=ensureOwnAvatarEntity(Client.room.id)if avatarError then
+emitBridgeError('avatar.set_failed',tostring(avatarError))return end local
+response,err=awaitRequest('cmd.entity.patch',{room_id=Client.room.id,entity_id=
+Client.ownAvatarId,components={effect=effect}})if response==nil then
+emitBridgeError('effect.patch_failed',tostring(err))return end emitBridgeState(
+'effect applied')end)end local function localPreviewAnchor()local character=
+LocalPlayer.Character if character==nil then return nil end return character:
+FindFirstChild('HumanoidRootPart')or character:FindFirstChild('Head')end local 
+function clearLocalPreview()if Client.previewHandle then destroyHandle(Client.
+previewHandle)Client.previewHandle=nil end end local function 
+bridgePreviewEffect(effect)if type(effect)~='table'then emitBridgeError(
+'effect.invalid','Effect payload is required')return end local anchor=
+localPreviewAnchor()if anchor==nil then emitBridgeError('preview.no_character',
+'Local character is not ready')return end if Client.previewHandle==nil then
+Client.previewHandle={}end applyEffectToPart(Client.previewHandle,anchor,
+effectSettings('local_preview',{effect=effect,avatar={overlay_color=effect.color
+}}))emitBridgeState('preview applied')end function OverlayBridge.send(eventName,
+payload)payload=payload or{}if eventName=='room.list'then bridgeListRooms()
+elseif eventName=='room.create'then bridgeCreateRoom(payload.name)elseif
+eventName=='room.join'then bridgeJoinRoom(payload.room_id)elseif eventName==
+'room.delete'then bridgeDeleteRoom(payload.room_id)elseif eventName==
+'room.invite'then bridgeInviteRoom(payload.user_id,payload.room_id)elseif
+eventName=='room.kick'then bridgeKickRoom(payload.user_id,payload.room_id)elseif
+eventName=='chat.send'then bridgeSendChat(payload.scope,payload.text,payload.
+room_id)elseif eventName=='cmd.avatar.set'then bridgeSetAvatar(payload)elseif
+eventName=='cmd.morph.apply'then bridgeApplyMorph(payload)elseif eventName==
+'cmd.animation.play'then bridgePlayAnimation(payload)elseif eventName==
+'cmd.animation.stop'then bridgeStopAnimation(payload)elseif eventName==
+'cmd.sync.request'then bridgeRequestSync(payload)elseif eventName==
+'cmd.sync.clear'then bridgeClearSync()elseif eventName=='asset.catalog.load'then
 loadAssetCatalog(payload.url or payload.catalog_url or payload.value)elseif
-eventName=='cmd.entity.patch'then bridgePatchEffect(payload.effect or payload.
-components and payload.components.effect or payload)elseif eventName==
-'effect.preview'then bridgePreviewEffect(payload.effect or payload)elseif
-eventName=='diagnostics.ping'then sendMessage('ping',{client_time_ms=math.floor(
-os.clock()*1000)})elseif eventName=='OverlayStop'then if type(GLOBAL.OverlayStop
-)=='function'then GLOBAL.OverlayStop()end else emitBridgeError(
-'bridge.unknown_event','Unknown bridge event: '..tostring(eventName))end end
-OverlayBridge.emit=OverlayBridge.send OverlayBridge.listRooms=bridgeListRooms
-OverlayBridge.createRoom=bridgeCreateRoom OverlayBridge.joinRoom=bridgeJoinRoom
-OverlayBridge.deleteRoom=bridgeDeleteRoom OverlayBridge.inviteRoom=
-bridgeInviteRoom OverlayBridge.kickRoom=bridgeKickRoom OverlayBridge.sendChat=
-bridgeSendChat OverlayBridge.setAvatar=bridgeSetAvatar OverlayBridge.applyMorph=
+eventName=='animation.catalog.load'then task.spawn(function()
+loadNativeAnimationArchive()end)elseif eventName=='cmd.entity.patch'then
+bridgePatchEffect(payload.effect or payload.components and payload.components.
+effect or payload)elseif eventName=='effect.preview'then bridgePreviewEffect(
+payload.effect or payload)elseif eventName=='diagnostics.ping'then sendMessage(
+'ping',{client_time_ms=math.floor(os.clock()*1000)})elseif eventName==
+'OverlayStop'then if type(GLOBAL.OverlayStop)=='function'then GLOBAL.
+OverlayStop()end else emitBridgeError('bridge.unknown_event',
+'Unknown bridge event: '..tostring(eventName))end end OverlayBridge.emit=
+OverlayBridge.send OverlayBridge.listRooms=bridgeListRooms OverlayBridge.
+createRoom=bridgeCreateRoom OverlayBridge.joinRoom=bridgeJoinRoom OverlayBridge.
+deleteRoom=bridgeDeleteRoom OverlayBridge.inviteRoom=bridgeInviteRoom
+OverlayBridge.kickRoom=bridgeKickRoom OverlayBridge.sendChat=bridgeSendChat
+OverlayBridge.setAvatar=bridgeSetAvatar OverlayBridge.applyMorph=
 bridgeApplyMorph OverlayBridge.playAnimation=bridgePlayAnimation OverlayBridge.
-loadAssetCatalog=loadAssetCatalog OverlayBridge.loadNativeMorphArchive=
-loadNativeMorphArchive OverlayBridge.loadNativeAnimationArchive=
-loadNativeAnimationArchive OverlayBridge.reloadNativeMorphCatalog=function()
-Client.nativeMorphLoadAttempted=false Client.nativeMorphCatalogEmitted=false
-task.spawn(function()loadNativeMorphArchive()end)end OverlayBridge.
-reloadNativeAnimationCatalog=function()Client.nativeAnimationLoadAttempted=false
-Client.nativeAnimationCatalogEmitted=false task.spawn(function()
-loadNativeAnimationArchive()end)end OverlayBridge.patchEffect=bridgePatchEffect
-OverlayBridge.previewEffect=bridgePreviewEffect end installOverlayBridge()GLOBAL
-.OverlayBridge=OverlayBridge task.spawn(function()loadNativeMorphArchive()end)
-local function refreshBridgeRoomList()if not Client.connected then return end
-task.spawn(function()local response,err=awaitRequest('room.list',{})if response
-==nil then emitBridgeError('room.list_failed',tostring(err))return end Client.
-cachedRooms=response.data.rooms or{}emitBridgeEvent('room.list',{rooms=Client.
-cachedRooms,online_count=response.data.online_count})end)end local function 
-runSession()disconnectWsConnections()Client.sessionId=Client.sessionId+1 local
-sessionId=Client.sessionId Client.avatarReadyRoomId=nil local ws=wsConnect(
-CONFIG.url)if ws==nil then return false,
+stopAnimation=bridgeStopAnimation OverlayBridge.requestSync=bridgeRequestSync
+OverlayBridge.clearSync=bridgeClearSync OverlayBridge.loadAssetCatalog=
+loadAssetCatalog OverlayBridge.loadNativeMorphArchive=loadNativeMorphArchive
+OverlayBridge.loadNativeAnimationManifest=loadNativeAnimationManifest
+OverlayBridge.loadNativeAnimationArchive=loadNativeAnimationArchive
+OverlayBridge.reloadNativeMorphCatalog=function()Client.nativeMorphLoadAttempted
+=false Client.nativeMorphCatalogEmitted=false task.spawn(function()
+loadNativeMorphArchive()end)end OverlayBridge.reloadNativeAnimationCatalog=
+function()Client.nativeAnimationLoadAttempted=false Client.
+nativeAnimationCatalogEmitted=false Client.nativeAnimationManifestLoaded=false
+task.spawn(function()loadNativeAnimationArchive()end)end OverlayBridge.
+patchEffect=bridgePatchEffect OverlayBridge.previewEffect=bridgePreviewEffect
+end installOverlayBridge()GLOBAL.OverlayBridge=OverlayBridge task.spawn(function
+()loadNativeMorphArchive()end)local function refreshBridgeRoomList()if not
+Client.connected then return end task.spawn(function()local response,err=
+awaitRequest('room.list',{})if response==nil then emitBridgeError(
+'room.list_failed',tostring(err))return end Client.cachedRooms=response.data.
+rooms or{}emitBridgeEvent('room.list',{rooms=Client.cachedRooms,online_count=
+response.data.online_count})end)end local function runSession()
+disconnectWsConnections()Client.sessionId=Client.sessionId+1 local sessionId=
+Client.sessionId Client.avatarReadyRoomId=nil local ws=wsConnect(CONFIG.url)if
+ws==nil then return false,
 [[no usable WebSocket API (checked WebSocket/websocket/syn.websocket connect variants)]]
 end Client.ws=ws Client.connected=true Client.lastServerContact=os.clock()
 emitBridgeState('connected')trackWsConnection(ws.OnMessage:Connect(function(raw)
@@ -2401,29 +2555,29 @@ authError)end Client.user=authResponse.data Client.ownAvatarId='avatar_'..Client
 .user.user_id log('authenticated as',Client.user.user_id)emitBridgeState(
 'authenticated as '..tostring(Client.user.user_id))if CONFIG.asset_catalog_url
 then loadAssetCatalog(CONFIG.asset_catalog_url)end task.spawn(function()
-loadNativeMorphArchive()end)task.spawn(function()loadNativeAnimationArchive()end
-)local roomId=nil local resumeFrom=0 local roomError=nil local pendingRoomId=
-pendingRoomFromTeleportSetting()if pendingRoomId then roomId=pendingRoomId
-elseif Client.room and Client.room.id then roomId=Client.room.id resumeFrom=
-Client.room.version or 0 elseif CONFIG.auto_join_default_room then roomId,
-resumeFrom,roomError=resolveRoom()end if roomId then Client.roomClosingId=nil
-local joinResponse,joinError=requestRoomJoin(roomId,resumeFrom or 0)if
-joinResponse==nil and string.find(tostring(joinError),'room.not_found',1,true)
-then log('previous room missing')Client.room=nil Client.avatarReadyRoomId=nil if
-CONFIG.auto_join_default_room then roomId,resumeFrom,roomError=resolveRoom()if
-roomId==nil then return false,roomError end joinResponse,joinError=
-requestRoomJoin(roomId,resumeFrom or 0)else refreshBridgeRoomList()
-emitBridgeState('ready')joinResponse=nil joinError=nil end end if joinResponse==
-nil then if joinError then return false,'room.join failed: '..tostring(joinError
-)end else if Client.teleporting then return true end log('joined room',Client.
-room.id,'at version',joinResponse.data.current_version)local _,avatarError=
-ensureOwnAvatarEntity(Client.room.id)if avatarError then return false,
-avatarError end emitBridgeState('joined '..tostring(Client.room.id))end else if
-roomError then return false,roomError end refreshBridgeRoomList()
-emitBridgeState('ready')end task.spawn(function()while Client.running and Client
-.connected do task.wait(Client.heartbeatSeconds*0.8)sendMessage('ping',{
-client_time_ms=math.floor(os.clock()*1000)})if os.clock()-Client.
-lastServerContact>Client.heartbeatSeconds*3 then log(
+loadNativeAnimationManifest()if CONFIG.native_animation_autoload then
+loadNativeAnimationArchive()end end)local roomId=nil local resumeFrom=0 local
+roomError=nil local pendingRoomId=pendingRoomFromTeleportSetting()if
+pendingRoomId then roomId=pendingRoomId elseif Client.room and Client.room.id
+then roomId=Client.room.id resumeFrom=Client.room.version or 0 elseif CONFIG.
+auto_join_default_room then roomId,resumeFrom,roomError=resolveRoom()end if
+roomId then Client.roomClosingId=nil local joinResponse,joinError=
+requestRoomJoin(roomId,resumeFrom or 0)if joinResponse==nil and string.find(
+tostring(joinError),'room.not_found',1,true)then log('previous room missing')
+Client.room=nil Client.avatarReadyRoomId=nil if CONFIG.auto_join_default_room
+then roomId,resumeFrom,roomError=resolveRoom()if roomId==nil then return false,
+roomError end joinResponse,joinError=requestRoomJoin(roomId,resumeFrom or 0)else
+refreshBridgeRoomList()emitBridgeState('ready')joinResponse=nil joinError=nil
+end end if joinResponse==nil then if joinError then return false,
+'room.join failed: '..tostring(joinError)end else if Client.teleporting then
+return true end log('joined room',Client.room.id,'at version',joinResponse.data.
+current_version)local _,avatarError=ensureOwnAvatarEntity(Client.room.id)if
+avatarError then return false,avatarError end emitBridgeState('joined '..
+tostring(Client.room.id))end else if roomError then return false,roomError end
+refreshBridgeRoomList()emitBridgeState('ready')end task.spawn(function()while
+Client.running and Client.connected do task.wait(Client.heartbeatSeconds*0.8)
+sendMessage('ping',{client_time_ms=math.floor(os.clock()*1000)})if os.clock()-
+Client.lastServerContact>Client.heartbeatSeconds*3 then log(
 'no server contact; forcing reconnect')Client.connected=false pcall(function()
 Client.ws:Close()end)end end end)local moveInterval=1/CONFIG.move_hz local
 moveKeepaliveSeconds=CONFIG.move_keepalive_seconds or 10 local lastMoveCFrame=
@@ -2473,6 +2627,7 @@ local PLACEHOLDER_ANIMATION = "No native animations"
 local ASSET_DROPDOWN_LIMIT = 150
 local ANIMATION_DROPDOWN_LIMIT = 200
 local DEFAULT_ANIMATIONS = { "Wave", "Dance", "Idle", "Point" }
+local ANIMATION_ROLE_VALUES = { "Any", "Male", "Female" }
 
 local MORPH_SLOT_VALUES = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "default" }
 local MORPH_SLOT_LABELS = {
@@ -2495,7 +2650,7 @@ local DEFAULT_THEME = {
 	AccentColor = Color3.fromRGB(125, 85, 255),
 	OutlineColor = Color3.fromRGB(40, 40, 40),
 	FontColor = Color3.new(1, 1, 1),
-	Font = Font.fromEnum(Enum.Font.Code),
+	Font = Font.fromEnum(Enum.Font.Gotham),
 	RedColor = Color3.fromRGB(255, 50, 50),
 	DestructiveColor = Color3.fromRGB(220, 38, 38),
 	DarkColor = Color3.new(0, 0, 0),
@@ -2514,6 +2669,10 @@ local DEFAULT_HOOKS = {
 	["cmd.morph.apply"] = function() end,
 	["cmd.entity.patch"] = function() end,
 	["cmd.animation.play"] = function() end,
+	["cmd.animation.stop"] = function() end,
+	["cmd.sync.request"] = function() end,
+	["cmd.sync.clear"] = function() end,
+	["animation.catalog.load"] = function() end,
 	["effect.preview"] = function() end,
 	OverlayStop = function() end,
 }
@@ -2604,6 +2763,7 @@ function OverlayUI.new(options)
 		SelectedMember = nil,
 		SelectedAsset = nil,
 		SelectedAnimation = nil,
+		SelectedAnimationRole = "Any",
 		AssetFilter = "",
 		FilteredAssetCount = 0,
 		SelectedMorphSlot = "1",
@@ -2817,11 +2977,16 @@ end
 function OverlayUI:_animationValues()
 	local values = {}
 	self.AnimationById = {}
+	local selectedRole = string.lower(tostring(self.State.SelectedAnimationRole or "Any"))
 	for _, animation in ipairs(self.State.Animations) do
 		if typeof(animation) == "table" and type(animation.asset_id) == "string" then
-			self.AnimationById[animation.asset_id] = animation
-			if #values < ANIMATION_DROPDOWN_LIMIT then
-				table.insert(values, animation.asset_id)
+			local role = string.lower(tostring(animation.role or "any"))
+			local roleMatches = selectedRole == "any" or role == "any" or role == selectedRole
+			if roleMatches then
+				self.AnimationById[animation.asset_id] = animation
+				if #values < ANIMATION_DROPDOWN_LIMIT then
+					table.insert(values, animation.asset_id)
+				end
 			end
 		end
 	end
@@ -2975,7 +3140,7 @@ end
 
 function OverlayUI:_currentEffectPayload()
 	local presetOption = self.Library.Options.Overlay_AuraPreset
-	local trailOption = self.Library.Options.Overlay_EffectTrail
+	local trailToggle = self.Library.Toggles and self.Library.Toggles.Overlay_EffectTrail
 	local intensityOption = self.Library.Options.Overlay_EffectIntensity
 	local preset = presetOption and presetOption.Value or "Violet"
 	local intensity = intensityOption and intensityOption.Value or 50
@@ -2983,7 +3148,7 @@ function OverlayUI:_currentEffectPayload()
 		preset = string.lower(tostring(preset)),
 		intensity = intensity,
 		color = auraPresetColor(preset),
-		trail = (trailOption and trailOption.Value or "Off") == "On",
+		trail = trailToggle and trailToggle.Value == true,
 	}
 end
 
@@ -3030,14 +3195,18 @@ function OverlayUI:_refreshMemberControls()
 
 	if dropdown then
 		self.RefreshingMembers = true
-		if dropdown.SetValues then
-			dropdown:SetValues(values)
-		end
-		if dropdown.SetDisabledValues then
-			dropdown:SetDisabledValues(#self.State.Members == 0 and { PLACEHOLDER_MEMBER } or {})
-		end
-		if dropdown.SetValue then
-			dropdown:SetValue(selectedValue)
+		for _, targetDropdown in ipairs({ dropdown, self.Controls.SyncMemberDropdown }) do
+			if targetDropdown then
+				if targetDropdown.SetValues then
+					targetDropdown:SetValues(values)
+				end
+				if targetDropdown.SetDisabledValues then
+					targetDropdown:SetDisabledValues(#self.State.Members == 0 and { PLACEHOLDER_MEMBER } or {})
+				end
+				if targetDropdown.SetValue then
+					targetDropdown:SetValue(selectedValue)
+				end
+			end
 		end
 		self.RefreshingMembers = false
 	end
@@ -3128,7 +3297,7 @@ function OverlayUI:_refreshAnimationDropdown()
 	self.RefreshingAnimations = false
 	local shownCount = math.min(#self.State.Animations, ANIMATION_DROPDOWN_LIMIT)
 	self:_setLabel("AnimationCatalogLabel", string.format(
-		"Native animations: %d total, %d shown",
+		"Animations: %d loaded, %d shown",
 		#self.State.Animations,
 		shownCount
 	))
@@ -3173,14 +3342,20 @@ function OverlayUI:Mount()
 		Rooms = self.Window:AddTab({ Name = "Rooms", Icon = "door-open", Description = "Create, refresh, and join rooms" }),
 		GlobalChat = self.Window:AddTab({ Name = "Global Chat", Icon = "messages-square", Description = "Global overlay channel" }),
 		RoomChat = self.Window:AddTab({ Name = "Room Chat", Icon = "message-circle", Description = "Selected room channel" }),
-		Avatar = self.Window:AddTab({ Name = "Avatar/Effects", Icon = "sparkles", Description = "Avatar, morph, and animation commands" }),
+		Avatar = self.Window:AddTab({ Name = "Avatar", Icon = "user-round", Description = "Avatar appearance" }),
+		Morphs = self.Window:AddTab({ Name = "Morphs", Icon = "layers-3", Description = "Native morph slots" }),
+		Effects = self.Window:AddTab({ Name = "Effects", Icon = "sparkles", Description = "Aura and trail" }),
+		Animation = self.Window:AddTab({ Name = "Animation", Icon = "person-standing", Description = "Animation, sync, and seat" }),
 		Diagnostics = self.Window:AddTab({ Name = "Diagnostics", Icon = "activity", Description = "Runtime status and cleanup" }),
 	}
 
 	self:_buildRooms()
 	self:_buildGlobalChat()
 	self:_buildRoomChat()
-	self:_buildAvatarEffects()
+	self:_buildAvatar()
+	self:_buildMorphs()
+	self:_buildEffects()
+	self:_buildAnimation()
 	self:_buildDiagnostics()
 	self:_refreshDiagnostics()
 	self:_refreshChatLabels()
@@ -3465,10 +3640,8 @@ function OverlayUI:_buildRoomChat()
 	})
 end
 
-function OverlayUI:_buildAvatarEffects()
-	local avatar = self.Tabs.Avatar:AddLeftGroupbox("Avatar", "user-round")
-	local effects = self.Tabs.Avatar:AddRightGroupbox("Effects", "sparkles")
-
+function OverlayUI:_buildAvatar()
+	local avatar = self.Tabs.Avatar:AddLeftGroupbox("Identity", "user-round")
 	avatar:AddInput("Overlay_AvatarId", {
 		Text = "Avatar asset / user id",
 		Placeholder = "asset id, GitHub raw URL, or user:123",
@@ -3478,13 +3651,17 @@ function OverlayUI:_buildAvatarEffects()
 	})
 	avatar:AddButton({
 		Text = "Set avatar",
-		Tooltip = "Emits cmd.avatar.set.",
+		Tooltip = "Apply a Roblox user appearance or an avatar asset.",
 		Func = function()
 			local option = self.Library.Options.Overlay_AvatarId
 			self:_emit("cmd.avatar.set", { value = option and option.Value or "" })
 		end,
 	})
+end
 
+function OverlayUI:_buildMorphs()
+	local effects = self.Tabs.Morphs:AddLeftGroupbox("Slots", "layers-3")
+	local actions = self.Tabs.Morphs:AddRightGroupbox("Apply", "wand-sparkles")
 	effects:AddInput("Overlay_MorphAssetId", {
 		Text = "Morph name / asset URL",
 		Placeholder = "cheiBody, Garchomp, or GitHub raw URL",
@@ -3525,11 +3702,11 @@ function OverlayUI:_buildAvatarEffects()
 			self:_refreshAssetDropdown()
 		end,
 	})
-	self.Controls.MorphCatalogLabel = effects:AddLabel("Overlay_MorphCatalogStatus", {
-		Text = "Native morphs: 0 total, 0 match, 0 shown",
+	self.Controls.MorphCatalogLabel = actions:AddLabel("Overlay_MorphCatalogStatus", {
+		Text = "Morphs: 0 loaded",
 		DoesWrap = false,
 	})
-	self.Controls.MorphAssetDropdown = effects:AddDropdown("Overlay_MorphCatalog", {
+	self.Controls.MorphAssetDropdown = actions:AddDropdown("Overlay_MorphCatalog", {
 		Text = "Native morph",
 		Values = { PLACEHOLDER_ASSET },
 		Default = 1,
@@ -3549,15 +3726,15 @@ function OverlayUI:_buildAvatarEffects()
 			self.State.SelectedAsset = value
 		end,
 	})
-	effects:AddDropdown("Overlay_MorphPreset", {
+	actions:AddDropdown("Overlay_MorphPreset", {
 		Text = "Morph preset",
 		Values = { "None", "Robot", "Ghost", "Custom" },
 		Default = 1,
 		Searchable = true,
 	})
-	effects:AddButton({
+	actions:AddButton({
 		Text = "Apply morph",
-		Tooltip = "Emits cmd.morph.apply.",
+		Tooltip = "Apply the selected morph to the selected slot.",
 		Func = function()
 			local asset = self.Library.Options.Overlay_MorphAssetId
 			local option = self.Library.Options.Overlay_MorphPreset
@@ -3572,24 +3749,84 @@ function OverlayUI:_buildAvatarEffects()
 			end
 		end,
 	})
-	effects:AddButton({
+	actions:AddButton({
 		Text = "Clear selected slot",
 		Tooltip = "Clears only the selected morph slot.",
 		Func = function()
 			self:_emit("cmd.morph.apply", { preset = "None", slot = self.State.SelectedMorphSlot or "1" })
 		end,
 	})
+end
+
+function OverlayUI:_buildEffects()
+	local effects = self.Tabs.Effects:AddLeftGroupbox("Aura", "sparkles")
+	local preview = self.Tabs.Effects:AddRightGroupbox("Preview", "eye")
 	effects:AddDropdown("Overlay_AuraPreset", {
 		Text = "Aura preset",
 		Values = { "Violet", "Cyan", "Emerald", "Gold", "Rose", "None" },
 		Default = 1,
 		Searchable = true,
 	})
-	self.Controls.AnimationCatalogLabel = effects:AddLabel("Overlay_AnimationCatalogStatus", {
-		Text = "Native animations: 0 total, 0 shown",
+	effects:AddToggle("Overlay_EffectTrail", {
+		Text = "Trail",
+		Default = false,
+	})
+	effects:AddSlider("Overlay_EffectIntensity", {
+		Text = "Effect intensity",
+		Default = 50,
+		Min = 0,
+		Max = 100,
+		Rounding = 0,
+		Suffix = "%",
+		Compact = true,
+	})
+	effects:AddButton({
+		Text = "Apply effect",
+		Tooltip = "Sync the selected aura to your room avatar.",
+		Func = function()
+			self:_emit("cmd.entity.patch", {
+				effect = self:_currentEffectPayload(),
+			})
+		end,
+	})
+	preview:AddButton({
+		Text = "Preview local",
+		Tooltip = "Preview on your character without syncing.",
+		Func = function()
+			self:_emit("effect.preview", {
+				effect = self:_currentEffectPayload(),
+			})
+		end,
+	})
+end
+
+function OverlayUI:_buildAnimation()
+	local picker = self.Tabs.Animation:AddLeftGroupbox("Animation", "person-standing")
+	local sync = self.Tabs.Animation:AddRightGroupbox("Sync", "link-2")
+	self.Controls.AnimationCatalogLabel = picker:AddLabel("Overlay_AnimationCatalogStatus", {
+		Text = "Animations: not loaded",
 		DoesWrap = false,
 	})
-	self.Controls.AnimationDropdown = effects:AddDropdown("Overlay_AnimationPreset", {
+	picker:AddButton({
+		Text = "Load catalog",
+		Tooltip = "Load native animations from the local archive.",
+		Func = function()
+			self:_emit("animation.catalog.load", {})
+			self:_notify("Loading animations", 2)
+		end,
+	})
+	picker:AddDropdown("Overlay_AnimationRole", {
+		Text = "Role",
+		Values = ANIMATION_ROLE_VALUES,
+		Default = 1,
+		Searchable = false,
+		Callback = function(value)
+			self.State.SelectedAnimationRole = value or "Any"
+			self.State.SelectedAnimation = nil
+			self:_refreshAnimationDropdown()
+		end,
+	})
+	self.Controls.AnimationDropdown = picker:AddDropdown("Overlay_AnimationPreset", {
 		Text = "Animation",
 		Values = DEFAULT_ANIMATIONS,
 		Default = 1,
@@ -3608,67 +3845,114 @@ function OverlayUI:_buildAvatarEffects()
 			self.State.SelectedAnimation = value
 		end,
 	})
-	effects:AddInput("Overlay_AnimationAssetId", {
-		Text = "Animation asset id / URL",
-		Placeholder = "optional",
-		Default = "",
-		Finished = true,
-		ClearTextOnFocus = false,
-	})
-	effects:AddSlider("Overlay_AnimationSpeed", {
-		Text = "Animation speed",
+	picker:AddSlider("Overlay_AnimationSpeed", {
+		Text = "Speed",
 		Default = 1,
 		Min = 0,
 		Max = 5,
 		Rounding = 2,
 		Compact = true,
 	})
-	effects:AddDropdown("Overlay_EffectTrail", {
-		Text = "Trail",
-		Values = { "Off", "On" },
+	picker:AddToggle("Overlay_AnimationLoop", {
+		Text = "Loop",
+		Default = true,
+	})
+	picker:AddInput("Overlay_AnimationAssetId", {
+		Text = "Advanced asset id / URL",
+		Placeholder = "optional",
+		Default = "",
+		Finished = true,
+		ClearTextOnFocus = false,
+	})
+	self.Controls.SyncMemberDropdown = sync:AddDropdown("Overlay_SyncMember", {
+		Text = "Partner",
+		Values = { PLACEHOLDER_MEMBER },
 		Default = 1,
-		Searchable = false,
-	})
-	effects:AddSlider("Overlay_EffectIntensity", {
-		Text = "Effect intensity",
-		Default = 50,
-		Min = 0,
-		Max = 100,
-		Rounding = 0,
-		Suffix = "%",
-		Compact = true,
-	})
-	effects:AddButton({
-		Text = "Apply effect",
-		Tooltip = "Applies a client-rendered aura effect to your room avatar.",
-		Func = function()
-			self:_emit("cmd.entity.patch", {
-				effect = self:_currentEffectPayload(),
-			})
+		AllowNull = true,
+		Searchable = true,
+		MaxVisibleDropdownItems = 6,
+		DisabledValues = { PLACEHOLDER_MEMBER },
+		FormatDisplayValue = function(value)
+			if value == PLACEHOLDER_MEMBER then
+				return PLACEHOLDER_MEMBER
+			end
+			local member = self.MemberById[value]
+			if member then
+				return self:_memberLabel(member)
+			end
+			return tostring(value or "")
+		end,
+		Callback = function(value)
+			if self.RefreshingMembers then
+				return
+			end
+			if value == PLACEHOLDER_MEMBER then
+				self.State.SelectedMember = nil
+				return
+			end
+			if type(value) == "string" and self.MemberById[value] then
+				self.State.SelectedMember = value
+			end
 		end,
 	})
-	effects:AddButton({
-		Text = "Preview local",
-		Tooltip = "Shows the selected effect on your own character without syncing it to the room.",
+	sync:AddButton({
+		Text = "Request sync",
+		Tooltip = "Pair with the selected room member.",
 		Func = function()
-			self:_emit("effect.preview", {
-				effect = self:_currentEffectPayload(),
-			})
+			local userId = self:_selectedMemberId()
+			if not userId or userId == PLACEHOLDER_MEMBER then
+				self:_notify("Select a partner", 2)
+				return
+			end
+			self:_emit("cmd.sync.request", { user_id = userId })
 		end,
 	})
-	effects:AddButton({
+	sync:AddButton({
+		Text = "Clear sync",
+		Func = function()
+			self:_emit("cmd.sync.clear", {})
+		end,
+	})
+	sync:AddToggle("Overlay_AnimationSync", {
+		Text = "Sync playback",
+		Default = true,
+	})
+	sync:AddToggle("Overlay_AnimationSeat", {
+		Text = "Seat lock",
+		Default = true,
+	})
+	picker:AddButton({
 		Text = "Play animation",
-		Tooltip = "Emits cmd.animation.play.",
+		Tooltip = "Play on your avatar. Sync options use the selected partner.",
 		Func = function()
 			local intensity = self.Library.Options.Overlay_EffectIntensity
 			local speed = self.Library.Options.Overlay_AnimationSpeed
+			local role = self.Library.Options.Overlay_AnimationRole
 			local asset = self.Library.Options.Overlay_AnimationAssetId
+			local loop = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationLoop
+			local syncToggle = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationSync
+			local seatToggle = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationSeat
 			local value = trimString(asset and asset.Value or "")
 			self:_emit("cmd.animation.play", {
 				name = self:_selectedAnimationName(),
 				intensity = intensity and intensity.Value or 50,
 				speed = speed and speed.Value or 1,
+				role = role and role.Value or self.State.SelectedAnimationRole or "Any",
+				looped = not loop or loop.Value ~= false,
+				sync_enabled = syncToggle and syncToggle.Value == true,
+				seat_enabled = seatToggle and seatToggle.Value == true,
+				partner_user_id = self:_selectedMemberId(),
 				value = value,
+			})
+		end,
+	})
+	picker:AddButton({
+		Text = "Stop animation",
+		Func = function()
+			local syncToggle = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationSync
+			self:_emit("cmd.animation.stop", {
+				sync_enabled = syncToggle and syncToggle.Value == true,
+				partner_user_id = self:_selectedMemberId(),
 			})
 		end,
 	})
@@ -3695,7 +3979,7 @@ function OverlayUI:_buildDiagnostics()
 	})
 
 	lifecycle:AddLabel({
-		Text = "OverlayStop is exposed as a bridge hook so the host runtime can close sockets, detach handlers, and unload this UI in its own order.",
+		Text = "Close the overlay runtime and remove local visuals.",
 		DoesWrap = true,
 		Size = 13,
 	})
@@ -3857,7 +4141,7 @@ function OverlayUI:HandleRuntimeEvent(eventName, payload)
 		self.State.Animations = payload and payload.animations or {}
 		self.State.SelectedAnimation = nil
 		self:_refreshAnimationDropdown()
-		self:_notify("Animation catalog loaded: " .. tostring(#self.State.Animations), 3)
+		self:_notify("Animations loaded: " .. tostring(#self.State.Animations), 3)
 	elseif eventName == "asset.cached" then
 		self:_notify("Asset cache: " .. tostring(payload and payload.asset_id or "?") .. " / " .. tostring(payload and payload.status or "?"), 3)
 	elseif eventName == "asset.descriptor.ready" then
@@ -3870,6 +4154,20 @@ function OverlayUI:HandleRuntimeEvent(eventName, payload)
 		self:_notify("Morph applied", 3)
 	elseif eventName == "animation.played" then
 		self:_notify("Animation played", 3)
+	elseif eventName == "animation.stopped" then
+		self:_notify("Animation stopped", 2)
+	elseif eventName == "sync.requested" then
+		self:_notify("Sync request from " .. tostring(payload and (payload.display_name or payload.from_user_id) or "?"), 4)
+	elseif eventName == "sync.requested.local" then
+		if payload and payload.linked == true then
+			self:_notify("Sync linked", 3)
+		else
+			self:_notify("Sync request sent", 3)
+		end
+	elseif eventName == "sync.linked" then
+		self:_notify("Sync linked", 3)
+	elseif eventName == "sync.cleared" or eventName == "sync.cleared.local" then
+		self:_notify("Sync cleared", 2)
 	elseif eventName == "diagnostics.state" then
 		self:SetRuntimeState(payload and payload.state or "connected")
 	elseif eventName == "error" then
