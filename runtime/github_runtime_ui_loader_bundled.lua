@@ -1646,9 +1646,9 @@ Client.room.id==roomId)then Client.room=nil end if roomId==nil or Client.
 avatarReadyRoomId==roomId then Client.avatarReadyRoomId=nil end if roomId==nil
 or Client.roomClosingId==roomId then Client.roomClosingId=nil end Client.joining
 =nil Client.deferredSnapshot=nil clearEntities()end trackConnection(RunService.
-Heartbeat:Connect(function()local now=os.clock()local renderAt=os.clock()-CONFIG
-.interp_delay for entityId,entity in pairs(Client.entities)do local handle=
-entity.handle if entity.rendererKind=='proxy'and handle and handle.model and#
+Heartbeat:Connect(function(delta)local now=os.clock()local renderAt=os.clock()-
+CONFIG.interp_delay for entityId,entity in pairs(Client.entities)do local handle
+=entity.handle if entity.rendererKind=='proxy'and handle and handle.model and#
 entity.samples>0 then local samples=entity.samples local previous,following for
 i=#samples,1,-1 do if samples[i].at<=renderAt then previous=samples[i]following=
 samples[i+1]break end end if previous==nil then handle.model.CFrame=samples[1].
