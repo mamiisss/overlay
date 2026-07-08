@@ -257,6 +257,7 @@ local Client = {
 	nativeMorphArchiveLoading = false,
 	nativeMorphCatalog = {},
 	nativeMorphCatalogIndex = {},
+	nativeMorphCatalogSlots = {},
 	nativeMorphLookup = {},
 	nativeMorphStats = {},
 	nativeMorphLoadAttempted = false,
@@ -1178,6 +1179,29 @@ local function destroyHandle(handle)
 		end
 		handle.nativeMorphHiddenParts = nil
 	end
+	if type(handle.nativeMorphSlots) == "table" then
+		for _, state in pairs(handle.nativeMorphSlots) do
+			if type(state.nativeMorphHiddenParts) == "table" then
+				for _, item in ipairs(state.nativeMorphHiddenParts) do
+					local part = item and item.part
+					if part and part.Parent then
+						pcall(function()
+							part.Transparency = item.transparency
+						end)
+						pcall(function()
+							part.LocalTransparencyModifier = item.localTransparencyModifier
+						end)
+					end
+				end
+			end
+			if state.root then
+				pcall(function()
+					state.root:Destroy()
+				end)
+			end
+		end
+		handle.nativeMorphSlots = nil
+	end
 	if handle.connections then
 		for _, connection in ipairs(handle.connections) do
 			pcall(function()
@@ -1827,6 +1851,47 @@ local MORPH_GROUP_MOUNTS = {
 	LowerR = { anchor = "Torso", offset = "torso_lower_right_back" },
 }
 
+local NativeMorph = {
+	slotLabels = {
+		["1"] = "1 Pink",
+		["2"] = "2 Green",
+		["3"] = "3 Purple",
+		["4"] = "4 Blue",
+		["5"] = "5 Orange",
+		["6"] = "6 Yellow",
+		["7"] = "7 Red",
+		["8"] = "8 Cyan",
+		["9"] = "Customize 1",
+		["10"] = "Customize 2",
+		default = "General",
+	},
+	slotAliases = {
+		["1"] = "1", ["1pink"] = "1", pink = "1", upper = "1", chest = "1",
+		["2"] = "2", ["2green"] = "2", green = "2", lower = "2", rear = "2",
+		["3"] = "3", ["3purple"] = "3", purple = "3",
+		["4"] = "4", ["4blue"] = "4", blue = "4", front = "4",
+		["5"] = "5", ["5orange"] = "5", orange = "5",
+		["6"] = "6", ["6yellow"] = "6", yellow = "6", body = "6",
+		["7"] = "7", ["7red"] = "7", red = "7", accessory = "7",
+		["8"] = "8", ["8cyan"] = "8", cyan = "8", head = "8",
+		["9"] = "9", ["customize1"] = "9", customize1 = "9",
+		["10"] = "10", ["customize2"] = "10", customize2 = "10",
+	},
+}
+
+function NativeMorph.normalizeSlot(value)
+	local raw = trimString(value)
+	if raw == "" then
+		return nil
+	end
+	local firstSegment = string.match(raw, "^([^/]+)/")
+	if firstSegment then
+		raw = firstSegment
+	end
+	local key = string.lower(raw):gsub("[%s%p_%-]+", "")
+	return NativeMorph.slotAliases[key] or (NativeMorph.slotLabels[raw] and raw or nil)
+end
+
 local function isDescriptorBasePartClass(className)
 	return className == "Part"
 		or className == "WedgePart"
@@ -2297,16 +2362,22 @@ local function emitNativeMorphCatalog(archive)
 
 	local assets = {}
 	local index = {}
+	local slots = {}
 	Client.nativeMorphLookup = {}
 	local function addMorph(categoryName, item)
 		if item == nil or (not item:IsA("Folder") and not item:IsA("Model")) then
 			return
 		end
 		local pathName = trimString(categoryName) ~= "" and (categoryName .. "/" .. item.Name) or item.Name
+		local slot = NativeMorph.normalizeSlot(categoryName) or NativeMorph.normalizeSlot(pathName) or "default"
+		slots[slot] = NativeMorph.slotLabels[slot] or slot
 		table.insert(assets, {
 			asset_id = "native:" .. pathName,
 			name = item.Name,
 			display_name = pathName,
+			category = categoryName,
+			slot = slot,
+			slot_label = NativeMorph.slotLabels[slot] or slot,
 			type = "native_morph",
 			kind = "native_morph",
 			format = "rbxm_native_archive",
@@ -2319,6 +2390,7 @@ local function emitNativeMorphCatalog(archive)
 			normalizedPath = normalizedPath,
 			normalizedName = normalizedName,
 			displayName = pathName,
+			slot = slot,
 		})
 		Client.nativeMorphLookup[normalizedPath] = item
 		if Client.nativeMorphLookup[normalizedName] == nil then
@@ -2348,6 +2420,7 @@ local function emitNativeMorphCatalog(archive)
 
 	Client.nativeMorphCatalog = assets
 	Client.nativeMorphCatalogIndex = index
+	Client.nativeMorphCatalogSlots = slots
 	Client.assetCatalog = assets
 	Client.assetCatalogById = {}
 	for _, asset in ipairs(assets) do
@@ -2361,6 +2434,7 @@ local function emitNativeMorphCatalog(archive)
 		source = "native_morph_archive",
 		status = Client.nativeMorphArchiveStatus,
 		path = CONFIG.native_morph_archive_path,
+		slots = slots,
 	})
 	emitBridgeState("native morph catalog loaded: " .. tostring(#assets))
 end
@@ -2671,9 +2745,64 @@ local function restoreNativeMorphHiddenParts(handle)
 	handle.nativeMorphHiddenParts = nil
 end
 
+function NativeMorph.slotState(handle, slot)
+	if handle == nil then
+		return nil
+	end
+	slot = trimString(slot) ~= "" and trimString(slot) or "default"
+	handle.nativeMorphSlots = handle.nativeMorphSlots or {}
+	local state = handle.nativeMorphSlots[slot]
+	if state == nil then
+		state = { slot = slot }
+		handle.nativeMorphSlots[slot] = state
+	end
+	return state
+end
+
+function NativeMorph.rebuildSmartBones(handle)
+	if handle == nil then
+		return
+	end
+	local all = {}
+	for _, state in pairs(handle.nativeMorphSlots or {}) do
+		for _, controller in ipairs(state.smartBones or {}) do
+			table.insert(all, controller)
+		end
+	end
+	handle.nativeMorphSmartBones = #all > 0 and all or nil
+end
+
+function NativeMorph.clearSlot(handle, slot)
+	if handle == nil then
+		return
+	end
+	if type(handle.nativeMorphSlots) ~= "table" then
+		return
+	end
+	local state = handle.nativeMorphSlots[slot]
+	if state == nil then
+		return
+	end
+	restoreNativeMorphHiddenParts(state)
+	if state.root then
+		destroyInstanceDeferred(state.root)
+	end
+	handle.nativeMorphSlots[slot] = nil
+	NativeMorph.rebuildSmartBones(handle)
+end
+
 local function clearNativeMorph(handle)
 	if handle == nil then
 		return
+	end
+	if type(handle.nativeMorphSlots) == "table" then
+		local slots = {}
+		for slot in pairs(handle.nativeMorphSlots) do
+			table.insert(slots, slot)
+		end
+		for _, slot in ipairs(slots) do
+			NativeMorph.clearSlot(handle, slot)
+		end
 	end
 	restoreNativeMorphHiddenParts(handle)
 	if handle.nativeMorphRoot then
@@ -2685,7 +2814,7 @@ local function clearNativeMorph(handle)
 	handle.nativeMorphSmartBones = nil
 end
 
-local function mountNativeMorphGroup(handle, group, character, fallbackAnchor)
+local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, slotState)
 	local mount = MORPH_GROUP_MOUNTS[group.Name]
 	local anchor = mount and findCharacterPart(character, { mount.anchor }) or nil
 	anchor = anchor or fallbackAnchor
@@ -2721,9 +2850,33 @@ local function mountNativeMorphGroup(handle, group, character, fallbackAnchor)
 	joint.Parent = middle
 
 	if mount and BODY_REPLACEMENT_TARGETS[group.Name] then
-		hideNativeMorphTarget(handle, anchor)
+		hideNativeMorphTarget(slotState or handle, anchor)
 	end
 	return true
+end
+
+function NativeMorph.clearConflictingGroups(handle, exceptSlot, groups)
+	local groupNames = {}
+	for _, group in ipairs(groups or {}) do
+		if group and MORPH_GROUP_MOUNTS[group.Name] then
+			groupNames[group.Name] = true
+		end
+	end
+	local slotsToClear = {}
+	for slot, state in pairs(handle.nativeMorphSlots or {}) do
+		if slot ~= exceptSlot and type(state.groupNames) == "table" then
+			for groupName in pairs(groupNames) do
+				if state.groupNames[groupName] then
+					table.insert(slotsToClear, slot)
+					break
+				end
+			end
+		end
+	end
+	for _, slot in ipairs(slotsToClear) do
+		NativeMorph.clearSlot(handle, slot)
+	end
+	return groupNames
 end
 
 local function createNativeSmartBoneControllers(root)
@@ -2743,25 +2896,31 @@ local function createNativeSmartBoneControllers(root)
 	return #controllers > 0 and controllers or nil
 end
 
-local function applyNativeMorph(handle, anchorPart, components, entityId, character)
-	if handle == nil or type(components) ~= "table" then
+function NativeMorph.applySlot(handle, anchorPart, components, entityId, character, slot, morphEntry)
+	if handle == nil or type(morphEntry) ~= "table" then
 		return false
 	end
-	local morph = components.morph
-	local query = nativeMorphQuery(morph)
+	local rawSlot = trimString(slot or morphEntry.slot or morphEntry.category)
+	slot = NativeMorph.normalizeSlot(rawSlot) or (rawSlot ~= "" and rawSlot or "default")
+	if morphEntry.enabled == false then
+		NativeMorph.clearSlot(handle, slot)
+		return true
+	end
+	local query = nativeMorphQuery(morphEntry)
 	if query == nil then
+		NativeMorph.clearSlot(handle, slot)
 		return false
 	end
 
 	local source = findNativeMorphByName(query)
 	if source == nil then
-		clearNativeMorph(handle)
+		NativeMorph.clearSlot(handle, slot)
 		return true
 	end
 
 	local stats = nativeMorphStats(source)
 	if stats and not stats.withinLimit then
-		clearNativeMorph(handle)
+		NativeMorph.clearSlot(handle, slot)
 		local message = "Native morph too heavy: " .. tostring(stats.baseParts) .. " parts (limit " .. tostring(CONFIG.native_morph_max_base_parts) .. ")"
 		emitBridgeError("native_morph.too_heavy", message)
 		emitBridgeState(message)
@@ -2769,32 +2928,27 @@ local function applyNativeMorph(handle, anchorPart, components, entityId, charac
 	end
 
 	character = character or (anchorPart and anchorPart.Parent)
-	local key = normalizeMorphName(query) .. ":" .. tostring(source)
-	if handle.nativeMorphRoot and handle.nativeMorphKey == key and handle.nativeMorphCharacter == character then
+	local key = tostring(slot) .. ":" .. normalizeMorphName(query) .. ":" .. tostring(source)
+	local state = NativeMorph.slotState(handle, slot)
+	if state.root and state.key == key and state.character == character then
 		return true
 	end
 
-	clearNativeMorph(handle)
-	if handle.descriptorMorphRoot then
-		pcall(function()
-			handle.descriptorMorphRoot:Destroy()
-		end)
-	end
-	handle.descriptorMorphRoot = nil
-	handle.descriptorMorphAssetId = nil
-	handle.descriptorMorphAnchor = nil
-	handle.descriptorMorphJiggle = nil
+	NativeMorph.clearSlot(handle, slot)
+	state = NativeMorph.slotState(handle, slot)
 
 	local root = Instance.new("Folder")
-	root.Name = "OverlayNativeMorph_" .. tostring(entityId or query)
+	root.Name = "OverlayNativeMorph_" .. tostring(entityId or query) .. "_" .. tostring(slot)
 
 	local clone = source:Clone()
 	clone.Name = source.Name
 	clone.Parent = root
 
+	local groups = topNativeMorphGroups(clone)
+	local groupNames = NativeMorph.clearConflictingGroups(handle, slot, groups)
 	local mountedAny = false
-	for _, group in ipairs(topNativeMorphGroups(clone)) do
-		if mountNativeMorphGroup(handle, group, character, anchorPart) then
+	for _, group in ipairs(groups) do
+		if mountNativeMorphGroup(handle, group, character, anchorPart, state) then
 			mountedAny = true
 		end
 	end
@@ -2821,15 +2975,84 @@ local function applyNativeMorph(handle, anchorPart, components, entityId, charac
 
 	if not mountedAny then
 		root:Destroy()
+		handle.nativeMorphSlots[slot] = nil
 		return true
 	end
 
 	root.Parent = handle.folder or entityFolder
-	handle.nativeMorphRoot = root
-	handle.nativeMorphKey = key
-	handle.nativeMorphCharacter = character
-	handle.nativeMorphSmartBones = createNativeSmartBoneControllers(root)
+	state.root = root
+	state.key = key
+	state.character = character
+	state.groupNames = groupNames
+	state.smartBones = createNativeSmartBoneControllers(root)
+	NativeMorph.rebuildSmartBones(handle)
 	return true
+end
+
+local function applyNativeMorph(handle, anchorPart, components, entityId, character)
+	if handle == nil or type(components) ~= "table" then
+		return false
+	end
+	local morph = components.morph
+	if type(morph) ~= "table" then
+		return false
+	end
+	if morph.enabled == false then
+		clearNativeMorph(handle)
+		return true
+	end
+
+	if type(morph.slots) == "table" then
+		if handle.descriptorMorphRoot then
+			pcall(function()
+				handle.descriptorMorphRoot:Destroy()
+			end)
+		end
+		handle.descriptorMorphRoot = nil
+		handle.descriptorMorphAssetId = nil
+		handle.descriptorMorphAnchor = nil
+		handle.descriptorMorphJiggle = nil
+
+		local activeSlots = {}
+		local appliedAny = false
+		for slot, entry in pairs(morph.slots) do
+			local normalizedSlot = NativeMorph.normalizeSlot(slot) or tostring(slot)
+			activeSlots[normalizedSlot] = true
+			if type(entry) == "table" and entry.enabled ~= false and nativeMorphQuery(entry) ~= nil then
+				if NativeMorph.applySlot(handle, anchorPart, components, entityId, character, normalizedSlot, entry) then
+					appliedAny = true
+				end
+			else
+				NativeMorph.clearSlot(handle, normalizedSlot)
+			end
+		end
+		local staleSlots = {}
+		for slot in pairs(handle.nativeMorphSlots or {}) do
+			if not activeSlots[slot] then
+				table.insert(staleSlots, slot)
+			end
+		end
+		for _, slot in ipairs(staleSlots) do
+			NativeMorph.clearSlot(handle, slot)
+		end
+		return appliedAny or next(activeSlots) ~= nil
+	end
+
+	local query = nativeMorphQuery(morph)
+	if query == nil then
+		return false
+	end
+	if handle.descriptorMorphRoot then
+		pcall(function()
+			handle.descriptorMorphRoot:Destroy()
+		end)
+	end
+	handle.descriptorMorphRoot = nil
+	handle.descriptorMorphAssetId = nil
+	handle.descriptorMorphAnchor = nil
+	handle.descriptorMorphJiggle = nil
+	local slot = NativeMorph.normalizeSlot(morph.slot or morph.category or query) or "default"
+	return NativeMorph.applySlot(handle, anchorPart, components, entityId, character, slot, morph)
 end
 
 local function clearDescriptorMorph(handle)
@@ -3912,6 +4135,7 @@ function OverlayBridge.onEvent(callback)
 					source = "native_morph_archive",
 					status = Client.nativeMorphArchiveStatus,
 					path = CONFIG.native_morph_archive_path,
+					slots = Client.nativeMorphCatalogSlots,
 				})
 			end
 		end)
@@ -3943,6 +4167,7 @@ function OverlayBridge.getState()
 		room = Client.room,
 		rooms = Client.cachedRooms,
 		assets = assets,
+		asset_slots = Client.nativeMorphCatalogSlots,
 		native_morph_archive = {
 			status = Client.nativeMorphArchiveStatus,
 			error = Client.nativeMorphArchiveError,
@@ -4413,6 +4638,28 @@ local function bridgeSetAvatar(payload)
 	end)
 end
 
+function NativeMorph.copySlots(source)
+	local out = {}
+	if type(source) == "table" and type(source.slots) == "table" then
+		for slot, entry in pairs(source.slots) do
+			if type(entry) == "table" then
+				local copied = {}
+				for key, value in pairs(entry) do
+					copied[key] = value
+				end
+				out[tostring(slot)] = copied
+			end
+		end
+	end
+	return out
+end
+
+function NativeMorph.currentOwnMorphComponent()
+	local entity = Client.ownAvatarId and Client.entities[Client.ownAvatarId] or nil
+	local components = entity and entity.components or nil
+	return type(components) == "table" and components.morph or nil
+end
+
 local function bridgeApplyMorph(payload)
 	payload = bridgePayloadTable(payload)
 	local roomId = bridgeRequireRoom("applying morph")
@@ -4462,6 +4709,24 @@ local function bridgeApplyMorph(payload)
 			morph.enabled = false
 		end
 
+		local requestedSlot = NativeMorph.normalizeSlot(payload.slot or payload.category or payload.morph_slot or payload.morphSlot)
+		if requestedSlot then
+			local slots = NativeMorph.copySlots(NativeMorph.currentOwnMorphComponent())
+			if morph.enabled == false then
+				slots[requestedSlot] = nil
+			else
+				morph.slot = requestedSlot
+				slots[requestedSlot] = morph
+			end
+			morph = {
+				native = true,
+				slots = slots,
+			}
+			if next(slots) == nil then
+				morph.enabled = false
+			end
+		end
+
 		local response, err = awaitRequest("cmd.morph.apply", {
 			room_id = roomId,
 			entity_id = Client.ownAvatarId,
@@ -4474,11 +4739,16 @@ local function bridgeApplyMorph(payload)
 
 		Client.ownAvatarId = response.data.entity_id
 		Client.avatarReadyRoomId = roomId
+		local ownEntity = Client.entities[Client.ownAvatarId]
+		if ownEntity and type(ownEntity.components) == "table" then
+			ownEntity.components.morph = morph
+		end
 		emitBridgeEvent("morph.applied", {
 			room_id = roomId,
 			entity_id = Client.ownAvatarId,
 			asset_id = asset and asset.asset_id or nil,
 			preset = morph.preset,
+			slot = requestedSlot,
 		})
 		emitBridgeState(asset and ("morph asset applied: " .. tostring(asset.asset_id)) or ("morph applied: " .. tostring(morph.preset)))
 	end)
@@ -4908,6 +5178,21 @@ local PLACEHOLDER_MEMBER = "No members"
 local PLACEHOLDER_ASSET = "No catalog assets"
 local ASSET_DROPDOWN_LIMIT = 150
 
+local MORPH_SLOT_VALUES = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "default" }
+local MORPH_SLOT_LABELS = {
+	["1"] = "1 Pink",
+	["2"] = "2 Green",
+	["3"] = "3 Purple",
+	["4"] = "4 Blue",
+	["5"] = "5 Orange",
+	["6"] = "6 Yellow",
+	["7"] = "7 Red",
+	["8"] = "8 Cyan",
+	["9"] = "Customize 1",
+	["10"] = "Customize 2",
+	default = "General",
+}
+
 local DEFAULT_THEME = {
 	BackgroundColor = Color3.fromRGB(15, 15, 15),
 	MainColor = Color3.fromRGB(25, 25, 25),
@@ -5021,6 +5306,7 @@ function OverlayUI.new(options)
 		SelectedAsset = nil,
 		AssetFilter = "",
 		FilteredAssetCount = 0,
+		SelectedMorphSlot = "1",
 		JoinedRoom = nil,
 		GlobalHistory = {},
 		RoomHistory = {},
@@ -5168,6 +5454,11 @@ function OverlayUI:_assetLabel(assetOrId)
 	return tostring(assetOrId or "")
 end
 
+function OverlayUI:_morphSlotLabel(slot)
+	slot = tostring(slot or "default")
+	return MORPH_SLOT_LABELS[slot] or slot
+end
+
 function OverlayUI:_memberValues()
 	local values = {}
 	self.MemberById = {}
@@ -5188,13 +5479,16 @@ function OverlayUI:_assetValues()
 	local values = {}
 	self.AssetById = {}
 	local filter = string.lower(trimString(self.State.AssetFilter or ""))
+	local selectedSlot = tostring(self.State.SelectedMorphSlot or "1")
 	local totalMatches = 0
 	for _, asset in ipairs(self.State.Assets) do
 		if typeof(asset) == "table" and type(asset.asset_id) == "string" then
 			self.AssetById[asset.asset_id] = asset
 			local label = string.lower(self:_assetLabel(asset))
 			local id = string.lower(asset.asset_id)
-			if filter == "" or string.find(label, filter, 1, true) or string.find(id, filter, 1, true) then
+			local slot = tostring(asset.slot or asset.category or "default")
+			local slotMatches = selectedSlot == "" or slot == selectedSlot
+			if slotMatches and (filter == "" or string.find(label, filter, 1, true) or string.find(id, filter, 1, true)) then
 				totalMatches += 1
 				if #values < ASSET_DROPDOWN_LIMIT then
 					table.insert(values, asset.asset_id)
@@ -5445,7 +5739,8 @@ function OverlayUI:_refreshAssetDropdown()
 		shownCount = 0
 	end
 	self:_setLabel("MorphCatalogLabel", string.format(
-		"Native morphs: %d total, %d match, %d shown",
+		"Native morphs: %s | %d total, %d match, %d shown",
+		self:_morphSlotLabel(self.State.SelectedMorphSlot),
 		#self.State.Assets,
 		self.State.FilteredAssetCount or 0,
 		shownCount
@@ -5809,6 +6104,27 @@ function OverlayUI:_buildAvatarEffects()
 		Finished = true,
 		ClearTextOnFocus = false,
 	})
+	self.Controls.MorphSlotDropdown = effects:AddDropdown("Overlay_MorphSlot", {
+		Text = "Morph slot",
+		Values = MORPH_SLOT_VALUES,
+		Default = 1,
+		Searchable = false,
+		MaxVisibleDropdownItems = 10,
+		FormatDisplayValue = function(value)
+			return self:_morphSlotLabel(value)
+		end,
+		FormatListValue = function(value)
+			return self:_morphSlotLabel(value)
+		end,
+		Callback = function(value)
+			if type(value) ~= "string" then
+				return
+			end
+			self.State.SelectedMorphSlot = value
+			self.State.SelectedAsset = nil
+			self:_refreshAssetDropdown()
+		end,
+	})
 	effects:AddInput("Overlay_MorphSearch", {
 		Text = "Filter native morphs",
 		Placeholder = "type, press Enter",
@@ -5858,13 +6174,21 @@ function OverlayUI:_buildAvatarEffects()
 			local asset = self.Library.Options.Overlay_MorphAssetId
 			local option = self.Library.Options.Overlay_MorphPreset
 			local value = trimString(asset and asset.Value or "")
+			local slot = self.State.SelectedMorphSlot or "1"
 			if value ~= "" then
-				self:_emit("cmd.morph.apply", { value = value })
+				self:_emit("cmd.morph.apply", { value = value, slot = slot })
 			elseif self:_selectedAssetId() then
-				self:_emit("cmd.morph.apply", { asset_id = self:_selectedAssetId() })
+				self:_emit("cmd.morph.apply", { asset_id = self:_selectedAssetId(), slot = slot })
 			else
-				self:_emit("cmd.morph.apply", { preset = option and option.Value or "None" })
+				self:_emit("cmd.morph.apply", { preset = option and option.Value or "None", slot = slot })
 			end
+		end,
+	})
+	effects:AddButton({
+		Text = "Clear selected slot",
+		Tooltip = "Clears only the selected morph slot.",
+		Func = function()
+			self:_emit("cmd.morph.apply", { preset = "None", slot = self.State.SelectedMorphSlot or "1" })
 		end,
 	})
 	effects:AddDropdown("Overlay_AuraPreset", {
