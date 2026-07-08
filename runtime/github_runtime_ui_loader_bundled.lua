@@ -1825,44 +1825,60 @@ fallback.Z)end return fallback end local function defaultSeatOffset(role)role=
 string.lower(tostring(role or''))if role=='male'or role=='m'then return Vector3.
 new(-0.9,0,0)end if role=='female'or role=='f'then return Vector3.new(0.9,0,0)
 end return Vector3.zero end local function clearNativeAnimationSeat(handle)if
-handle==nil then return end if handle.nativeAnimationSeatHumanoid and handle.
-nativeAnimationSeatAutoRotate~=nil then pcall(function()handle.
-nativeAnimationSeatHumanoid.AutoRotate=handle.nativeAnimationSeatAutoRotate end)
-end handle.nativeAnimationSeatHumanoid=nil handle.nativeAnimationSeatAutoRotate=
-nil handle.nativeAnimationSeatKey=nil if handle.nativeAnimationSeat then pcall(
-function()handle.nativeAnimationSeat:Destroy()end)handle.nativeAnimationSeat=nil
-end end local function applyNativeAnimationSeat(handle,character,animation)if
-handle==nil or character==nil or type(animation)~='table'then return end local
-seat=type(animation.seat)=='table'and animation.seat or nil if seat==nil or seat
-.enabled==false then clearNativeAnimationSeat(handle)return end if character~=
-LocalPlayer.Character then clearNativeAnimationSeat(handle)return end local root
-=character:FindFirstChild('HumanoidRootPart')local humanoid=character:
-FindFirstChildOfClass('Humanoid')if root==nil or humanoid==nil then return end
-local origin=type(seat.origin)=='table'and transformToCFrame(seat.origin)or root
-.CFrame local offset=seatVector(seat.offset,defaultSeatOffset(seat.role or
-animation.role))local seatCFrame=origin*CFrame.new(offset)*CFrame.new(0,0.5,0)
-local seatKey=tostring(seatCFrame)local seatPart=handle.nativeAnimationSeat if
-seatPart==nil or seatPart.Parent==nil then seatPart=Instance.new('Seat')seatPart
-.Name='OverlaySyncSeat'seatPart.Size=Vector3.new(2,0.35,2)seatPart.Transparency=
-1 seatPart.CanCollide=false seatPart.Anchored=true pcall(function()seatPart.
-Disabled=false end)seatPart.Parent=handle.folder or entityFolder handle.
-nativeAnimationSeat=seatPart end seatPart.CFrame=seatCFrame if handle.
-nativeAnimationSeatHumanoid~=humanoid then if handle.nativeAnimationSeatHumanoid
+handle==nil then return end local humanoid=handle.nativeAnimationSeatHumanoid
+local seatPart=handle.nativeAnimationSeat if handle.nativeAnimationSeatHumanoid
 and handle.nativeAnimationSeatAutoRotate~=nil then pcall(function()handle.
+nativeAnimationSeatHumanoid.AutoRotate=handle.nativeAnimationSeatAutoRotate end)
+end if humanoid and humanoid.Parent and seatPart and humanoid.SeatPart==seatPart
+then pcall(function()humanoid.Sit=false end)end handle.
+nativeAnimationSeatHumanoid=nil handle.nativeAnimationSeatAutoRotate=nil handle.
+nativeAnimationSeatKey=nil handle.nativeAnimationSeatAttempt=nil if handle.
+nativeAnimationSeat then pcall(function()handle.nativeAnimationSeat:Destroy()end
+)handle.nativeAnimationSeat=nil end end local function 
+forceSitNativeAnimationSeat(handle,character,humanoid,root,seatPart,seatCFrame,
+seatKey)handle.nativeAnimationSeatAttempt=(handle.nativeAnimationSeatAttempt or
+0)+1 local attemptToken=handle.nativeAnimationSeatAttempt task.spawn(function()
+for attempt=1,10 do if handle.nativeAnimationSeatAttempt~=attemptToken or handle
+.nativeAnimationSeat~=seatPart or character~=LocalPlayer.Character or character.
+Parent==nil or humanoid.Parent==nil or root.Parent==nil or seatPart.Parent==nil
+then return end pcall(function()root.Anchored=false root.AssemblyLinearVelocity=
+Vector3.zero root.AssemblyAngularVelocity=Vector3.zero root.CFrame=seatCFrame*
+CFrame.new(0,2.35,0)end)pcall(function()humanoid.Sit=false end)task.wait()pcall(
+function()seatPart:Sit(humanoid)end)pcall(function()humanoid.Sit=true end)if
+humanoid.SeatPart==seatPart then handle.nativeAnimationSeatKey=seatKey return
+end task.wait(0.08)end end)end local function applyNativeAnimationSeat(handle,
+character,animation)if handle==nil or character==nil or type(animation)~='table'
+then return end local seat=type(animation.seat)=='table'and animation.seat or
+nil if seat==nil or seat.enabled==false then clearNativeAnimationSeat(handle)
+return end if character~=LocalPlayer.Character then clearNativeAnimationSeat(
+handle)return end local root=character:FindFirstChild('HumanoidRootPart')local
+humanoid=character:FindFirstChildOfClass('Humanoid')if root==nil or humanoid==
+nil then return end local origin=type(seat.origin)=='table'and
+transformToCFrame(seat.origin)or root.CFrame local offset=seatVector(seat.offset
+,defaultSeatOffset(seat.role or animation.role))local seatCFrame=origin*CFrame.
+new(offset)*CFrame.new(0,0.5,0)local seatKey=tostring(seatCFrame)local seatPart=
+handle.nativeAnimationSeat if seatPart==nil or seatPart.Parent==nil then
+seatPart=Instance.new('Seat')seatPart.Name='OverlaySyncSeat'seatPart.Size=
+Vector3.new(2,0.35,2)seatPart.Transparency=1 seatPart.CanCollide=true seatPart.
+CanTouch=true seatPart.CanQuery=false seatPart.Anchored=true pcall(function()
+seatPart.Disabled=false end)seatPart.Parent=workspace handle.nativeAnimationSeat
+=seatPart end seatPart.CFrame=seatCFrame if handle.nativeAnimationSeatHumanoid~=
+humanoid then if handle.nativeAnimationSeatHumanoid and handle.
+nativeAnimationSeatAutoRotate~=nil then pcall(function()handle.
 nativeAnimationSeatHumanoid.AutoRotate=handle.nativeAnimationSeatAutoRotate end)
 end handle.nativeAnimationSeatHumanoid=humanoid handle.
 nativeAnimationSeatAutoRotate=humanoid.AutoRotate end pcall(function()humanoid:
 UnequipTools()end)pcall(function()humanoid.AutoRotate=false end)if handle.
-nativeAnimationSeatKey~=seatKey or humanoid.SeatPart~=seatPart then handle.
-nativeAnimationSeatKey=seatKey pcall(function()seatPart:Sit(humanoid)end)end end
-function NativeAnimation.clear(handle)if handle==nil or handle.nativeAnimation==
-nil then clearNativeAnimationSeat(handle)return end local state=handle.
-nativeAnimation if state.connection then pcall(function()state.connection:
-Disconnect()end)end if type(state.originalC1)=='table'then for motor,c1 in
-pairs(state.originalC1)do if motor and motor.Parent then pcall(function()motor.
-C1=c1 motor.CurrentAngle=0 end)end end end if state.animateScript and state.
-animateWasDisabled~=nil and state.animateScript.Parent then pcall(function()
-state.animateScript.Disabled=state.animateWasDisabled end)end
+nativeAnimationSeatKey~=seatKey or humanoid.SeatPart~=seatPart then
+forceSitNativeAnimationSeat(handle,character,humanoid,root,seatPart,seatCFrame,
+seatKey)end end function NativeAnimation.clear(handle)if handle==nil or handle.
+nativeAnimation==nil then clearNativeAnimationSeat(handle)return end local state
+=handle.nativeAnimation if state.connection then pcall(function()state.
+connection:Disconnect()end)end if type(state.originalC1)=='table'then for motor,
+c1 in pairs(state.originalC1)do if motor and motor.Parent then pcall(function()
+motor.C1=c1 motor.CurrentAngle=0 end)end end end if state.animateScript and
+state.animateWasDisabled~=nil and state.animateScript.Parent then pcall(function
+()state.animateScript.Disabled=state.animateWasDisabled end)end
 clearNativeAnimationSeat(handle)handle.nativeAnimation=nil end local function 
 estimatedServerNowMs()if tonumber(Client.serverTimeOffsetMs)then return os.
 clock()*1000+Client.serverTimeOffsetMs end return nil end function
@@ -2721,7 +2737,7 @@ local PLACEHOLDER_MEMBER = "No members"
 local PLACEHOLDER_ASSET = "No catalog assets"
 local PLACEHOLDER_ANIMATION = "No native animations"
 local ASSET_DROPDOWN_LIMIT = 150
-local ANIMATION_DROPDOWN_LIMIT = 200
+local ANIMATION_DROPDOWN_LIMIT = 5000
 local DEFAULT_ANIMATIONS = { "Wave", "Dance", "Idle", "Point" }
 local ANIMATION_ROLE_VALUES = { "Any", "Male", "Female" }
 
