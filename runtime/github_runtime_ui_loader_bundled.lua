@@ -78,11 +78,45 @@ end
 local function wsConnect(url)
 	local candidates = {}
 
-	local function globalValue(name)
-		if type(GLOBAL) == "table" and GLOBAL[name] ~= nil then
-			return GLOBAL[name]
+	local function safeField(owner, key)
+		if owner == nil then
+			return nil
 		end
-		return _G[name]
+		local ok, value = pcall(function()
+			return owner[key]
+		end)
+		if ok then
+			return value
+		end
+		return nil
+	end
+
+	local function globalValue(name)
+		local sources = { GLOBAL, _G }
+		if type(shared) == "table" then
+			table.insert(sources, shared)
+		end
+		if type(getrenv) == "function" then
+			local ok, env = pcall(getrenv)
+			if ok and type(env) == "table" then
+				table.insert(sources, env)
+			end
+		end
+		if type(getfenv) == "function" then
+			for _, level in ipairs({ 0, 1, 2, 3 }) do
+				local ok, env = pcall(getfenv, level)
+				if ok and type(env) == "table" then
+					table.insert(sources, env)
+				end
+			end
+		end
+		for _, source in ipairs(sources) do
+			local value = safeField(source, name)
+			if value ~= nil then
+				return value
+			end
+		end
+		return nil
 	end
 
 	local function addCandidate(label, owner, method)
@@ -104,17 +138,21 @@ local function wsConnect(url)
 
 	for _, name in ipairs({ "WebSocket", "Websocket", "websocket" }) do
 		local api = globalValue(name)
-		if type(api) == "table" then
-			addCandidate(name .. ".connect", api, api.connect)
-			addCandidate(name .. ".Connect", api, api.Connect)
+		if api ~= nil then
+			addCandidate(name .. ".connect", api, safeField(api, "connect"))
+			addCandidate(name .. ".Connect", api, safeField(api, "Connect"))
+			addCandidate(name .. ".CONNECT", api, safeField(api, "CONNECT"))
 		end
 	end
 
 	local synApi = globalValue("syn")
-	if type(synApi) == "table" and type(synApi.websocket) == "table" then
-		addCandidate("syn.websocket.connect", synApi.websocket, synApi.websocket.connect)
-		addCandidate("syn.websocket.Connect", synApi.websocket, synApi.websocket.Connect)
+	local synWebsocket = safeField(synApi, "websocket")
+	if synWebsocket ~= nil then
+		addCandidate("syn.websocket.connect", synWebsocket, safeField(synWebsocket, "connect"))
+		addCandidate("syn.websocket.Connect", synWebsocket, safeField(synWebsocket, "Connect"))
 	end
+	addCandidate("websocket_connect", nil, globalValue("websocket_connect"))
+	addCandidate("WebSocketConnect", nil, globalValue("WebSocketConnect"))
 
 	local function callSocketMethod(method, raw, ...)
 		local ok, result = pcall(method, raw, ...)
@@ -128,17 +166,17 @@ local function wsConnect(url)
 		if raw == nil then
 			return nil
 		end
-		local sendMethod = raw.Send or raw.send
-		local closeMethod = raw.Close or raw.close
-		local onMessage = raw.OnMessage or raw.MessageReceived or raw.Message
-		local onClose = raw.OnClose or raw.Closed or raw.CloseEvent
+		local sendMethod = safeField(raw, "Send") or safeField(raw, "send")
+		local closeMethod = safeField(raw, "Close") or safeField(raw, "close")
+		local onMessage = safeField(raw, "OnMessage") or safeField(raw, "MessageReceived") or safeField(raw, "Message")
+		local onClose = safeField(raw, "OnClose") or safeField(raw, "Closed") or safeField(raw, "CloseEvent")
 		if type(sendMethod) ~= "function" or type(closeMethod) ~= "function" then
 			return nil
 		end
 		if onMessage == nil or onClose == nil then
 			return nil
 		end
-		if type(onMessage.Connect) ~= "function" or type(onClose.Connect) ~= "function" then
+		if type(safeField(onMessage, "Connect")) ~= "function" or type(safeField(onClose, "Connect")) ~= "function" then
 			return nil
 		end
 		return {
