@@ -41,7 +41,7 @@ local CONFIG = {
 	asset_cache_folder = "overlay-cache/assets",
 	asset_max_bytes = 32 * 1024 * 1024,
 	asset_require_hash_verification = false,
-	asset_catalog_url = "https://raw.githubusercontent.com/mamiisss/overlay/main/descriptors/catalog.json",
+	asset_catalog_url = nil,
 	native_morph_archive_path = "overlay-native-morph-tests/morphlar.rbxm",
 }
 
@@ -239,6 +239,7 @@ local Client = {
 	nativeMorphArchive = nil,
 	nativeMorphLookup = {},
 	nativeMorphLoadAttempted = false,
+	nativeMorphCatalogEmitted = false,
 	previewHandle = nil,
 }
 
@@ -2177,12 +2178,71 @@ local function nativeMorphQuery(morph)
 	return raw
 end
 
+local function emitNativeMorphCatalog(archive)
+	if archive == nil or Client.nativeMorphCatalogEmitted then
+		return
+	end
+
+	local assets = {}
+	local function addMorph(categoryName, item)
+		if item == nil or (not item:IsA("Folder") and not item:IsA("Model")) then
+			return
+		end
+		local hasRenderable = false
+		for _, descendant in ipairs(item:GetDescendants()) do
+			if descendant:IsA("BasePart") or descendant:IsA("ParticleEmitter") or descendant:IsA("Attachment") then
+				hasRenderable = true
+				break
+			end
+		end
+		if not hasRenderable and #item:GetChildren() == 0 then
+			return
+		end
+		local pathName = trimString(categoryName) ~= "" and (categoryName .. "/" .. item.Name) or item.Name
+		table.insert(assets, {
+			asset_id = "native:" .. pathName,
+			name = item.Name,
+			display_name = pathName,
+			type = "native_morph",
+			kind = "native_morph",
+			format = "rbxm_native_archive",
+			source = "native-rbxm",
+		})
+	end
+
+	for _, category in ipairs(archive:GetChildren()) do
+		if category:IsA("Folder") or category:IsA("Model") then
+			local children = category:GetChildren()
+			if #children > 0 then
+				for _, item in ipairs(children) do
+					addMorph(category.Name, item)
+				end
+			else
+				addMorph("", category)
+			end
+		end
+	end
+
+	table.sort(assets, function(a, b)
+		return tostring(a.display_name):lower() < tostring(b.display_name):lower()
+	end)
+	Client.nativeMorphCatalogEmitted = true
+	emitBridgeEvent("asset.catalog", {
+		assets = assets,
+		total = #assets,
+		source = "native_morph_archive",
+	})
+	emitBridgeState("native morph catalog loaded: " .. tostring(#assets))
+end
+
 local function loadNativeMorphArchive()
 	if Client.nativeMorphArchive and Client.nativeMorphArchive.Parent ~= nil then
+		emitNativeMorphCatalog(Client.nativeMorphArchive)
 		return Client.nativeMorphArchive
 	end
 	if typeof(GLOBAL.OverlayNativeMorphArchive) == "Instance" then
 		Client.nativeMorphArchive = GLOBAL.OverlayNativeMorphArchive
+		emitNativeMorphCatalog(Client.nativeMorphArchive)
 		return Client.nativeMorphArchive
 	end
 	if Client.nativeMorphLoadAttempted then
@@ -2214,6 +2274,7 @@ local function loadNativeMorphArchive()
 	Client.nativeMorphArchive = objects[1]
 	GLOBAL.OverlayNativeMorphArchive = Client.nativeMorphArchive
 	log("native morph archive loaded", Client.nativeMorphArchive.Name)
+	emitNativeMorphCatalog(Client.nativeMorphArchive)
 	return Client.nativeMorphArchive
 end
 
@@ -2243,26 +2304,39 @@ local function findNativeMorphByName(query)
 
 	local exact = nil
 	local partial = nil
-	local function consider(instance)
+	local function consider(instance, pathName)
 		local score = nativeMorphCandidateScore(instance)
 		if score <= 0 then
 			return
 		end
 		local name = normalizeMorphName(instance.Name)
-		if name == normalized then
+		local fullName = normalizeMorphName(pathName or instance.Name)
+		if name == normalized or fullName == normalized then
 			if exact == nil or score > exact.score then
 				exact = { instance = instance, score = score }
 			end
-		elseif string.find(name, normalized, 1, true) or string.find(normalized, name, 1, true) then
+		elseif string.find(name, normalized, 1, true)
+			or string.find(normalized, name, 1, true)
+			or string.find(fullName, normalized, 1, true)
+			or string.find(normalized, fullName, 1, true) then
 			if partial == nil or score > partial.score then
 				partial = { instance = instance, score = score }
 			end
 		end
 	end
 
-	consider(archive)
-	for _, descendant in ipairs(archive:GetDescendants()) do
-		consider(descendant)
+	local function walk(instance, pathName)
+		consider(instance, pathName)
+		for _, child in ipairs(instance:GetChildren()) do
+			walk(child, pathName .. "/" .. child.Name)
+		end
+	end
+
+	walk(archive, archive.Name)
+	for _, category in ipairs(archive:GetChildren()) do
+		for _, item in ipairs(category:GetChildren()) do
+			consider(item, category.Name .. "/" .. item.Name)
+		end
 	end
 
 	local found = exact and exact.instance or (partial and partial.instance or nil)
@@ -4128,7 +4202,16 @@ local function bridgeApplyMorph(payload)
 
 	task.spawn(function()
 		local rawValue = trimString(payload.value or payload.input)
-		local hasExplicitAsset = trimString(payload.asset_id or payload.assetId or payload.id) ~= ""
+		local explicitAssetId = trimString(payload.asset_id or payload.assetId or payload.id)
+		local nativeAssetName = ""
+		if string.sub(string.lower(explicitAssetId), 1, 7) == "native:" then
+			nativeAssetName = string.sub(explicitAssetId, 8)
+			explicitAssetId = ""
+		elseif string.sub(string.lower(rawValue), 1, 7) == "native:" then
+			nativeAssetName = string.sub(rawValue, 8)
+			rawValue = ""
+		end
+		local hasExplicitAsset = explicitAssetId ~= ""
 			or trimString(payload.url) ~= ""
 			or isHttpUrl(rawValue)
 		local asset, assetError = nil, nil
@@ -4141,6 +4224,9 @@ local function bridgeApplyMorph(payload)
 		end
 
 		local preset = trimString(payload.preset or payload.name or payload.native_name or payload.morph_name)
+		if preset == "" and nativeAssetName ~= "" then
+			preset = nativeAssetName
+		end
 		if preset == "" and not hasExplicitAsset then
 			preset = rawValue
 		end
@@ -4399,6 +4485,9 @@ local function runSession()
 	if CONFIG.asset_catalog_url then
 		loadAssetCatalog(CONFIG.asset_catalog_url)
 	end
+	task.spawn(function()
+		loadNativeMorphArchive()
+	end)
 
 	local roomId = nil
 	local resumeFrom = 0
@@ -5455,7 +5544,7 @@ function OverlayUI:_buildAvatarEffects()
 		ClearTextOnFocus = false,
 	})
 	self.Controls.MorphAssetDropdown = effects:AddDropdown("Overlay_MorphCatalog", {
-		Text = "Catalog morph",
+		Text = "Native morph",
 		Values = { PLACEHOLDER_ASSET },
 		Default = 1,
 		Searchable = true,
@@ -5736,7 +5825,8 @@ function OverlayUI:HandleRuntimeEvent(eventName, payload)
 		self.State.Assets = payload and payload.assets or {}
 		self.State.SelectedAsset = nil
 		self:_refreshAssetDropdown()
-		self:_notify("Asset catalog loaded: " .. tostring(#self.State.Assets), 3)
+		local label = payload and payload.source == "native_morph_archive" and "Native morph catalog" or "Asset catalog"
+		self:_notify(label .. " loaded: " .. tostring(#self.State.Assets), 3)
 	elseif eventName == "asset.cached" then
 		self:_notify("Asset cache: " .. tostring(payload and payload.asset_id or "?") .. " / " .. tostring(payload and payload.status or "?"), 3)
 	elseif eventName == "asset.descriptor.ready" then
