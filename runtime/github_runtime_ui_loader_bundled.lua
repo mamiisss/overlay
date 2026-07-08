@@ -45,6 +45,10 @@ local CONFIG = {
 	native_morph_archive_path = "overlay-native-morph-tests/morphlar.rbxm",
 	native_morph_archive_url = nil, -- optional; set getgenv().OverlayNativeMorphArchiveUrl after uploading morphlar.rbxm
 	native_morph_archive_max_bytes = 128 * 1024 * 1024,
+	native_morph_max_base_parts = 900,
+	native_morph_enable_smart_bones = false,
+	native_morph_max_smart_bone_controllers = 6,
+	native_morph_operation_budget_seconds = 0.008,
 }
 
 local HttpService = game:GetService("HttpService")
@@ -66,6 +70,12 @@ if type(GLOBAL.OverlayNativeMorphArchivePath) == "string" then
 end
 if type(GLOBAL.OverlayNativeMorphArchiveUrl) == "string" then
 	CONFIG.native_morph_archive_url = GLOBAL.OverlayNativeMorphArchiveUrl
+end
+if tonumber(GLOBAL.OverlayNativeMorphMaxBaseParts) then
+	CONFIG.native_morph_max_base_parts = math.max(1, math.floor(tonumber(GLOBAL.OverlayNativeMorphMaxBaseParts)))
+end
+if GLOBAL.OverlayNativeMorphSmartBones == true then
+	CONFIG.native_morph_enable_smart_bones = true
 end
 
 local function log(...)
@@ -246,7 +256,9 @@ local Client = {
 	nativeMorphArchiveError = nil,
 	nativeMorphArchiveLoading = false,
 	nativeMorphCatalog = {},
+	nativeMorphCatalogIndex = {},
 	nativeMorphLookup = {},
+	nativeMorphStats = {},
 	nativeMorphLoadAttempted = false,
 	nativeMorphCatalogEmitted = false,
 	previewHandle = nil,
@@ -465,6 +477,15 @@ local function trimString(value)
 		return ""
 	end
 	return tostring(value):match("^%s*(.-)%s*$")
+end
+
+local function yieldIfBudgetSpent(startedAt)
+	local budget = tonumber(CONFIG.native_morph_operation_budget_seconds) or 0
+	if budget > 0 and os.clock() - startedAt >= budget then
+		task.wait()
+		return os.clock()
+	end
+	return startedAt
 end
 
 local function emitBridgeEvent(eventName, payload)
@@ -2275,18 +2296,10 @@ local function emitNativeMorphCatalog(archive)
 	end
 
 	local assets = {}
+	local index = {}
+	Client.nativeMorphLookup = {}
 	local function addMorph(categoryName, item)
 		if item == nil or (not item:IsA("Folder") and not item:IsA("Model")) then
-			return
-		end
-		local hasRenderable = false
-		for _, descendant in ipairs(item:GetDescendants()) do
-			if descendant:IsA("BasePart") or descendant:IsA("ParticleEmitter") or descendant:IsA("Attachment") then
-				hasRenderable = true
-				break
-			end
-		end
-		if not hasRenderable and #item:GetChildren() == 0 then
 			return
 		end
 		local pathName = trimString(categoryName) ~= "" and (categoryName .. "/" .. item.Name) or item.Name
@@ -2299,19 +2312,34 @@ local function emitNativeMorphCatalog(archive)
 			format = "rbxm_native_archive",
 			source = "native-rbxm",
 		})
+		local normalizedPath = normalizeMorphName(pathName)
+		local normalizedName = normalizeMorphName(item.Name)
+		table.insert(index, {
+			instance = item,
+			normalizedPath = normalizedPath,
+			normalizedName = normalizedName,
+			displayName = pathName,
+		})
+		Client.nativeMorphLookup[normalizedPath] = item
+		if Client.nativeMorphLookup[normalizedName] == nil then
+			Client.nativeMorphLookup[normalizedName] = item
+		end
 	end
 
+	local startedAt = os.clock()
 	for _, category in ipairs(archive:GetChildren()) do
 		if category:IsA("Folder") or category:IsA("Model") then
 			local children = category:GetChildren()
 			if #children > 0 then
 				for _, item in ipairs(children) do
 					addMorph(category.Name, item)
+					startedAt = yieldIfBudgetSpent(startedAt)
 				end
 			else
 				addMorph("", category)
 			end
 		end
+		startedAt = yieldIfBudgetSpent(startedAt)
 	end
 
 	table.sort(assets, function(a, b)
@@ -2319,6 +2347,7 @@ local function emitNativeMorphCatalog(archive)
 	end)
 
 	Client.nativeMorphCatalog = assets
+	Client.nativeMorphCatalogIndex = index
 	Client.assetCatalog = assets
 	Client.assetCatalogById = {}
 	for _, asset in ipairs(assets) do
@@ -2420,39 +2449,27 @@ local function findNativeMorphByName(query)
 
 	local exact = nil
 	local partial = nil
-	local function consider(instance, pathName)
-		local score = nativeMorphCandidateScore(instance)
-		if score <= 0 then
-			return
-		end
-		local name = normalizeMorphName(instance.Name)
-		local fullName = normalizeMorphName(pathName or instance.Name)
-		if name == normalized or fullName == normalized then
-			if exact == nil or score > exact.score then
-				exact = { instance = instance, score = score }
+	local startedAt = os.clock()
+	for _, item in ipairs(Client.nativeMorphCatalogIndex or {}) do
+		local instance = item.instance
+		if instance and instance.Parent then
+			local score = nativeMorphCandidateScore(instance)
+			local name = item.normalizedName or normalizeMorphName(instance.Name)
+			local fullName = item.normalizedPath or name
+			if name == normalized or fullName == normalized then
+				if exact == nil or score > exact.score then
+					exact = { instance = instance, score = score }
+				end
+			elseif string.find(name, normalized, 1, true)
+				or string.find(normalized, name, 1, true)
+				or string.find(fullName, normalized, 1, true)
+				or string.find(normalized, fullName, 1, true) then
+				if partial == nil or score > partial.score then
+					partial = { instance = instance, score = score }
+				end
 			end
-		elseif string.find(name, normalized, 1, true)
-			or string.find(normalized, name, 1, true)
-			or string.find(fullName, normalized, 1, true)
-			or string.find(normalized, fullName, 1, true) then
-			if partial == nil or score > partial.score then
-				partial = { instance = instance, score = score }
-			end
 		end
-	end
-
-	local function walk(instance, pathName)
-		consider(instance, pathName)
-		for _, child in ipairs(instance:GetChildren()) do
-			walk(child, pathName .. "/" .. child.Name)
-		end
-	end
-
-	walk(archive, archive.Name)
-	for _, category in ipairs(archive:GetChildren()) do
-		for _, item in ipairs(category:GetChildren()) do
-			consider(item, category.Name .. "/" .. item.Name)
-		end
+		startedAt = yieldIfBudgetSpent(startedAt)
 	end
 
 	local found = exact and exact.instance or (partial and partial.instance or nil)
@@ -2465,12 +2482,64 @@ local function collectBaseParts(root)
 	if root:IsA("BasePart") then
 		table.insert(parts, root)
 	end
-	for _, descendant in ipairs(root:GetDescendants()) do
+	local startedAt = os.clock()
+	for index, descendant in ipairs(root:GetDescendants()) do
 		if descendant:IsA("BasePart") then
 			table.insert(parts, descendant)
 		end
+		if index % 250 == 0 then
+			startedAt = yieldIfBudgetSpent(startedAt)
+		end
 	end
 	return parts
+end
+
+local function countBasePartsLimited(root, limit)
+	local count = root:IsA("BasePart") and 1 or 0
+	if count > limit then
+		return count, false
+	end
+	local startedAt = os.clock()
+	for index, descendant in ipairs(root:GetDescendants()) do
+		if descendant:IsA("BasePart") then
+			count += 1
+			if count > limit then
+				return count, false
+			end
+		end
+		if index % 250 == 0 then
+			startedAt = yieldIfBudgetSpent(startedAt)
+		end
+	end
+	return count, true
+end
+
+local function nativeMorphStats(source)
+	local stats = Client.nativeMorphStats[source]
+	if stats then
+		return stats
+	end
+	local count, withinLimit = countBasePartsLimited(source, CONFIG.native_morph_max_base_parts)
+	stats = {
+		baseParts = count,
+		withinLimit = withinLimit,
+	}
+	Client.nativeMorphStats[source] = stats
+	return stats
+end
+
+local function destroyInstanceDeferred(instance)
+	if instance == nil then
+		return
+	end
+	pcall(function()
+		instance.Parent = nil
+	end)
+	task.defer(function()
+		pcall(function()
+			instance:Destroy()
+		end)
+	end)
 end
 
 local function findDirectMiddle(root)
@@ -2608,9 +2677,7 @@ local function clearNativeMorph(handle)
 	end
 	restoreNativeMorphHiddenParts(handle)
 	if handle.nativeMorphRoot then
-		pcall(function()
-			handle.nativeMorphRoot:Destroy()
-		end)
+		destroyInstanceDeferred(handle.nativeMorphRoot)
 	end
 	handle.nativeMorphRoot = nil
 	handle.nativeMorphKey = nil
@@ -2660,11 +2727,17 @@ local function mountNativeMorphGroup(handle, group, character, fallbackAnchor)
 end
 
 local function createNativeSmartBoneControllers(root)
+	if not CONFIG.native_morph_enable_smart_bones then
+		return nil
+	end
 	local controllers = {}
 	for _, part in ipairs(collectBaseParts(root)) do
 		local controller = createSmartBoneController(part)
 		if controller then
 			table.insert(controllers, controller)
+			if #controllers >= CONFIG.native_morph_max_smart_bone_controllers then
+				break
+			end
 		end
 	end
 	return #controllers > 0 and controllers or nil
@@ -2683,6 +2756,15 @@ local function applyNativeMorph(handle, anchorPart, components, entityId, charac
 	local source = findNativeMorphByName(query)
 	if source == nil then
 		clearNativeMorph(handle)
+		return true
+	end
+
+	local stats = nativeMorphStats(source)
+	if stats and not stats.withinLimit then
+		clearNativeMorph(handle)
+		local message = "Native morph too heavy: " .. tostring(stats.baseParts) .. " parts (limit " .. tostring(CONFIG.native_morph_max_base_parts) .. ")"
+		emitBridgeError("native_morph.too_heavy", message)
+		emitBridgeState(message)
 		return true
 	end
 
@@ -2705,7 +2787,6 @@ local function applyNativeMorph(handle, anchorPart, components, entityId, charac
 
 	local root = Instance.new("Folder")
 	root.Name = "OverlayNativeMorph_" .. tostring(entityId or query)
-	root.Parent = handle.folder or entityFolder
 
 	local clone = source:Clone()
 	clone.Name = source.Name
@@ -2743,6 +2824,7 @@ local function applyNativeMorph(handle, anchorPart, components, entityId, charac
 		return true
 	end
 
+	root.Parent = handle.folder or entityFolder
 	handle.nativeMorphRoot = root
 	handle.nativeMorphKey = key
 	handle.nativeMorphCharacter = character
@@ -4824,6 +4906,7 @@ OverlayUI.__index = OverlayUI
 local PLACEHOLDER_ROOM = "No rooms"
 local PLACEHOLDER_MEMBER = "No members"
 local PLACEHOLDER_ASSET = "No catalog assets"
+local ASSET_DROPDOWN_LIMIT = 150
 
 local DEFAULT_THEME = {
 	BackgroundColor = Color3.fromRGB(15, 15, 15),
@@ -4936,6 +5019,8 @@ function OverlayUI.new(options)
 		SelectedRoom = nil,
 		SelectedMember = nil,
 		SelectedAsset = nil,
+		AssetFilter = "",
+		FilteredAssetCount = 0,
 		JoinedRoom = nil,
 		GlobalHistory = {},
 		RoomHistory = {},
@@ -5072,6 +5157,17 @@ function OverlayUI:_memberLabel(member)
 	return string.format("%s [%s]", memberName(member), shortId)
 end
 
+function OverlayUI:_assetLabel(assetOrId)
+	local asset = assetOrId
+	if type(assetOrId) == "string" then
+		asset = self.AssetById[assetOrId]
+	end
+	if typeof(asset) == "table" then
+		return tostring(asset.display_name or asset.name or asset.asset_id or asset.id or "unknown")
+	end
+	return tostring(assetOrId or "")
+end
+
 function OverlayUI:_memberValues()
 	local values = {}
 	self.MemberById = {}
@@ -5091,12 +5187,22 @@ end
 function OverlayUI:_assetValues()
 	local values = {}
 	self.AssetById = {}
+	local filter = string.lower(trimString(self.State.AssetFilter or ""))
+	local totalMatches = 0
 	for _, asset in ipairs(self.State.Assets) do
 		if typeof(asset) == "table" and type(asset.asset_id) == "string" then
 			self.AssetById[asset.asset_id] = asset
-			table.insert(values, asset.asset_id)
+			local label = string.lower(self:_assetLabel(asset))
+			local id = string.lower(asset.asset_id)
+			if filter == "" or string.find(label, filter, 1, true) or string.find(id, filter, 1, true) then
+				totalMatches += 1
+				if #values < ASSET_DROPDOWN_LIMIT then
+					table.insert(values, asset.asset_id)
+				end
+			end
 		end
 	end
+	self.State.FilteredAssetCount = totalMatches
 	if #values == 0 then
 		table.insert(values, PLACEHOLDER_ASSET)
 	end
@@ -5334,6 +5440,16 @@ function OverlayUI:_refreshAssetDropdown()
 		dropdown:SetValue(selectedValue)
 	end
 	self.RefreshingAssets = false
+	local shownCount = #values
+	if shownCount == 1 and values[1] == PLACEHOLDER_ASSET then
+		shownCount = 0
+	end
+	self:_setLabel("MorphCatalogLabel", string.format(
+		"Native morphs: %d total, %d match, %d shown",
+		#self.State.Assets,
+		self.State.FilteredAssetCount or 0,
+		shownCount
+	))
 end
 
 function OverlayUI:_refreshDiagnostics()
@@ -5693,13 +5809,35 @@ function OverlayUI:_buildAvatarEffects()
 		Finished = true,
 		ClearTextOnFocus = false,
 	})
+	effects:AddInput("Overlay_MorphSearch", {
+		Text = "Filter native morphs",
+		Placeholder = "type, press Enter",
+		Default = "",
+		Finished = true,
+		ClearTextOnFocus = false,
+		Callback = function(value)
+			self.State.AssetFilter = trimString(value)
+			self.State.SelectedAsset = nil
+			self:_refreshAssetDropdown()
+		end,
+	})
+	self.Controls.MorphCatalogLabel = effects:AddLabel("Overlay_MorphCatalogStatus", {
+		Text = "Native morphs: 0 total, 0 match, 0 shown",
+		DoesWrap = false,
+	})
 	self.Controls.MorphAssetDropdown = effects:AddDropdown("Overlay_MorphCatalog", {
 		Text = "Native morph",
 		Values = { PLACEHOLDER_ASSET },
 		Default = 1,
-		Searchable = true,
+		Searchable = false,
 		MaxVisibleDropdownItems = 8,
 		DisabledValues = { PLACEHOLDER_ASSET },
+		FormatDisplayValue = function(value)
+			return self:_assetLabel(value)
+		end,
+		FormatListValue = function(value)
+			return self:_assetLabel(value)
+		end,
 		Callback = function(value)
 			if self.RefreshingAssets then
 				return
