@@ -2197,19 +2197,20 @@ tryTeleportToRoute(joinResponse.data.teleport_route or joinResponse.data.
 roblox_route,joinResponse.data.room_id)if okTeleport then return joinResponse,
 'teleporting'end log('teleport failed:',teleportError)end end Client.joining=nil
 return joinResponse,joinError end local OverlayBridge={}local bridgeListRooms
-function OverlayBridge.onEvent(callback)if type(callback)~='function'then return
-function()end end table.insert(Client.bridgeSubscribers,callback)local active=
-true if type(Client.nativeMorphCatalog)=='table'and#Client.nativeMorphCatalog>0
-then task.spawn(function()if active then pcall(callback,'asset.catalog',{assets=
-Client.nativeMorphCatalog,total=#Client.nativeMorphCatalog,source=
-'native_morph_archive',status=Client.nativeMorphArchiveStatus,path=CONFIG.
-native_morph_archive_path,slots=Client.nativeMorphCatalogSlots})end end)end if
-type(Client.nativeAnimationCatalog)=='table'and#Client.nativeAnimationCatalog>0
-then task.spawn(function()if active then pcall(callback,'animation.catalog',{
-animations=Client.nativeAnimationCatalog,total=#Client.nativeAnimationCatalog,
-source='native_animation_archive',status=Client.nativeAnimationArchiveStatus,
-path=CONFIG.native_animation_archive_path})end end)end return function()if not
-active then return end active=false for index,existing in ipairs(Client.
+local clearLocalPreview function OverlayBridge.onEvent(callback)if type(callback
+)~='function'then return function()end end table.insert(Client.bridgeSubscribers
+,callback)local active=true if type(Client.nativeMorphCatalog)=='table'and#
+Client.nativeMorphCatalog>0 then task.spawn(function()if active then pcall(
+callback,'asset.catalog',{assets=Client.nativeMorphCatalog,total=#Client.
+nativeMorphCatalog,source='native_morph_archive',status=Client.
+nativeMorphArchiveStatus,path=CONFIG.native_morph_archive_path,slots=Client.
+nativeMorphCatalogSlots})end end)end if type(Client.nativeAnimationCatalog)==
+'table'and#Client.nativeAnimationCatalog>0 then task.spawn(function()if active
+then pcall(callback,'animation.catalog',{animations=Client.
+nativeAnimationCatalog,total=#Client.nativeAnimationCatalog,source=
+'native_animation_archive',status=Client.nativeAnimationArchiveStatus,path=
+CONFIG.native_animation_archive_path})end end)end return function()if not active
+then return end active=false for index,existing in ipairs(Client.
 bridgeSubscribers)do if existing==callback then table.remove(Client.
 bridgeSubscribers,index)break end end end end OverlayBridge.OnEvent=
 OverlayBridge.onEvent function OverlayBridge.getState()local assets=Client.
@@ -2478,8 +2479,8 @@ Client.ownAvatarId,components={effect=effect}})if response==nil then
 emitBridgeError('effect.patch_failed',tostring(err))return end emitBridgeState(
 'effect applied')end)end local function localPreviewAnchor()local character=
 LocalPlayer.Character if character==nil then return nil end return character:
-FindFirstChild('HumanoidRootPart')or character:FindFirstChild('Head')end local 
-function clearLocalPreview()if Client.previewHandle then destroyHandle(Client.
+FindFirstChild('HumanoidRootPart')or character:FindFirstChild('Head')end
+clearLocalPreview=function()if Client.previewHandle then destroyHandle(Client.
 previewHandle)Client.previewHandle=nil end end local function 
 bridgePreviewEffect(effect)if type(effect)~='table'then emitBridgeError(
 'effect.invalid','Effect payload is required')return end local anchor=
@@ -2596,16 +2597,17 @@ moveKeepaliveSeconds then lastMoveCFrame=cf lastMoveSentAt=os.clock()local rx,ry
 .Z},rotation={math.deg(rx),math.deg(ry),math.deg(rz)}}})end end end return true
 end GLOBAL.OverlayStop=function()Client.running=false Client.connected=false
 pcall(function()Client.ws:Close()end)disconnectWsConnections()
-disconnectTrackedConnections()clearLocalPreview()clearEntities()entityFolder:
-Destroy()if GLOBAL.OverlayBridge==OverlayBridge then GLOBAL.OverlayBridge=nil
-end log('stopped')end task.spawn(function()local backoff=1 while Client.running
-do log('connecting to',CONFIG.url)local ok,err=runSession()Client.connected=
-false Client.pending={}pcall(function()Client.ws:Close()end)
-disconnectWsConnections()if Client.teleporting then log(
-'waiting for Roblox teleport')break end if not Client.running then break end if
-ok then backoff=1 log('disconnected; reconnecting')else log('session error:',err
-)backoff=math.min(backoff*2,CONFIG.reconnect_max_delay)end task.wait(backoff)end
-end)log([[overlay runtime client started; call OverlayStop() to shut down]])]=]
+disconnectTrackedConnections()if type(clearLocalPreview)=='function'then
+clearLocalPreview()end clearEntities()entityFolder:Destroy()if GLOBAL.
+OverlayBridge==OverlayBridge then GLOBAL.OverlayBridge=nil end log('stopped')end
+task.spawn(function()local backoff=1 while Client.running do log('connecting to'
+,CONFIG.url)local ok,err=runSession()Client.connected=false Client.pending={}
+pcall(function()Client.ws:Close()end)disconnectWsConnections()if Client.
+teleporting then log('waiting for Roblox teleport')break end if not Client.
+running then break end if ok then backoff=1 log('disconnected; reconnecting')
+else log('session error:',err)backoff=math.min(backoff*2,CONFIG.
+reconnect_max_delay)end task.wait(backoff)end end)log(
+[[overlay runtime client started; call OverlayStop() to shut down]])]=]
 
 local EMBEDDED_BRIDGE_UI_LOADER = [[-- Obsidian overlay UI loader for the real runtime bridge.
 -- Run overlay-runtime/client.lua first. This file does not open a WebSocket;
