@@ -2323,7 +2323,9 @@ local function updateSmartBoneController(controller, delta)
 	if controller == nil or controller.rootPart == nil or controller.rootPart.Parent == nil then
 		return
 	end
-	local settings = controller.settings
+	delta = tonumber(delta) or (1 / 60)
+	local settings = controller.settings or SMART_BONE_DEFAULTS
+	controller.accumulator = tonumber(controller.accumulator) or 0
 	local frameTime = 1 / math.max(settings.UpdateRate or 60, 1)
 	controller.accumulator += delta
 	if controller.accumulator < frameTime then
@@ -2333,27 +2335,32 @@ local function updateSmartBoneController(controller, delta)
 	controller.accumulator = 0
 	local rootMove = controller.rootPart.Position - controller.lastRootPosition
 	controller.lastRootPosition = controller.rootPart.Position
-	local gravity = (settings.Gravity + settings.Force) * dt * dt
+	local gravity = ((settings.Gravity or SMART_BONE_DEFAULTS.Gravity) + (settings.Force or SMART_BONE_DEFAULTS.Force)) * dt * dt
 	local now = os.clock()
 
 	for _, tree in ipairs(controller.trees) do
 		for _, particle in ipairs(tree.particles) do
+			particle.phase = tonumber(particle.phase) or 0
+			particle.restLength = tonumber(particle.restLength) or 0
+			particle.depth = tonumber(particle.depth) or 0
 			if particle.anchored then
 				particle.lastPosition = particle.bone.WorldPosition
 				particle.position = particle.bone.WorldPosition
 			else
 				local velocity = particle.position - particle.lastPosition
-				particle.lastPosition = particle.position + (rootMove * settings.Inertia)
+				particle.lastPosition = particle.position + (rootMove * (settings.Inertia or 0))
 				local wind = Vector3.new()
-				if settings.WindInfluence > 0 and particle.restLength > 0 then
-					local t = now * settings.WindSpeed + particle.phase
+				local windInfluence = settings.WindInfluence or 0
+				if windInfluence > 0 and particle.restLength > 0 then
+					local windDirection = settings.WindDirection or SMART_BONE_DEFAULTS.WindDirection
+					local t = now * (settings.WindSpeed or SMART_BONE_DEFAULTS.WindSpeed) + particle.phase
 					wind = Vector3.new(
-						settings.WindDirection.X * math.sin(t),
+						windDirection.X * math.sin(t),
 						0.05 * math.sin(t * 0.63),
-						settings.WindDirection.Z * math.cos(t)
-					) * (settings.WindStrength * settings.WindInfluence * 0.002 * math.max(particle.depth, 1))
+						windDirection.Z * math.cos(t)
+					) * ((settings.WindStrength or 0) * windInfluence * 0.002 * math.max(particle.depth, 1))
 				end
-				particle.position += velocity * (1 - settings.Damping) + gravity + rootMove * settings.Inertia + wind
+				particle.position += velocity * (1 - (settings.Damping or 0)) + gravity + rootMove * (settings.Inertia or 0) + wind
 			end
 		end
 
@@ -2362,12 +2369,12 @@ local function updateSmartBoneController(controller, delta)
 				local parent = particle.parentIndex > 0 and tree.particles[particle.parentIndex] or nil
 				if parent and not particle.anchored then
 					local restPosition = (parent.bone.WorldCFrame * particle.restLocal).Position
-					particle.position = particle.position:Lerp(restPosition, math.clamp(settings.Elasticity * dt * 10, 0, 1))
+					particle.position = particle.position:Lerp(restPosition, math.clamp((settings.Elasticity or 0) * dt * 10, 0, 1))
 					local deltaPos = particle.position - parent.position
 					local length = deltaPos.Magnitude
 					if length > 0.0001 then
 						local target = parent.position + deltaPos.Unit * math.max(particle.restLength, 0.001)
-						particle.position = particle.position:Lerp(target, math.clamp(0.65 + settings.Stiffness * 0.35, 0, 1))
+						particle.position = particle.position:Lerp(target, math.clamp(0.65 + (settings.Stiffness or 0) * 0.35, 0, 1))
 					end
 				end
 			end
@@ -2853,12 +2860,104 @@ local function moveMorphGroupByMiddle(group, middle, desiredMiddleCFrame)
 	end
 end
 
-local function prepareNativeMorphPart(part)
+function NativeMorph.colorFromAny(value, fallback)
+	if typeof(value) == "Color3" then
+		return value
+	end
+	if type(value) == "table" then
+		return descriptorColor(value, fallback)
+	end
+	return fallback or Color3.new(1, 1, 1)
+end
+
+function NativeMorph.characterBodyColor(character, fallback)
+	local part = findCharacterPart(character, { "Torso", "UpperTorso", "LowerTorso", "Head" })
+	if part and part:IsA("BasePart") then
+		return part.Color
+	end
+	return fallback or Color3.new(1, 1, 1)
+end
+
+function NativeMorph.palette(character, components, entityId)
+	local fallback = colorFromComponents(tostring(entityId or "native_morph"), components or {})
+	local body = NativeMorph.characterBodyColor(character, fallback)
+	local morph = type(components) == "table" and components.morph or nil
+	local colors = type(morph) == "table" and morph.colors or nil
+	return {
+		body = body,
+		color1 = NativeMorph.colorFromAny(colors and (colors.color1 or colors[1]), body),
+		color2 = NativeMorph.colorFromAny(colors and (colors.color2 or colors[2]), body),
+		color3 = NativeMorph.colorFromAny(colors and (colors.color3 or colors[3]), body),
+		color4 = NativeMorph.colorFromAny(colors and (colors.color4 or colors[4]), body),
+	}
+end
+
+function NativeMorph.paletteKey(palette)
+	local body = palette and palette.body or Color3.new(1, 1, 1)
+	local color1 = palette and palette.color1 or body
+	local color2 = palette and palette.color2 or body
+	return table.concat({
+		math.floor(body.R * 255 + 0.5),
+		math.floor(body.G * 255 + 0.5),
+		math.floor(body.B * 255 + 0.5),
+		math.floor(color1.R * 255 + 0.5),
+		math.floor(color1.G * 255 + 0.5),
+		math.floor(color1.B * 255 + 0.5),
+		math.floor(color2.R * 255 + 0.5),
+		math.floor(color2.G * 255 + 0.5),
+		math.floor(color2.B * 255 + 0.5),
+	}, ",")
+end
+
+function NativeMorph.hasMarker(root, markerName)
+	if root == nil then
+		return false
+	end
+	local found = root:FindFirstChild(markerName, true)
+	return found ~= nil
+end
+
+function NativeMorph.applyParticleColor(part, color)
+	for _, child in ipairs(part:GetChildren()) do
+		if child.Name == "Particles" or child:IsA("ParticleEmitter") or child:IsA("Trail") or child:IsA("Beam") then
+			safeSet(child, "Color", ColorSequence.new(color))
+		end
+	end
+end
+
+function NativeMorph.forceColors(root, color)
+	for _, descendant in ipairs(root:GetDescendants()) do
+		if descendant:IsA("BasePart") then
+			safeSet(descendant, "Color", color)
+		end
+	end
+end
+
+local function prepareNativeMorphPart(part, palette)
 	safeSet(part, "Anchored", false)
 	safeSet(part, "CanCollide", false)
 	safeSet(part, "CanTouch", false)
 	safeSet(part, "CanQuery", false)
 	safeSet(part, "Massless", true)
+	safeSet(part, "Transparency", 0)
+	palette = palette or { body = part.Color, color1 = part.Color, color2 = part.Color, color3 = part.Color, color4 = part.Color }
+	if part.Name == "color1" or part:FindFirstChild("IsColor1") then
+		safeSet(part, "Color", palette.color1 or palette.body)
+	elseif part.Name == "color2" or part:FindFirstChild("IsColor2") then
+		safeSet(part, "Color", palette.color2 or palette.body)
+	elseif part.Name == "color5" or part:FindFirstChild("IsColor3") or part:FindFirstChild("IsColor5") then
+		safeSet(part, "Color", palette.body)
+	elseif part.Name == "Particle1" then
+		NativeMorph.applyParticleColor(part, palette.color3 or palette.body)
+		safeSet(part, "Transparency", 1)
+	elseif part.Name == "Particle2" or part.Name == "Particle3" or part:FindFirstChild("IsColor4") then
+		NativeMorph.applyParticleColor(part, palette.color4 or palette.body)
+		safeSet(part, "Transparency", 1)
+	end
+	if part.Name == "Middle" or part:FindFirstChild("Hidden") then
+		safeSet(part, "Transparency", 1)
+		safeSet(part, "LocalTransparencyModifier", 1)
+	end
 end
 
 local function hideNativeMorphTarget(handle, part)
@@ -2876,6 +2975,7 @@ local function hideNativeMorphTarget(handle, part)
 		transparency = safeGet(part, "Transparency", 0),
 		localTransparencyModifier = safeGet(part, "LocalTransparencyModifier", 0),
 	})
+	safeSet(part, "Transparency", 1)
 	safeSet(part, "LocalTransparencyModifier", 1)
 end
 
@@ -2962,7 +3062,7 @@ local function clearNativeMorph(handle)
 	handle.nativeMorphSmartBones = nil
 end
 
-local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, slotState)
+local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, slotState, palette)
 	local mount = MORPH_GROUP_MOUNTS[group.Name]
 	local anchor = mount and findCharacterPart(character, { mount.anchor }) or nil
 	anchor = anchor or fallbackAnchor
@@ -2977,7 +3077,7 @@ local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, s
 	end
 
 	for _, part in ipairs(collectBaseParts(group)) do
-		prepareNativeMorphPart(part)
+		prepareNativeMorphPart(part, palette)
 	end
 
 	local offset = mount and morphMountOffset(anchor, mount.offset) or CFrame.new()
@@ -2998,7 +3098,10 @@ local function mountNativeMorphGroup(handle, group, character, fallbackAnchor, s
 	joint.Parent = middle
 
 	if mount and BODY_REPLACEMENT_TARGETS[group.Name] then
-		hideNativeMorphTarget(slotState or handle, anchor)
+		NativeMorph.forceColors(group, anchor.Color)
+		if not NativeMorph.hasMarker(group.Parent, "IsNone") then
+			hideNativeMorphTarget(slotState or handle, anchor)
+		end
 	end
 	return true
 end
@@ -3083,7 +3186,8 @@ function NativeMorph.applySlot(handle, anchorPart, components, entityId, charact
 	end
 
 	character = character or (anchorPart and anchorPart.Parent)
-	local key = tostring(slot) .. ":" .. normalizeMorphName(query) .. ":" .. tostring(source)
+	local palette = NativeMorph.palette(character, components, entityId)
+	local key = tostring(slot) .. ":" .. normalizeMorphName(query) .. ":" .. tostring(source) .. ":" .. NativeMorph.paletteKey(palette)
 	local state = NativeMorph.slotState(handle, slot)
 	if state.root and state.key == key and state.character == character then
 		return true
@@ -3103,7 +3207,7 @@ function NativeMorph.applySlot(handle, anchorPart, components, entityId, charact
 	local groupNames = NativeMorph.clearConflictingGroups(handle, slot, groups)
 	local mountedAny = false
 	for _, group in ipairs(groups) do
-		if mountNativeMorphGroup(handle, group, character, anchorPart, state) then
+		if mountNativeMorphGroup(handle, group, character, anchorPart, state, palette) then
 			mountedAny = true
 		end
 	end
@@ -3112,7 +3216,7 @@ function NativeMorph.applySlot(handle, anchorPart, components, entityId, charact
 		local parts = collectBaseParts(clone)
 		if #parts > 0 then
 			for _, part in ipairs(parts) do
-				prepareNativeMorphPart(part)
+				prepareNativeMorphPart(part, palette)
 			end
 			local pivot = parts[1].CFrame
 			local target = anchorPart.CFrame
@@ -4006,7 +4110,12 @@ trackConnection(RunService.Heartbeat:Connect(function()
 		end
 		if handle and handle.nativeMorphSmartBones then
 			for _, controller in ipairs(handle.nativeMorphSmartBones) do
-				updateSmartBoneController(controller, delta)
+				if not controller.disabled then
+					local ok = pcall(updateSmartBoneController, controller, delta)
+					if not ok then
+						controller.disabled = true
+					end
+				end
 			end
 		end
 	end
