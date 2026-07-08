@@ -788,18 +788,19 @@ SMART_BONE_DEFAULTS={Damping=0.1,Stiffness=0.2,Inertia=0,Elasticity=0.5,
 BlendWeight=1,Radius=0.2,AnchorDepth=0,AnchorsRotate=false,Gravity=Vector3.new(0
 ,-1,0),Force=Vector3.new(0,0.2,0),WindDirection=Vector3.new(-1,0,0),WindSpeed=8,
 WindStrength=1,WindInfluence=1,UpdateRate=60,ActivationDistance=45,
-ThrottleDistance=15}local function attributeValue(instance,names)for _,name in
-ipairs(names)do local ok,value=pcall(function()return instance:GetAttribute(name
-)end)if ok and value~=nil then return value end end return nil end local 
-function attributeNumber(instance,names,fallback,minValue,maxValue)local value=
-attributeValue(instance,names)local numeric=tonumber(value)if numeric==nil then
-return fallback end if minValue~=nil or maxValue~=nil then numeric=math.clamp(
-numeric,minValue or numeric,maxValue or numeric)end return numeric end local 
-function attributeVector(instance,names,fallback)local value=attributeValue(
-instance,names)if typeof(value)=='Vector3'then return value end return fallback
-end local function smartBoneSettings(rootPart)return{Damping=attributeNumber(
-rootPart,{'Damping','Dampen','Dampening','damping','dampen'},SMART_BONE_DEFAULTS
-.Damping,0,1),Stiffness=attributeNumber(rootPart,{'Stiffness','stiffness'},
+ThrottleDistance=15}local SMART_BONE_WIND_RNG=Random.new(1029410295159813)local 
+function attributeValue(instance,names)for _,name in ipairs(names)do local ok,
+value=pcall(function()return instance:GetAttribute(name)end)if ok and value~=nil
+then return value end end return nil end local function attributeNumber(instance
+,names,fallback,minValue,maxValue)local value=attributeValue(instance,names)
+local numeric=tonumber(value)if numeric==nil then return fallback end if
+minValue~=nil or maxValue~=nil then numeric=math.clamp(numeric,minValue or
+numeric,maxValue or numeric)end return numeric end local function 
+attributeVector(instance,names,fallback)local value=attributeValue(instance,
+names)if typeof(value)=='Vector3'then return value end return fallback end local 
+function smartBoneSettings(rootPart)return{Damping=attributeNumber(rootPart,{
+'Damping','Dampen','Dampening','damping','dampen'},SMART_BONE_DEFAULTS.Damping,0
+,1),Stiffness=attributeNumber(rootPart,{'Stiffness','stiffness'},
 SMART_BONE_DEFAULTS.Stiffness,0,1),Inertia=attributeNumber(rootPart,{'Inertia',
 'inertia'},SMART_BONE_DEFAULTS.Inertia,0,1),Elasticity=attributeNumber(rootPart,
 {'Elasticity','elasticity'},SMART_BONE_DEFAULTS.Elasticity,0,1),BlendWeight=
@@ -859,72 +860,184 @@ insert(roots,rootBone)end end if#roots>0 then return roots end end if CONFIG.
 native_morph_infer_smart_bone_roots and NativeMorph.hasSmartBoneSignal(rootPart)
 then return NativeMorph.inferSmartBoneRoots(rootPart)end return roots end local 
 function ensureTailBone(bone,parentBone)local existing=bone:FindFirstChild(bone.
-Name..'_OverlayTail')if existing and existing:IsA('Bone')then return existing
-end local tail=Instance.new('Bone')tail.Name=bone.Name..'_OverlayTail'tail.
-Parent=bone local offset=Vector3.new(0,0.1,0)if parentBone then local direction=
-bone.WorldPosition-parentBone.WorldPosition if direction.Magnitude>0.001 then
-offset=bone.CFrame:VectorToObjectSpace(direction.Unit*math.max(direction.
-Magnitude,0.05))end end tail.CFrame=CFrame.new(offset)return tail end local 
-function appendSmartBoneParticle(tree,bone,parentIndex,depth)local maxParticles=
-tonumber(CONFIG.native_morph_max_smart_bone_particles)or 0 if maxParticles>0 and
-#tree.particles>=maxParticles then tree.truncated=true return end local parent=
+Name..'_Tail')or bone:FindFirstChild(bone.Name..'_OverlayTail')if existing and
+existing:IsA('Bone')then return existing end local tail=Instance.new('Bone')tail
+.Name=bone.Name..'_Tail'tail.Parent=bone local distance=0.1 if parentBone then
+distance=math.max((bone.WorldPosition-parentBone.WorldPosition).Magnitude,0.05)
+end tail.WorldCFrame=bone.WorldCFrame+(bone.WorldCFrame.UpVector.Unit*distance)
+return tail end local function ensureSmartBoneTailBones(rootPart)for _,
+descendant in ipairs(rootPart:GetDescendants())do if descendant:IsA('Bone')and
+descendant.Parent and descendant.Parent:IsA('Bone')and#descendant:GetChildren()
+==0 then ensureTailBone(descendant,descendant.Parent)end end end local function 
+appendSmartBoneParticle(tree,bone,parentIndex,depth)local maxParticles=tonumber(
+CONFIG.native_morph_max_smart_bone_particles)or 0 if maxParticles>0 and#tree.
+particles>=maxParticles then tree.truncated=true return end local parent=
 parentIndex>0 and tree.particles[parentIndex]or nil local transform=bone.
 WorldCFrame:ToObjectSpace(tree.root.WorldCFrame):Inverse()local localTransform=
 bone.CFrame:ToObjectSpace(tree.root.CFrame):Inverse()local rootTransform=tree.
 root.WorldCFrame:ToObjectSpace(tree.rootPart.CFrame):Inverse()local boneLength=
-parent and(parent.bone.WorldPosition-bone.WorldPosition).Magnitude or 0.05 local
+parent and(parent.bone.WorldPosition-bone.WorldPosition).Magnitude or 0 local
 particle={bone=bone,root=tree.root,parentIndex=parentIndex,depth=depth,
-hierarchyLength=math.max(depth,1),position=bone.WorldPosition,lastPosition=bone.
+hierarchyLength=depth,position=bone.WorldPosition,lastPosition=bone.
 WorldPosition,restWorld=bone.WorldCFrame,restLength=boneLength,boneLength=math.
-max(boneLength,0.05),weight=0.7,transform=transform,localTransform=
-localTransform,rootTransform=rootTransform,transformOffset=bone.WorldCFrame,
-lastTransformOffset=bone.WorldCFrame,localTransformOffset=bone.CFrame,
-calculatedWorldCFrame=bone.WorldCFrame,anchored=parentIndex==0 or depth<=tree.
-settings.AnchorDepth,phase=(#tree.particles+1)*0.71}table.insert(tree.particles,
-particle)local index=#tree.particles local children=childBones(bone)if#children
-==0 and parentIndex>0 then table.insert(children,ensureTailBone(bone,parent and
-parent.bone or nil))end for _,child in ipairs(children)do if maxParticles>0 and#
-tree.particles>=maxParticles then tree.truncated=true break end
-appendSmartBoneParticle(tree,child,index,depth+1)end end local function 
+max(boneLength,0.0001),weight=parent and(math.max(boneLength,0.0001)*0.7)or 0.7,
+transform=transform,localTransform=localTransform,rootTransform=rootTransform,
+transformOffset=bone.WorldCFrame,lastTransformOffset=bone.WorldCFrame,
+localTransformOffset=bone.CFrame,calculatedWorldCFrame=bone.WorldCFrame,
+calculatedWorldPosition=bone.WorldPosition,anchored=parentIndex==0 or depth<=
+tree.settings.AnchorDepth}table.insert(tree.particles,particle)local index=#tree
+.particles local children=childBones(bone)for _,child in ipairs(children)do if
+maxParticles>0 and#tree.particles>=maxParticles then tree.truncated=true break
+end appendSmartBoneParticle(tree,child,index,depth+1)end end local function 
 createSmartBoneController(rootPart)if rootPart==nil or not rootPart:IsA(
 'BasePart')then return nil end local rootBones=NativeMorph.smartBoneRootBones(
-rootPart)if#rootBones==0 then return nil end local settings=smartBoneSettings(
-rootPart)local controller={rootPart=rootPart,lastRootPosition=rootPart.Position,
-settings=settings,frameTime=0,inRange=false,objectScale=math.abs(rootPart.Size.X
-)*0.0002800336040324839,trees={}}for _,rootBone in ipairs(rootBones)do local
-gravity=settings.Gravity or SMART_BONE_DEFAULTS.Gravity local localGravity=
-gravity if gravity.Magnitude>0.0001 then localGravity=rootBone.CFrame:
-PointToWorldSpace(gravity).Unit*gravity.Magnitude end local tree={root=rootBone,
-rootPart=rootPart,settings=settings,particles={},truncated=false,windOffset=math
-.random()*1000000,localGravity=localGravity,restGravity=Vector3.new(),objectMove
-=Vector3.new(),objectPreviousPosition=rootPart.Position}appendSmartBoneParticle(
-tree,rootBone,0,0)if#tree.particles>1 then table.insert(controller.trees,tree)
-end end if#controller.trees==0 then return nil end return controller end local 
-function rotationBetween(fromVector,toVector,fallbackAxis)if fromVector.
-Magnitude<=0.0001 or toVector.Magnitude<=0.0001 then return CFrame.new()end
-local fromUnit=fromVector.Unit local toUnit=toVector.Unit local dot=fromUnit:
-Dot(toUnit)if dot>0.99999 then return CFrame.new()end if dot<-0.99999 then local
-axis=fallbackAxis or Vector3.new(1,0,0)if axis.Magnitude<=0.0001 then axis=
-Vector3.new(1,0,0)end return CFrame.fromAxisAngle(axis.Unit,math.pi)end local
-axis=fromUnit:Cross(toUnit)return CFrame.new(0,0,0,axis.X,axis.Y,axis.Z,1+dot)
-end local function smartBoneWithinViewport(rootPart)local camera=workspace.
-CurrentCamera if camera==nil or rootPart==nil then return true end local ok,_,
-visible=pcall(function()return camera:WorldToViewportPoint(rootPart.Position)end
-)return ok and visible==true end local function resetSmartBoneTree(tree)for _,
-particle in ipairs(tree.particles)do if particle.bone and particle.bone.Parent
-then local transformOffset if particle.bone==tree.root then transformOffset=tree
-.rootPart.CFrame*particle.rootTransform else transformOffset=tree.root.
-WorldCFrame*particle.transform end particle.transformOffset=transformOffset
-particle.lastTransformOffset=transformOffset particle.localTransformOffset=tree.
-root.CFrame*particle.localTransform particle.lastPosition=transformOffset.
-Position particle.position=transformOffset.Position particle.
+rootPart)if#rootBones==0 then return nil end ensureSmartBoneTailBones(rootPart)
+local settings=smartBoneSettings(rootPart)local controller={rootPart=rootPart,
+lastRootPosition=rootPart.Position,settings=settings,frameTime=0,time=0,oldTime=
+os.clock(),frameRateTable={},inRange=false,objectScale=math.abs(rootPart.Size.X)
+*0.0002800336040324839,windPreviousPosition=Vector3.new(),trees={}}for _,
+rootBone in ipairs(rootBones)do local gravity=settings.Gravity or
+SMART_BONE_DEFAULTS.Gravity local localGravity=gravity if gravity.Magnitude>
+0.0001 then localGravity=rootBone.CFrame:PointToWorldSpace(gravity).Unit*gravity
+.Magnitude end local tree={root=rootBone,rootPart=rootPart,settings=settings,
+particles={},truncated=false,windOffset=SMART_BONE_WIND_RNG:NextNumber(0,1000000
+),localGravity=localGravity,restGravity=Vector3.new(),objectMove=Vector3.new(),
+objectPreviousPosition=rootPart.Position}appendSmartBoneParticle(tree,rootBone,0
+,0)if#tree.particles>1 then table.insert(controller.trees,tree)end end if#
+controller.trees==0 then return nil end return controller end local function 
+rotationBetween(fromVector,toVector,fallbackAxis)if fromVector.Magnitude<=0.0001
+or toVector.Magnitude<=0.0001 then return CFrame.new()end local fromUnit=
+fromVector.Unit local toUnit=toVector.Unit local dot=fromUnit:Dot(toUnit)if dot>
+0.99999 then return CFrame.new()end if dot<-0.99999 then local axis=fallbackAxis
+or Vector3.new(1,0,0)if axis.Magnitude<=0.0001 then axis=Vector3.new(1,0,0)end
+return CFrame.fromAxisAngle(axis.Unit,math.pi)end local axis=fromUnit:Cross(
+toUnit)return CFrame.new(0,0,0,axis.X,axis.Y,axis.Z,1+dot)end local function 
+smartBoneWithinViewport(rootPart)local camera=workspace.CurrentCamera if camera
+==nil or rootPart==nil then return true end local cf=rootPart.CFrame local size=
+rootPart.Size for i=1,8 do local point=cf*CFrame.new(size.X*(i%2==0 and 0.5 or-
+0.5),size.Y*(i%4>1 and 0.5 or-0.5),size.Z*(i%8>3 and 0.5 or-0.5))local ok=pcall(
+function()return camera:WorldToViewportPoint(point.Position)end)if ok then
+return true end end return false end local function smartBoneSmoothDelta(
+controller)local currentTime=os.clock()local frameRateTable=controller.
+frameRateTable or{}controller.frameRateTable=frameRateTable for index=#
+frameRateTable,1,-1 do if frameRateTable[index]>=currentTime-1 then
+frameRateTable[index+1]=frameRateTable[index]else frameRateTable[index+1]=nil
+end end frameRateTable[1]=currentTime local oldTime=controller.oldTime or
+currentTime local frameRate if currentTime-oldTime>=1 then frameRate=#
+frameRateTable else frameRate=#frameRateTable/math.max(currentTime-oldTime,1/240
+)end frameRate=math.max(math.floor(frameRate),1)return math.floor(((frameRate*((
+1/frameRate)^2)+0.001)*1000)+0.5)/1000 end local function resetSmartBoneTree(
+tree)for _,particle in ipairs(tree.particles)do if particle.bone and particle.
+bone.Parent then particle.lastPosition=particle.transformOffset.Position
+particle.position=particle.transformOffset.Position end end end local function 
+resetSmartBoneController(controller)for _,tree in ipairs(controller.trees or{})
+do resetSmartBoneTree(tree)for _,particle in ipairs(tree.particles)do if
+particle.bone and particle.bone.Parent then local transformOffset if particle.
+bone==tree.root then transformOffset=tree.rootPart.CFrame*particle.rootTransform
+else transformOffset=tree.root.WorldCFrame*particle.transform end particle.
+transformOffset=transformOffset particle.lastTransformOffset=transformOffset
+particle.localTransformOffset=tree.root.CFrame*particle.localTransform particle.
 calculatedWorldCFrame=transformOffset safeSet(particle.bone,'WorldCFrame',
 transformOffset)end end tree.objectPreviousPosition=tree.rootPart.Position tree.
-objectMove=Vector3.new()end local function resetSmartBoneController(controller)
-for _,tree in ipairs(controller.trees or{})do resetSmartBoneTree(tree)end end
+objectMove=Vector3.new()end end local function smartBonePreUpdate(tree)local
+rootPart=tree.rootPart local root=tree.root tree.objectMove=rootPart.Position-
+tree.objectPreviousPosition tree.objectPreviousPosition=rootPart.Position tree.
+restGravity=root.CFrame:PointToWorldSpace(tree.localGravity)for _,particle in
+ipairs(tree.particles)do particle.lastTransformOffset=particle.transformOffset
+if particle.bone==tree.root then particle.transformOffset=rootPart.CFrame*
+particle.rootTransform else particle.transformOffset=root.WorldCFrame*particle.
+transform end particle.localTransformOffset=root.CFrame*particle.localTransform
+end end local function smartBoneUpdateParticles(controller,tree,delta,loopIndex)
+local settings=controller.settings local force=settings.Gravity or
+SMART_BONE_DEFAULTS.Gravity local forceDirection=force.Magnitude>0.0001 and
+force.Unit or Vector3.new(0,-1,0)local projectedForce=forceDirection*math.max(
+tree.restGravity:Dot(forceDirection),0)force=(force-projectedForce+(settings.
+Force or SMART_BONE_DEFAULTS.Force))*((controller.objectScale or 0)*delta)local
+objectMove=loopIndex==0 and tree.objectMove or Vector3.new()local now=os.clock()
+for _,particle in ipairs(tree.particles)do if particle.parentIndex>=1 and
+particle.anchored==false then local windMove=Vector3.new()if(settings.
+WindInfluence or 0)>0 then local windDirection=settings.WindDirection or
+SMART_BONE_DEFAULTS.WindDirection local timeModifier=(tree.windOffset or 0)+(now
+-((particle.hierarchyLength or 0)/5))+(((particle.transformOffset.Position-tree.
+root.WorldPosition).Magnitude/5)*(settings.WindInfluence or 1))windMove=Vector3.
+new(windDirection.X+(windDirection.X*math.sin(timeModifier*(settings.WindSpeed
+or 8))),windDirection.Y+(0.05*math.sin(timeModifier*(settings.WindSpeed or 8))),
+windDirection.Z+(windDirection.X*math.sin(timeModifier*(settings.WindSpeed or 8)
+)))windMove=windMove/math.max(particle.boneLength or 0.0001,0.0001)windMove=
+windMove*(settings.WindInfluence or 1)windMove=windMove*(((settings.WindStrength
+or 1)/100)*(math.clamp(particle.hierarchyLength or 1,1,10)/10))windMove=windMove
+*(particle.weight or 0.7)controller.windPreviousPosition=windMove end local
+velocity=particle.position-particle.lastPosition local move=objectMove*(settings
+.Inertia or 0)particle.lastPosition=particle.position+move particle.position=
+particle.position+(velocity*(1-(settings.Damping or 0))+force+move+windMove)else
+particle.lastPosition=particle.transformOffset.Position particle.position=
+particle.transformOffset.Position end end end local function 
+smartBoneCorrectParticles(controller,tree,delta)local settings=controller.
+settings local stiffness=settings.Stiffness or 0 for _,point in ipairs(tree.
+particles)do local parentPoint=tree.particles[point.parentIndex]if parentPoint
+and point.parentIndex>=1 and point.anchored==false then local restLength=(
+parentPoint.transformOffset.Position-point.transformOffset.Position).Magnitude
+if stiffness>0 or(settings.Elasticity or 0)>0 then local mat=CFrame.new(
+parentPoint.position)*parentPoint.transformOffset.Rotation local restPosition=(
+mat*CFrame.new(point.localTransformOffset.Position)).Position local difference=
+restPosition-point.position point.position=point.position+difference*((settings.
+Elasticity or 0)*delta)if stiffness>0 then difference=restPosition-point.
+position local length=difference.Magnitude local maxLength=restLength*(1-
+stiffness)*2 if length>maxLength and length>0 then point.position=point.position
++difference*((length-maxLength)/length)end end end local difference=parentPoint.
+position-point.position local length=difference.Magnitude if length>0 then point
+.position=point.position+difference*((length-restLength)/length)end end end end
+local function smartBoneSkipUpdateParticles(controller,tree)local stiffness=
+controller.settings.Stiffness or 0 for _,point in ipairs(tree.particles)do if
+point.parentIndex>=1 and not point.anchored then point.lastPosition=point.
+lastPosition+tree.objectMove point.position=point.position+tree.objectMove local
+parentPoint=tree.particles[point.parentIndex]if parentPoint then local
+restLength=(parentPoint.transformOffset.Position-point.transformOffset.Position)
+.Magnitude if stiffness>0 then local distance=(parentPoint.position-point.
+position).Magnitude local restPosition=parentPoint.position if distance>0 then
+restPosition=parentPoint.position+CFrame.lookAt(parentPoint.position,point.
+position).LookVector.Unit*distance end local difference=restPosition-point.
+position local length=difference.Magnitude local maxLength=restLength*(1-
+stiffness)*2 if length>maxLength and length>0 then point.position=point.position
++difference*((length-maxLength)/length)end end local difference=parentPoint.
+position-point.position local length=difference.Magnitude if length>restLength
+and length>0 then point.position=point.position+difference*((length-restLength)/
+length)end end else point.lastPosition=point.transformOffset.Position point.
+position=point.transformOffset.Position end end end local function 
+smartBoneCalculateTransforms(controller,tree,delta)if not controller.inRange
+then return end for _,point in ipairs(tree.particles)do if point.parentIndex>=1
+and point.anchored==false then local parentPoint=tree.particles[point.
+parentIndex]local boneParent=parentPoint and parentPoint.bone if parentPoint and
+boneParent and boneParent:IsA('Bone')and boneParent~=tree.root then local
+localPosition=parentPoint.localTransformOffset.Position local referenceCFrame=
+parentPoint.transformOffset local v0=referenceCFrame:PointToObjectSpace(
+localPosition)local v1=point.position-parentPoint.position local rotation=
+rotationBetween(referenceCFrame.UpVector,v1,v0).Rotation*referenceCFrame.
+Rotation local alpha=1-(0.00001^delta)parentPoint.calculatedWorldCFrame=
+boneParent.WorldCFrame:Lerp(CFrame.new(parentPoint.position)*rotation,alpha)
+parentPoint.calculatedWorldPosition=parentPoint.calculatedWorldCFrame.Position
+end end end end local function smartBoneTransformBones(controller,tree)if not
+controller.inRange then return end for _,point in ipairs(tree.particles)do if
+point.parentIndex>=1 and point.anchored==false then local parentPoint=tree.
+particles[point.parentIndex]local boneParent=parentPoint and parentPoint.bone if
+parentPoint and boneParent and boneParent:IsA('Bone')and boneParent~=tree.root
+then if parentPoint.anchored and controller.settings.AnchorsRotate==false then
+safeSet(boneParent,'WorldCFrame',parentPoint.transformOffset)elseif parentPoint.
+calculatedWorldCFrame then safeSet(boneParent,'WorldCFrame',parentPoint.
+calculatedWorldCFrame)end end end end end local function smartBoneRunLoop(
+controller,tree,delta,updateRate)local ready=true local timeVar=delta*10 if
+updateRate>0 then local frameTime=1/updateRate controller.time=(controller.time
+or 0)+delta ready=false if controller.time>=frameTime then ready=true controller
+.time=0 end end if ready then smartBoneUpdateParticles(controller,tree,timeVar,0
+)smartBoneCorrectParticles(controller,tree,timeVar)else
+smartBoneSkipUpdateParticles(controller,tree)end end local function 
+smartBoneUpdateBones(controller,delta,updateRate)for _,tree in ipairs(controller
+.trees or{})do if tree.root and tree.root.Parent and tree.rootPart and tree.
+rootPart.Parent then smartBonePreUpdate(tree)smartBoneRunLoop(controller,tree,
+delta,updateRate)smartBoneCalculateTransforms(controller,tree,delta)end end end
 local function updateSmartBoneController(controller,delta)if controller==nil or
 controller.rootPart==nil or controller.rootPart.Parent==nil then return end
-delta=tonumber(delta)or(1/60)local settings=controller.settings or
+delta=smartBoneSmoothDelta(controller)local settings=controller.settings or
 SMART_BONE_DEFAULTS controller.frameTime=(tonumber(controller.frameTime)or 0)+
 delta local updateRate=math.max(settings.UpdateRate or 60,1)local camera=
 workspace.CurrentCamera local distance=0 if camera then distance=(camera.CFrame.
@@ -935,81 +1048,20 @@ SMART_BONE_DEFAULTS.ThrottleDistance,0)local updateDistance=math.clamp(distance-
 throttleDistance,0,activationDistance)local updateThrottle=1-math.clamp(
 updateDistance/activationDistance,0,1)updateRate=math.floor(math.clamp(
 updateThrottle*updateRate,1,updateRate))if controller.frameTime<(1/updateRate)
-then return end local dt=math.clamp(controller.frameTime,1/240,0.1)controller.
-frameTime=0 if distance>=activationDistance or not smartBoneWithinViewport(
+then return end if distance>=activationDistance or not smartBoneWithinViewport(
 controller.rootPart)then if controller.inRange then controller.inRange=false
-resetSmartBoneController(controller)end return end controller.inRange=true local
-timeVar=dt*10 local gravity=settings.Gravity or SMART_BONE_DEFAULTS.Gravity
-local gravityDirection=gravity.Magnitude>0.0001 and gravity.Unit or Vector3.new(
-0,-1,0)local now=os.clock()for _,tree in ipairs(controller.trees)do if tree.root
-and tree.root.Parent and tree.rootPart and tree.rootPart.Parent then tree.
-objectMove=tree.rootPart.Position-tree.objectPreviousPosition tree.
-objectPreviousPosition=tree.rootPart.Position tree.restGravity=tree.root.CFrame:
-PointToWorldSpace(tree.localGravity)local projectedForce=gravityDirection*math.
-max(tree.restGravity:Dot(gravityDirection),0)local force=(gravity-projectedForce
-+(settings.Force or SMART_BONE_DEFAULTS.Force))*((controller.objectScale or 0)*
-timeVar)for _,particle in ipairs(tree.particles)do if particle.bone and particle
-.bone.Parent then particle.lastTransformOffset=particle.transformOffset if
-particle.bone==tree.root then particle.transformOffset=tree.rootPart.CFrame*
-particle.rootTransform else particle.transformOffset=tree.root.WorldCFrame*
-particle.transform end particle.localTransformOffset=tree.root.CFrame*particle.
-localTransform end end for _,particle in ipairs(tree.particles)do if particle.
-parentIndex>=1 and not particle.anchored and particle.bone and particle.bone.
-Parent then local windMove=Vector3.new()if(settings.WindInfluence or 0)>0 and(
-settings.WindStrength or 0)>0 then local windDirection=settings.WindDirection or
-SMART_BONE_DEFAULTS.WindDirection local distanceFromRoot=(particle.
-transformOffset.Position-tree.root.WorldPosition).Magnitude local timeModifier=(
-tree.windOffset or 0)+(now-((particle.hierarchyLength or 1)/5))+((
-distanceFromRoot/5)*(settings.WindInfluence or 1))windMove=Vector3.new(
-windDirection.X+(windDirection.X*math.sin(timeModifier*(settings.WindSpeed or 8)
-)),windDirection.Y+(0.05*math.sin(timeModifier*(settings.WindSpeed or 8))),
-windDirection.Z+(windDirection.X*math.sin(timeModifier*(settings.WindSpeed or 8)
-)))windMove=windMove/math.max(particle.boneLength or 0.05,0.05)windMove=windMove
-*(settings.WindInfluence or 1)windMove=windMove*(((settings.WindStrength or 1)/
-100)*(math.clamp(particle.hierarchyLength or 1,1,10)/10))windMove=windMove*(
-particle.weight or 0.7)end local velocity=particle.position-particle.
-lastPosition local move=tree.objectMove*(settings.Inertia or 0)particle.
-lastPosition=particle.position+move particle.position=particle.position+(
-velocity*(1-(settings.Damping or 0))+force+move+windMove)else particle.
-lastPosition=particle.transformOffset.Position particle.position=particle.
-transformOffset.Position end end for _,particle in ipairs(tree.particles)do
-local parent=particle.parentIndex>=1 and tree.particles[particle.parentIndex]or
-nil if parent and not particle.anchored then local restLength=(parent.
-transformOffset.Position-particle.transformOffset.Position).Magnitude if(
-settings.Stiffness or 0)>0 or(settings.Elasticity or 0)>0 then local mat=CFrame.
-new(parent.position)*parent.transformOffset.Rotation local restPosition=(mat*
-CFrame.new(particle.localTransformOffset.Position)).Position local difference=
-restPosition-particle.position particle.position=particle.position+difference*((
-settings.Elasticity or 0)*timeVar)if(settings.Stiffness or 0)>0 then difference=
-restPosition-particle.position local length=difference.Magnitude local maxLength
-=restLength*(1-(settings.Stiffness or 0))*2 if length>maxLength and length>0
-then particle.position=particle.position+difference*((length-maxLength)/length)
-end end end local difference=parent.position-particle.position local length=
-difference.Magnitude if length>0 then particle.position=particle.position+
-difference*((length-restLength)/length)end end end for _,particle in ipairs(tree
-.particles)do if particle.parentIndex>=1 and not particle.anchored then local
-parent=tree.particles[particle.parentIndex]if parent and parent.bone and parent.
-bone.Parent and parent.bone~=tree.root then local localPosition=parent.
-localTransformOffset.Position local reference=parent.transformOffset local v0=
-reference:PointToObjectSpace(localPosition)local v1=particle.position-parent.
-position local rotation=rotationBetween(reference.UpVector,v1,v0).Rotation*
-reference.Rotation local alpha=1-(0.00001^timeVar)parent.calculatedWorldCFrame=
-parent.bone.WorldCFrame:Lerp(CFrame.new(parent.position)*rotation,alpha)end end
-end for _,particle in ipairs(tree.particles)do if particle.parentIndex>=1 and
-not particle.anchored then local parent=tree.particles[particle.parentIndex]if
-parent and parent.bone and parent.bone.Parent and parent.bone~=tree.root then if
-parent.anchored and(settings.AnchorsRotate==false)then safeSet(parent.bone,
-'WorldCFrame',parent.transformOffset)elseif parent.calculatedWorldCFrame then
-safeSet(parent.bone,'WorldCFrame',parent.calculatedWorldCFrame)end end end end
-end end end local BODY_REPLACEMENT_TARGETS={BodyLeftArm=true,BodyRightArm=true,
-BodyLeftLeg=true,BodyRightLeg=true,BodyTorso=true}local function 
-normalizeMorphName(value)value=string.lower(trimString(value))if string.sub(
-value,1,7)=='native:'then value=string.sub(value,8)end return string.gsub(value,
-'[%s%p_%-]+','')end local function nativeMorphQuery(morph)if type(morph)~=
-'table'then return nil end local raw=trimString(morph.native_name or morph.
-morph_name or morph.query or morph.name or morph.preset)if raw==''then return
-nil end local lower=string.lower(raw)if lower=='none'or lower=='off'or lower==
-'disabled'then return nil end return raw end local function 
+resetSmartBoneController(controller)end return end local dt=controller.frameTime
+controller.frameTime=0 controller.inRange=true smartBoneUpdateBones(controller,
+dt,updateRate)for _,tree in ipairs(controller.trees or{})do
+smartBoneTransformBones(controller,tree)end end local BODY_REPLACEMENT_TARGETS={
+BodyLeftArm=true,BodyRightArm=true,BodyLeftLeg=true,BodyRightLeg=true,BodyTorso=
+true}local function normalizeMorphName(value)value=string.lower(trimString(value
+))if string.sub(value,1,7)=='native:'then value=string.sub(value,8)end return
+string.gsub(value,'[%s%p_%-]+','')end local function nativeMorphQuery(morph)if
+type(morph)~='table'then return nil end local raw=trimString(morph.native_name
+or morph.morph_name or morph.query or morph.name or morph.preset)if raw==''then
+return nil end local lower=string.lower(raw)if lower=='none'or lower=='off'or
+lower=='disabled'then return nil end return raw end local function 
 ensureNativeMorphArchiveFile()local path=trimString(CONFIG.
 native_morph_archive_path)if path==''then Client.nativeMorphArchiveStatus=
 'path_required'Client.nativeMorphArchiveError=
