@@ -398,33 +398,34 @@ label.TextScaled=true label.Font=Enum.Font.GothamBold label.TextColor3=color
 label.TextStrokeColor3=Color3.new(0,0,0)label.TextStrokeTransparency=0.25 label.
 Text=displayNameFor(entityId,components)label.Parent=billboard return billboard,
 label end local function destroyHandle(handle)if handle==nil then return end if
-handle.animationTrack then pcall(function()handle.animationTrack:Stop(0.15)
-handle.animationTrack:Destroy()end)handle.animationTrack=nil end if handle.
-animationObject then pcall(function()handle.animationObject:Destroy()end)handle.
-animationObject=nil end if type(handle.nativeMorphHiddenParts)=='table'then for
-_,item in ipairs(handle.nativeMorphHiddenParts)do local part=item and item.part
-if part and part.Parent then pcall(function()part.Transparency=item.transparency
-end)pcall(function()part.LocalTransparencyModifier=item.
-localTransparencyModifier end)end end handle.nativeMorphHiddenParts=nil end if
-type(handle.nativeMorphSlots)=='table'then for _,state in pairs(handle.
-nativeMorphSlots)do if type(state.nativeMorphHiddenParts)=='table'then for _,
-item in ipairs(state.nativeMorphHiddenParts)do local part=item and item.part if
-part and part.Parent then pcall(function()part.Transparency=item.transparency
-end)pcall(function()part.LocalTransparencyModifier=item.
-localTransparencyModifier end)end end end if state.root then pcall(function()
-state.root:Destroy()end)end end handle.nativeMorphSlots=nil end if handle.
-connections then for _,connection in ipairs(handle.connections)do pcall(function
-()connection:Disconnect()end)end end for _,key in ipairs({'billboard',
-'highlight','auraParticle','auraAttachment','trail','trailAttachment0',
-'trailAttachment1','meshVisual','textureDecal','nativeMorphRoot',
-'descriptorMorphRoot','appearanceModel','model','folder'})do local instance=
-handle[key]if instance then pcall(function()instance:Destroy()end)end end end
-local function activeOverlayHighlightCount()local count=0 for _,entity in pairs(
-Client.entities)do if entity.handle and entity.handle.highlight then count=count
-+1 end end return count end local function pushSample(entity,transform)entity.
-samples=entity.samples or{}table.insert(entity.samples,{at=os.clock(),cf=
-transformToCFrame(transform)})while#entity.samples>8 do table.remove(entity.
-samples,1)end end local function assetIdFromComponent(component)if type(
+NativeAnimation and type(NativeAnimation.clear)=='function'then NativeAnimation.
+clear(handle)end if handle.animationTrack then pcall(function()handle.
+animationTrack:Stop(0.15)handle.animationTrack:Destroy()end)handle.
+animationTrack=nil end if handle.animationObject then pcall(function()handle.
+animationObject:Destroy()end)handle.animationObject=nil end if type(handle.
+nativeMorphHiddenParts)=='table'then for _,item in ipairs(handle.
+nativeMorphHiddenParts)do local part=item and item.part if part and part.Parent
+then pcall(function()part.Transparency=item.transparency end)pcall(function()
+part.LocalTransparencyModifier=item.localTransparencyModifier end)end end handle
+.nativeMorphHiddenParts=nil end if type(handle.nativeMorphSlots)=='table'then
+for _,state in pairs(handle.nativeMorphSlots)do if type(state.
+nativeMorphHiddenParts)=='table'then for _,item in ipairs(state.
+nativeMorphHiddenParts)do local part=item and item.part if part and part.Parent
+then pcall(function()part.Transparency=item.transparency end)pcall(function()
+part.LocalTransparencyModifier=item.localTransparencyModifier end)end end end if
+state.root then pcall(function()state.root:Destroy()end)end end handle.
+nativeMorphSlots=nil end if handle.connections then for _,connection in ipairs(
+handle.connections)do pcall(function()connection:Disconnect()end)end end for _,
+key in ipairs({'billboard','highlight','auraParticle','auraAttachment','trail',
+'trailAttachment0','trailAttachment1','meshVisual','textureDecal',
+'nativeMorphRoot','descriptorMorphRoot','appearanceModel','model','folder'})do
+local instance=handle[key]if instance then pcall(function()instance:Destroy()end
+)end end end local function activeOverlayHighlightCount()local count=0 for _,
+entity in pairs(Client.entities)do if entity.handle and entity.handle.highlight
+then count=count+1 end end return count end local function pushSample(entity,
+transform)entity.samples=entity.samples or{}table.insert(entity.samples,{at=os.
+clock(),cf=transformToCFrame(transform)})while#entity.samples>8 do table.remove(
+entity.samples,1)end end local function assetIdFromComponent(component)if type(
 component)=='table'then return component.asset_id or component.mesh_asset_id or
 component.texture_asset_id end if type(component)=='string'then return component
 end return nil end local function robloxAssetUrl(value)value=trimString(value)if
@@ -450,58 +451,59 @@ animationKey=nil handle.animationCharacter=nil end local function
 applyAnimationToCharacter(handle,character,components,entityId)if handle==nil or
 character==nil or type(components)~='table'then clearAnimation(handle)return end
 local animation=components.animation if type(animation)~='table'or animation.
-enabled==false or animation.stopped==true then clearAnimation(handle)return end
-if NativeAnimation and type(NativeAnimation.apply)=='function'and
-NativeAnimation.apply(handle,character,components,entityId)then return end local
-assetUrl=animationAssetUrl(animation)if assetUrl==nil then if handle.
-animationUnsupportedKey~=tostring(animation.name or animation.preset or entityId
-)then handle.animationUnsupportedKey=tostring(animation.name or animation.preset
-or entityId)emitBridgeEvent('animation.unsupported',{entity_id=entityId,name=
-animation.name or animation.preset,reason='missing_roblox_animation_id'})end
-return end handle.animationUnsupportedKey=nil local speed=tonumber(animation.
-speed or animation.playback_speed or animation.playbackSpeed)or 1 speed=math.
-clamp(speed,0.05,4)local weight=tonumber(animation.weight)if weight==nil then
-weight=math.clamp((tonumber(animation.intensity)or 100)/100,0.05,1)end local
-looped=animation.looped~=false local key=assetUrl..'|'..tostring(looped)if
-handle.animationTrack and handle.animationKey==key and handle.animationCharacter
-==character then pcall(function()handle.animationTrack:AdjustSpeed(speed)end)
-return end clearAnimation(handle)local humanoid=character:FindFirstChildOfClass(
-'Humanoid')if humanoid==nil then return end local animator=humanoid:
-FindFirstChildOfClass('Animator')if animator==nil then animator=Instance.new(
-'Animator')animator.Parent=humanoid end local anim=Instance.new('Animation')anim
-.Name='OverlayAnimation'anim.AnimationId=assetUrl anim.Parent=handle.folder or
-character local ok,track=pcall(function()return animator:LoadAnimation(anim)end)
-if not ok or track==nil then pcall(function()anim:Destroy()end)emitBridgeEvent(
-'animation.load_failed',{entity_id=entityId,animation_id=assetUrl})return end
-pcall(function()track.Looped=looped track.Priority=Enum.AnimationPriority.Action
-track:Play(0.15,weight,speed)end)handle.animationObject=anim handle.
-animationTrack=track handle.animationKey=key handle.animationCharacter=character
-end local function assetLooksLikeKind(asset,kind)if type(asset)~='table'then
-return false end local typeName=string.lower(tostring(asset.type or''))local url
-=string.lower(tostring(asset.url or''))if string.find(typeName,kind,1,true)then
-return true end if kind=='mesh'then return string.find(url,'%.mesh',1,false)~=
-nil end if kind=='texture'then return string.find(url,'%.png',1,false)~=nil or
-string.find(url,'%.jpg',1,false)~=nil or string.find(url,'%.jpeg',1,false)~=nil
-or string.find(url,'%.webp',1,false)~=nil end return false end local function 
-localVisualAssetUrl(component,kind)local assetId=assetIdFromComponent(component)
-if not assetId then return nil end local asset=Client.assetManifests[assetId]if
-asset and not assetLooksLikeKind(asset,kind)then return nil end return
-AssetCache.localUrl(assetId)end local function applyProxyAssetVisuals(handle,
-parentPart,components)if handle==nil or parentPart==nil or type(components)~=
-'table'then return end local meshUrl=localVisualAssetUrl(components.mesh,'mesh')
-or localVisualAssetUrl(components.morph,'mesh')or localVisualAssetUrl(components
-.avatar,'mesh')local textureUrl=localVisualAssetUrl(components.texture,'texture'
-)or localVisualAssetUrl(components.morph,'texture')or localVisualAssetUrl(
-components.avatar,'texture')if meshUrl then if handle.meshVisual==nil or handle.
-meshVisual.Parent~=parentPart then if handle.meshVisual then handle.meshVisual:
-Destroy()end local mesh=Instance.new('SpecialMesh')mesh.Name='OverlayAssetMesh'
-mesh.MeshType=Enum.MeshType.FileMesh mesh.Parent=parentPart handle.meshVisual=
-mesh end handle.meshVisual.MeshId=meshUrl handle.meshVisual.TextureId=textureUrl
-or''if handle.textureDecal then handle.textureDecal:Destroy()handle.textureDecal
-=nil end elseif handle.meshVisual then handle.meshVisual:Destroy()handle.
-meshVisual=nil end if textureUrl and not meshUrl then if handle.textureDecal==
-nil or handle.textureDecal.Parent~=parentPart then if handle.textureDecal then
-handle.textureDecal:Destroy()end local decal=Instance.new('Decal')decal.Name=
+enabled==false or animation.stopped==true or animation.state=='stopped'then
+clearAnimation(handle)return end if NativeAnimation and type(NativeAnimation.
+apply)=='function'and NativeAnimation.apply(handle,character,components,entityId
+)then return end local assetUrl=animationAssetUrl(animation)if assetUrl==nil
+then if handle.animationUnsupportedKey~=tostring(animation.name or animation.
+preset or entityId)then handle.animationUnsupportedKey=tostring(animation.name
+or animation.preset or entityId)emitBridgeEvent('animation.unsupported',{
+entity_id=entityId,name=animation.name or animation.preset,reason=
+'missing_roblox_animation_id'})end return end handle.animationUnsupportedKey=nil
+local speed=tonumber(animation.speed or animation.playback_speed or animation.
+playbackSpeed)or 1 speed=math.clamp(speed,0.05,4)local weight=tonumber(animation
+.weight)if weight==nil then weight=math.clamp((tonumber(animation.intensity)or
+100)/100,0.05,1)end local looped=animation.looped~=false local key=assetUrl..'|'
+..tostring(looped)if handle.animationTrack and handle.animationKey==key and
+handle.animationCharacter==character then pcall(function()handle.animationTrack:
+AdjustSpeed(speed)end)return end clearAnimation(handle)local humanoid=character:
+FindFirstChildOfClass('Humanoid')if humanoid==nil then return end local animator
+=humanoid:FindFirstChildOfClass('Animator')if animator==nil then animator=
+Instance.new('Animator')animator.Parent=humanoid end local anim=Instance.new(
+'Animation')anim.Name='OverlayAnimation'anim.AnimationId=assetUrl anim.Parent=
+handle.folder or character local ok,track=pcall(function()return animator:
+LoadAnimation(anim)end)if not ok or track==nil then pcall(function()anim:
+Destroy()end)emitBridgeEvent('animation.load_failed',{entity_id=entityId,
+animation_id=assetUrl})return end pcall(function()track.Looped=looped track.
+Priority=Enum.AnimationPriority.Action track:Play(0.15,weight,speed)end)handle.
+animationObject=anim handle.animationTrack=track handle.animationKey=key handle.
+animationCharacter=character end local function assetLooksLikeKind(asset,kind)if
+type(asset)~='table'then return false end local typeName=string.lower(tostring(
+asset.type or''))local url=string.lower(tostring(asset.url or''))if string.find(
+typeName,kind,1,true)then return true end if kind=='mesh'then return string.
+find(url,'%.mesh',1,false)~=nil end if kind=='texture'then return string.find(
+url,'%.png',1,false)~=nil or string.find(url,'%.jpg',1,false)~=nil or string.
+find(url,'%.jpeg',1,false)~=nil or string.find(url,'%.webp',1,false)~=nil end
+return false end local function localVisualAssetUrl(component,kind)local assetId
+=assetIdFromComponent(component)if not assetId then return nil end local asset=
+Client.assetManifests[assetId]if asset and not assetLooksLikeKind(asset,kind)
+then return nil end return AssetCache.localUrl(assetId)end local function 
+applyProxyAssetVisuals(handle,parentPart,components)if handle==nil or parentPart
+==nil or type(components)~='table'then return end local meshUrl=
+localVisualAssetUrl(components.mesh,'mesh')or localVisualAssetUrl(components.
+morph,'mesh')or localVisualAssetUrl(components.avatar,'mesh')local textureUrl=
+localVisualAssetUrl(components.texture,'texture')or localVisualAssetUrl(
+components.morph,'texture')or localVisualAssetUrl(components.avatar,'texture')if
+meshUrl then if handle.meshVisual==nil or handle.meshVisual.Parent~=parentPart
+then if handle.meshVisual then handle.meshVisual:Destroy()end local mesh=
+Instance.new('SpecialMesh')mesh.Name='OverlayAssetMesh'mesh.MeshType=Enum.
+MeshType.FileMesh mesh.Parent=parentPart handle.meshVisual=mesh end handle.
+meshVisual.MeshId=meshUrl handle.meshVisual.TextureId=textureUrl or''if handle.
+textureDecal then handle.textureDecal:Destroy()handle.textureDecal=nil end
+elseif handle.meshVisual then handle.meshVisual:Destroy()handle.meshVisual=nil
+end if textureUrl and not meshUrl then if handle.textureDecal==nil or handle.
+textureDecal.Parent~=parentPart then if handle.textureDecal then handle.
+textureDecal:Destroy()end local decal=Instance.new('Decal')decal.Name=
 'OverlayAssetTexture'decal.Face=Enum.NormalId.Front decal.Parent=parentPart
 handle.textureDecal=decal end handle.textureDecal.Texture=textureUrl elseif
 handle.textureDecal then handle.textureDecal:Destroy()handle.textureDecal=nil
@@ -1500,30 +1502,43 @@ trimString(value))if string.sub(value,1,17)=='native_animation:'then value=
 string.sub(value,18)elseif string.sub(value,1,7)=='native:'then value=string.
 sub(value,8)end return string.gsub(value,'[%s%p_%-]+','')end local function 
 animationRoleFromName(value)local text=tostring(value or'')local lower=string.
-lower(text)if string.find(lower,'/female/',1,true)or string.find(lower,
-'\\female\\',1,true)or string.match(text,'%sF$')or string.match(text,'%sFemale$'
-)or string.find(lower,' female',1,true)then return'female'end if string.find(
-lower,'/male/',1,true)or string.find(lower,'\\male\\',1,true)or string.match(
-text,'%sM$')or string.match(text,'%sMale$')or string.find(lower,' male',1,true)
+lower(text)local leaf=string.match(text,'([^/\\]+)$')or text if string.sub(lower
+,1,7)=='female/'or string.sub(lower,1,7)=='female\\'or string.find(lower,
+'/female/',1,true)or string.find(lower,'\\female\\',1,true)or string.match(leaf,
+'%s[Ff]$')or string.match(leaf,'%s[Ff]%d+$')or string.match(leaf,'F%d*$')or
+string.match(leaf,'%sFemale$')or string.find(lower,' female',1,true)then return
+'female'end if string.sub(lower,1,5)=='male/'or string.sub(lower,1,5)=='male\\'
+or string.find(lower,'/male/',1,true)or string.find(lower,'\\male\\',1,true)or
+string.match(leaf,'%s[Mm]$')or string.match(leaf,'%s[Mm]%d+$')or string.match(
+leaf,'M%d*$')or string.match(leaf,'%sMale$')or string.find(lower,' male',1,true)
 then return'male'end return'any'end local function oppositeAnimationRole(role)
 role=string.lower(tostring(role or''))if role=='male'or role=='m'then return
 'female'end if role=='female'or role=='f'then return'male'end return'any'end
-local function counterpartAnimationName(value)local text=tostring(value or'')if
-string.find(text,'/Male/',1,true)then return string.gsub(text,'/Male/',
-'/Female/',1)end if string.find(text,'/Female/',1,true)then return string.gsub(
-text,'/Female/','/Male/',1)end if string.match(text,'%sM$')then return string.
-gsub(text,'%sM$',' F',1)end if string.match(text,'%sF$')then return string.gsub(
-text,'%sF$',' M',1)end if string.match(text,'%sMale$')then return string.gsub(
-text,'%sMale$',' Female',1)end if string.match(text,'%sFemale$')then return
-string.gsub(text,'%sFemale$',' Male',1)end return text end local function 
-nativeAnimationQuery(animation)if type(animation)~='table'then return nil end
-local raw=trimString(animation.native_name or animation.animation_name or
-animation.query or animation.name or animation.preset or animation.value)if raw
-==''then raw=trimString(animation.asset_id)end if raw==''then return nil end
-local lower=string.lower(raw)if lower=='none'or lower=='off'or lower=='disabled'
-or lower=='stop'then return nil end return raw end local function 
-ensureNativeAnimationArchiveFile()local path=trimString(CONFIG.
-native_animation_archive_path)if path==''then Client.
+local function counterpartAnimationName(value)local text=tostring(value or'')
+local role=animationRoleFromName(text)local nextText=text if role=='male'then if
+string.sub(nextText,1,5)=='Male/'then nextText='Female/'..string.sub(nextText,6)
+elseif string.sub(nextText,1,5)=='Male\\'then nextText='Female\\'..string.sub(
+nextText,6)else nextText=string.gsub(nextText,'/Male/','/Female/',1)nextText=
+string.gsub(nextText,'\\Male\\','\\Female\\',1)end if string.match(nextText,
+'%sM$')then return string.gsub(nextText,'%sM$',' F',1)end if string.match(
+nextText,'%sM%d+$')then return string.gsub(nextText,'%sM(%d+)$',' F%1',1)end if
+string.match(nextText,'M%d*$')then return string.gsub(nextText,'M(%d*)$','F%1',1
+)end return nextText end if role=='female'then if string.sub(nextText,1,7)==
+'Female/'then nextText='Male/'..string.sub(nextText,8)elseif string.sub(nextText
+,1,7)=='Female\\'then nextText='Male\\'..string.sub(nextText,8)else nextText=
+string.gsub(nextText,'/Female/','/Male/',1)nextText=string.gsub(nextText,
+'\\Female\\','\\Male\\',1)end if string.match(nextText,'%sF$')then return string
+.gsub(nextText,'%sF$',' M',1)end if string.match(nextText,'%sF%d+$')then return
+string.gsub(nextText,'%sF(%d+)$',' M%1',1)end if string.match(nextText,'F%d*$')
+then return string.gsub(nextText,'F(%d*)$','M%1',1)end return nextText end
+return text end local function nativeAnimationQuery(animation)if type(animation)
+~='table'then return nil end local raw=trimString(animation.native_name or
+animation.animation_name or animation.query or animation.name or animation.
+preset or animation.value)if raw==''then raw=trimString(animation.asset_id)end
+if raw==''then return nil end local lower=string.lower(raw)if lower=='none'or
+lower=='off'or lower=='disabled'or lower=='stop'then return nil end return raw
+end local function ensureNativeAnimationArchiveFile()local path=trimString(
+CONFIG.native_animation_archive_path)if path==''then Client.
 nativeAnimationArchiveStatus='path_required'Client.nativeAnimationArchiveError=
 'Native animation archive path is empty'return nil,Client.
 nativeAnimationArchiveError end local isfileFn=getGlobalFunction('isfile')if not
@@ -1592,20 +1607,22 @@ local manifest=readNativeAnimationManifest()if manifest==nil then Client.
 nativeAnimationManifestLoaded=true return nil end local assets={}local index={}
 for _,item in ipairs(manifest.animations)do if type(item)=='table'then local
 assetId=trimString(item.asset_id)local displayName=trimString(item.display_name
-or item.name)if assetId~=''and displayName~=''then local role=item.role or
-animationRoleFromName(displayName)table.insert(assets,{asset_id=assetId,name=
-trimString(item.name)~=''and trimString(item.name)or displayName,display_name=
-displayName,type='native_animation',kind='animation',format='keyframe_sequence',
-source='native-rbxm-manifest',role=role,counterpart_asset_id=item.
-counterpart_asset_id,counterpart_name=item.counterpart_name,looped=item.looped==
-true})table.insert(index,{instance=nil,normalizedPath=normalizeAnimationName(
-displayName),normalizedName=normalizeAnimationName(item.name or displayName),
-displayName=displayName,role=role})end end end if#assets==0 then Client.
-nativeAnimationManifestLoaded=true return nil end Client.
-nativeAnimationManifestLoaded=true Client.nativeAnimationManifestRevision=
-manifest.revision applyNativeAnimationCatalog(assets,index,
-'native_animation_manifest','manifest')return assets end local function 
-writeNativeAnimationManifest(assets)local path=trimString(CONFIG.
+or item.name)if assetId~=''and displayName~=''then local role=
+animationRoleFromName(displayName)if role=='any'then role=animationRoleFromName(
+item.name)end local counterpartName=counterpartAnimationName(displayName)table.
+insert(assets,{asset_id=assetId,name=trimString(item.name)~=''and trimString(
+item.name)or displayName,display_name=displayName,type='native_animation',kind=
+'animation',format='keyframe_sequence',source='native-rbxm-manifest',role=role,
+counterpart_asset_id=counterpartName~=displayName and('native_animation:'..
+counterpartName)or nil,counterpart_name=counterpartName~=displayName and
+counterpartName or nil,looped=item.looped==true})table.insert(index,{instance=
+nil,normalizedPath=normalizeAnimationName(displayName),normalizedName=
+normalizeAnimationName(item.name or displayName),displayName=displayName,role=
+role})end end end if#assets==0 then Client.nativeAnimationManifestLoaded=true
+return nil end Client.nativeAnimationManifestLoaded=true Client.
+nativeAnimationManifestRevision=manifest.revision applyNativeAnimationCatalog(
+assets,index,'native_animation_manifest','manifest')return assets end local 
+function writeNativeAnimationManifest(assets)local path=trimString(CONFIG.
 native_animation_manifest_path)local writefileFn=getGlobalFunction('writefile')
 if path==''or not writefileFn then return end local folder=parentFolder(path)if
 folder~=''then ensureFolder(folder)end local manifest={revision=tostring(os.
@@ -1782,90 +1799,124 @@ fallback.Z)end return fallback end local function defaultSeatOffset(role)role=
 string.lower(tostring(role or''))if role=='male'or role=='m'then return Vector3.
 new(-0.9,0,0)end if role=='female'or role=='f'then return Vector3.new(0.9,0,0)
 end return Vector3.zero end local function clearNativeAnimationSeat(handle)if
-handle==nil then return end if handle.nativeAnimationSeat then pcall(function()
-handle.nativeAnimationSeat:Destroy()end)handle.nativeAnimationSeat=nil end end
-local function applyNativeAnimationSeat(handle,character,animation)if handle==
-nil or character==nil or type(animation)~='table'then return end local seat=
-type(animation.seat)=='table'and animation.seat or nil if seat==nil or seat.
-enabled==false then clearNativeAnimationSeat(handle)return end local root=
-character:FindFirstChild('HumanoidRootPart')local humanoid=character:
-FindFirstChildOfClass('Humanoid')if root==nil or humanoid==nil then return end
-local origin=type(seat.origin)=='table'and transformToCFrame(seat.origin)or root
-.CFrame local offset=seatVector(seat.offset,defaultSeatOffset(seat.role or
-animation.role))local seatCFrame=origin*CFrame.new(offset)local seatPart=handle.
-nativeAnimationSeat if seatPart==nil or seatPart.Parent==nil then seatPart=
-Instance.new('Seat')seatPart.Name='OverlaySyncSeat'seatPart.Size=Vector3.new(2,
-0.35,2)seatPart.Transparency=1 seatPart.CanCollide=false seatPart.Anchored=true
-pcall(function()seatPart.Disabled=false end)seatPart.Parent=handle.folder or
-entityFolder handle.nativeAnimationSeat=seatPart end seatPart.CFrame=seatCFrame
-pcall(function()seatPart:Sit(humanoid)end)pcall(function()root.
-AssemblyLinearVelocity=Vector3.zero root.AssemblyAngularVelocity=Vector3.zero
-end)end function NativeAnimation.clear(handle)if handle==nil or handle.
-nativeAnimation==nil then clearNativeAnimationSeat(handle)return end local state
-=handle.nativeAnimation if state.connection then pcall(function()state.
-connection:Disconnect()end)end if type(state.originalC1)=='table'then for motor,
-c1 in pairs(state.originalC1)do if motor and motor.Parent then pcall(function()
-motor.C1=c1 motor.CurrentAngle=0 end)end end end if state.animateScript and
-state.animateWasDisabled~=nil and state.animateScript.Parent then pcall(function
-()state.animateScript.Disabled=state.animateWasDisabled end)end
-clearNativeAnimationSeat(handle)handle.nativeAnimation=nil end local function 
-estimatedServerNowMs()if tonumber(Client.serverTimeOffsetMs)then return os.
-clock()*1000+Client.serverTimeOffsetMs end return nil end function
-NativeAnimation.apply(handle,character,components,entityId)local animation=
-components and components.animation local query=nativeAnimationQuery(animation)
-if query==nil then return false end local sequence=findNativeAnimationByName(
-query)if sequence==nil then return false end local speed=tonumber(animation.
-speed or animation.playback_speed or animation.playbackSpeed)or 1 speed=math.
-clamp(speed,0,8)local startedAt=tonumber(animation.started_at_server_ms)local
-key=tostring(sequence)..'|'..tostring(startedAt or'')..'|'..tostring(animation.
-looped)if handle.nativeAnimation and handle.nativeAnimation.key==key and handle.
-nativeAnimation.character==character then handle.nativeAnimation.speed=speed
-applyNativeAnimationSeat(handle,character,animation)return true end
-NativeAnimation.clear(handle)local rig=buildNativeAnimationRig(character)if rig
-==nil then emitBridgeEvent('animation.load_failed',{entity_id=entityId,name=
-sequence.Name,reason='rig_not_found'})return true end local clip=
-buildNativeAnimationClip(sequence,rig)if animation.looped~=nil then clip.looped=
-animation.looped~=false end local state={key=key,character=character,sequence=
-sequence,clip=clip,rig=rig,speed=speed,time=0,startClock=os.clock(),
-startedAtServerMs=startedAt,firstFrame=true,originalC1=rig.originalC1}local
-animateScript=character:FindFirstChild('Animate')if character==LocalPlayer.
-Character and animateScript then state.animateScript=animateScript state.
-animateWasDisabled=animateScript.Disabled pcall(function()animateScript.Disabled
-=true end)local humanoid=character:FindFirstChildOfClass('Humanoid')if humanoid
-then for _,track in ipairs(humanoid:GetPlayingAnimationTracks())do pcall(
-function()track:Stop(0.1)end)end end end state.connection=RunService.Stepped:
-Connect(function(_,delta)if handle.nativeAnimation~=state or character.Parent==
-nil then NativeAnimation.clear(handle)return end local timePosition local
-serverNow=state.startedAtServerMs and estimatedServerNowMs()or nil if serverNow
-then timePosition=math.max(0,((serverNow-state.startedAtServerMs)/1000)*state.
-speed)else state.time=state.time+(tonumber(delta)or(1/60))*state.speed
-timePosition=state.time end if clip.looped then timePosition=timePosition%clip.
-length elseif timePosition>=clip.length then NativeAnimation.clear(handle)return
-end local alpha=math.clamp(timePosition/clip.length,0,1)if state.firstFrame and
-timePosition<0.1 then alpha=0.75 end state.firstFrame=false for part,item in
-pairs(rig.partList)do if item.motor and item.motor.Parent then local target=
-getNativeMotorC1(clip,item,timePosition)pcall(function()item.motor.C1=item.motor
-.C1:Lerp(target,alpha)end)end end end)applyNativeAnimationSeat(handle,character,
-animation)handle.nativeAnimation=state handle.animationUnsupportedKey=nil return
-true end local function appearanceUserIdFor(components)local avatar=components
-and components.avatar if type(avatar)~='table'then return nil end local userId=
-tonumber(avatar.appearance_user_id)if userId and userId>0 then return math.
-floor(userId)end return nil end local function clearAppearanceAvatar(handle)if
-handle and handle.appearanceModel then pcall(function()handle.appearanceModel:
-Destroy()end)end if handle then handle.appearanceModel=nil handle.
-appearanceUserId=nil handle.appearanceAnchor=nil handle.appearanceLoadingId=nil
-end end local function prepareAppearanceModel(model)for _,descendant in ipairs(
-model:GetDescendants())do if descendant:IsA('BasePart')then descendant.
-CanCollide=false descendant.CanTouch=false descendant.CanQuery=false descendant.
-Massless=true elseif descendant:IsA('Script')or descendant:IsA('LocalScript')
-then descendant:Destroy()end end local humanoid=model:FindFirstChildOfClass(
-'Humanoid')if humanoid then pcall(function()humanoid.DisplayDistanceType=Enum.
-HumanoidDisplayDistanceType.None end)end end local function appearanceRootPart(
-model)return model:FindFirstChild('HumanoidRootPart')or model.PrimaryPart or
-model:FindFirstChildWhichIsA('BasePart')end local function 
-createAppearanceModelFromUserId(userId)local ok,model=pcall(function()return
-Players:CreateHumanoidModelFromUserId(userId)end)if ok and model then return
-model end local descriptionOk,description=pcall(function()return Players:
+handle==nil then return end handle.nativeAnimationSeatLock=nil if handle.
+nativeAnimationSeat then pcall(function()handle.nativeAnimationSeat:Destroy()end
+)handle.nativeAnimationSeat=nil end end local function 
+updateNativeAnimationSeatLock(handle,character)local lock=handle and handle.
+nativeAnimationSeatLock if type(lock)~='table'or character==nil then return end
+local root=character:FindFirstChild('HumanoidRootPart')if root==nil then return
+end local target=lock.rootCFrame if typeof(target)=='CFrame'then if(root.
+Position-target.Position).Magnitude>0.35 then pcall(function()root.CFrame=target
+end)end end pcall(function()root.AssemblyLinearVelocity=Vector3.zero root.
+AssemblyAngularVelocity=Vector3.zero end)end local function 
+applyNativeAnimationSeat(handle,character,animation)if handle==nil or character
+==nil or type(animation)~='table'then return end local seat=type(animation.seat)
+=='table'and animation.seat or nil if seat==nil or seat.enabled==false then
+clearNativeAnimationSeat(handle)return end local root=character:FindFirstChild(
+'HumanoidRootPart')local humanoid=character:FindFirstChildOfClass('Humanoid')if
+root==nil or humanoid==nil then return end local origin=type(seat.origin)==
+'table'and transformToCFrame(seat.origin)or root.CFrame local offset=seatVector(
+seat.offset,defaultSeatOffset(seat.role or animation.role))local rootCFrame=
+origin*CFrame.new(offset)local seatCFrame=rootCFrame*CFrame.new(0,-2.1,0)local
+seatPart=handle.nativeAnimationSeat if seatPart==nil or seatPart.Parent==nil
+then seatPart=Instance.new('Seat')seatPart.Name='OverlaySyncSeat'seatPart.Size=
+Vector3.new(2,0.35,2)seatPart.Transparency=1 seatPart.CanCollide=false seatPart.
+Anchored=true pcall(function()seatPart.Disabled=false end)seatPart.Parent=handle
+.folder or entityFolder handle.nativeAnimationSeat=seatPart end seatPart.CFrame=
+seatCFrame handle.nativeAnimationSeatLock={rootCFrame=rootCFrame,seatCFrame=
+seatCFrame}pcall(function()seatPart:Sit(humanoid)end)
+updateNativeAnimationSeatLock(handle,character)end function NativeAnimation.
+clear(handle)if handle==nil or handle.nativeAnimation==nil then
+clearNativeAnimationSeat(handle)return end local state=handle.nativeAnimation if
+state.connection then pcall(function()state.connection:Disconnect()end)end if
+type(state.originalC1)=='table'then for motor,c1 in pairs(state.originalC1)do if
+motor and motor.Parent then pcall(function()motor.C1=c1 motor.CurrentAngle=0 end
+)end end end if state.animateScript and state.animateWasDisabled~=nil and state.
+animateScript.Parent then pcall(function()state.animateScript.Disabled=state.
+animateWasDisabled end)end clearNativeAnimationSeat(handle)handle.
+nativeAnimation=nil end local function estimatedServerNowMs()if tonumber(Client.
+serverTimeOffsetMs)then return os.clock()*1000+Client.serverTimeOffsetMs end
+return nil end function NativeAnimation.apply(handle,character,components,
+entityId)local animation=components and components.animation local query=
+nativeAnimationQuery(animation)if query==nil then return false end local
+sequence=findNativeAnimationByName(query)if sequence==nil then return false end
+local speed=tonumber(animation.speed or animation.playback_speed or animation.
+playbackSpeed)or 1 speed=math.clamp(speed,0,8)local startedAt=tonumber(animation
+.started_at_server_ms)local key=tostring(sequence)..'|'..tostring(startedAt or''
+)..'|'..tostring(animation.looped)if handle.nativeAnimation and handle.
+nativeAnimation.key==key and handle.nativeAnimation.character==character then
+handle.nativeAnimation.speed=speed applyNativeAnimationSeat(handle,character,
+animation)return true end NativeAnimation.clear(handle)local rig=
+buildNativeAnimationRig(character)if rig==nil then emitBridgeEvent(
+'animation.load_failed',{entity_id=entityId,name=sequence.Name,reason=
+'rig_not_found'})return true end local clip=buildNativeAnimationClip(sequence,
+rig)if animation.looped~=nil then clip.looped=animation.looped~=false end local
+state={key=key,character=character,sequence=sequence,clip=clip,rig=rig,speed=
+speed,time=0,startClock=os.clock(),startedAtServerMs=startedAt,firstFrame=true,
+originalC1=rig.originalC1}local animateScript=character:FindFirstChild('Animate'
+)if character==LocalPlayer.Character and animateScript then state.animateScript=
+animateScript state.animateWasDisabled=animateScript.Disabled pcall(function()
+animateScript.Disabled=true end)local humanoid=character:FindFirstChildOfClass(
+'Humanoid')if humanoid then for _,track in ipairs(humanoid:
+GetPlayingAnimationTracks())do pcall(function()track:Stop(0.1)end)end end end
+state.connection=RunService.Stepped:Connect(function(_,delta)if handle.
+nativeAnimation~=state or character.Parent==nil then NativeAnimation.clear(
+handle)return end local timePosition local serverNow=state.startedAtServerMs and
+estimatedServerNowMs()or nil if serverNow then timePosition=math.max(0,((
+serverNow-state.startedAtServerMs)/1000)*state.speed)else state.time=state.time+
+(tonumber(delta)or(1/60))*state.speed timePosition=state.time end if clip.looped
+then timePosition=timePosition%clip.length elseif timePosition>=clip.length then
+NativeAnimation.clear(handle)return end local alpha=math.clamp(timePosition/clip
+.length,0,1)if state.firstFrame and timePosition<0.1 then alpha=0.75 end state.
+firstFrame=false for part,item in pairs(rig.partList)do if item.motor and item.
+motor.Parent then local target=getNativeMotorC1(clip,item,timePosition)pcall(
+function()item.motor.C1=item.motor.C1:Lerp(target,alpha)end)end end
+updateNativeAnimationSeatLock(handle,character)end)applyNativeAnimationSeat(
+handle,character,animation)handle.nativeAnimation=state handle.
+animationUnsupportedKey=nil return true end local function appearanceUserIdFor(
+components)local avatar=components and components.avatar if type(avatar)~=
+'table'then return nil end local userId=tonumber(avatar.appearance_user_id)if
+userId and userId>0 then return math.floor(userId)end return nil end local 
+function restoreAppearanceSourceCharacter(handle)if handle==nil or type(handle.
+appearanceHiddenParts)~='table'then return end for _,item in ipairs(handle.
+appearanceHiddenParts)do local instance=item.instance if instance and instance.
+Parent then pcall(function()instance.Transparency=item.transparency end)if item.
+localTransparencyModifier~=nil then pcall(function()instance.
+LocalTransparencyModifier=item.localTransparencyModifier end)end end end handle.
+appearanceHiddenParts=nil handle.appearanceHiddenCharacter=nil end local 
+function characterFromAnchor(anchorPart)local current=anchorPart while current
+and current~=workspace do if current:IsA('Model')and current:
+FindFirstChildOfClass('Humanoid')then return current end current=current.Parent
+end return nil end local function hideAppearanceSourceCharacter(handle,
+anchorPart)if handle==nil or anchorPart==nil then return end local character=
+characterFromAnchor(anchorPart)if character==nil then
+restoreAppearanceSourceCharacter(handle)return end if handle.
+appearanceHiddenCharacter==character then return end
+restoreAppearanceSourceCharacter(handle)handle.appearanceHiddenCharacter=
+character handle.appearanceHiddenParts={}for _,descendant in ipairs(character:
+GetDescendants())do if descendant:IsA('BasePart')and descendant.Name~=
+'HumanoidRootPart'then table.insert(handle.appearanceHiddenParts,{instance=
+descendant,transparency=descendant.Transparency,localTransparencyModifier=
+descendant.LocalTransparencyModifier})pcall(function()descendant.
+LocalTransparencyModifier=1 end)elseif descendant:IsA('Decal')or descendant:IsA(
+'Texture')then table.insert(handle.appearanceHiddenParts,{instance=descendant,
+transparency=descendant.Transparency})pcall(function()descendant.Transparency=1
+end)end end end local function clearAppearanceAvatar(handle)
+restoreAppearanceSourceCharacter(handle)if handle and handle.appearanceModel
+then pcall(function()handle.appearanceModel:Destroy()end)end if handle then
+handle.appearanceModel=nil handle.appearanceUserId=nil handle.appearanceAnchor=
+nil handle.appearanceLoadingId=nil end end local function prepareAppearanceModel
+(model)for _,descendant in ipairs(model:GetDescendants())do if descendant:IsA(
+'BasePart')then descendant.CanCollide=false descendant.CanTouch=false descendant
+.CanQuery=false descendant.Massless=true elseif descendant:IsA('Script')or
+descendant:IsA('LocalScript')then descendant:Destroy()end end local humanoid=
+model:FindFirstChildOfClass('Humanoid')if humanoid then pcall(function()humanoid
+.DisplayDistanceType=Enum.HumanoidDisplayDistanceType.None end)end end local 
+function appearanceRootPart(model)return model:FindFirstChild('HumanoidRootPart'
+)or model.PrimaryPart or model:FindFirstChildWhichIsA('BasePart')end local 
+function createAppearanceModelFromUserId(userId)local ok,model=pcall(function()
+return Players:CreateHumanoidModelFromUserId(userId)end)if ok and model then
+return model end local descriptionOk,description=pcall(function()return Players:
 GetHumanoidDescriptionFromUserId(userId)end)if not descriptionOk or not
 description then return nil end local modelOk,fallbackModel=pcall(function()
 return Players:CreateHumanoidModelFromDescription(description,Enum.
@@ -1894,17 +1945,18 @@ entityFolder rootPart.CFrame=anchorPart.CFrame local weld=Instance.new(
 'WeldConstraint')weld.Name='OverlayAppearanceWeld'weld.Part0=anchorPart weld.
 Part1=rootPart weld.Parent=rootPart handle.appearanceModel=model handle.
 appearanceUserId=userId handle.appearanceAnchor=anchorPart handle.
-appearanceLoadingId=nil setProxyVisualHidden(handle,true)emitBridgeEvent(
-'avatar.appearance.ready',{user_id=userId,entity_id=entityId})end)end local
-ProxyAvatarRenderer={}local NativeCharacterOverlayRenderer={}local
-OwnCharacterOverlayRenderer={}local Renderers={proxy=ProxyAvatarRenderer,native=
-NativeCharacterOverlayRenderer,self=OwnCharacterOverlayRenderer}local function 
-selectRendererKind(entityId,components)if isOwnEntity(entityId,components)then
-return'self'end if findPlayerByRobloxUserId(robloxUserIdFor(components))then
-return'native'end return'proxy'end local function configureProxyPart(part,color)
-part.Anchored=false part.CanCollide=false part.CanQuery=false part.Massless=true
-part.Color=color part.Material=Enum.Material.SmoothPlastic part.TopSurface=Enum.
-SurfaceType.Smooth part.BottomSurface=Enum.SurfaceType.Smooth end local function 
+appearanceLoadingId=nil hideAppearanceSourceCharacter(handle,anchorPart)
+setProxyVisualHidden(handle,true)emitBridgeEvent('avatar.appearance.ready',{
+user_id=userId,entity_id=entityId})end)end local ProxyAvatarRenderer={}local
+NativeCharacterOverlayRenderer={}local OwnCharacterOverlayRenderer={}local
+Renderers={proxy=ProxyAvatarRenderer,native=NativeCharacterOverlayRenderer,self=
+OwnCharacterOverlayRenderer}local function selectRendererKind(entityId,
+components)if isOwnEntity(entityId,components)then return'self'end if
+findPlayerByRobloxUserId(robloxUserIdFor(components))then return'native'end
+return'proxy'end local function configureProxyPart(part,color)part.Anchored=
+false part.CanCollide=false part.CanQuery=false part.Massless=true part.Color=
+color part.Material=Enum.Material.SmoothPlastic part.TopSurface=Enum.SurfaceType
+.Smooth part.BottomSurface=Enum.SurfaceType.Smooth end local function 
 weldProxyPart(root,part,offset)part.CFrame=root.CFrame*offset part.Parent=root
 local weld=Instance.new('WeldConstraint')weld.Name='OverlayProxyWeld'weld.Part0=
 root weld.Part1=part weld.Parent=part end local function createProxyLimb(root,
@@ -2316,13 +2368,18 @@ end end return nil end local function appearanceInputRaw(payload)payload=
 bridgePayloadTable(payload)local raw=trimString(payload.appearance_user_id or
 payload.appearanceUserId or payload.roblox_avatar_user_id)if raw==''then raw=
 trimString(payload.value or payload.input)end return raw end local function 
+findLocalRobloxUserIdByName(raw)local clean=string.lower(trimString(raw))if
+clean==''then return nil end for _,player in ipairs(Players:GetPlayers())do if
+string.lower(player.Name)==clean or string.lower(player.DisplayName)==clean then
+return player.UserId end end return nil end local function 
 resolveAppearanceUserId(payload)local numericId=parseAppearanceUserId(payload)if
 numericId then return numericId end local raw=appearanceInputRaw(payload)if raw
 ==''or isHttpUrl(raw)then return nil end local lower=string.lower(raw)if string.
 sub(lower,1,5)=='user:'then raw=string.sub(raw,6)elseif string.sub(lower,1,5)==
 'name:'then raw=string.sub(raw,6)elseif string.sub(raw,1,1)=='@'then raw=string.
 sub(raw,2)end raw=trimString(raw)if raw==''or string.match(raw,'[/%\\:%?]')then
-return nil end local ok,userId=pcall(function()return Players:
+return nil end local localUserId=findLocalRobloxUserIdByName(raw)if localUserId
+then return localUserId end local ok,userId=pcall(function()return Players:
 GetUserIdFromNameAsync(raw)end)if ok and tonumber(userId)then return tonumber(
 userId)end return nil end local function resolveBridgeAsset(kind,payload)payload
 =bridgePayloadTable(payload)local value=trimString(payload.value or payload.
@@ -2358,64 +2415,68 @@ if not Client.room or not Client.room.id then emitBridgeError('room.required',
 function bridgeSetAvatar(payload)payload=bridgePayloadTable(payload)local roomId
 =bridgeRequireRoom('setting avatar')if not roomId then return end task.spawn(
 function()local appearanceUserId=resolveAppearanceUserId(payload)local asset,
-assetError=nil,nil if not appearanceUserId then asset,assetError=
-resolveBridgeAsset('avatar',payload)end if assetError then emitBridgeError(
-'asset.resolve_failed',assetError)return end local overlayColor=payload.color if
-type(overlayColor)~='table'then overlayColor=colorToArray(colorFromId(tostring(
-LocalPlayer.UserId)))end local avatar={display_name=trimString(payload.
-display_name or payload.displayName)~=''and trimString(payload.display_name or
-payload.displayName)or LocalPlayer.DisplayName,roblox_user_id=LocalPlayer.UserId
-,roblox_name=LocalPlayer.Name,render_surface='native_character_overlay',
-overlay_color=overlayColor}if asset then avatar.asset_id=asset.asset_id avatar.
-asset_type=asset.type end if appearanceUserId then avatar.appearance_user_id=
-appearanceUserId end local response,err=awaitRequest('cmd.avatar.set',{room_id=
-roomId,avatar=avatar})if response==nil then emitBridgeError('avatar.set_failed',
-tostring(err))return end Client.ownAvatarId=response.data.entity_id Client.
-avatarReadyRoomId=roomId emitBridgeEvent('avatar.applied',{room_id=roomId,
-entity_id=Client.ownAvatarId,asset_id=asset and asset.asset_id or nil,
-appearance_user_id=appearanceUserId})if asset then emitBridgeState(
-'avatar asset applied: '..tostring(asset.asset_id))elseif appearanceUserId then
-emitBridgeState('avatar appearance id applied: '..tostring(appearanceUserId))
-else emitBridgeState('avatar reset')end end)end function NativeMorph.copySlots(
-source)local out={}if type(source)=='table'and type(source.slots)=='table'then
-for slot,entry in pairs(source.slots)do if type(entry)=='table'then local copied
-={}for key,value in pairs(entry)do copied[key]=value end out[tostring(slot)]=
-copied end end end return out end function NativeMorph.currentOwnMorphComponent(
-)local entity=Client.ownAvatarId and Client.entities[Client.ownAvatarId]or nil
-local components=entity and entity.components or nil return type(components)==
-'table'and components.morph or nil end local function bridgeApplyMorph(payload)
-payload=bridgePayloadTable(payload)local roomId=bridgeRequireRoom(
-'applying morph')if not roomId then return end task.spawn(function()local
-rawValue=trimString(payload.value or payload.input)local explicitAssetId=
-trimString(payload.asset_id or payload.assetId or payload.id)local
-nativeAssetName=''if string.sub(string.lower(explicitAssetId),1,7)=='native:'
-then nativeAssetName=string.sub(explicitAssetId,8)explicitAssetId=''elseif
-string.sub(string.lower(rawValue),1,7)=='native:'then nativeAssetName=string.
-sub(rawValue,8)rawValue=''end local hasExplicitAsset=explicitAssetId~=''or
-trimString(payload.url)~=''or isHttpUrl(rawValue)local asset,assetError=nil,nil
-if hasExplicitAsset then asset,assetError=resolveBridgeAsset('morph',payload)if
-assetError then emitBridgeError('asset.resolve_failed',assetError)return end end
-local preset=trimString(payload.preset or payload.name or payload.native_name or
-payload.morph_name)if preset==''and nativeAssetName~=''then preset=
-nativeAssetName end if preset==''and not hasExplicitAsset then preset=rawValue
-end local morph={}if asset then morph.asset_id=asset.asset_id morph.asset_type=
-asset.type elseif preset~=''and string.lower(preset)~='none'then morph.preset=
-preset morph.native=true else morph.preset='None'morph.enabled=false end local
-requestedSlot=NativeMorph.normalizeSlot(payload.slot or payload.category or
-payload.morph_slot or payload.morphSlot)if requestedSlot then local slots=
-NativeMorph.copySlots(NativeMorph.currentOwnMorphComponent())if morph.enabled==
-false then slots[requestedSlot]=nil else morph.slot=requestedSlot slots[
-requestedSlot]=morph end morph={native=true,slots=slots}if next(slots)==nil then
-morph.enabled=false end end local response,err=awaitRequest('cmd.morph.apply',{
-room_id=roomId,entity_id=Client.ownAvatarId,morph=morph})if response==nil then
-emitBridgeError('morph.apply_failed',tostring(err))return end Client.ownAvatarId
-=response.data.entity_id Client.avatarReadyRoomId=roomId local ownEntity=Client.
-entities[Client.ownAvatarId]if ownEntity and type(ownEntity.components)=='table'
-then ownEntity.components.morph=morph end emitBridgeEvent('morph.applied',{
-room_id=roomId,entity_id=Client.ownAvatarId,asset_id=asset and asset.asset_id or
-nil,preset=morph.preset,slot=requestedSlot})emitBridgeState(asset and(
-'morph asset applied: '..tostring(asset.asset_id))or('morph applied: '..
-tostring(morph.preset)))end)end local function bridgePlayAnimation(payload)
+assetError=nil,nil if not appearanceUserId then local rawAppearance=
+appearanceInputRaw(payload)local explicitAsset=trimString(payload.asset_id or
+payload.assetId or payload.id)~=''or trimString(payload.url)~=''or isHttpUrl(
+rawAppearance)if rawAppearance~=''and not explicitAsset then emitBridgeError(
+'avatar.user_not_found','Roblox username or user id was not found')return end if
+explicitAsset then asset,assetError=resolveBridgeAsset('avatar',payload)end end
+if assetError then emitBridgeError('asset.resolve_failed',assetError)return end
+local overlayColor=payload.color if type(overlayColor)~='table'then overlayColor
+=colorToArray(colorFromId(tostring(LocalPlayer.UserId)))end local avatar={
+display_name=trimString(payload.display_name or payload.displayName)~=''and
+trimString(payload.display_name or payload.displayName)or LocalPlayer.
+DisplayName,roblox_user_id=LocalPlayer.UserId,roblox_name=LocalPlayer.Name,
+render_surface='native_character_overlay',overlay_color=overlayColor}if asset
+then avatar.asset_id=asset.asset_id avatar.asset_type=asset.type end if
+appearanceUserId then avatar.appearance_user_id=appearanceUserId end local
+response,err=awaitRequest('cmd.avatar.set',{room_id=roomId,avatar=avatar})if
+response==nil then emitBridgeError('avatar.set_failed',tostring(err))return end
+Client.ownAvatarId=response.data.entity_id Client.avatarReadyRoomId=roomId
+emitBridgeEvent('avatar.applied',{room_id=roomId,entity_id=Client.ownAvatarId,
+asset_id=asset and asset.asset_id or nil,appearance_user_id=appearanceUserId})if
+asset then emitBridgeState('avatar asset applied: '..tostring(asset.asset_id))
+elseif appearanceUserId then emitBridgeState('avatar appearance id applied: '..
+tostring(appearanceUserId))else emitBridgeState('avatar reset')end end)end
+function NativeMorph.copySlots(source)local out={}if type(source)=='table'and
+type(source.slots)=='table'then for slot,entry in pairs(source.slots)do if type(
+entry)=='table'then local copied={}for key,value in pairs(entry)do copied[key]=
+value end out[tostring(slot)]=copied end end end return out end function
+NativeMorph.currentOwnMorphComponent()local entity=Client.ownAvatarId and Client
+.entities[Client.ownAvatarId]or nil local components=entity and entity.
+components or nil return type(components)=='table'and components.morph or nil
+end local function bridgeApplyMorph(payload)payload=bridgePayloadTable(payload)
+local roomId=bridgeRequireRoom('applying morph')if not roomId then return end
+task.spawn(function()local rawValue=trimString(payload.value or payload.input)
+local explicitAssetId=trimString(payload.asset_id or payload.assetId or payload.
+id)local nativeAssetName=''if string.sub(string.lower(explicitAssetId),1,7)==
+'native:'then nativeAssetName=string.sub(explicitAssetId,8)explicitAssetId=''
+elseif string.sub(string.lower(rawValue),1,7)=='native:'then nativeAssetName=
+string.sub(rawValue,8)rawValue=''end local hasExplicitAsset=explicitAssetId~=''
+or trimString(payload.url)~=''or isHttpUrl(rawValue)local asset,assetError=nil,
+nil if hasExplicitAsset then asset,assetError=resolveBridgeAsset('morph',payload
+)if assetError then emitBridgeError('asset.resolve_failed',assetError)return end
+end local preset=trimString(payload.preset or payload.name or payload.
+native_name or payload.morph_name)if preset==''and nativeAssetName~=''then
+preset=nativeAssetName end if preset==''and not hasExplicitAsset then preset=
+rawValue end local morph={}if asset then morph.asset_id=asset.asset_id morph.
+asset_type=asset.type elseif preset~=''and string.lower(preset)~='none'then
+morph.preset=preset morph.native=true else morph.preset='None'morph.enabled=
+false end local requestedSlot=NativeMorph.normalizeSlot(payload.slot or payload.
+category or payload.morph_slot or payload.morphSlot)if requestedSlot then local
+slots=NativeMorph.copySlots(NativeMorph.currentOwnMorphComponent())if morph.
+enabled==false then slots[requestedSlot]=nil else morph.slot=requestedSlot slots
+[requestedSlot]=morph end morph={native=true,slots=slots}if next(slots)==nil
+then morph.enabled=false end end local response,err=awaitRequest(
+'cmd.morph.apply',{room_id=roomId,entity_id=Client.ownAvatarId,morph=morph})if
+response==nil then emitBridgeError('morph.apply_failed',tostring(err))return end
+Client.ownAvatarId=response.data.entity_id Client.avatarReadyRoomId=roomId local
+ownEntity=Client.entities[Client.ownAvatarId]if ownEntity and type(ownEntity.
+components)=='table'then ownEntity.components.morph=morph end emitBridgeEvent(
+'morph.applied',{room_id=roomId,entity_id=Client.ownAvatarId,asset_id=asset and
+asset.asset_id or nil,preset=morph.preset,slot=requestedSlot})emitBridgeState(
+asset and('morph asset applied: '..tostring(asset.asset_id))or('morph applied: '
+..tostring(morph.preset)))end)end local function bridgePlayAnimation(payload)
 payload=bridgePayloadTable(payload)local roomId=bridgeRequireRoom(
 'playing animation')if not roomId then return end task.spawn(function()local
 directAnimationId=robloxAssetUrl(payload.animation_id or payload.animationId or
@@ -2922,7 +2983,14 @@ function OverlayUI:_animationLabel(animationOrId)
 		animation = self.AnimationById[animationOrId]
 	end
 	if typeof(animation) == "table" then
-		return tostring(animation.display_name or animation.name or animation.asset_id or animation.id or "unknown")
+		local label = tostring(animation.display_name or animation.name or animation.asset_id or animation.id or "unknown")
+		local role = string.lower(tostring(animation.role or "any"))
+		if role == "male" then
+			return label .. " [M]"
+		elseif role == "female" then
+			return label .. " [F]"
+		end
+		return label
 	end
 	return tostring(animationOrId or "")
 end
@@ -3021,6 +3089,19 @@ function OverlayUI:_selectedAnimationName()
 		return selected
 	end
 	return DEFAULT_ANIMATIONS[1]
+end
+
+function OverlayUI:_selectedAnimationRole()
+	local selected = self.State.SelectedAnimation
+	if type(selected) == "string" and self.AnimationById[selected] then
+		local role = string.lower(tostring(self.AnimationById[selected].role or "any"))
+		if role == "male" then
+			return "Male"
+		elseif role == "female" then
+			return "Female"
+		end
+	end
+	return self.State.SelectedAnimationRole or "Any"
 end
 
 function OverlayUI:_selectedMemberId()
@@ -3645,8 +3726,8 @@ end
 function OverlayUI:_buildAvatar()
 	local avatar = self.Tabs.Avatar:AddLeftGroupbox("Identity", "user-round")
 	avatar:AddInput("Overlay_AvatarId", {
-		Text = "Avatar asset / user id",
-		Placeholder = "asset id, GitHub raw URL, or user:123",
+		Text = "Roblox avatar",
+		Placeholder = "username, @name, or user id",
 		Default = "",
 		Finished = true,
 		ClearTextOnFocus = false,
@@ -3929,7 +4010,6 @@ function OverlayUI:_buildAnimation()
 		Func = function()
 			local intensity = self.Library.Options.Overlay_EffectIntensity
 			local speed = self.Library.Options.Overlay_AnimationSpeed
-			local role = self.Library.Options.Overlay_AnimationRole
 			local asset = self.Library.Options.Overlay_AnimationAssetId
 			local loop = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationLoop
 			local syncToggle = self.Library.Toggles and self.Library.Toggles.Overlay_AnimationSync
@@ -3939,7 +4019,7 @@ function OverlayUI:_buildAnimation()
 				name = self:_selectedAnimationName(),
 				intensity = intensity and intensity.Value or 50,
 				speed = speed and speed.Value or 1,
-				role = role and role.Value or self.State.SelectedAnimationRole or "Any",
+				role = self:_selectedAnimationRole(),
 				looped = not loop or loop.Value ~= false,
 				sync_enabled = syncToggle and syncToggle.Value == true,
 				seat_enabled = seatToggle and seatToggle.Value == true,
