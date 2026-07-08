@@ -4949,6 +4949,8 @@ function OverlayBridge.getState()
 	}
 end
 
+local function installOverlayBridge()
+
 local function bridgeListRooms()
 	if not Client.connected then
 		emitBridgeError("runtime.disconnected", "Runtime is not connected")
@@ -5710,6 +5712,10 @@ OverlayBridge.reloadNativeMorphCatalog = function()
 end
 OverlayBridge.patchEffect = bridgePatchEffect
 OverlayBridge.previewEffect = bridgePreviewEffect
+
+end
+
+installOverlayBridge()
 
 GLOBAL.OverlayBridge = OverlayBridge
 
